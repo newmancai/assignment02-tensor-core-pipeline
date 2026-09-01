@@ -1,0 +1,70 @@
+# from tvm.script import ir as I
+# from tvm.script import tirx as T
+
+@I.ir_module
+class Module:
+    @T.prim_func
+    def main_kernel(A_desc: T.handle("uint8x128", "grid_constant"), B_desc: T.handle("uint8x128", "grid_constant"), C: T.handle("float32", "global")):
+        T.func_attr({"calling_conv": 2, "dyn_shared_memory_buf": 98304, "target": T.target({"arch": "sm_90a", "keys": ["cuda", "gpu"], "kind": "cuda", "max_num_threads": 1024, "tag": "", "thread_warp_size": 32}), "thread_extent": {"blockIdx.x": 8, "blockIdx.y": 8, "threadIdx.x": 256, "threadIdx.y": 1, "threadIdx.z": 1}, "tirx.is_global_func": T.bool(True), "tirx.kernel_launch_params": ["blockIdx.x", "blockIdx.y", "threadIdx.x", "threadIdx.y", "threadIdx.z", "tirx.use_dyn_shared_memory"], "tirx.noalias": True, "tl.non_restrict_params": [], "tl.readonly_param_indices": [0, 1], "tl.smem_alignment_map": {"A_shared": 1024, "B_shared": 1024}})
+        C_1 = T.decl_buffer((1048576,), data=C)
+        bx = T.launch_thread("blockIdx.x", 8)
+        buf_dyn_shmem = T.alloc_buffer((98304,), "uint8", scope="shared.dyn")
+        A_shared: T.handle("float16", "shared.dyn") = T.handle_add_byte_offset(buf_dyn_shmem.data, 0)
+        B_shared: T.handle("float16", "shared.dyn") = T.handle_add_byte_offset(buf_dyn_shmem.data, 49152)
+        mbarrier = T.alloc_buffer((6,), "uint64", scope="shared.barrier")
+        C_local = T.alloc_buffer((128,), scope="local")
+        by = T.launch_thread("blockIdx.y", 8)
+        tx = T.launch_thread("threadIdx.x", 256)
+        if T.tl_shuffle_elect(0):
+            T.prefetch_tma_descriptor(A_desc)
+            T.prefetch_tma_descriptor(B_desc)
+        ty = T.launch_thread("threadIdx.y", 1)
+        tz = T.launch_thread("threadIdx.z", 1)
+        mbarrier_1 = T.decl_buffer((6,), "uint64", data=mbarrier.data, scope="shared.barrier")
+        C_local_1 = T.decl_buffer((128,), data=C_local.data, scope="local")
+        if T.tl_shuffle_elect(0):
+            T.ptx_init_barrier_thread_count(mbarrier_1[0], 1)
+            T.ptx_init_barrier_thread_count(mbarrier_1[1], 1)
+            T.ptx_init_barrier_thread_count(mbarrier_1[2], 1)
+            T.ptx_init_barrier_thread_count(mbarrier_1[3], 128)
+            T.ptx_init_barrier_thread_count(mbarrier_1[4], 128)
+            T.ptx_init_barrier_thread_count(mbarrier_1[5], 128)
+        T.ptx_fence_barrier_init()
+        T.tvm_storage_sync("shared")
+        T.attr([128, 128], "kWarpSpecializationScope", 0)
+        if tx < 128:
+            T.set_max_nreg(24, 0)
+            for ko in range(16):
+                T.mbarrier_wait_parity(mbarrier_1[ko % 3 + 3], T.bitwise_xor(ko % 6 // 3, 1))
+                if T.tl_shuffle_elect(128):
+                    T.mbarrier_expect_tx(mbarrier_1[ko % 3], 16384)
+                    T.tma_load(A_desc, mbarrier_1[ko % 3], T.tvm_access_ptr(T.type_annotation("float16"), A_shared, ko % 3 * 8192, 8192, 2), ko * 64, by * 128, 0)
+                    T.ptx_arrive_barrier_expect_tx(mbarrier_1[ko % 3], 16384)
+                    T.tma_load(B_desc, mbarrier_1[ko % 3], T.tvm_access_ptr(T.type_annotation("float16"), B_shared, ko % 3 * 8192, 4096, 2), bx * 128, ko * 64, 0)
+                    T.tma_load(B_desc, mbarrier_1[ko % 3], T.tvm_access_ptr(T.type_annotation("float16"), B_shared, ko % 3 * 8192 + 4096, 4096, 2), bx * 128 + 64, ko * 64, 0)
+        else:
+            T.set_max_nreg(240, 1)
+            for i in T.unroll(32):
+                C_local_1[i * 4:i * 4 + 4] = T.Broadcast(T.float32(0.0), 4)
+            for ko in range(16):
+                T.mbarrier_wait_parity(mbarrier_1[ko % 3], ko % 6 // 3)
+                with T.attr(0, "lexical_alloc_scope", 1):
+                    desc_a = T.alloc_buffer((1,), "uint64", scope="local.descriptor.wgmma")
+                    desc_b = T.alloc_buffer((1,), "uint64", scope="local.descriptor.wgmma")
+                    desc_a_1 = T.decl_buffer((1,), "uint64", data=desc_a.data, scope="local.descriptor.wgmma")
+                    desc_b_1 = T.decl_buffer((1,), "uint64", data=desc_b.data, scope="local.descriptor.wgmma")
+                    T.initialize_wgmma_descriptor(desc_a_1[0], T.tvm_access_ptr(T.type_annotation("float16"), A_shared, 0, 24576, 1), 1, 1, 64)
+                    T.increase_descriptor_offset(desc_a_1[0], ko % 3 * 16384)
+                    T.initialize_wgmma_descriptor(desc_b_1[0], T.tvm_access_ptr(T.type_annotation("float16"), B_shared, 0, 24576, 1), 1, 512, 64)
+                    T.increase_descriptor_offset(desc_b_1[0], ko % 3 * 16384)
+                    T.warpgroup_fence_operand("float32", C_local.data, 0, 128)
+                    T.warpgroup_arrive()
+                    for i in T.unroll(2):
+                        for ki in T.unroll(4):
+                            T.ptx_wgmma_ss("m64n128k16", T.bool(True), T.bool(False), "fp16", "fp16", "fp32", desc_a.data, T.shift_right(i * 8192 + ki * 32, 4), desc_b.data, T.shift_right(ki * 2048, 4), C_local.data, i * 64, 1, 1, 1)
+                    T.warpgroup_commit_batch()
+                    T.warpgroup_wait(0)
+                    T.warpgroup_fence_operand("float32", C_local.data, 0, 128)
+                T.ptx_arrive_barrier(mbarrier_1[ko % 3 + 3])
+            for i in T.unroll(64):
+                C_1[by * 131072 + i // 32 * 65536 + tx // 32 * 16384 + i % 2 * 8192 + tx % 32 // 4 * 1024 + bx * 128 + i % 32 // 2 * 8 + tx % 4 * 2 - 65536:by * 131072 + i // 32 * 65536 + tx // 32 * 16384 + i % 2 * 8192 + tx % 32 // 4 * 1024 + bx * 128 + i % 32 // 2 * 8 + tx % 4 * 2 - 65536 + 2] = C_local_1[i * 2:i * 2 + 2]

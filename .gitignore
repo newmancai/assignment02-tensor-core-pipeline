@@ -1,0 +1,16 @@
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+build/
+bin/
+*.o
+*.so
+*.a
+*.ptx
+*.cubin
+*.fatbin
+*.ncu-rep
+*.nsys-rep
+uv.lock
+

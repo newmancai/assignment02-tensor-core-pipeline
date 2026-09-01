@@ -1,0 +1,24 @@
+#include <tl_templates/cuda/instruction/mma.h>
+#include <tl_templates/cuda/threadblock_swizzle.h>
+extern "C" __global__ void main_kernel(__grid_constant__ const CUtensorMap A_desc, __grid_constant__ const CUtensorMap B_desc, float* __restrict__ C);
+extern "C" __global__ void __launch_bounds__(256, 1) main_kernel(__grid_constant__ const CUtensorMap A_desc, __grid_constant__ const CUtensorMap B_desc, float* __restrict__ C) {
+__shared__ __align__(16) uint64_t mbarrier_mem[6];
+auto mbarrier = reinterpret_cast<Barrier*>(mbarrier_mem);
+tl::prefetch_tma_descriptor(A_desc);
+tl::prefetch_tma_descriptor(B_desc);
+mbarrier[0].init(1);
+mbarrier[1].init(1);
+mbarrier[2].init(1);
+mbarrier[3].init(128);
+mbarrier[4].init(128);
+mbarrier[5].init(128);
+mbarrier[((ko % 3) + 3)].wait((((ko % 6) / 3) ^ 1));
+mbarrier[(ko % 3)].expect_transaction(16384);
+tl::tma_load(A_desc, mbarrier[(ko % 3)], (&(((half_t*)A_shared)[((ko % 3) * 8192)])), (ko * 64), (((int)blockIdx.y) * 128));
+mbarrier[(ko % 3)].arrive_and_expect_tx(16384);
+tl::tma_load(B_desc, mbarrier[(ko % 3)], (&(((half_t*)B_shared)[((ko % 3) * 8192)])), (((int)blockIdx.x) * 128), (ko * 64));
+tl::tma_load(B_desc, mbarrier[(ko % 3)], (&(((half_t*)B_shared)[(((ko % 3) * 8192) + 4096)])), ((((int)blockIdx.x) * 128) + 64), (ko * 64));
+mbarrier[(ko_1 % 3)].wait(((ko_1 % 6) / 3));
+tl::mma_sync<tl::DataType::kFloat16, tl::DataType::kFloat16, tl::DataType::kFloat32, 16, 8, 16, false, true>(reinterpret_cast<float*>(C_local + ((i_3 * 32) + (j * 8))), reinterpret_cast<const unsigned*>(A_local + (i_3 * 8)), reinterpret_cast<const unsigned*>(B_local + (j * 8)));
+tl::mma_sync<tl::DataType::kFloat16, tl::DataType::kFloat16, tl::DataType::kFloat32, 16, 8, 16, false, true>(reinterpret_cast<float*>(C_local + (((i_3 * 32) + (j * 8)) + 4)), reinterpret_cast<const unsigned*>(A_local + (i_3 * 8)), reinterpret_cast<const unsigned*>(B_local + ((j * 8) + 4)));
+mbarrier[((ko_1 % 3) + 3)].arrive();
