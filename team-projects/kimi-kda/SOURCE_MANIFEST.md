@@ -27,3 +27,5 @@
 - 2026-09-01 独立复跑：Slurm Job 14592。
 - NCU resource/roofline：Jobs 5166、5173。
 - 单扩展构建：Job 5191。
+- Nsys V128/自动 ValueSlice 同进程 trace：Job 14991（2026-09-01）。
+- Nsys 原始报告、四份 NCU 报告已在本机 `experiments/artifacts/` 归档并校验；因含服务器环境元数据不上传公开仓库。公开仓库保留已脱敏 CSV、紧凑 SASS 样例和复现脚本。

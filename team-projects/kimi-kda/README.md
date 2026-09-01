@@ -14,6 +14,7 @@ FlashKDA 在 B300 上仍使用 SM80 `mma.sync`，但主要瓶颈并不是“Tens
 | 资源感知 dispatcher | 已完成固定形状 B300 候选版 | 3% + 5 µs guard band；越界退回 V128 |
 | 正确性 | 已完成 | fixed BF16/FP32、ragged、state in/out、CUDA Graph；与 V128 bitwise equal |
 | 性能 | 已完成并于 2026-09-01 复跑 | forward 高价值区间降低 9.37%–26.10%；stateful trace 降低 5.68% |
+| Trace/profile 瓶颈图 | 已完成 | 真实 Nsys/NCU 数据、多面板 PNG/SVG 与原始报告均已归档 |
 | 报告 | 已有可编辑初稿 | `docs/report-draft.md` |
 | 答辩 | 已有讲述骨架 | `docs/defense-outline.md` |
 
@@ -33,6 +34,9 @@ K2 的核心小矩阵以 `M=16` 为主，正好贴合 `mma.sync.m16n8k16`。SM10
 - `docs/report-draft.md`：报告正文初稿。
 - `docs/defense-outline.md`：答辩页序与讲述重点。
 - `experiments/README.md`：复现实验流程与口径。
+- `experiments/BOTTLENECK_ANALYSIS.md`：Nsys + NCU 联合瓶颈分析、指标解释与限制。
+- `experiments/figures/kimi_kda_b300_bottleneck.png`：可直接放入报告/群文档的浓缩实测图；同目录含 SVG。
+- `experiments/artifacts/`：公开仓库保存紧凑 SASS 样例；含服务器元数据的 Nsight 原始报告只在本机同目录归档，不公开上传。
 - `experiments/integrated_validation_20260901.log`：最新 B300 独立复跑日志。
 - `SOURCE_MANIFEST.md`：本机/服务器一致性与关键文件校验和。
 

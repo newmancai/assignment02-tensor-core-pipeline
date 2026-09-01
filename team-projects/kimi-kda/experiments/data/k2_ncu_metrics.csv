@@ -1,0 +1,37 @@
+label,report,grid_size,block_size,section,metric,value,unit
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",GPU Speed Of Light Throughput,DRAM Throughput,0.36,%
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",GPU Speed Of Light Throughput,Duration,632.32,us
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",GPU Speed Of Light Throughput,Compute (SM) Throughput,2.66,%
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",Memory Workload Analysis,L2 Hit Rate,81.15,%
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",Scheduler Statistics,No Eligible,66.63,%
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",Scheduler Statistics,Eligible Warps Per Scheduler,0.35,warp
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",Launch Statistics,Registers Per Thread,73,register/thread
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",Launch Statistics,Dynamic Shared Memory Per Block,98.43,Kbyte/block
+official_h12,official_t4096_h12.ncu-rep,"(1, 12, 1)","(192, 1, 1)",Occupancy,Achieved Occupancy,9.38,%
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",GPU Speed Of Light Throughput,DRAM Throughput,1.58,%
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",GPU Speed Of Light Throughput,Duration,454.69,us
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",GPU Speed Of Light Throughput,Compute (SM) Throughput,7.18,%
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",Memory Workload Analysis,L2 Hit Rate,86.51,%
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",Scheduler Statistics,No Eligible,85.08,%
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",Scheduler Statistics,Eligible Warps Per Scheduler,0.15,warp
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",Launch Statistics,Registers Per Thread,54,register/thread
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",Launch Statistics,Dynamic Shared Memory Per Block,48.64,Kbyte/block
+v16_h12,v16_t4096_h12.ncu-rep,"(1, 12, 8)","(96, 1, 1)",Occupancy,Achieved Occupancy,4.69,%
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",GPU Speed Of Light Throughput,DRAM Throughput,9.02,%
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",GPU Speed Of Light Throughput,Duration,645.06,us
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",GPU Speed Of Light Throughput,Compute (SM) Throughput,15.92,%
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",Memory Workload Analysis,L2 Hit Rate,51.74,%
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",Scheduler Statistics,No Eligible,67.56,%
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",Scheduler Statistics,Eligible Warps Per Scheduler,0.34,warp
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",Launch Statistics,Registers Per Thread,73,register/thread
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",Launch Statistics,Dynamic Shared Memory Per Block,98.43,Kbyte/block
+official_h74,official_t4096_h74.ncu-rep,"(1, 74, 1)","(192, 1, 1)",Occupancy,Achieved Occupancy,9.37,%
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",GPU Speed Of Light Throughput,DRAM Throughput,11.30,%
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",GPU Speed Of Light Throughput,Duration,517.31,us
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",GPU Speed Of Light Throughput,Compute (SM) Throughput,26.37,%
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",Memory Workload Analysis,L2 Hit Rate,63.88,%
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",Scheduler Statistics,No Eligible,73.19,%
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",Scheduler Statistics,Eligible Warps Per Scheduler,0.29,warp
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",Launch Statistics,Registers Per Thread,58,register/thread
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",Launch Statistics,Dynamic Shared Memory Per Block,68.61,Kbyte/block
+v64_h74,v64_t4096_h74.ncu-rep,"(1, 74, 2)","(192, 1, 1)",Occupancy,Achieved Occupancy,9.37,%
