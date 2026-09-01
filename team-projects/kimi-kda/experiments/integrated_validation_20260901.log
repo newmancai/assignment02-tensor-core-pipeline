@@ -1,0 +1,20 @@
+name, uuid, clocks.current.sm [MHz]
+NVIDIA B300 SXM6 AC, GPU-REDACTED, 1095 MHz
+extension=results/20260821_dispatch_boundary/integrated_dispatch/lib/flash_kda_C.cpython-312-x86_64-linux-gnu.so
+device={'device': 0, 'major': 10, 'minor': 3, 'sm_count': 148, 'l2_bytes': 132644864, 'shared_memory_per_sm': 233472, 'registers_per_sm': 65536, 'max_threads_per_sm': 2048, 'warp_size': 32, 'max_blocks_per_sm': 32}
+correctness: fixed BF16/FP32 and ragged V16/V32/V64 bitwise equal to V128
+policy: BF16/FP32 boundary decisions match the validated envelope
+dtype,heads,slice,official_ms,auto_ms,graph_auto_ms,reduction_pct
+bf16,18,16,0.714384,0.527952,0.515616,26.10
+bf16,19,32,0.714688,0.546272,0.535712,23.56
+bf16,37,32,0.761600,0.586992,0.573200,22.93
+bf16,38,64,0.762848,0.634144,0.622160,16.87
+bf16,74,64,0.848544,0.721328,0.707856,14.99
+bf16,75,128,0.851280,0.851088,0.839616,0.02
+fp32,18,16,0.695856,0.542976,0.531120,21.97
+fp32,19,32,0.698496,0.559440,0.544480,19.91
+fp32,37,32,0.745968,0.600224,0.587440,19.54
+fp32,38,64,0.748832,0.668896,0.657664,10.67
+fp32,74,64,0.832144,0.754160,0.741952,9.37
+fp32,75,128,0.835392,0.836208,0.822832,-0.10
+streaming_trace prefill=4096 decode_steps=64 heads=38 official=2.206671 ms auto=2.081341 ms reduction=5.68%

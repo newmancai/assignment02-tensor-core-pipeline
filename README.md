@@ -14,6 +14,7 @@
 | M4 | 完整 GEMM、TMA、pipeline | 待 B/C 完成，当前为题目骨架 |
 | M5 | 低精度与 block scaling | 待 C 完成，当前为题目骨架 |
 | M6 | TileLang lowering 对照 | 已完成 |
+| Team C1 | Kimi KDA / FlashKDA on B300 | 已完成 ValueSlice 主线、报告初稿与独立复跑 |
 
 ## 目录
 
@@ -25,7 +26,8 @@
 - [`M5-low-precision/`](M5-low-precision/)：5.1–5.5
 - [`M6-tilelang/`](M6-tilelang/)：6.1
 - [`docs/`](docs/)：完整报告与 A 负责人交接记录
-- [`team-optional/`](team-optional/)：团队选做题说明
+- [`team-optional/`](team-optional/)：团队题原始说明
+- [`team-projects/kimi-kda/`](team-projects/kimi-kda/)：Kimi KDA 代码补丁、B300 实验、报告与答辩材料
 
 ## 快速开始
 
@@ -43,4 +45,3 @@
 
 建议按 `fragment 映射 → MMA 输入打包 → ldmatrix → descriptor/swizzle →
 WGMMA/TMA pipeline → TileLang lowering` 阅读。每个小题目录内保留实现或说明文档。
-
