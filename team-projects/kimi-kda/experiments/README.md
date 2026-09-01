@@ -70,3 +70,23 @@ python profile/k2-vsplit-opt/integrated_validation.py \
 | Job 14592（2026-09-01） | 14.99%–26.10% | 9.37%–21.97% | 5.68% |
 
 第二次运行 GPU 时钟较低，绝对延迟整体变大，但 dispatcher 的边界、bitwise correctness 和相对收益稳定复现。
+
+## 6. Trace/profile 归档
+
+- `BOTTLENECK_ANALYSIS.md`：完整瓶颈判断与答辩解释。
+- `figures/kimi_kda_b300_bottleneck.png`：基于实测数据的浓缩图片。
+- `figures/kimi_kda_b300_bottleneck.svg`：可编辑矢量版。
+- `artifacts/nsys/`：本机保存 Nsight Systems 原始报告、SQLite 与导出统计；这些文件含服务器元数据，已被 Git 忽略。
+- `artifacts/ncu/`：本机保存四个 K2 对照的 Nsight Compute 原始报告；已被 Git 忽略。
+- `data/k2_nsys_timeline.csv`、`data/k2_nsys_ranges.csv`：时间线紧凑数据。
+- `data/k2_ncu_metrics.csv`：duration、throughput、L2、scheduler、occupancy 与 launch resource 指标。
+- `data/sass_opcode_summary.csv`、`artifacts/sass/`：recurrence 指令族汇总与抽样 SASS；本次为 3,640 条 HMMA、0 条 TCGEN/UTCMMA。
+- `extract_nsys_timeline.py`、`export_ncu_metrics.py`、`make_bottleneck_figure.py`、`render_figure_png.mjs`：从报告到图片的可复现链路。
+
+采集 H12 的同进程 V128/V16 trace：
+
+```bash
+sbatch run_nsys_trace.sbatch
+```
+
+图片不是生成式图像；它由绘图脚本读取 CSV 后确定性生成，因此每个柱、数值和时间段都能回到归档报告。

@@ -12,5 +12,7 @@ bin/
 *.fatbin
 *.ncu-rep
 *.nsys-rep
+team-projects/kimi-kda/experiments/artifacts/**/*.sqlite
+team-projects/kimi-kda/experiments/artifacts/**/*_stats.csv
+team-projects/kimi-kda/experiments/artifacts/SHA256SUMS
 uv.lock
-

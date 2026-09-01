@@ -1,0 +1,7 @@
+scope,opcode,count
+all,HMMA.16816.F32.BF16,3704
+all,HMMA.16816.F16,24
+recurrence,HMMA.16816.F32.BF16,3640
+recurrence_family_total,HMMA,3640
+recurrence_family_total,TCGEN,0
+recurrence_family_total,UTCMMA,0

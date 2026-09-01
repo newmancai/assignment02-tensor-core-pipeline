@@ -47,7 +47,9 @@ SM100 BF16 `tcgen05` 面向更大的有效 M tile。若保持 `CHUNK=16` 直接�
 
 ### 3.2 NCU 证据
 
-官方 K2 在 H12 形状下的代表性计数器为：SM throughput 约 2.53%、DRAM throughput 约 2.18%、achieved occupancy 约 9.37%。更完整的 resource/roofline 实验显示，即使 V64/H74 恰好填满 148 个 SM，compute 与 HBM 仍远未饱和，scheduler 仍有大量周期找不到 eligible warp。
+官方 K2 在 H12 形状下的代表性计数器为：SM throughput 2.66%、DRAM throughput 0.36%、achieved occupancy 9.38%。V16 把 recurrence grid 从 12 个 CTA 扩展到 96 个 CTA，NCU duration 从 632.32 µs 降到 454.69 µs；但 SM/DRAM throughput 仍仅为 7.18%/1.58%。在 H74 对照中，V64 恰好发射 148 个 CTA，duration 从 645.06 µs 降到 517.31 µs，而 SM/DRAM throughput 仍仅为 26.37%/11.30%。scheduler 的 `No Eligible` 在四个配置中均为 66.63%–85.08%。
+
+Nsight Systems 的同进程五轮对照进一步显示：Official V128 的 NVTX GPU projected span 为 3.416 ms，自动选择 V16 后为 2.505 ms（−26.7%）；最后一轮 K2 recurrence 为 625.16 µs 对 451.08 µs。浓缩图与完整解释见 `experiments/BOTTLENECK_ANALYSIS.md`。
 
 结论是：当前边界主要由 recurrence/TMA issue critical path 与 CTA 分布决定，不是 BF16 Tensor Core 峰值或 HBM 峰值饱和。
 
