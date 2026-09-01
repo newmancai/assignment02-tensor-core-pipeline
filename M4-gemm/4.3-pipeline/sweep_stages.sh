@@ -14,7 +14,7 @@ for shape in "4096 4096 4096" "256 4096 16384"; do
         bin=$(mktemp /tmp/pipeline.XXXXXX)
         "$NVCC" -O3 -std=c++17 -DSTAGES=$s -I"$M4_DIR" \
           -gencode arch=compute_${ARCH},code=sm_${ARCH} \
-          "$SCRIPT_DIR/03_pipeline.cu" -lcublas -o "$bin" || exit 1
+          "$SCRIPT_DIR/03_pipeline.cu" -lcublas -lcuda -o "$bin" || exit 1
         timeout -k 5 180 "$bin" $shape || echo "S=$s: 失败或挂死(超时被杀)"
         rm -f "$bin"
     done

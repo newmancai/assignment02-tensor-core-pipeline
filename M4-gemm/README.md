@@ -1,15 +1,15 @@
 # M4 · 完整 GEMM
 
-负责人：B（4.1–4.3）与 C（4.5）。当前为待完成骨架。
+负责人：B（4.1–4.3）与 C（4.5）。B 负责部分已完成并通过 B300 回归。
 
 | 小题 | 内容 | 状态 |
 |---|---|---|
-| 4.1 | tiled GEMM | TODO |
-| 4.2 | TMA staging | TODO |
-| 4.3 | 多级 pipeline | TODO |
-| 4.4 | 扩展题 | Optional |
+| 4.1 | tiled GEMM | [完成：exact PASS，49.9 TFLOPS](4.1-tiled/README.md) |
+| 4.2 | TMA staging | [完成：exact PASS，279.5 TFLOPS](4.2-tma/README.md) |
+| 4.3 | 多级 pipeline | [完成：stage sweep 全部 exact PASS](4.3-pipeline/README.md) |
+| 4.4 | 扩展题 | 选做 |
 | 4.5 | thin GEMM | 待实测 |
 
-最终应形成一张性能阶梯表，统一记录 shape、tile、stages、正确性、TFLOPS、
-带宽与相对 cuBLAS 性能。
+性能阶梯、两种形状的 stage sweep 和原始输出见各小题 README 及
+[`docs/evidence/b300-results.md`](../docs/evidence/b300-results.md)。
 

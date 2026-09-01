@@ -16,7 +16,7 @@ for item in "4.1-tiled/01_tiled" "4.2-tma/02_tma" "4.3-pipeline/03_pipeline"; do
     bin=$(mktemp "/tmp/$name.XXXXXX")
     "$NVCC" -O3 -std=c++17 -I"$M4_DIR" \
       -gencode arch=compute_${ARCH},code=sm_${ARCH} \
-      "$src" -lcublas -o "$bin" || { echo "$name: 编译失败"; fail=1; rm -f "$bin"; continue; }
+      "$src" -lcublas -lcuda -o "$bin" || { echo "$name: 编译失败"; fail=1; rm -f "$bin"; continue; }
     timeout -k 5 180 "$bin" $SHAPE || fail=1
     rm -f "$bin"
 done

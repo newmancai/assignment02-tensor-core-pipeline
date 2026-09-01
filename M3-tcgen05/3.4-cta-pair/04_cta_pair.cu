@@ -1,21 +1,3 @@
-// 问题 3.4:cta_group::1 vs cta_group::2,程序不需要修改。
-//
-// 同一个 m256n64k64 bf16 任务的两种算法:
-//   变体 A(::1):2 个独立 block 各算 128 行,B 全量 staging;
-//   变体 B(::2):1 个 cluster(2 CTA)发一条 M=256 的 mma,
-//               A 各持自己的 128 行,B 沿 N 切半各持一半。
-//
-// 先预测再运行:(a) ::2 下每个 CTA 的 B smem 应是 ::1 的多少?TMEM
-// 侧呢?运行验证(程序打印 smem/block 与耗时);(b) ncu 记两版的
-// staging store 和 Tensor Core shared wavefront 对比;B tile 减半不等于
-// A+B 总流量减半。(c) ::2 省下的 smem 容量在 M4 的 pipeline 里能换
-// 什么?(d) 纸面:cta_group::2 依赖 sm90 引入的哪个硬件概念?你手里
-// 的 5090 没有 2-CTA MMA,结合 0.2 表里的数字说明这类特性为什么出现
-// 在数据中心卡上。
-//
-// 实现要点都在注释里(::2 的 alloc/dealloc 是 pair 协作指令、commit
-// 的 multicast、B 切半的 staging)——3.2 做完后值得通读一遍。
-// 运行:make run/m3_tcgen05/04_cta_pair
 #include <cooperative_groups.h>
 #include <cuda_bf16.h>
 #include <cstdio>
@@ -53,10 +35,10 @@ __device__ inline void mbar_wait(uint32_t mbar, uint32_t phase) {
             : "r"(mbar), "r"(phase));
 }
 
-template <int GROUP>  // 1 或 2
+template <int GROUP>  // 1 闂?2
 __global__ void tile_kernel(const __nv_bfloat16* gA, const __nv_bfloat16* gB,
                             float* gD) {
-    constexpr int BROWS = GROUP == 1 ? N : N / 2;  // 本 CTA 的 B 行数
+    constexpr int BROWS = GROUP == 1 ? N : N / 2;  // B rows staged by each CTA
     __shared__ __align__(1024) uint8_t sA[128 * K * 2];
     __shared__ __align__(1024) uint8_t sB[BROWS * K * 2];
     __shared__ __align__(8) uint64_t mbar;
@@ -70,10 +52,10 @@ __global__ void tile_kernel(const __nv_bfloat16* gA, const __nv_bfloat16* gB,
                      "r"(1));
         asm volatile("fence.mbarrier_init.release.cluster;");
     }
-    // TMEM 分配:::1 各自分配;::2 是 pair 协作指令——两个 CTA 的
-    // 同号 warp 都必须发射,dst 用各自 smem 的同一位置,结果对称。
-    if (warp == 0) {
+    // Group 1 allocates independently; group 2 allocates cooperatively.
+    // Matching warps in both CTAs must issue the pair operation.
         uint32_t dst = (uint32_t)__cvta_generic_to_shared(s_taddr);
+    if (warp == 0) {
         if constexpr (GROUP == 1) {
             asm volatile(
                 "tcgen05.alloc.cta_group::1.sync.aligned.shared::cta.b32 "
@@ -89,7 +71,6 @@ __global__ void tile_kernel(const __nv_bfloat16* gA, const __nv_bfloat16* gB,
         }
     }
 
-    // staging:A 取本 CTA 的 128 行;B ::1 全量 / ::2 取本 rank 的 N/2
     for (int i = tid; i < 128 * K; i += blockDim.x) {
         int r = i / K, k = i % K;
         *reinterpret_cast<__nv_bfloat16*>(&sA[swz128(r, k * 2)]) =
@@ -105,8 +86,7 @@ __global__ void tile_kernel(const __nv_bfloat16* gA, const __nv_bfloat16* gB,
     if constexpr (GROUP == 1)
         __syncthreads();
     else
-        cg::this_cluster().sync();  // 两个 CTA 的 smem 都就绪
-
+        cg::this_cluster().sync();
     uint32_t taddr = s_taddr[0];
 
     uint32_t elected;
@@ -155,7 +135,7 @@ __global__ void tile_kernel(const __nv_bfloat16* gA, const __nv_bfloat16* gB,
     }
     mbar_wait(mbar_u32, 0);
 
-    // epilogue:各 CTA 读自己的 TMEM 128 行,写回 global 的对应行
+    // Each CTA reads its 128 TMEM rows and writes them to global memory.
     asm volatile("tcgen05.fence::after_thread_sync;");
     for (int c = 0; c < N; c += 8) {
         uint32_t src = taddr + ((uint32_t)(warp * 32) << 16) + c;
@@ -180,7 +160,7 @@ __global__ void tile_kernel(const __nv_bfloat16* gA, const __nv_bfloat16* gB,
                     taddr),
                 "r"(64));
     } else {
-        cg::this_cluster().sync();  // 两侧都读完才能释放
+        cg::this_cluster().sync();  // Both CTAs finish TMEM reads before release.
         if (warp == 0)
             asm volatile(
                 "tcgen05.dealloc.cta_group::2.sync.aligned.b32 %0, %1;" ::"r"(
@@ -216,14 +196,13 @@ int main() {
            at1.sharedSizeBytes, at2.sharedSizeBytes);
 
     std::vector<float> got(M * N);
-    // 变体 A:::1,两个独立 block
     tile_kernel<1><<<2, 128>>>(dA, dB, dD);
     CUDA_CHECK_KERNEL();
     CUDA_CHECK(cudaMemcpy(got.data(), dD, M * N * 4, cudaMemcpyDeviceToHost));
     long bad1 = 0;
     for (int i = 0; i < M * N; i++) bad1 += got[i] != ref[i];
 
-    // 变体 B:::2,一个 cluster(2 CTA)
+    // 闂備礁鎲￠悷锔炬箒缂?B:::2,濠电偞鍨堕幐鎾磻閹炬枼妲?cluster(2 CTA)
     CUDA_CHECK(cudaMemset(dD, 0, M * N * 4));
     cudaLaunchConfig_t cfg = {};
     cfg.gridDim = dim3(2);

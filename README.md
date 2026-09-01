@@ -10,8 +10,8 @@
 | M0 | 环境、架构与 Roofline | 已完成 |
 | M1 | fragment、`mma.sync`、`ldmatrix` | 已完成 |
 | M2 | descriptor、swizzle | 已完成 |
-| M3 | `tcgen05` | 待 B 完成，当前为题目骨架 |
-| M4 | 完整 GEMM、TMA、pipeline | 待 B/C 完成，当前为题目骨架 |
+| M3 | `tcgen05` | 3.1–3.4 已完成并在 B300 验证 |
+| M4 | 完整 GEMM、TMA、pipeline | B 负责的 4.1–4.3 已完成；4.5 待 C 完成 |
 | M5 | 低精度与 block scaling | 待 C 完成，当前为题目骨架 |
 | M6 | TileLang lowering 对照 | 已完成 |
 | Team C1 | Kimi KDA / FlashKDA on B300 | 已完成 ValueSlice 主线、报告初稿与独立复跑 |

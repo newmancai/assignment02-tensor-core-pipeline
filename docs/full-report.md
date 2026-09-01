@@ -21,8 +21,8 @@
 | M0 环境与峰值 | A | ☑ | ☑ | ☑ | ☑ |
 | M1 fragment 与 `mma.sync` | A | ☑ | ☑ | ☑ | ☑ |
 | M2 descriptor 与 swizzle | A | ☑ | ☑ | ☑ | 不适用（Host 判测） |
-| M3 `tcgen05` | B | ☐ | ☐ | ☐ | ☐ |
-| M4.1–M4.3 完整 GEMM | B | ☐ | ☐ | ☐ | ☐ |
+| M3 `tcgen05` | B | ☑ | ☑ | ☑ | ☑ |
+| M4.1–M4.3 完整 GEMM | B | ☑ | ☑ | ☑ | ☑ |
 | M4.5 thin GEMM | C | ☐ | ☐ | ☐ | ☐ |
 | M5 低精度与 block scaling | C | ☐ | ☐ | ☐ | ☐ |
 | M6 TileLang 对照 | A | ☑ | ☑ | ☑ | ☑ |
@@ -355,11 +355,11 @@ layout_type：`(layout & 7ull) << 61`
 
 | 小题 | 判断 | 理由/计算 |
 |---|---|---|
-| (a) | 对 / 错 | 【】 |
-| (b) | 对 / 错 | 【】 |
-| (c) | 对 / 错 | 【】 |
-| (d) | 对 / 错 | 【写出计算过程】 |
-| (e) | 对 / 错 | 【】 |
+| (a) | 对 | TMEM 地址高 16 bit 表示 lane 偏移；各 warp 可用 `tcgen05.ld` 读取对应的 32 条 lane。 |
+| (b) | 对 | MMA 由 elected lane 发射，硬件异步执行，累加结果写入 TMEM。 |
+| (c) | 错 | TMEM 不能直接作为 TMA 的 global 写回源；需 `tcgen05.ld` 到寄存器后再写回。 |
+| (d) | 对 | TMEM 总容量 `128×512×4=256 KiB`；m128n256 FP32 accumulator 为 `128×256×4=128 KiB`，恰为一半。 |
+| (e) | 错 | `tcgen05.commit` 不等于阻塞等待；必须等待其 mbarrier 完成后才能安全读取 TMEM。 |
 
 ## Prob 3.2 tcgen05 单 tile GEMM
 
@@ -369,20 +369,22 @@ layout_type：`(layout & 7ull) << 61`
 global → smem → tcgen05.mma → TMEM → tcgen05.ld → global
 ```
 
-【说明 descriptor、swizzle、TMEM alloc、mbarrier、idesc、mma 和 ld 的实现。】
+kernel 为 A/B 建立 128B swizzle shared-memory descriptor，初始化 mbarrier，
+分配 64 个 TMEM column。K=64 被拆成四个 k16 MMA：elected lane 发射
+`tcgen05.mma`，随后以 `tcgen05.commit` 把完成事件关联到 barrier。等待完成后，
+四个 warp 用 `tcgen05.ld` 读取各自负责的 32 条 lane，将结果写回 global，最后
+同步并释放 TMEM。
 
 ### 判测结果
 
-```text
-【粘贴 make 与 judge_tile.sh 的 PASS 输出】
-```
+seeds 1、7、42、1234、99999 均为 `PASS`。
 
 ### 移除 fence.proxy.async 的现象
 
-```text
-观察现象：
-原因：
-```
+定义 `OMIT_PROXY_FENCE` 移除 `fence.proxy.async.shared::cta` 后，上述五组 seed
+在本次 B300 实验中仍全部 PASS。这个阴性结果不证明 fence 可以删除：普通
+shared-memory 写与 async proxy 之间的可见性仍由该 fence 建立，缺少 fence
+属于模型上未保证的写法，结果可能随调度、编译器或负载变化。
 
 ## Prob 3.3 mbarrier bug
 
@@ -390,37 +392,49 @@ global → smem → tcgen05.mma → TMEM → tcgen05.ld → global
 
 | rounds | 结果 | 是否超时 | 观察 |
 |---:|---|---|---|
-| 1 | 【】 | 【】 | 【】 |
-| 2 | 【】 | 【】 | 【】 |
-| 4 | 【】 | 【】 | 【】 |
+| 1 | PASS | 否 | 第一代 phase 0 与错误等待恰好一致 |
+| 2 | FAIL 或卡住 | 部分运行超时 | 第二代实际需要 phase 1，固定等 phase 0 已失配 |
+| 4 | FAIL 或卡住 | 部分运行超时 | 代际错误继续累积，20 s 限时内不能可靠完成 |
 
 ### 修复说明
 
-【描述 phase、arrival count 的修改以及错误等待何时过早或过晚放行。】
+barrier 初始化 arrival count 为 1；每轮 commit 后等待 `round & 1`，正确相位
+依次为 0、1、0、1。原错误版固定等待 0，从第二轮开始可能等待旧 generation，
+导致提前读取仍在更新的 TMEM，或在错误代际上无限等待。
 
 ### 状态变化图
 
-【插入修改前后 mbarrier 状态图。】
+```text
+init: phase 0 pending
+round 0 commit -> phase 0 complete -> reset phase 1
+round 1 commit -> phase 1 complete -> reset phase 0
+round 2 commit -> phase 0 complete -> reset phase 1
+```
 
 ### 修复后判测
 
-```text
-【粘贴 judge_mbar.sh 输出】
-```
+修复版 rounds=1/2/4、seeds=42/7 的六种组合全部 `PASS`。
 
 ## Prob 3.4 CTA pair
 
 | 指标 | cta_group::1 | cta_group::2 |
 |---|---:|---:|
-| 每 CTA 的 B shared memory | 【】 | 【】 |
-| TMEM 占用 | 【】 | 【】 |
-| shared memory 总流量 | 【】 | 【】 |
+| 每 CTA 的 B shared memory | 8 KiB | 4 KiB |
+| 每 CTA 的 TMEM | m128n64，64-column 半区 | m128n64，64-column 半区 |
+| shared memory/block | 24588 B | 20492 B |
+| NCU shared-store wavefront | 778 | 650 |
+| 正确性 | PASS | PASS |
 
 ### 分析
 
-1. 节省的 shared memory 在 M4 pipeline 中可以用于：【】
-2. 依赖的硬件机制：【】
-3. 为什么更常出现在数据中心 GPU：【】
+1. group 2 让 cluster 内两个 CTA 各 staging 一半 B，再用 group-2 MMA 和
+   multicast commit 协作。B shared memory 减半，但每 CTA 仍对应 m128n64
+   的 64-column TMEM 半区，因此 TMEM 占用不随 B staging 减半。节省出的
+   shared memory 可用于更多 pipeline stage。
+2. 该实现依赖 CTA cluster、cluster rank 映射、跨 CTA 协作的 TMEM
+   alloc/MMA/commit/dealloc 机制。
+3. 数据中心 GPU 更强调大矩阵吞吐、cluster 协作与片上数据复用，也更能以
+   足够多的并行工作摊薄 cluster 同步开销。
 
 # M4 完整 GEMM（B/C）
 
@@ -428,47 +442,57 @@ global → smem → tcgen05.mma → TMEM → tcgen05.ld → global
 
 | 实现 | TFLOPS | 对 cuBLAS 达成率 | 时间主要花在哪里 |
 |---|---:|---:|---|
-| naive（assignment01，FP32） | 【】 | — | 【】 |
-| 4.1 tiled | 【】 | 【】 | 【】 |
-| 4.2 TMA | 【】 | 【】 | 【】 |
-| 4.3 pipeline（S=3） | 【】 | 【】 | 【】 |
-| cuBLAS | 【】 | 100% | 【】 |
+| naive（assignment01，FP32，1024³） | 3.129 | — | 标量 FMA 与 global 访问 |
+| 4.1 tiled | 49.9 | 5.1% | 普通 staging 指令及 load/MMA 串行 |
+| 4.2 TMA | 279.5 | 28.6% | 单缓冲下 TMA 与 MMA 串行 |
+| 4.3 pipeline（S=3） | 287.8 | 29.6% | shared-memory 容量、occupancy 与等待 |
+| cuBLAS | 约 972–979 | 100% | 高度优化的生产级实现 |
 
 ## Prob 4.1 tiled GEMM（B）
 
 ### 实现说明
 
-【说明 grid/tile 映射、K 循环、同步和累加。】
+grid 覆盖 128×64 输出 tile；K 维以 64 为步长。128 个线程用普通 global
+load/shared store staging A/B，执行 async-proxy fence 后发射 MMA，并用单缓冲
+同步保证下一次覆写前消费完成。FP32 在 TMEM 累加，最后转为 BF16 写回。
 
 ### 正确性与性能
 
-```text
-判测：
-时间：
-TFLOPS：
-```
+4096³：2.753 ms，49.9 TFLOPS；同输入 cuBLAS 为 0.141 ms、976.2 TFLOPS。
+BF16 输出逐元素位级比较为 `exact PASS`。
 
 ### 瓶颈判断
 
-【结合 0.2 的机器平衡点说明主要受哪一环节限制。】
+4096³ BF16 GEMM 的理想算术强度约为 1365.3 FLOP/byte，高于 B300 官方
+机器平衡点 281.25 FLOP/byte；理想充分复用实现应为 compute-bound，但 4.1
+没有持续向 Tensor Core 供数。普通线程需要执行大量地址计算、global load 和
+shared store，而且 staging 与 MMA 严格串行，因此前端指令与数据搬运无法被隐藏。
+
+Nsight Compute 2025.3.1 `detailed` profile（Job 14904）显示：Compute/SM
+46.62%、Memory 30.97%、DRAM 0.38%、Issue Slots Busy 41.40%、L2 hit rate
+88.47%，并有约 13% excessive global sectors。DRAM 远未饱和，说明瓶颈是
+普通 staging 的指令/地址开销、访问合并和延迟，而非 HBM 或 Tensor Core 屋顶。
 
 ## Prob 4.2 TMA（B）
 
 ### 修改内容
 
-【说明 tensor map、cp.async.bulk.tensor、expect_tx 和同步方式。】
+host 用 `cuTensorMapEncodeTiled` 建立 A/B tensor map；kernel 以
+`mbarrier.arrive.expect_tx` 声明传输字节数，并用两条 2D TMA load 搬运 tile。
+`full` barrier 表示 TMA 完成，`empty` barrier 表示 MMA 已消费，避免同一个
+barrier 同时承担两种 completion generation。
 
 ### 正确性与性能
 
-```text
-判测：
-时间：
-TFLOPS：
-```
+4096³：0.492 ms，279.5 TFLOPS；cuBLAS 为 0.140 ms、978.8 TFLOPS；
+逐元素位级比较 `exact PASS`。
 
 ### 4.1 与 4.2 对比
 
-【说明 4.1 staging 的组成，以及哪些工作改用 TMA 后不再由普通 CUDA 指令执行。】
+4.1 的线程负责地址生成、global load、寄存器暂存和 shared store；4.2 将这些
+批量搬运工作交给 TMA，吞吐提升约 5.6 倍。4.2 仍是单缓冲，因此尚未隐藏
+TMA 与 MMA 之间的串行等待。上述 4.1 NCU 数据进一步排除了 HBM 带宽饱和，
+验证了 TMA 所替代的普通地址/load/store 供数路径是主要开销。
 
 ## Prob 4.3 多级 pipeline（B）
 
@@ -476,19 +500,37 @@ TFLOPS：
 
 | 形状 | S=2 | S=3 | S=4 | S=6 |
 |---|---:|---:|---:|---:|
-| 4096³ | 【】 | 【】 | 【】 | 【】 |
-| 256×4096×16384 | 【】 | 【】 | 【】 | 【】 |
+| 4096³ | 301.8 | 288.5 | 253.3 | 183.3 |
+| 256×4096×16384 | 168.5 | 207.4 | 189.4 | 210.5 |
 
 ### 流水时空图
 
-【任选一个 STAGES，插入稳态阶段 TMA 与 MMA 的时空图。】
+```text
+时间 →       t0          t1          t2          t3
+TMA producer load S0     load S1     load S2     refill S0
+MMA consumer             use S0      use S1      use S2
+barrier       full0       full1       full2       empty0→reuse
+```
+
+每个 stage 有 `full[s]`（producer→consumer 的 RAW 保护）和 `empty[s]`
+（consumer→producer 的 WAR 保护）；消费完成后才能覆写环形槽位。
 
 ### 分析
 
-1. 两个形状对 STAGES 的敏感程度：【】
-2. 从 4.1 到 4.3 的瓶颈变化：【】
-3. 每一级优化减少的开销：【】
-4. 继续增加 tile/stage 时先遇到的容量限制：【】
+1. CUDA occupancy API 在 B300 上对 S=2/3/4/6 均返回 1 block/SM。4096³
+   有 2048 CTA，即约 13.8 waves，仍可依靠 block 间调度隐藏延迟，S=2 最好；
+   M=256 只有 128 CTA，少于 148 SM，更依赖单 block 流水，因此 S=3/S=6
+   优于 S=2。性能变化不能解释为 blocks/SM 从 4 逐级降到 1。
+2. 4.1 主要受普通 staging 指令限制；4.2 消除大部分线程搬运工作；4.3
+   重叠 TMA/MMA 后，瓶颈转向 shared-memory 容量、occupancy 和同步气泡。
+3. 4.1→4.2 减少地址生成/load/store 指令，4.2→4.3 隐藏单缓冲串行等待。
+4. 每 stage 的 A/B tile 约 24 KiB；S=2/3/4/6 约占 48/72/96/144 KiB，
+   occupancy API 的实际最大 blocks/SM 均为 1。设备每 SM 有 233472 B shared
+   memory；仅按总字节数整除得到 4/3/2/1，但 occupancy API 的实际值均为 1。
+   S=2 的 NCU basic profile（Job 14933）也将 6.2% theoretical occupancy 的
+   限制归因于 required shared memory，说明简单字节除法忽略了当前动态 smem
+   配置/硬件分配约束。继续增加 stage 时 shared memory 仍会先于当前
+   64-column TMEM accumulator 成为硬容量限制。
 
 ## Prob 4.5 thin GEMM（C）
 
