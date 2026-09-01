@@ -1,188 +1,326 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1280" viewBox="0 0 1800 1280">
-<defs><filter id="shadow" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324d" flood-opacity="0.12"/></filter></defs>
-<rect width="1800" height="1280" fill="#f6f8fb"/>
-<text x="40.0" y="48.0" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="800" fill="#14213d" text-anchor="start">Kimi KDA K2 on NVIDIA B300: where the time goes</text>
-<text x="40.0" y="82.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#5c667a" text-anchor="start">Real Nsight Systems + Nsight Compute evidence · CUDA 13.0 · CC 10.3 · 148 SM · measured 2026-09-01</text>
-<text x="1760.0" y="48.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="650" fill="#5c667a" text-anchor="end">T=4096 · D=128</text>
-<g filter="url(#shadow)">
-<rect x="40.0" y="118.0" width="1720.0" height="262.0" rx="18" fill="#ffffff" stroke="#e3e8f0" stroke-width="1" opacity="1"/>
-</g>
-<text x="64.0" y="154.0" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="700" fill="#14213d" text-anchor="start">A. Nsight Systems — last captured GPU iteration (T=4096, H=12, BF16)</text>
-<line x1="285.0" y1="188.0" x2="285.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="285.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">0</text>
-<line x1="445.0" y1="188.0" x2="445.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="445.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">100</text>
-<line x1="605.0" y1="188.0" x2="605.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="605.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">200</text>
-<line x1="765.0" y1="188.0" x2="765.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="765.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">300</text>
-<line x1="925.0" y1="188.0" x2="925.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="925.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">400</text>
-<line x1="1085.0" y1="188.0" x2="1085.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="1085.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">500</text>
-<line x1="1245.0" y1="188.0" x2="1245.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="1245.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">600</text>
-<line x1="1405.0" y1="188.0" x2="1405.0" y2="328.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="1405.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="middle">700</text>
-<text x="845.0" y="375.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="400" fill="#5c667a" text-anchor="middle">GPU time from first kernel (µs)</text>
-<text x="64.0" y="232.0" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="650" fill="#14213d" text-anchor="start">Official V128</text>
-<rect x="285.0" y="208.0" width="7.4" height="34.0" rx="5" fill="#9aa7b8" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="294.6" y="208.0" width="59.3" height="34.0" rx="5" fill="#e8b04d" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="356.8" y="208.0" width="1000.3" height="34.0" rx="5" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="857.0" y="231.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">K2 625.2 µs</text>
-<text x="64.0" y="294.0" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="650" fill="#14213d" text-anchor="start">Auto → V16</text>
-<rect x="285.0" y="270.0" width="7.7" height="34.0" rx="5" fill="#9aa7b8" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="294.6" y="270.0" width="59.4" height="34.0" rx="5" fill="#e8b04d" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="356.8" y="270.0" width="721.7" height="34.0" rx="5" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="717.6" y="293.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">K2 451.1 µs</text>
-<rect x="1455.0" y="176.0" width="20.0" height="14.0" rx="3" fill="#9aa7b8" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1485.0" y="190.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="start">copy</text>
-<rect x="1455.0" y="204.0" width="20.0" height="14.0" rx="3" fill="#e8b04d" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1485.0" y="218.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="start">prepare</text>
-<rect x="1455.0" y="232.0" width="20.0" height="14.0" rx="3" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1485.0" y="246.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="start">K2 recurrence</text>
-<text x="1455.0" y="295.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#5c667a" text-anchor="start">5-iteration projected NVTX span</text>
-<text x="1455.0" y="320.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#14213d" text-anchor="start">3.416 → 2.505 ms</text>
-<text x="1455.0" y="346.0" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="800" fill="#157a8a" text-anchor="start">−26.7%</text>
-<g filter="url(#shadow)">
-<rect x="40.0" y="402.0" width="840.0" height="365.0" rx="18" fill="#ffffff" stroke="#e3e8f0" stroke-width="1" opacity="1"/>
-</g>
-<text x="64.0" y="438.0" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="700" fill="#14213d" text-anchor="start">B. Value slicing trades per-CTA size for whole-GPU coverage</text>
-<line x1="114.0" y1="685.0" x2="834.0" y2="685.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="104.0" y="690.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">0</text>
-<line x1="114.0" y1="626.4" x2="834.0" y2="626.4" stroke="#dce3ed" stroke-width="1"/>
-<text x="104.0" y="631.4" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">200</text>
-<line x1="114.0" y1="567.9" x2="834.0" y2="567.9" stroke="#dce3ed" stroke-width="1"/>
-<text x="104.0" y="572.9" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">400</text>
-<line x1="114.0" y1="509.3" x2="834.0" y2="509.3" stroke="#dce3ed" stroke-width="1"/>
-<text x="104.0" y="514.3" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">600</text>
-<text x="114.0" y="467.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">NCU duration (µs)</text>
-<rect x="169.0" y="499.8" width="70.0" height="185.2" rx="7" fill="#e07a2f" stroke="none" stroke-width="1" opacity="1"/>
-<text x="204.0" y="490.8" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#14213d" text-anchor="middle">632</text>
-<text x="204.0" y="709.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#14213d" text-anchor="middle">H12</text>
-<text x="204.0" y="727.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#e07a2f" text-anchor="middle">V128</text>
-<text x="204.0" y="751.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="middle">12 CTA · 8.1% SM</text>
-<rect x="324.0" y="551.8" width="70.0" height="133.2" rx="7" fill="#157a8a" stroke="none" stroke-width="1" opacity="1"/>
-<text x="359.0" y="542.8" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#14213d" text-anchor="middle">455</text>
-<text x="359.0" y="709.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#14213d" text-anchor="middle">H12</text>
-<text x="359.0" y="727.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#157a8a" text-anchor="middle">V16</text>
-<text x="359.0" y="751.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="middle">96 CTA · 64.9% SM</text>
-<rect x="559.0" y="496.1" width="70.0" height="188.9" rx="7" fill="#e07a2f" stroke="none" stroke-width="1" opacity="1"/>
-<text x="594.0" y="487.1" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#14213d" text-anchor="middle">645</text>
-<text x="594.0" y="709.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#14213d" text-anchor="middle">H74</text>
-<text x="594.0" y="727.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#e07a2f" text-anchor="middle">V128</text>
-<text x="594.0" y="751.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="middle">74 CTA · 50.0% SM</text>
-<rect x="714.0" y="533.5" width="70.0" height="151.5" rx="7" fill="#157a8a" stroke="none" stroke-width="1" opacity="1"/>
-<text x="749.0" y="524.5" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#14213d" text-anchor="middle">517</text>
-<text x="749.0" y="709.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#14213d" text-anchor="middle">H74</text>
-<text x="749.0" y="727.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#157a8a" text-anchor="middle">V64</text>
-<text x="749.0" y="751.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="middle">148 CTA · 100.0% SM</text>
-<line x1="477.0" y1="472.0" x2="477.0" y2="758.0" stroke="#c7cfdb" stroke-width="1" stroke-dasharray="5 5"/>
-<text x="384.0" y="467.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="750" fill="#157a8a" text-anchor="middle">H12 gain −28.1%</text>
-<text x="739.0" y="467.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="750" fill="#157a8a" text-anchor="middle">H74 gain −19.8%</text>
-<g filter="url(#shadow)">
-<rect x="920.0" y="402.0" width="840.0" height="365.0" rx="18" fill="#ffffff" stroke="#e3e8f0" stroke-width="1" opacity="1"/>
-</g>
-<text x="944.0" y="438.0" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="700" fill="#14213d" text-anchor="start">C. Peak resources remain unsaturated after slicing</text>
-<line x1="990.0" y1="695.0" x2="1720.0" y2="695.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="981.0" y="700.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">0%</text>
-<line x1="990.0" y1="623.3" x2="1720.0" y2="623.3" stroke="#dce3ed" stroke-width="1"/>
-<text x="981.0" y="628.3" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">10%</text>
-<line x1="990.0" y1="551.7" x2="1720.0" y2="551.7" stroke="#dce3ed" stroke-width="1"/>
-<text x="981.0" y="556.7" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">20%</text>
-<line x1="990.0" y1="480.0" x2="1720.0" y2="480.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="981.0" y="485.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">30%</text>
-<rect x="1033.0" y="675.9" width="40.0" height="19.1" rx="5" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1053.0" y="668.9" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#4967c4" text-anchor="middle">2.7</text>
-<rect x="1087.0" y="692.4" width="40.0" height="2.6" rx="5" fill="#9a6ac1" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1107.0" y="685.4" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#9a6ac1" text-anchor="middle">0.4</text>
-<text x="1080.0" y="720.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#14213d" text-anchor="middle">H12 V128</text>
-<rect x="1208.0" y="643.5" width="40.0" height="51.5" rx="5" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1228.0" y="636.5" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#4967c4" text-anchor="middle">7.2</text>
-<rect x="1262.0" y="683.7" width="40.0" height="11.3" rx="5" fill="#9a6ac1" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1282.0" y="676.7" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#9a6ac1" text-anchor="middle">1.6</text>
-<text x="1255.0" y="720.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#14213d" text-anchor="middle">H12 V16</text>
-<rect x="1383.0" y="580.9" width="40.0" height="114.1" rx="5" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1403.0" y="573.9" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#4967c4" text-anchor="middle">15.9</text>
-<rect x="1437.0" y="630.4" width="40.0" height="64.6" rx="5" fill="#9a6ac1" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1457.0" y="623.4" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#9a6ac1" text-anchor="middle">9.0</text>
-<text x="1430.0" y="720.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#14213d" text-anchor="middle">H74 V128</text>
-<rect x="1558.0" y="506.0" width="40.0" height="189.0" rx="5" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1578.0" y="499.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#4967c4" text-anchor="middle">26.4</text>
-<rect x="1612.0" y="614.0" width="40.0" height="81.0" rx="5" fill="#9a6ac1" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1632.0" y="607.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#9a6ac1" text-anchor="middle">11.3</text>
-<text x="1605.0" y="720.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#14213d" text-anchor="middle">H74 V64</text>
-<rect x="1434.0" y="434.0" width="18.0" height="12.0" rx="2" fill="#4967c4" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1460.0" y="445.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">SM</text>
-<rect x="1505.0" y="434.0" width="18.0" height="12.0" rx="2" fill="#9a6ac1" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1531.0" y="445.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">DRAM</text>
-<text x="1345.0" y="750.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" fill="#5c667a" text-anchor="middle">Fastest case still uses only 26.4% SM and 11.3% DRAM throughput</text>
-<g filter="url(#shadow)">
-<rect x="40.0" y="790.0" width="1720.0" height="286.0" rx="18" fill="#ffffff" stroke="#e3e8f0" stroke-width="1" opacity="1"/>
-</g>
-<text x="64.0" y="826.0" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="700" fill="#14213d" text-anchor="start">D. Scheduler and cache evidence — global coverage ≠ per-SM occupancy</text>
-<text x="70.0" y="855.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#14213d" text-anchor="start">L2 hit rate</text>
-<text x="70.0" y="900.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H12 V128</text>
-<rect x="158.0" y="885.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="158.0" y="885.0" width="308.4" height="17.0" rx="8" fill="#2f8f67" stroke="none" stroke-width="1" opacity="1"/>
-<text x="547.0" y="900.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">81.2%</text>
-<text x="70.0" y="940.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H12 V16</text>
-<rect x="158.0" y="925.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="158.0" y="925.0" width="328.7" height="17.0" rx="8" fill="#2f8f67" stroke="none" stroke-width="1" opacity="1"/>
-<text x="547.0" y="940.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">86.5%</text>
-<text x="70.0" y="980.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H74 V128</text>
-<rect x="158.0" y="965.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="158.0" y="965.0" width="196.6" height="17.0" rx="8" fill="#2f8f67" stroke="none" stroke-width="1" opacity="1"/>
-<text x="547.0" y="980.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">51.7%</text>
-<text x="70.0" y="1020.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H74 V64</text>
-<rect x="158.0" y="1005.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="158.0" y="1005.0" width="242.7" height="17.0" rx="8" fill="#2f8f67" stroke="none" stroke-width="1" opacity="1"/>
-<text x="547.0" y="1020.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">63.9%</text>
-<line x1="605.0" y1="852.0" x2="605.0" y2="1046.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="635.0" y="855.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#14213d" text-anchor="start">No eligible warp</text>
-<text x="635.0" y="900.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H12 V128</text>
-<rect x="723.0" y="885.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="723.0" y="885.0" width="253.2" height="17.0" rx="8" fill="#c74f50" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1112.0" y="900.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">66.6%</text>
-<text x="635.0" y="940.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H12 V16</text>
-<rect x="723.0" y="925.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="723.0" y="925.0" width="323.3" height="17.0" rx="8" fill="#c74f50" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1112.0" y="940.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">85.1%</text>
-<text x="635.0" y="980.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H74 V128</text>
-<rect x="723.0" y="965.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="723.0" y="965.0" width="256.7" height="17.0" rx="8" fill="#c74f50" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1112.0" y="980.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">67.6%</text>
-<text x="635.0" y="1020.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H74 V64</text>
-<rect x="723.0" y="1005.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="723.0" y="1005.0" width="278.1" height="17.0" rx="8" fill="#c74f50" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1112.0" y="1020.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">73.2%</text>
-<line x1="1170.0" y1="852.0" x2="1170.0" y2="1046.0" stroke="#dce3ed" stroke-width="1"/>
-<text x="1200.0" y="855.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#14213d" text-anchor="start">Achieved occupancy</text>
-<text x="1200.0" y="900.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H12 V128</text>
-<rect x="1288.0" y="885.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="1288.0" y="885.0" width="35.6" height="17.0" rx="8" fill="#60758f" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1677.0" y="900.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">9.4%</text>
-<text x="1200.0" y="940.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H12 V16</text>
-<rect x="1288.0" y="925.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="1288.0" y="925.0" width="17.8" height="17.0" rx="8" fill="#60758f" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1677.0" y="940.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">4.7%</text>
-<text x="1200.0" y="980.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H74 V128</text>
-<rect x="1288.0" y="965.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="1288.0" y="965.0" width="35.6" height="17.0" rx="8" fill="#60758f" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1677.0" y="980.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">9.4%</text>
-<text x="1200.0" y="1020.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">H74 V64</text>
-<rect x="1288.0" y="1005.0" width="380.0" height="17.0" rx="8" fill="#edf1f6" stroke="none" stroke-width="1" opacity="1"/>
-<rect x="1288.0" y="1005.0" width="35.6" height="17.0" rx="8" fill="#60758f" stroke="none" stroke-width="1" opacity="1"/>
-<text x="1677.0" y="1020.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#14213d" text-anchor="end">9.4%</text>
-<text x="900.0" y="1058.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="750" fill="#157a8a" text-anchor="middle">V16 is faster although achieved occupancy falls: it activates 96 CTAs across the GPU instead of only 12.</text>
-<rect x="40.0" y="1098.0" width="1720.0" height="132.0" rx="18" fill="#14213d" stroke="none" stroke-width="1" opacity="1"/>
-<text x="66.0" y="1134.0" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#ffffff" text-anchor="start">Bottleneck diagnosis</text>
-<text x="66.0" y="1167.0" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="500" fill="#e9eef7" text-anchor="start">K2 dominates the trace; slicing raises CTA/SM coverage; compute and HBM stay far below peak; scheduler idle time remains high.</text>
-<text x="66.0" y="1200.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="800" fill="#73d5c4" text-anchor="start">⇒ Primarily issue/latency + CTA-distribution bound — not a traditional Tensor Core compute roof or HBM bandwidth roof.</text>
-<line x1="1280.0" y1="1118.0" x2="1280.0" y2="1210.0" stroke="#41506a" stroke-width="1"/>
-<text x="1305.0" y="1140.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="start">Code-path evidence</text>
-<text x="1305.0" y="1168.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" fill="#e9eef7" text-anchor="start">recurrence SASS: 3,640 HMMA</text>
-<text x="1305.0" y="1195.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" fill="#e9eef7" text-anchor="start">TCGEN/UTCMMA: 0/0 · grid 12 → 96 CTA</text>
-<text x="40.0" y="1262.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="start">Reproducible source: k2_nsys_timeline.csv · k2_nsys_ranges.csv · k2_ncu_metrics.csv · make_bottleneck_figure.py</text>
-<text x="1760.0" y="1262.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#5c667a" text-anchor="end">Nsight Systems 2025.3.2 · Nsight Compute 2025.3.1</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1500" viewBox="0 0 2000 1500">
+<defs>
+<marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0072B2"/></marker>
+<marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#D55E00"/></marker>
+</defs>
+<rect width="2000" height="1500" fill="#ffffff"/>
+<text x="70.0" y="48.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="30" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">Kimi KDA K2 on NVIDIA B300: profiler-guided bottleneck diagnosis</text>
+<text x="70.0" y="82.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="16" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">Paired ValueSlice measurements with execution timeline, coverage–latency trend, resource ceilings, and scheduler diagnostics</text>
+<text x="1930.0" y="48.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="15" font-weight="600" font-style="normal" fill="#5d6470" text-anchor="end">T=4096 · D=128 · BF16</text>
+<text x="70.0" y="147.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">(a)</text>
+<text x="118.0" y="147.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="start">GPU execution timeline: last captured iteration</text>
+<line x1="70.0" y1="163.0" x2="970.0" y2="163.0" stroke="#1a1a1a" stroke-width="1.2"/>
+<rect x="225.0" y="203.0" width="695.0" height="165.0" fill="none" stroke="#1a1a1a" stroke-width="1" rx="0"/>
+<line x1="225.0" y1="203.0" x2="225.0" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="225.0" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">0</text>
+<line x1="324.3" y1="203.0" x2="324.3" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="324.3" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">100</text>
+<line x1="423.6" y1="203.0" x2="423.6" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="423.6" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">200</text>
+<line x1="522.9" y1="203.0" x2="522.9" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="522.9" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">300</text>
+<line x1="622.1" y1="203.0" x2="622.1" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="622.1" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">400</text>
+<line x1="721.4" y1="203.0" x2="721.4" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="721.4" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">500</text>
+<line x1="820.7" y1="203.0" x2="820.7" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="820.7" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">600</text>
+<line x1="920.0" y1="203.0" x2="920.0" y2="368.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="920.0" y="391.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">700</text>
+<text x="572.5" y="418.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="middle">Time from first GPU kernel (µs)</text>
+<text x="167.0" y="285.5" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="middle" transform="rotate(-90.0 167.0 285.5)"></text>
+<text x="207.0" y="255.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">Official V128</text>
+<rect x="225.0" y="233.0" width="4.6" height="30.0" fill="#8b95a5" stroke="none" stroke-width="1" rx="2"/>
+<rect x="230.9" y="233.0" width="36.8" height="30.0" fill="#E69F00" stroke="none" stroke-width="1" rx="2"/>
+<rect x="269.6" y="233.0" width="620.7" height="30.0" fill="#0072B2" stroke="none" stroke-width="1" rx="2"/>
+<text x="579.9" y="254.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#ffffff" text-anchor="middle">K2 625.2 µs</text>
+<text x="207.0" y="325.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">Auto → V16</text>
+<rect x="225.0" y="303.0" width="4.8" height="30.0" fill="#8b95a5" stroke="none" stroke-width="1" rx="2"/>
+<rect x="231.0" y="303.0" width="36.9" height="30.0" fill="#E69F00" stroke="none" stroke-width="1" rx="2"/>
+<rect x="269.5" y="303.0" width="447.9" height="30.0" fill="#0072B2" stroke="none" stroke-width="1" rx="2"/>
+<text x="493.5" y="324.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#ffffff" text-anchor="middle">K2 451.1 µs</text>
+<line x1="717.4" y1="341.0" x2="890.3" y2="341.0" stroke="#0072B2" stroke-width="1.5"/>
+<line x1="717.4" y1="335.0" x2="717.4" y2="347.0" stroke="#0072B2" stroke-width="1.5"/>
+<line x1="890.3" y1="335.0" x2="890.3" y2="347.0" stroke="#0072B2" stroke-width="1.5"/>
+<text x="803.8" y="361.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#0072B2" text-anchor="middle">ΔK2 = −174.1 µs</text>
+<rect x="240.0" y="453.0" width="18.0" height="12.0" fill="#8b95a5" stroke="none" stroke-width="1" rx="0"/>
+<text x="265.0" y="465.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">copy</text>
+<rect x="385.0" y="453.0" width="18.0" height="12.0" fill="#E69F00" stroke="none" stroke-width="1" rx="0"/>
+<text x="410.0" y="465.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">prepare</text>
+<rect x="530.0" y="453.0" width="18.0" height="12.0" fill="#0072B2" stroke="none" stroke-width="1" rx="0"/>
+<text x="555.0" y="465.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">K2 recurrence</text>
+<text x="645.0" y="465.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="start">5-run NVTX: 3.416 → 2.505 ms  (−26.7%)</text>
+<text x="1040.0" y="147.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">(b)</text>
+<text x="1088.0" y="147.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="start">Latency versus whole-GPU SM coverage</text>
+<line x1="1040.0" y1="163.0" x2="1930.0" y2="163.0" stroke="#1a1a1a" stroke-width="1.2"/>
+<rect x="1135.0" y="195.0" width="740.0" height="220.0" fill="none" stroke="#1a1a1a" stroke-width="1" rx="0"/>
+<line x1="1135.0" y1="195.0" x2="1135.0" y2="415.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1135.0" y="438.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">0</text>
+<line x1="1320.0" y1="195.0" x2="1320.0" y2="415.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1320.0" y="438.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">25</text>
+<line x1="1505.0" y1="195.0" x2="1505.0" y2="415.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1505.0" y="438.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">50</text>
+<line x1="1690.0" y1="195.0" x2="1690.0" y2="415.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1690.0" y="438.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">75</text>
+<line x1="1875.0" y1="195.0" x2="1875.0" y2="415.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1875.0" y="438.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">100</text>
+<line x1="1135.0" y1="397.4" x2="1875.0" y2="397.4" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1125.0" y="402.4" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">450</text>
+<line x1="1135.0" y1="353.4" x2="1875.0" y2="353.4" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1125.0" y="358.4" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">500</text>
+<line x1="1135.0" y1="309.4" x2="1875.0" y2="309.4" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1125.0" y="314.4" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">550</text>
+<line x1="1135.0" y1="265.4" x2="1875.0" y2="265.4" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1125.0" y="270.4" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">600</text>
+<line x1="1135.0" y1="221.4" x2="1875.0" y2="221.4" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1125.0" y="226.4" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">650</text>
+<text x="1505.0" y="465.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="middle">Ideal SM coverage ceiling (%)</text>
+<text x="1077.0" y="305.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="middle" transform="rotate(-90.0 1077.0 305.0)">NCU K2 duration (µs)</text>
+<line x1="1135.0" y1="221.9" x2="1875.0" y2="359.4" stroke="#5d6470" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1147.0" y="214.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="start">OLS guide (n=4; descriptive)</text>
+<line x1="1195.0" y1="237.0" x2="1615.0" y2="393.3" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+<circle cx="1195.0" cy="237.0" r="7.0" fill="#ffffff" stroke="#0072B2" stroke-width="2.5" opacity="1"/>
+<circle cx="1615.0" cy="393.3" r="8.0" fill="#0072B2" stroke="#ffffff" stroke-width="2" opacity="1"/>
+<text x="1205.0" y="225.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">H12 V128</text>
+<text x="1607.0" y="380.3" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="end">H12 sliced</text>
+<text x="1405.0" y="305.1" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#0072B2" text-anchor="middle">−28.1%</text>
+<line x1="1505.0" y1="225.7" x2="1875.0" y2="338.2" stroke="#D55E00" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
+<circle cx="1505.0" cy="225.7" r="7.0" fill="#ffffff" stroke="#D55E00" stroke-width="2.5" opacity="1"/>
+<circle cx="1875.0" cy="338.2" r="8.0" fill="#D55E00" stroke="#ffffff" stroke-width="2" opacity="1"/>
+<text x="1515.0" y="213.7" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">H74 V128</text>
+<text x="1867.0" y="325.2" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="end">H74 sliced</text>
+<text x="1690.0" y="272.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#D55E00" text-anchor="middle">−19.8%</text>
+<text x="1922.0" y="477.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="end">Arrows denote paired measurements, not a causal fit.</text>
+<text x="70.0" y="557.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">(c)</text>
+<text x="118.0" y="557.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="start">Peak-throughput utilization remains low</text>
+<line x1="70.0" y1="573.0" x2="970.0" y2="573.0" stroke="#1a1a1a" stroke-width="1.2"/>
+<rect x="215.0" y="603.0" width="705.0" height="232.0" fill="none" stroke="#1a1a1a" stroke-width="1" rx="0"/>
+<line x1="215.0" y1="603.0" x2="215.0" y2="835.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="215.0" y="857.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">0%</text>
+<line x1="391.2" y1="603.0" x2="391.2" y2="835.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="391.2" y="857.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">25%</text>
+<line x1="567.5" y1="603.0" x2="567.5" y2="835.0" stroke="#d8dce2" stroke-width="0.8" stroke-dasharray="3 4"/>
+<text x="567.5" y="857.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">50%</text>
+<line x1="743.8" y1="603.0" x2="743.8" y2="835.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="743.8" y="857.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">75%</text>
+<line x1="920.0" y1="603.0" x2="920.0" y2="835.0" stroke="#d8dce2" stroke-width="0.8" stroke-dasharray="3 4"/>
+<text x="920.0" y="857.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">100%</text>
+<text x="567.5" y="883.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="middle">Achieved throughput relative to hardware peak</text>
+<text x="916.0" y="593.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="end">100% = profiler hardware roof</text>
+<text x="201.0" y="636.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H12 · V128</text>
+<rect x="215.0" y="621.0" width="18.8" height="13.0" fill="#0072B2" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="233.8" cy="627.5" r="4.5" fill="#0072B2" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="243.8" y="632.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">2.66%</text>
+<rect x="215.0" y="641.0" width="2.5" height="13.0" fill="#D55E00" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="217.5" cy="647.5" r="4.5" fill="#D55E00" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="233.0" y="652.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">0.36%</text>
+<text x="201.0" y="689.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H12 · V16</text>
+<rect x="215.0" y="674.0" width="50.6" height="13.0" fill="#0072B2" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="265.6" cy="680.5" r="4.5" fill="#0072B2" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="275.6" y="685.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">7.18%</text>
+<rect x="215.0" y="694.0" width="11.1" height="13.0" fill="#D55E00" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="226.1" cy="700.5" r="4.5" fill="#D55E00" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="236.1" y="705.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">1.58%</text>
+<text x="201.0" y="742.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H74 · V128</text>
+<rect x="215.0" y="727.0" width="112.2" height="13.0" fill="#0072B2" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="327.2" cy="733.5" r="4.5" fill="#0072B2" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="337.2" y="738.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">15.92%</text>
+<rect x="215.0" y="747.0" width="63.6" height="13.0" fill="#D55E00" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="278.6" cy="753.5" r="4.5" fill="#D55E00" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="288.6" y="758.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">9.02%</text>
+<text x="201.0" y="795.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H74 · V64</text>
+<rect x="215.0" y="780.0" width="185.9" height="13.0" fill="#0072B2" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="400.9" cy="786.5" r="4.5" fill="#0072B2" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="410.9" y="791.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">26.37%</text>
+<rect x="215.0" y="800.0" width="79.7" height="13.0" fill="#D55E00" stroke="none" stroke-width="1" rx="0"/>
+<circle cx="294.7" cy="806.5" r="4.5" fill="#D55E00" stroke="#ffffff" stroke-width="1" opacity="1"/>
+<text x="304.7" y="811.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">11.30%</text>
+<rect x="700.0" y="550.0" width="16.0" height="11.0" fill="#0072B2" stroke="none" stroke-width="1" rx="0"/>
+<text x="723.0" y="561.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">SM</text>
+<rect x="770.0" y="550.0" width="16.0" height="11.0" fill="#D55E00" stroke="none" stroke-width="1" rx="0"/>
+<text x="793.0" y="561.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">DRAM</text>
+<text x="965.0" y="888.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="end">Largest observed SM utilization = 26.37%</text>
+<text x="1040.0" y="557.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">(d)</text>
+<text x="1088.0" y="557.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="start">Paired diagnostic counters</text>
+<line x1="1040.0" y1="573.0" x2="1930.0" y2="573.0" stroke="#1a1a1a" stroke-width="1.2"/>
+<text x="1207.5" y="597.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">L2 hit rate</text>
+<rect x="1085.0" y="615.0" width="245.0" height="205.0" fill="none" stroke="#1a1a1a" stroke-width="1" rx="0"/>
+<line x1="1085.0" y1="797.2" x2="1330.0" y2="797.2" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1078.0" y="801.2" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">50%</text>
+<line x1="1085.0" y1="706.1" x2="1330.0" y2="706.1" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1078.0" y="710.1" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">70%</text>
+<line x1="1085.0" y1="615.0" x2="1330.0" y2="615.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1078.0" y="619.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">90%</text>
+<text x="1137.0" y="842.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">V128</text>
+<text x="1278.0" y="842.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">sliced</text>
+<line x1="1137.0" y1="655.3" x2="1278.0" y2="630.9" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1137.0" cy="655.3" r="5.0" fill="#ffffff" stroke="#0072B2" stroke-width="2" opacity="1"/>
+<circle cx="1278.0" cy="630.9" r="5.5" fill="#0072B2" stroke="#ffffff" stroke-width="1.5" opacity="1"/>
+<text x="1130.0" y="647.3" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="end">81.2</text>
+<text x="1285.0" y="634.9" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">86.5 H12</text>
+<line x1="1137.0" y1="789.3" x2="1278.0" y2="734.0" stroke="#D55E00" stroke-width="2"/>
+<circle cx="1137.0" cy="789.3" r="5.0" fill="#ffffff" stroke="#D55E00" stroke-width="2" opacity="1"/>
+<circle cx="1278.0" cy="734.0" r="5.5" fill="#D55E00" stroke="#ffffff" stroke-width="1.5" opacity="1"/>
+<text x="1130.0" y="805.3" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="end">51.7</text>
+<text x="1285.0" y="738.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">63.9 H74</text>
+<text x="1492.5" y="597.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">No eligible warp</text>
+<rect x="1370.0" y="615.0" width="245.0" height="205.0" fill="none" stroke="#1a1a1a" stroke-width="1" rx="0"/>
+<line x1="1370.0" y1="820.0" x2="1615.0" y2="820.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1363.0" y="824.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">60%</text>
+<line x1="1370.0" y1="717.5" x2="1615.0" y2="717.5" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1363.0" y="721.5" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">75%</text>
+<line x1="1370.0" y1="615.0" x2="1615.0" y2="615.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1363.0" y="619.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">90%</text>
+<text x="1422.0" y="842.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">V128</text>
+<text x="1563.0" y="842.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">sliced</text>
+<line x1="1422.0" y1="774.7" x2="1563.0" y2="648.6" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1422.0" cy="774.7" r="5.0" fill="#ffffff" stroke="#0072B2" stroke-width="2" opacity="1"/>
+<circle cx="1563.0" cy="648.6" r="5.5" fill="#0072B2" stroke="#ffffff" stroke-width="1.5" opacity="1"/>
+<text x="1415.0" y="766.7" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="end">66.6</text>
+<text x="1570.0" y="652.6" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">85.1 H12</text>
+<line x1="1422.0" y1="768.3" x2="1563.0" y2="729.9" stroke="#D55E00" stroke-width="2"/>
+<circle cx="1422.0" cy="768.3" r="5.0" fill="#ffffff" stroke="#D55E00" stroke-width="2" opacity="1"/>
+<circle cx="1563.0" cy="729.9" r="5.5" fill="#D55E00" stroke="#ffffff" stroke-width="1.5" opacity="1"/>
+<text x="1415.0" y="784.3" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="end">67.6</text>
+<text x="1570.0" y="733.9" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">73.2 H74</text>
+<text x="1777.5" y="597.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">Achieved occupancy</text>
+<rect x="1655.0" y="615.0" width="245.0" height="205.0" fill="none" stroke="#1a1a1a" stroke-width="1" rx="0"/>
+<line x1="1655.0" y1="820.0" x2="1900.0" y2="820.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1648.0" y="824.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">0%</text>
+<line x1="1655.0" y1="717.5" x2="1900.0" y2="717.5" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1648.0" y="721.5" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">6%</text>
+<line x1="1655.0" y1="615.0" x2="1900.0" y2="615.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="1648.0" y="619.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">12%</text>
+<text x="1707.0" y="842.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">V128</text>
+<text x="1848.0" y="842.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">sliced</text>
+<line x1="1707.0" y1="659.8" x2="1848.0" y2="739.9" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1707.0" cy="659.8" r="5.0" fill="#ffffff" stroke="#0072B2" stroke-width="2" opacity="1"/>
+<circle cx="1848.0" cy="739.9" r="5.5" fill="#0072B2" stroke="#ffffff" stroke-width="1.5" opacity="1"/>
+<text x="1700.0" y="651.8" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="end">9.4</text>
+<text x="1855.0" y="743.9" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#0072B2" text-anchor="start">4.7 H12</text>
+<line x1="1707.0" y1="659.9" x2="1848.0" y2="659.9" stroke="#D55E00" stroke-width="2"/>
+<circle cx="1707.0" cy="659.9" r="5.0" fill="#ffffff" stroke="#D55E00" stroke-width="2" opacity="1"/>
+<circle cx="1848.0" cy="659.9" r="5.5" fill="#D55E00" stroke="#ffffff" stroke-width="1.5" opacity="1"/>
+<text x="1700.0" y="675.9" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="end">9.4</text>
+<text x="1855.0" y="663.9" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="650" font-style="normal" fill="#D55E00" text-anchor="start">9.4 H74</text>
+<line x1="1660.0" y1="559.0" x2="1685.0" y2="559.0" stroke="#0072B2" stroke-width="2"/>
+<text x="1692.0" y="563.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">H12</text>
+<line x1="1750.0" y1="559.0" x2="1775.0" y2="559.0" stroke="#D55E00" stroke-width="2"/>
+<text x="1782.0" y="563.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">H74</text>
+<text x="1926.0" y="888.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="end">Whole-GPU coverage and per-active-SM occupancy measure different layers.</text>
+<text x="70.0" y="967.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">(e)</text>
+<text x="118.0" y="967.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="start">Launch-resource map</text>
+<line x1="70.0" y1="983.0" x2="970.0" y2="983.0" stroke="#1a1a1a" stroke-width="1.2"/>
+<rect x="175.0" y="1015.0" width="740.0" height="190.0" fill="none" stroke="#1a1a1a" stroke-width="1" rx="0"/>
+<line x1="175.0" y1="1015.0" x2="175.0" y2="1205.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="175.0" y="1228.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">40</text>
+<line x1="402.7" y1="1015.0" x2="402.7" y2="1205.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="402.7" y="1228.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">60</text>
+<line x1="630.4" y1="1015.0" x2="630.4" y2="1205.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="630.4" y="1228.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">80</text>
+<line x1="858.1" y1="1015.0" x2="858.1" y2="1205.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="858.1" y="1228.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="middle">100</text>
+<line x1="175.0" y1="1193.1" x2="915.0" y2="1193.1" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="165.0" y="1198.1" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">50</text>
+<line x1="175.0" y1="1133.8" x2="915.0" y2="1133.8" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="165.0" y="1138.8" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">60</text>
+<line x1="175.0" y1="1074.4" x2="915.0" y2="1074.4" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="165.0" y="1079.4" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">70</text>
+<line x1="175.0" y1="1015.0" x2="915.0" y2="1015.0" stroke="#d8dce2" stroke-width="0.8"/>
+<text x="165.0" y="1020.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">80</text>
+<text x="545.0" y="1255.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="middle">Dynamic shared memory / CTA (KiB)</text>
+<text x="117.0" y="1110.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="middle" transform="rotate(-90.0 117.0 1110.0)">Registers / thread</text>
+<circle cx="840.2" cy="1056.6" r="18.0" fill="#0072B2" stroke="#ffffff" stroke-width="2.5" opacity="0.9"/>
+<text x="852.2" y="1041.6" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#0072B2" text-anchor="start">V128 (H12/H74)</text>
+<circle cx="273.4" cy="1169.4" r="15.4" fill="#009E73" stroke="#ffffff" stroke-width="2.5" opacity="0.9"/>
+<text x="285.4" y="1189.4" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#009E73" text-anchor="start">V16 · H12</text>
+<circle cx="500.7" cy="1145.6" r="18.0" fill="#D55E00" stroke="#ffffff" stroke-width="2.5" opacity="0.9"/>
+<text x="512.7" y="1133.6" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" font-style="normal" fill="#D55E00" text-anchor="start">V64 · H74</text>
+<line x1="830.2" y1="1066.6" x2="283.4" y2="1162.4" stroke="#009E73" stroke-width="1.6" stroke-dasharray="6 5"/>
+<line x1="830.2" y1="1066.6" x2="510.7" y2="1138.6" stroke="#D55E00" stroke-width="1.6" stroke-dasharray="6 5"/>
+<text x="185.0" y="1033.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="start">Bubble area ∝ threads / CTA</text>
+<text x="965.0" y="1273.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="end">V128 → V16: shared memory −50.6%; registers −26.0%</text>
+<text x="1040.0" y="967.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">(f)</text>
+<text x="1088.0" y="967.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="start">Evidence matrix (raw percentages)</text>
+<line x1="1040.0" y1="983.0" x2="1930.0" y2="983.0" stroke="#1a1a1a" stroke-width="1.2"/>
+<text x="1241.0" y="1014.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="middle">CTA / SM</text>
+<text x="1353.0" y="1014.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="middle">SM</text>
+<text x="1465.0" y="1014.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="middle">DRAM</text>
+<text x="1577.0" y="1014.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="middle">L2 hit</text>
+<text x="1689.0" y="1014.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="middle">No eligible</text>
+<text x="1801.0" y="1014.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="middle">Occupancy</text>
+<text x="1173.0" y="1054.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H12 · V128</text>
+<rect x="1185.0" y="1027.0" width="108.0" height="39.0" fill="#e4edf7" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1239.0" y="1053.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">8.1%</text>
+<rect x="1297.0" y="1027.0" width="108.0" height="39.0" fill="#f1f6fc" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1351.0" y="1053.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">2.7%</text>
+<rect x="1409.0" y="1027.0" width="108.0" height="39.0" fill="#f6faff" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1463.0" y="1053.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">0.4%</text>
+<rect x="1521.0" y="1027.0" width="108.0" height="39.0" fill="#3571af" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1575.0" y="1053.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">81.2%</text>
+<rect x="1633.0" y="1027.0" width="108.0" height="39.0" fill="#588abd" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1687.0" y="1053.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">66.6%</text>
+<rect x="1745.0" y="1027.0" width="108.0" height="39.0" fill="#e1ebf6" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1799.0" y="1053.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">9.4%</text>
+<text x="1173.0" y="1097.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H12 · V16</text>
+<rect x="1185.0" y="1070.0" width="108.0" height="39.0" fill="#5c8dbf" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1239.0" y="1096.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">64.9%</text>
+<rect x="1297.0" y="1070.0" width="108.0" height="39.0" fill="#e6eff8" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1351.0" y="1096.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">7.2%</text>
+<rect x="1409.0" y="1070.0" width="108.0" height="39.0" fill="#f3f8fd" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1463.0" y="1096.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">1.6%</text>
+<rect x="1521.0" y="1070.0" width="108.0" height="39.0" fill="#2868a9" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1575.0" y="1096.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">86.5%</text>
+<rect x="1633.0" y="1070.0" width="108.0" height="39.0" fill="#2c6aab" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1687.0" y="1096.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">85.1%</text>
+<rect x="1745.0" y="1070.0" width="108.0" height="39.0" fill="#ecf3fa" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1799.0" y="1096.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">4.7%</text>
+<text x="1173.0" y="1140.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H74 · V128</text>
+<rect x="1185.0" y="1113.0" width="108.0" height="39.0" fill="#80a6ce" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1239.0" y="1139.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">50.0%</text>
+<rect x="1297.0" y="1113.0" width="108.0" height="39.0" fill="#d1e0ef" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1351.0" y="1139.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">15.9%</text>
+<rect x="1409.0" y="1113.0" width="108.0" height="39.0" fill="#e1ecf6" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1463.0" y="1139.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">9.0%</text>
+<rect x="1521.0" y="1113.0" width="108.0" height="39.0" fill="#7ba3cc" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1575.0" y="1139.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">51.7%</text>
+<rect x="1633.0" y="1113.0" width="108.0" height="39.0" fill="#5688bc" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1687.0" y="1139.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">67.6%</text>
+<rect x="1745.0" y="1113.0" width="108.0" height="39.0" fill="#e1ebf6" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1799.0" y="1139.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">9.4%</text>
+<text x="1173.0" y="1183.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#1a1a1a" text-anchor="end">H74 · V64</text>
+<rect x="1185.0" y="1156.0" width="108.0" height="39.0" fill="#08519c" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1239.0" y="1182.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">100.0%</text>
+<rect x="1297.0" y="1156.0" width="108.0" height="39.0" fill="#b8cee5" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1351.0" y="1182.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">26.4%</text>
+<rect x="1409.0" y="1156.0" width="108.0" height="39.0" fill="#dce8f4" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1463.0" y="1182.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">11.3%</text>
+<rect x="1521.0" y="1156.0" width="108.0" height="39.0" fill="#5e8ec0" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1575.0" y="1182.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">63.9%</text>
+<rect x="1633.0" y="1156.0" width="108.0" height="39.0" fill="#487fb7" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1687.0" y="1182.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#ffffff" text-anchor="middle">73.2%</text>
+<rect x="1745.0" y="1156.0" width="108.0" height="39.0" fill="#e1ebf6" stroke="#ffffff" stroke-width="1" rx="0"/>
+<text x="1799.0" y="1182.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="650" font-style="normal" fill="#1a1a1a" text-anchor="middle">9.4%</text>
+<rect x="1185.0" y="1224.0" width="18.0" height="10.0" fill="#f7fbff" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1203.0" y="1224.0" width="18.0" height="10.0" fill="#dfeaf5" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1221.0" y="1224.0" width="18.0" height="10.0" fill="#c7d9eb" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1239.0" y="1224.0" width="18.0" height="10.0" fill="#afc8e1" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1257.0" y="1224.0" width="18.0" height="10.0" fill="#97b7d7" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1275.0" y="1224.0" width="18.0" height="10.0" fill="#80a6ce" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1293.0" y="1224.0" width="18.0" height="10.0" fill="#6895c4" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1311.0" y="1224.0" width="18.0" height="10.0" fill="#5084ba" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1329.0" y="1224.0" width="18.0" height="10.0" fill="#3873b0" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1347.0" y="1224.0" width="18.0" height="10.0" fill="#2062a6" stroke="none" stroke-width="1" rx="0"/>
+<rect x="1365.0" y="1224.0" width="18.0" height="10.0" fill="#08519c" stroke="none" stroke-width="1" rx="0"/>
+<text x="1185.0" y="1252.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">0%</text>
+<text x="1383.0" y="1252.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="end">100%</text>
+<text x="1925.0" y="1273.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="400" font-style="italic" fill="#5d6470" text-anchor="end">Cell color encodes magnitude, not desirability.</text>
+<line x1="70.0" y1="1330.0" x2="1930.0" y2="1330.0" stroke="#1a1a1a" stroke-width="1.4"/>
+<text x="70.0" y="1364.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="16" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">Primary inference</text>
+<text x="220.0" y="1364.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="16" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="start">Value slicing shortens K2 by expanding whole-GPU CTA coverage; it does not require higher per-SM occupancy.</text>
+<text x="70.0" y="1394.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="16" font-weight="700" font-style="normal" fill="#1a1a1a" text-anchor="start">Boundary evidence</text>
+<text x="220.0" y="1394.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="16" font-weight="500" font-style="normal" fill="#1a1a1a" text-anchor="start">SM and DRAM remain far below peak while scheduler no-eligible cycles stay high → issue/latency + CTA-distribution bound.</text>
+<text x="70.0" y="1432.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">Figure 1 | B300, CUDA 13.0, CC 10.3, 148 SM; T=4096, D=128, BF16. Nsys 2025.3.2; NCU 2025.3.1.</text>
+<text x="70.0" y="1456.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="400" font-style="normal" fill="#5d6470" text-anchor="start">SASS: recurrence HMMA=3,640, TCGEN=0, UTCMMA=0. NCU durations are compared only within the same profiler methodology.</text>
+<text x="1930.0" y="1456.0" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="600" font-style="normal" fill="#5d6470" text-anchor="end">Measured data · deterministic SVG</text>
 </svg>
