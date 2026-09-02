@@ -28,6 +28,16 @@
 #include <vector>
 #include "../common.h"
 
+#define CUBLAS_CHECK(call)                                                   \
+    do {                                                                     \
+        cublasStatus_t status_ = (call);                                     \
+        if (status_ != CUBLAS_STATUS_SUCCESS) {                              \
+            fprintf(stderr, "cuBLAS error %d at %s:%d\n", (int)status_,     \
+                    __FILE__, __LINE__);                                     \
+            exit(1);                                                         \
+        }                                                                    \
+    } while (0)
+
 struct Shape {
     int n, k;
     const char* name;
@@ -59,8 +69,25 @@ static const Shape SHAPES[] = {
 static const int MS[] = {1, 8, 16, 64, 256, 1024, 4096, 16384, 65536};
 
 int main(int argc, char** argv) {
-    double peak_tflops = argc > 2 ? atof(argv[1]) : 0;
-    double peak_gbps = argc > 2 ? atof(argv[2]) : 0;
+    if (argc != 1 && argc != 3) {
+        fprintf(stderr, "usage: %s [peak_TFLOPS peak_GB/s]\n", argv[0]);
+        return 2;
+    }
+    double peak_tflops = argc == 3 ? atof(argv[1]) : 0;
+    double peak_gbps = argc == 3 ? atof(argv[2]) : 0;
+    if (argc == 3 && (peak_tflops <= 0 || peak_gbps <= 0)) {
+        fprintf(stderr, "peak_TFLOPS and peak_GB/s must both be positive\n");
+        return 2;
+    }
+
+    int device = 0;
+    cudaDeviceProp prop{};
+    CUDA_CHECK(cudaGetDevice(&device));
+    CUDA_CHECK(cudaGetDeviceProperties(&prop, device));
+    printf("device=%s cc=%d.%d peak=%.1f_TFLOPS bandwidth=%.1f_GB/s "
+           "balance=%.2f_FLOP/byte\n",
+           prop.name, prop.major, prop.minor, peak_tflops, peak_gbps,
+           peak_gbps > 0 ? peak_tflops * 1000.0 / peak_gbps : 0.0);
 
     int maxM = 65536, maxN = 0, maxK = 0;
     for (auto& s : SHAPES) {
@@ -88,21 +115,24 @@ int main(int argc, char** argv) {
                               cudaMemcpyDeviceToDevice));
 
     cublasHandle_t h;
-    cublasCreate(&h);
+    CUBLAS_CHECK(cublasCreate(&h));
     float alpha = 1.f, beta = 0.f;
 
     printf("%-20s %5s %6s %6s %9s %9s %9s %7s", "layer", "M", "N", "K",
            "us", "TFLOPS", "GB/s", "AI");
-    if (peak_tflops > 0) printf(" %8s %8s", "%TCpeak", "%BW");
+    if (peak_tflops > 0)
+        printf(" %9s %7s %8s %8s", "roofTF", "bound", "%TCpeak",
+               "%BWroof");
     printf("\n");
     for (auto& s : SHAPES) {
         for (int M : MS) {
             // D[M,N] 行主序:C_col[N,M] = W_col[K,N]^T x A_col[K,M]
             auto launch = [&] {
-                cublasGemmEx(h, CUBLAS_OP_T, CUBLAS_OP_N, s.n, M, s.k, &alpha,
-                             dW, CUDA_R_16BF, s.k, dA, CUDA_R_16BF, s.k,
-                             &beta, dD, CUDA_R_16BF, s.n, CUBLAS_COMPUTE_32F,
-                             CUBLAS_GEMM_DEFAULT);
+                CUBLAS_CHECK(cublasGemmEx(
+                    h, CUBLAS_OP_T, CUBLAS_OP_N, s.n, M, s.k, &alpha, dW,
+                    CUDA_R_16BF, s.k, dA, CUDA_R_16BF, s.k, &beta, dD,
+                    CUDA_R_16BF, s.n, CUBLAS_COMPUTE_32F,
+                    CUBLAS_GEMM_DEFAULT));
             };
             launch();
             CUDA_CHECK(cudaDeviceSynchronize());
@@ -116,13 +146,22 @@ int main(int argc, char** argv) {
             double ai = flop / bytes;
             printf("%-20s %5d %6d %6d %9.1f %9.1f %9.1f %7.1f", s.name, M,
                    s.n, s.k, ms * 1e3, tflops, gbps, ai);
-            if (peak_tflops > 0)
-                printf(" %7.1f%% %7.1f%%", 100.0 * tflops / peak_tflops,
+            if (peak_tflops > 0) {
+                double memory_roof = ai * peak_gbps / 1000.0;
+                double roof = memory_roof < peak_tflops ? memory_roof
+                                                        : peak_tflops;
+                printf(" %9.1f %7s %7.1f%% %7.1f%%", roof,
+                       memory_roof < peak_tflops ? "memory" : "compute",
+                       100.0 * tflops / peak_tflops,
                        100.0 * gbps / peak_gbps);
+            }
             printf("\n");
         }
         printf("\n");
     }
-    cublasDestroy(h);
+    CUBLAS_CHECK(cublasDestroy(h));
+    CUDA_CHECK(cudaFree(dD));
+    CUDA_CHECK(cudaFree(dW));
+    CUDA_CHECK(cudaFree(dA));
     return 0;
 }

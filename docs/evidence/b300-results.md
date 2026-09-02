@@ -176,6 +176,39 @@ required shared memory。原始证据：
 
 这些结果与 Job 14793 的趋势一致；绝对值差异属于时钟和测量波动。
 
+## 4.5 Thin GEMM
+
+Slurm Job `15340`；7 个 Kimi K3 投影形状 × 9 个 M，三个独立进程逐点
+中位数。代表结果：
+
+```text
+M=16:    大 K 形状 20.1–95.1 TFLOPS
+M=256:   大 K 形状 296.1–1005.8 TFLOPS
+M=65536: 大 K 形状 1265.1–1322.6 TFLOPS（官方峰值的 56.2%–58.8%）
+f_b_proj(K=128), M=65536: 413.2 TFLOPS，AI=117.9，始终 memory-bound
+```
+
+63 点原始输出、生成脚本与完整 Roofline 解释见
+[`M4-gemm/4.5-thin-gemm/`](../../M4-gemm/4.5-thin-gemm/README.md)。
+
+## M5 低精度最终回归
+
+Slurm Job `15409`：
+
+```text
+E2M1 hardware check: PASS, 202864 values
+NVFP4 byte check:    3/3 PASS, bad=0
+cuBLASLt FP4 GEMM:   3/3 PASS, maxrel about 3.9e-3
+Fused RMS+NVFP4:     10/10 PASS
+```
+
+5.4 三次复跑中位数：小 M 为 1.83–1.84×，过渡区为 1.24–1.50×，
+大 M 为 1.06–1.14×。Job `15414` 的十形状 ceiling probe 为 2–1424 GB/s；
+Job `15412` 的代表 fused profile 为 40 registers/thread、14.34 KiB dynamic
+shared、62.89% achieved occupancy，Memory/L1-TEX/SM throughput 为
+77.79%/85.88%/31.91%。完整逐形状表与 NCU 摘要见
+[`M5-low-precision/evidence/b300-final-regression.md`](../../M5-low-precision/evidence/b300-final-regression.md)。
+
 ## assignment01 naive FP32 基线
 
 ```text

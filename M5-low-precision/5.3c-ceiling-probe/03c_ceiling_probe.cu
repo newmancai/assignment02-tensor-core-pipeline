@@ -19,22 +19,69 @@ template <int BLOCK>
 __global__ void probe_kernel(const __nv_bfloat16* __restrict__ in,
                              uint8_t* __restrict__ dataOut,
                              uint8_t* __restrict__ sfOut, int M, int K) {
-    // TODO: 与你的 quant kernel 同形的访存,xor 直通,无数学。
+    const int groupsPerRow = K / NVFP4_GROUP;
+    const int64_t totalGroups = static_cast<int64_t>(M) * groupsPerRow;
+    const int64_t first = static_cast<int64_t>(blockIdx.x) * BLOCK + threadIdx.x;
+    const int64_t stride = static_cast<int64_t>(gridDim.x) * BLOCK;
+    const int numKTiles = nvfp4_num_ktiles(K);
+
+    for (int64_t group = first; group < totalGroups; group += stride) {
+        const int row = static_cast<int>(group / groupsPerRow);
+        const int kGroup = static_cast<int>(group -
+                                            static_cast<int64_t>(row) * groupsPerRow);
+        const uint16_t* src = reinterpret_cast<const uint16_t*>(in) +
+                              group * NVFP4_GROUP;
+
+        // Consume exactly the same 32 input bytes as the quant kernel.  Each
+        // adjacent bf16 pair is folded to one output byte using only xor, so
+        // every input load remains observable while numerical conversion,
+        // amax reduction, division, and FP4/FP8 instructions disappear.
+        uint64_t packed = 0;
+        uint8_t sfByte = 0;
+#pragma unroll
+        for (int i = 0; i < NVFP4_GROUP; i += 2) {
+            const uint16_t x = src[i];
+            const uint16_t y = src[i + 1];
+            const uint8_t byte = static_cast<uint8_t>(
+                x ^ (x >> 8) ^ y ^ (y >> 8) ^ 0x5au);
+            packed |= static_cast<uint64_t>(byte) << (i * 4);
+            sfByte ^= byte;
+        }
+
+        reinterpret_cast<uint64_t*>(dataOut)[group] = packed;
+        sfOut[sf_swizzled_offset(row, kGroup, numKTiles)] = sfByte;
+    }
 }
 
 static void launch_probe(const __nv_bfloat16* in, uint8_t* dataOut,
                          uint8_t* sfOut, int M, int K, int sms) {
-    // TODO: 启动配置。
-    (void)in; (void)dataOut; (void)sfOut; (void)M; (void)K; (void)sms;
+    constexpr int block = 256;
+    if (M <= 0 || K < NVFP4_GROUP) return;
+    const int64_t totalGroups = static_cast<int64_t>(M) * (K / NVFP4_GROUP);
+    const int64_t needed = (totalGroups + block - 1) / block;
+    const int maxBlocks = (sms > 0 ? sms : 1) * 8;
+    const int blocks = static_cast<int>(needed < maxBlocks ? needed : maxBlocks);
+    probe_kernel<block><<<blocks, block>>>(in, dataOut, sfOut, M, K);
 }
 
-int main() {
+int main(int argc, char** argv) {
+    int only_m = 0, only_k = 0;
+    if (argc == 3) {
+        only_m = atoi(argv[1]);
+        only_k = atoi(argv[2]);
+    } else if (argc != 1) {
+        fprintf(stderr, "usage: %s [M K]\n", argv[0]);
+        return 2;
+    }
     int sms;
     CUDA_CHECK(cudaDeviceGetAttribute(&sms, cudaDevAttrMultiProcessorCount, 0));
     for (const auto& shape :
-         {std::pair{4096, 7168}, {16384, 4096}, {16384, 8192}}) {
+         {std::pair{1, 4096}, {16, 4096}, {256, 4096}, {1024, 4096},
+          {4096, 4096}, {16384, 4096}, {4096, 7168}, {16384, 7168},
+          {4096, 8192}, {16384, 8192}}) {
         int M = shape.first;
         int K = shape.second;
+        if (only_m && (M != only_m || K != only_k)) continue;
         size_t n = (size_t)M * K;
         __nv_bfloat16* dx;
         uint8_t *dd, *dsf;

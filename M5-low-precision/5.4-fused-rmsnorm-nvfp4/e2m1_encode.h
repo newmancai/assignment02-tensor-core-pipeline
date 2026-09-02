@@ -15,7 +15,29 @@
 #include <math.h>
 
 __host__ __device__ inline uint8_t e2m1_encode(float v) {
-    // TODO: 实现。返回 4 bit 编码(bit3 符号,bit0-2 幅值格点下标)。
-    (void)v;
-    return 0;
+    // E2M1 的正数编码按数值递增，因此只需要在相邻格点的中点处分段。
+    // 中点恰好可由 float 表示；偶数 magnitude code 的尾数位为 0，
+    // 所以下面交替使用 <= / < 就实现了 round-to-nearest-even。
+    const float a = fabsf(v);
+    uint8_t magnitude;
+    if (a <= 0.25f)
+        magnitude = 0;  // 0.25: 0.0 (even) beats 0.5 (odd)
+    else if (a < 0.75f)
+        magnitude = 1;
+    else if (a <= 1.25f)
+        magnitude = 2;
+    else if (a < 1.75f)
+        magnitude = 3;
+    else if (a <= 2.5f)
+        magnitude = 4;
+    else if (a < 3.5f)
+        magnitude = 5;
+    else if (a <= 5.0f)
+        magnitude = 6;
+    else
+        magnitude = 7;  // Includes the satfinite region above 6.
+
+    // signbit deliberately preserves negative zero, matching the CUDA FP4
+    // conversion semantics as well as ordinary negative finite inputs.
+    return static_cast<uint8_t>((signbit(v) ? 0x8u : 0u) | magnitude);
 }
