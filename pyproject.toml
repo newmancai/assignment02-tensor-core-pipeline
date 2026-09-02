@@ -9,4 +9,7 @@ dependencies = ["torch>=2.8", "pytest>=8"]
 tilelang = ["tilelang==0.1.13"]
 
 [tool.pytest.ini_options]
-testpaths = ["M5-low-precision/5.2-block-scaling"]
+testpaths = [
+  "M5-low-precision/5.1-fp8-outlier",
+  "M5-low-precision/5.2-block-scaling",
+]

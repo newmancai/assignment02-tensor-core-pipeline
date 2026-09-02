@@ -26,6 +26,13 @@
 #include "e2m1_encode.h"
 #include "nvfp4_quant_kernel.h"
 
+#ifndef FUSED_GRID_MULT
+#define FUSED_GRID_MULT 6
+#endif
+#ifndef RMS_GRID_MULT
+#define RMS_GRID_MULT 4
+#endif
+
 // 给定的两步基线第一步:block-per-row 的 rms_norm,bf16 进出。
 // 允许修改或另写(公平基线的一部分:它调多快,对比就有多可信)。
 template <int BLOCK>
@@ -82,22 +89,102 @@ __global__ void rms_norm_baseline_kernel(const __nv_bfloat16* __restrict__ in,
     }
 }
 
-// TODO(核心):融合 kernel。签名自定,在 launch_fused 里接上。
+// One CTA owns one row.  The first phase reads x once with coalesced accesses,
+// accumulates sum(x^2), and retains the BF16 row in shared memory.  Once rnorm
+// is known, one thread consumes one complete 16-value NVFP4 group.  Keeping x
+// on chip removes the BF16 intermediate write/read while preserving the
+// synchronization-free, hardware-FP4 quantizer from 5.3(b).
+template <int BLOCK>
+__global__ void fused_rms_nvfp4_kernel(
+    const __nv_bfloat16* __restrict__ in,
+    const __nv_bfloat16* __restrict__ w,
+    uint8_t* __restrict__ dataOut,
+    uint8_t* __restrict__ sfOut,
+    int M, int K, float eps) {
+    extern __shared__ __nv_bfloat16 x_cache[];
+    __shared__ float warp_sum[BLOCK / 32];
+    const int numKTiles = nvfp4_num_ktiles(K);
+    const int groups = K / NVFP4_GROUP;
+
+    for (int row = blockIdx.x; row < M; row += gridDim.x) {
+        float ss = 0.0f;
+
+        for (int k = threadIdx.x; k < K; k += BLOCK) {
+            const __nv_bfloat16 bx = in[(size_t)row * K + k];
+            x_cache[k] = bx;
+            const float x = __bfloat162float(bx);
+            ss = fmaf(x, x, ss);
+        }
+
+#pragma unroll
+        for (int offset = 16; offset > 0; offset >>= 1)
+            ss += __shfl_down_sync(0xffffffffu, ss, offset);
+        if ((threadIdx.x & 31) == 0)
+            warp_sum[threadIdx.x >> 5] = ss;
+        __syncthreads();
+
+        if (threadIdx.x < 32) {
+            ss = threadIdx.x < BLOCK / 32 ? warp_sum[threadIdx.x] : 0.0f;
+#pragma unroll
+            for (int offset = 16; offset > 0; offset >>= 1)
+                ss += __shfl_down_sync(0xffffffffu, ss, offset);
+            if (threadIdx.x == 0) warp_sum[0] = ss;
+        }
+        __syncthreads();
+
+        const float rnorm = rsqrtf(warp_sum[0] / (float)K + eps);
+        for (int group = threadIdx.x; group < groups; group += BLOCK) {
+            const int base = group * NVFP4_GROUP;
+            float values[NVFP4_GROUP];
+            float amax = 0.0f;
+#pragma unroll
+            for (int i = 0; i < NVFP4_GROUP; ++i) {
+                const float x = __bfloat162float(x_cache[base + i]);
+                const float weight = __bfloat162float(w[base + i]);
+                const float value = x * rnorm * weight;
+                values[i] = value;
+                amax = fmaxf(amax, fabsf(value));
+            }
+
+            const __nv_fp8_e4m3 sf8(amax / 6.0f);
+            const float sf = static_cast<float>(sf8);
+            const float inv = sf != 0.0f ? 1.0f / sf : 0.0f;
+            sfOut[sf_swizzled_offset(row, group, numKTiles)] = sf8.__x;
+
+            uint64_t packed = 0;
+#pragma unroll
+            for (int i = 0; i < NVFP4_GROUP; i += 2) {
+                const __nv_fp4x2_e2m1 q(
+                    make_float2(values[i] * inv, values[i + 1] * inv));
+                packed |= static_cast<uint64_t>(q.__x) << (i * 4);
+            }
+            reinterpret_cast<uint64_t*>(dataOut)[
+                (size_t)row * groups + group] = packed;
+        }
+        __syncthreads();
+    }
+}
+
 static void launch_fused(const __nv_bfloat16* in, const __nv_bfloat16* w,
                          uint8_t* dataOut, uint8_t* sfOut, int M, int K,
                          float eps, int sms) {
-    // TODO
-    (void)in; (void)w; (void)dataOut; (void)sfOut; (void)M; (void)K;
-    (void)eps; (void)sms;
+    // Limit the persistent grid for large M; for small M launch one CTA/row.
+    const int grid = M < sms * FUSED_GRID_MULT ? M : sms * FUSED_GRID_MULT;
+    fused_rms_nvfp4_kernel<256><<<grid, 256, (size_t)K * sizeof(__nv_bfloat16)>>>(
+        in, w, dataOut, sfOut, M, K, eps);
 }
 
-// TODO(公平基线):两步各自的最优启动配置。默认给的是一个起点。
+// Fair baseline: the row reduction uses the same row-persistent policy as the
+// fused path, while quantization uses the tuned launch from 5.3(b).
 static void launch_two_step(const __nv_bfloat16* in, const __nv_bfloat16* w,
                             __nv_bfloat16* mid, uint8_t* dataOut,
                             uint8_t* sfOut, int M, int K, float eps,
                             int sms) {
-    int grid = M < sms ? M : sms * 2;
-    rms_norm_baseline_kernel<512><<<grid, 512>>>(in, w, mid, M, K, eps);
+    int grid = M < sms * RMS_GRID_MULT ? M : sms * RMS_GRID_MULT;
+    if (K <= 4096)
+        rms_norm_baseline_kernel<256><<<grid, 256>>>(in, w, mid, M, K, eps);
+    else
+        rms_norm_baseline_kernel<512><<<grid, 512>>>(in, w, mid, M, K, eps);
     launch_nvfp4_quant(mid, dataOut, sfOut, M, K, sms);
 }
 
@@ -131,7 +218,15 @@ static void host_ref(const std::vector<float>& x, const std::vector<float>& w,
     }
 }
 
-int main() {
+int main(int argc, char** argv) {
+    int only_m = 0, only_k = 0;
+    if (argc == 3) {
+        only_m = atoi(argv[1]);
+        only_k = atoi(argv[2]);
+    } else if (argc != 1) {
+        fprintf(stderr, "usage: %s [M K]\n", argv[0]);
+        return 2;
+    }
     int sms;
     CUDA_CHECK(cudaDeviceGetAttribute(&sms, cudaDevAttrMultiProcessorCount, 0));
     const float eps = 1e-6f;
@@ -144,6 +239,7 @@ int main() {
           {4096, 8192}, {16384, 8192}}) {
         int M = shape.first;
         int K = shape.second;
+        if (only_m && (M != only_m || K != only_k)) continue;
         size_t n = (size_t)M * K;
         int64_t sfB = nvfp4_sf_bytes(M, K);
         std::mt19937 rng(42);
