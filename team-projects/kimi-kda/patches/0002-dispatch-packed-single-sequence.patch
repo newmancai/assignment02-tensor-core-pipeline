@@ -1,0 +1,31 @@
+diff --git a/flash_kda/__init__.py b/flash_kda/__init__.py
+--- a/flash_kda/__init__.py
++++ b/flash_kda/__init__.py
+@@ -39,13 +39,25 @@ def _dispatch_decision(q, initial_state, final_state, cu_seqlens):
+         tensor is not None and tensor.dtype == torch.float32
+         for tensor in (initial_state, final_state)
+     )
++
++    # A packed batch containing exactly one sequence executes the same K2 grid
++    # and recurrence length as fixed B=1.  Treating it as generic varlen made
++    # the dispatcher unnecessarily fall back to V128 in the common
++    # single-request prefill path.  numel() is tensor metadata, so this policy
++    # does not copy cu_seqlens to the host or introduce a device synchronize.
++    packed_sequence_count = (
++        cu_seqlens.numel() - 1 if cu_seqlens is not None else None
++    )
++    is_unmodelled_varlen = (
++        packed_sequence_count is not None and packed_sequence_count != 1
++    )
+     decision = _cached_auto_decision(
+         q.device.index,
+-        q.shape[0],
++        1 if packed_sequence_count == 1 else q.shape[0],
+         q.shape[1],
+         q.shape[2],
+         state_fp32,
+-        cu_seqlens is not None,
++        is_unmodelled_varlen,
+     )
+     return decision.value_slice, decision
+ 

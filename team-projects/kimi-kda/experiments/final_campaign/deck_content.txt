@@ -1,0 +1,268 @@
+C1 最终答辩：10 页精炼文案与 speaker notes
+
+使用约定
+- 可见页面只保留“一句主张 + 不超过 3 组证据”；其他限定放讲稿。
+- 每页讲稿控制在 55 秒内；全部约 8 分 30 秒，为转场和超时留余量。
+- “0.920×”指 mma_time/tcgen_time，小于 1 表示 tcgen05 更慢。
+- “−27%”只是 FlashKDA forward operator 降时，不是 TTFT、TPOT 或 SLO goodput 实测。
+
+========================================================================
+01｜结论封面
+
+标题
+FlashKDA 从 SM80 MMA 迁移 SM100，值得吗？
+
+一句主张
+SM100 值得利用，但当下不值得机械替换 MMA；值得的是受保护的 K2 并行度专用化。
+
+可见证据（最多 3 组）
+1. STOP｜Phase-6 V128：`tcgen05 = 0.920× mma.sync`（慢 8.7%）
+2. GO｜H12/T8192：ValueSlice 使 operator 降时 `27.0%`
+3. 发布形态｜`V128 mma.sync fallback + guarded ValueSlice`
+
+建议视觉
+大字决策封面：左侧红色 STOP（换指令），右侧绿色 GO（换并行度），中间用箭头指向“guarded hybrid”。页脚只写 B300 / SM103 / single-GPU forward。
+
+55 秒内讲稿
+我们的答案不是简单的“迁”或“不迁”。官方 FlashKDA 在 B300 上仍用 SM80 世代 MMA，但最适合 tcgen05 的 Phase-6，在乐观摊销后仍慢 8.7%。真正的瓶颈是 TP8 代表形状下 CTA 太少。我们改切 Value 维，把单请求长 prefill 的算子时间降了 27%。所以建议保留原 MMA 回退，只在已标定区间启用新路径。
+
+[Sources]
+- team-projects/kimi-kda/docs/c1-final/README.md
+- team-projects/kimi-kda/docs/c1-final/FINAL_REPORT.md
+- https://github.com/MoonshotAI/FlashKDA/blob/master/docs/20260420-flashkda-v1-deep-dive.md
+
+========================================================================
+02｜官方复现：先确认我们在比什么
+
+标题
+官方 FlashKDA 已是强基线
+
+一句主张
+在未修改的官方 commit 上复现 B300 结果，确认后续挑战面对的不是一个粗糙 kernel。
+
+可见证据（最多 3 组）
+1. 基线｜FlashKDA `1ce47ea`，B300 CC `10.3`
+2. H96 fixed｜`1.0304 ms` vs FLA `2.4155 ms` = `2.34×`
+3. 六个官方 case｜FlashKDA 相对 FLA 为 `1.79–3.42×`
+
+建议视觉
+使用 fig01_official_vs_fla，右上角加小型“复现印章”：warmup 30 / iters 200 / repeats 5。不要把 H96 和 TP8 H12 混成同一用途：H96 是官方口径，H12 在后面用于 per-GPU 瓶颈。
+
+55 秒内讲稿
+第一阶段是复现，不带任何我们的补丁。按官方口径在 B300 上运行，H96 fixed 为 1.0304 毫秒，FLA chunk KDA 是 2.4155 毫秒；六个形状的加速范围是 1.79 到 3.42 倍。这一页的含义是：官方实现已经很强，“新 GPU 理论峰值更高”不足以证明重写值得。
+
+[Sources]
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/01_official_benchmark_17926.log
+- team-projects/kimi-kda/experiments/final_campaign/data/summary_metrics.csv
+- team-projects/kimi-kda/experiments/final_campaign/figures/fig01_official_vs_fla.png
+- https://github.com/MoonshotAI/FlashKDA
+
+========================================================================
+03｜SASS + NCU：定位真瓶颈
+
+标题
+指令是旧的，瓶颈却不是 Tensor Core 峰值
+
+一句主张
+SASS 证实题面，NCU 则证明 H12 K2 首要是 grid underfill，既非传统 compute-bound，也非 HBM-bound。
+
+可见证据（最多 3 组）
+1. SASS｜`3,640 HMMA.16816.F32.BF16`，`TCGEN/UTCMMA = 0`
+2. 官方 K2｜`12 CTA / 148 SM`，整卡覆盖上限 `8.1%`
+3. NCU｜SM `2.64%`，DRAM `1.24%`（官方 V128）
+
+建议视觉
+左侧是 SASS 证据卡，右侧用 fig07_ncu_bottleneck；在 148 个浅色 SM 方格中只点亮 12 个。不要用 active-cycle tensor 30.98% 当整卡利用率。
+
+55 秒内讲稿
+SASS 里有 3640 条静态 HMMA，tcgen05 相关指令是零，所以题面成立。但在 TP8 的 per-GPU H12 形状上，K2 一个 sequence-head 只对应一个长生命 CTA，全卡只有 12 个 CTA 面对 148 个 SM。NCU 看到 SM 吞吐 2.64%、DRAM 1.24%。因此这不是“算不快”或“带宽打满”，而是大量 SM 根本没有 CTA 可执行。
+
+[Sources]
+- team-projects/kimi-kda/experiments/data/sass_opcode_summary.csv
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/05_targeted_ncu_summary_17965.csv
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/05_targeted_ncu_metrics_17965.csv
+- team-projects/kimi-kda/experiments/final_campaign/figures/fig07_ncu_bottleneck.png
+- https://docs.nvidia.com/nsight-compute/NsightComputeCli/
+
+========================================================================
+04｜CHUNK 16 / 32 / 64：不是调一个常量
+
+标题
+CHUNK 放大：先破数值，再被 Neumann 代价惩罚
+
+一句主张
+CHUNK=16 同时服务数值范围、Neumann 求逆和 `m16n8k16` 形状；机械改成 32/64 已经是算法重设。
+
+可见证据（最多 3 组）
+1. C16｜无 FTZ/overflow，朴素序列代价 `1.00×`
+2. C32｜token `18` 首次 FTZ/overflow，Neumann `5.33×`
+3. C64｜token `18` 首次 FTZ/overflow，Neumann `26.67×`
+
+建议视觉
+使用 fig02_chunk_constraints，将 C16/C32/C64 画成三级路障：“可直接实现”、“需 rescale/block solve”、“需新算法”。workspace 数据只放讲稿或备注，不抢主结论。
+
+55 秒内讲稿
+CHUNK 16 不是随手选的 tile。它一方面控制门值累积的指数范围，一方面限制 16×16 Neumann 密集求逆代价，同时匹配现有 MMA。机械改成 C32 或 C64，当 lower_bound=-5 时都在第 18 个 token 首次出现 FTZ/overflow，朴素 Neumann 总代价还会到 5.33 和 26.67 倍。FLA 小探针说明改算法能做对，却不等于改常量会变快。
+
+[Sources]
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/04_chunk_analysis_17935.csv
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/04_chunk_analysis_17935.log
+- team-projects/kimi-kda/experiments/final_campaign/figures/fig02_chunk_constraints.png
+- https://github.com/MoonshotAI/FlashKDA/blob/master/docs/20260420-flashkda-v1-deep-dive.md
+
+========================================================================
+05｜tcgen05 + TMEM：直接换指令的 stop gate
+
+标题
+Phase-6 尺寸合法，但完整协议成本吞掉收益
+
+一句主张
+我们选了最有利于 tcgen05 的 Phase-6 做微基准，K3 正式 V128 仍未通过性能 gate。
+
+可见证据（最多 3 组）
+1. 合法映射｜`[128,16]@[16,V] → m128nVk16`
+2. V128，L0，inner=64｜`0.920×`，tcgen05 慢 `8.7%`
+3. V16，core L0 `1.501×` → 加入 L1 集成成本后 `0.778×`
+
+建议视觉
+使用 fig03_tcgen05_speedup，在 1.0 处画清晰 stop/go 分界线。旁边用小流程表示 TMEM alloc → descriptor → commit/wait → load → dealloc，强调“新指令不是一条替换”。
+
+55 秒内讲稿
+tcgen05 不是因为 CHUNK 16 就一定不匹配。Phase-6 的 128×16 乘 16×V 可以合法映射到 m128nVk16，因此我们特意挑了这个对新指令最友好的 phase。但在 V128、内循环 64 次的乐观 L0 口径下，tcgen05 仍慢 8.7%。V16 的核心计算曾有 1.501 倍潜力，一旦纳入状态、门控和重排就变成 0.778 倍。所以我们在这里停止直接换指令。
+
+[Sources]
+- team-projects/kimi-kda/experiments/final_campaign/analysis_tcgen05.md
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/03_tcgen05_probe_17937.sass
+- team-projects/kimi-kda/experiments/final_campaign/figures/fig03_tcgen05_speedup.png
+- https://docs.nvidia.com/cutlass/latest/media/docs/pythonDSL/cute_dsl_api/cute_nvgpu_tcgen05.html
+
+========================================================================
+06｜ValueSlice：把挑战从“换指令”改成“换并行度”
+
+标题
+不打破 chunk 依赖，切分正交的 Value 维
+
+一句主张
+Value 行之间互相独立，ValueSlice 保持每行运算顺序，却把 H12 的独立 CTA 数扩大 8 倍。
+
+可见证据（最多 3 组）
+1. grid｜`(N,H) → (N,H,D/V)`
+2. H12｜V128 `12 CTA` → V16 `96 CTA`
+3. 不变量｜总 Tensor FLOP 不变；无 reduction / atomic
+
+建议视觉
+原生示意图：上方是 12 个长 CTA 各自处理 128 行；下方每个 head 切成 8 个 16-row slice，变为 96 CTA。用相同颜色纵向连接每个 Value 行，表明没有跨 CTA reduction。
+
+55 秒内讲稿
+chunk 之间的 state 递推是真依赖，不能凭空并行。我们转而寻找正交维度：K2 state 的 Value 行互相独立。因此把原 grid 的 N×H 扩成 N×H×D/V。H12 下，V128 只有 12 个 CTA，V16 变成 96 个。它不改总 Tensor FLOP，不需要 reduction 或 atomic，而且保留每个 Value 行内部的计算顺序。代价是公共输入被多个 slice 重复请求。
+
+[Sources]
+- team-projects/kimi-kda/patches/0001-k2-value-slice-and-dispatch.patch
+- team-projects/kimi-kda/experiments/final_campaign/implementation/current/flash_kda/dispatch.py
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/05_targeted_ncu_summary_17965.csv
+
+========================================================================
+07｜挑战结果：性能、dispatcher 与正确性
+
+标题
+27% 不是通用加速：反例决定 dispatcher
+
+一句主张
+ValueSlice 在低并发长 prefill 显著受益，多短序列则会反转，所以只能作为 workload-aware 路径。
+
+可见证据（最多 3 组）
+1. 1×8192｜fixed `−27.0%`；packed `−26.9%`，新 dispatcher 自动选 V16
+2. 32×256｜强制 V16 慢 `106%`；`N>1` 保守回退 V128
+3. 正确性｜`200/200 finite`；`98/98 bitwise`；观测最坏 relRMSE `0.9131%`
+
+建议觉觉
+左侧使用 fig04_valueslice_distribution_heatmap，右侧是三层正确性印章。为 1×8192 用绿色，32×256 用红色，把“相同 total T，不同最优 V”作为视觉主线。
+
+55 秒内讲稿
+挑战结果有正有负。单序列 8192 token 时，fixed 和 packed 分别降时 27.0% 和 26.9%；新 dispatcher 只读 cu_seqlens 的元数据就能识别 packed 单序列，不引入 GPU 到 CPU 同步。但 32 条 256-token 序列已有自然并行度，强制 V16 反而慢 106%。因此 N>1 回退 V128。正确性方面，200 条比较全部 finite，其中 98 条 ValueSlice 对 V128 逐 bit 相等。
+
+[Sources]
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/05_dispatch_upgrade_17947.csv
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/05_dispatch_upgrade_17947.log
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/03_reference_correctness_17934.csv
+- team-projects/kimi-kda/experiments/final_campaign/figures/fig04_valueslice_distribution_heatmap.png
+- team-projects/kimi-kda/patches/0002-dispatch-packed-single-sequence.patch
+
+========================================================================
+08｜BF16 state：证据与边界
+
+标题
+kernel 数值过关，不等于模型精度已证明
+
+一句主张
+本轮长序列、ragged、state carry 和 long-memory 对拍中观测误差均低于 1%，但公开 state dtype 对照不是全 FP32 recurrence。
+
+可见证据（最多 3 组）
+1. T8192 random vs naive｜output `0.5698%`，state `0.4728%`
+2. T8192 long-memory vs naive｜output `0.8240%`，state `0.7405%`
+3. Flash vs FLA 观测最坏｜output `0.9131%`，state `0.8151%`
+
+建议视觉
+使用已修正文案的 fig05_correctness_rmse，加一条 1% 参考线，标题必须是“observed below 1%”而非“passed a 1% limit”。右下角放“仍需 perplexity / downstream eval”边界标签。
+
+55 秒内讲稿
+题目还要求回答 BF16 state 是否可以接受。在长序列随机输入上，输出和最终 state 相对 naive 的 relative RMSE 为 0.5698% 和 0.4728%；long-memory case 为 0.8240% 和 0.7405%；对 FLA 的观测最坏也低于 1%。但 public BF16/FP32 state buffer 结果相同，是因为 kernel 内部仍有 BF16 舍入点，不能因此说 FP32 无用，更不能代替模型级评测。
+
+[Sources]
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/03_reference_correctness_17934.csv
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/03_reference_correctness_17934.log
+- team-projects/kimi-kda/experiments/final_campaign/figures/fig05_correctness_rmse.png
+
+========================================================================
+09｜从 kernel 传导到 Kimi K3：只做有条件的外推
+
+标题
+27% operator 降时，何时才会变成 prefill / SLO 收益？
+
+一句主张
+ValueSlice 最可能改善低并发长 prompt 的 KDA prefill；端到端收益上限由算子时间占比 p 和 serving 系统共同决定。
+
+可见证据（最多 3 组）
+1. Kimi K3｜`69/93` 层用 KDA；`69/93 ≠ 时间占比`
+2. TP8 假设｜`H96 / 8 = H12`，单请求最容易 underfill
+3. Amdahl｜`p=20% / 40% / 60%` → prefill 降时约 `5.4% / 10.8% / 16.2%`
+
+建议视觉
+三段传导链：FlashKDA operator −27% → KDA prefill 份额 p → TTFT/容量/SLO。第二个箭头用虚线，并在下方放 Amdahl 三点。右侧深色边界框：“未实测 TPOT/decode、NCCL、SLO goodput”。
+
+55 秒内讲稿
+Kimi K3 的 93 层中有 69 层 KDA，但层数不是 wall-time 占比。在 TP8 假设下，H96 每卡变成 H12，所以 ValueSlice 最可能改善低并发长 prompt 的 KDA prefill。若 FlashKDA forward 占整个 prefill 的比例为 p，则预计降时只是 0.27p；p 为 20%、40%、60% 时，分别是 5.4%、10.8%、16.2%。我们没有测 TPOT、NCCL 或 SLO goodput，因此不做这些正向声称。
+
+[Sources]
+- team-projects/kimi-kda/experiments/final_campaign/FINAL_REPORT.md
+- team-projects/kimi-kda/experiments/final_campaign/data/raw/05_dispatch_upgrade_17947.csv
+- https://github.com/MoonshotAI/Kimi-K3
+- https://arxiv.org/abs/2607.24653
+
+========================================================================
+10｜Go / No-Go 路线图
+
+标题
+最终决策：不全面重写，发布 guarded hybrid
+
+一句主张
+当前应交付已通过正确性和性能 gate 的 ValueSlice，并把 cluster 数据复用与跨 phase tcgen05 重设放入后续 gate。
+
+可见证据（最多 3 组）
+1. NO-GO NOW｜全量 `mma.sync → tcgen05`；机械 C32/C64
+2. SHIP GUARDED｜B300/SM103 长序列单请求 ValueSlice；其余 V128 fallback
+3. NEXT GATE｜CTA Cluster + TMA multicast；仅在跨 Phase 1/3/4/6 共享布局/TMEM 后重开 tcgen05
+
+建议视觉
+三列决策路线图：红色“停止”、绿色“现在发布”、蓝色“下一道 gate”。页底用一句收束：“利用 SM100 的系统能力，不迷信 SM100 的单条指令。”
+
+55 秒内讲稿
+回到 C1，我们的 no-go 是全量直接换 tcgen05，以及只把 CHUNK 改成 32 或 64。我们的 go 是 guarded hybrid：保留官方 V128 mma.sync 作兼容回退，只对 B300/SM103 已标定的单请求长 prefill 启用 ValueSlice。下一步是用 CTA Cluster 和 TMA multicast 复用 slice 间公共输入；只有当多个 phase 能共享布局和 TMEM 生命周期时，才重新打开 tcgen05 全数据流路线。
+
+[Sources]
+- team-projects/kimi-kda/experiments/final_campaign/FINAL_REPORT.md
+- team-projects/kimi-kda/experiments/final_campaign/SUBMISSION_AUDIT.md
+- team-projects/kimi-kda/patches/0001-k2-value-slice-and-dispatch.patch
+- team-projects/kimi-kda/patches/0002-dispatch-packed-single-sequence.patch
+- https://docs.nvidia.com/cutlass/latest/media/docs/pythonDSL/cute_dsl_api/cute_nvgpu_tcgen05.html

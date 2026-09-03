@@ -1,0 +1,95 @@
+campaign=05_dispatch_upgrade
+started_utc=2026-09-03T07:26:02Z
+flashkda_commit=1ce47ea3bb22c84eb9cc665028399cf35e8ffb0b
+name, uuid, driver_version, clocks.current.sm [MHz], clocks.max.sm [MHz], memory.total [MiB]
+NVIDIA B300 SXM6 AC, GPU-<REDACTED>, 580.126.09, 1905 MHz, 2032 MHz, 275040 MiB
+fixed={'value_slice': 16, 'reason': 'calibrated_score_with_guard_band', 'predicted_ms': {16: 0.5743007899999999, 32: 0.588260421, 64: 0.638657433, 128: 0.7839451}, 'resident_blocks_per_sm': {16: 4, 32: 4, 64: 3, 128: 2}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671}
+packed_one={'value_slice': 16, 'reason': 'calibrated_score_with_guard_band', 'predicted_ms': {16: 0.5743007899999999, 32: 0.588260421, 64: 0.638657433, 128: 0.7839451}, 'resident_blocks_per_sm': {16: 4, 32: 4, 64: 3, 128: 2}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671}
+packed_many={'value_slice': 128, 'reason': 'varlen_not_calibrated', 'predicted_ms': {}, 'resident_blocks_per_sm': {}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671}
+SUMMARY,PASS
+extension=/home/lcpu/<USER_ID>/FlashKDA/results/20260821_dispatch_boundary/integrated_dispatch/lib/flash_kda_C.cpython-312-x86_64-linux-gnu.so
+device={'device': 0, 'major': 10, 'minor': 3, 'sm_count': 148, 'l2_bytes': 132644864, 'shared_memory_per_sm': 233472, 'registers_per_sm': 65536, 'max_threads_per_sm': 2048, 'warp_size': 32, 'max_blocks_per_sm': 32}
+case=fixed_1x8192 lengths=[8192] auto_decision={'value_slice': 16, 'reason': 'calibrated_score_with_guard_band', 'predicted_ms': {16: 0.5743007899999999, 32: 0.588260421, 64: 0.638657433, 128: 0.7839451}, 'resident_blocks_per_sm': {16: 4, 32: 4, 64: 3, 128: 2}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671} correctness={'v16_out_equal': True, 'v16_state_equal': True, 'v32_out_equal': True, 'v32_state_equal': True, 'v64_out_equal': True, 'v64_state_equal': True}
+result case=fixed_1x8192 repeat=0 mode=v16 median_ms=0.568960 p90_ms=0.570944
+result case=fixed_1x8192 repeat=0 mode=auto median_ms=0.569696 p90_ms=0.571232
+result case=fixed_1x8192 repeat=0 mode=compat_v128 median_ms=0.780672 p90_ms=0.782880
+result case=fixed_1x8192 repeat=0 mode=v32 median_ms=0.584400 p90_ms=0.586400
+result case=fixed_1x8192 repeat=0 mode=v64 median_ms=0.633616 p90_ms=0.635680
+result case=fixed_1x8192 repeat=1 mode=auto median_ms=0.569792 p90_ms=0.571008
+result case=fixed_1x8192 repeat=1 mode=v32 median_ms=0.584384 p90_ms=0.586336
+result case=fixed_1x8192 repeat=1 mode=v64 median_ms=0.635232 p90_ms=0.636480
+result case=fixed_1x8192 repeat=1 mode=v16 median_ms=0.569072 p90_ms=0.570944
+result case=fixed_1x8192 repeat=1 mode=compat_v128 median_ms=0.780000 p90_ms=0.782816
+result case=fixed_1x8192 repeat=2 mode=v64 median_ms=0.634896 p90_ms=0.635776
+result case=fixed_1x8192 repeat=2 mode=v16 median_ms=0.569824 p90_ms=0.571872
+result case=fixed_1x8192 repeat=2 mode=compat_v128 median_ms=0.780736 p90_ms=0.782944
+result case=fixed_1x8192 repeat=2 mode=v32 median_ms=0.584416 p90_ms=0.586368
+result case=fixed_1x8192 repeat=2 mode=auto median_ms=0.569824 p90_ms=0.571808
+case=packed_1x8192 lengths=[8192] auto_decision={'value_slice': 16, 'reason': 'calibrated_score_with_guard_band', 'predicted_ms': {16: 0.5743007899999999, 32: 0.588260421, 64: 0.638657433, 128: 0.7839451}, 'resident_blocks_per_sm': {16: 4, 32: 4, 64: 3, 128: 2}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671} correctness={'v16_out_equal': True, 'v16_state_equal': True, 'v32_out_equal': True, 'v32_state_equal': True, 'v64_out_equal': True, 'v64_state_equal': True}
+result case=packed_1x8192 repeat=0 mode=v32 median_ms=0.584128 p90_ms=0.586112
+result case=packed_1x8192 repeat=0 mode=v64 median_ms=0.633280 p90_ms=0.635360
+result case=packed_1x8192 repeat=0 mode=v16 median_ms=0.573952 p90_ms=0.576064
+result case=packed_1x8192 repeat=0 mode=auto median_ms=0.574016 p90_ms=0.576000
+result case=packed_1x8192 repeat=0 mode=compat_v128 median_ms=0.784960 p90_ms=0.787072
+result case=packed_1x8192 repeat=1 mode=v64 median_ms=0.633248 p90_ms=0.635328
+result case=packed_1x8192 repeat=1 mode=v32 median_ms=0.584128 p90_ms=0.586112
+result case=packed_1x8192 repeat=1 mode=auto median_ms=0.574016 p90_ms=0.576032
+result case=packed_1x8192 repeat=1 mode=compat_v128 median_ms=0.784928 p90_ms=0.787040
+result case=packed_1x8192 repeat=1 mode=v16 median_ms=0.573952 p90_ms=0.575968
+result case=packed_1x8192 repeat=2 mode=v64 median_ms=0.633280 p90_ms=0.635360
+result case=packed_1x8192 repeat=2 mode=compat_v128 median_ms=0.784960 p90_ms=0.787040
+result case=packed_1x8192 repeat=2 mode=v16 median_ms=0.573984 p90_ms=0.576032
+result case=packed_1x8192 repeat=2 mode=auto median_ms=0.573968 p90_ms=0.576032
+result case=packed_1x8192 repeat=2 mode=v32 median_ms=0.584128 p90_ms=0.586176
+case=packed_ragged6 lengths=[1300, 547, 2048, 963, 271, 3063] auto_decision={'value_slice': 128, 'reason': 'varlen_not_calibrated', 'predicted_ms': {}, 'resident_blocks_per_sm': {}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671} correctness={'v16_out_equal': True, 'v16_state_equal': True, 'v32_out_equal': True, 'v32_state_equal': True, 'v64_out_equal': True, 'v64_state_equal': True}
+result case=packed_ragged6 repeat=0 mode=v64 median_ms=0.281056 p90_ms=0.281280
+result case=packed_ragged6 repeat=0 mode=v32 median_ms=0.287232 p90_ms=0.289216
+result case=packed_ragged6 repeat=0 mode=auto median_ms=0.340400 p90_ms=0.340640
+result case=packed_ragged6 repeat=0 mode=v16 median_ms=0.321808 p90_ms=0.322144
+result case=packed_ragged6 repeat=0 mode=compat_v128 median_ms=0.340352 p90_ms=0.340640
+result case=packed_ragged6 repeat=1 mode=compat_v128 median_ms=0.340320 p90_ms=0.340576
+result case=packed_ragged6 repeat=1 mode=v64 median_ms=0.281024 p90_ms=0.281216
+result case=packed_ragged6 repeat=1 mode=auto median_ms=0.340352 p90_ms=0.340608
+result case=packed_ragged6 repeat=1 mode=v32 median_ms=0.287232 p90_ms=0.289248
+result case=packed_ragged6 repeat=1 mode=v16 median_ms=0.321952 p90_ms=0.322144
+result case=packed_ragged6 repeat=2 mode=v64 median_ms=0.281024 p90_ms=0.281184
+result case=packed_ragged6 repeat=2 mode=compat_v128 median_ms=0.340288 p90_ms=0.340640
+result case=packed_ragged6 repeat=2 mode=v32 median_ms=0.287216 p90_ms=0.289280
+result case=packed_ragged6 repeat=2 mode=auto median_ms=0.339808 p90_ms=0.340576
+result case=packed_ragged6 repeat=2 mode=v16 median_ms=0.321888 p90_ms=0.322208
+case=packed_8x1024 lengths=[1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024] auto_decision={'value_slice': 128, 'reason': 'varlen_not_calibrated', 'predicted_ms': {}, 'resident_blocks_per_sm': {}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671} correctness={'v16_out_equal': True, 'v16_state_equal': True, 'v32_out_equal': True, 'v32_state_equal': True, 'v64_out_equal': True, 'v64_state_equal': True}
+result case=packed_8x1024 repeat=0 mode=v32 median_ms=0.168544 p90_ms=0.170528
+result case=packed_8x1024 repeat=0 mode=auto median_ms=0.156128 p90_ms=0.156320
+result case=packed_8x1024 repeat=0 mode=v64 median_ms=0.154080 p90_ms=0.154208
+result case=packed_8x1024 repeat=0 mode=compat_v128 median_ms=0.156112 p90_ms=0.156288
+result case=packed_8x1024 repeat=0 mode=v16 median_ms=0.313792 p90_ms=0.313984
+result case=packed_8x1024 repeat=1 mode=v32 median_ms=0.168544 p90_ms=0.170560
+result case=packed_8x1024 repeat=1 mode=auto median_ms=0.156128 p90_ms=0.156288
+result case=packed_8x1024 repeat=1 mode=v16 median_ms=0.313824 p90_ms=0.314016
+result case=packed_8x1024 repeat=1 mode=compat_v128 median_ms=0.156128 p90_ms=0.156288
+result case=packed_8x1024 repeat=1 mode=v64 median_ms=0.154032 p90_ms=0.154240
+result case=packed_8x1024 repeat=2 mode=v16 median_ms=0.312752 p90_ms=0.314016
+result case=packed_8x1024 repeat=2 mode=auto median_ms=0.156064 p90_ms=0.156352
+result case=packed_8x1024 repeat=2 mode=v32 median_ms=0.168544 p90_ms=0.170592
+result case=packed_8x1024 repeat=2 mode=v64 median_ms=0.153888 p90_ms=0.154240
+result case=packed_8x1024 repeat=2 mode=compat_v128 median_ms=0.156096 p90_ms=0.156320
+case=packed_32x256 lengths=[256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256] auto_decision={'value_slice': 128, 'reason': 'varlen_not_calibrated', 'predicted_ms': {}, 'resident_blocks_per_sm': {}, 'reuse_footprint_bytes': 85327872, 'reuse_over_l2': 0.6432806324110671} correctness={'v16_out_equal': True, 'v16_state_equal': True, 'v32_out_equal': True, 'v32_state_equal': True, 'v64_out_equal': True, 'v64_state_equal': True}
+result case=packed_32x256 repeat=0 mode=auto median_ms=0.123856 p90_ms=0.125600
+result case=packed_32x256 repeat=0 mode=v32 median_ms=0.172368 p90_ms=0.172864
+result case=packed_32x256 repeat=0 mode=v16 median_ms=0.258528 p90_ms=0.260576
+result case=packed_32x256 repeat=0 mode=v64 median_ms=0.133504 p90_ms=0.133792
+result case=packed_32x256 repeat=0 mode=compat_v128 median_ms=0.125376 p90_ms=0.125632
+result case=packed_32x256 repeat=1 mode=auto median_ms=0.125376 p90_ms=0.125600
+result case=packed_32x256 repeat=1 mode=v64 median_ms=0.133600 p90_ms=0.133856
+result case=packed_32x256 repeat=1 mode=v32 median_ms=0.172512 p90_ms=0.174464
+result case=packed_32x256 repeat=1 mode=v16 median_ms=0.258464 p90_ms=0.260608
+result case=packed_32x256 repeat=1 mode=compat_v128 median_ms=0.125280 p90_ms=0.125664
+result case=packed_32x256 repeat=2 mode=compat_v128 median_ms=0.125280 p90_ms=0.125632
+result case=packed_32x256 repeat=2 mode=v16 median_ms=0.258464 p90_ms=0.260576
+result case=packed_32x256 repeat=2 mode=v32 median_ms=0.172384 p90_ms=0.174528
+result case=packed_32x256 repeat=2 mode=v64 median_ms=0.132848 p90_ms=0.133824
+result case=packed_32x256 repeat=2 mode=auto median_ms=0.125344 p90_ms=0.125632
+csv=/home/lcpu/<USER_ID>/FlashKDA-c1-results/05_dispatch_upgrade_17947.csv
+name, uuid, clocks.current.sm [MHz], temperature.gpu, power.draw [W]
+NVIDIA B300 SXM6 AC, GPU-<REDACTED>, 1905 MHz, 37, 503.43 W
+finished_utc=2026-09-03T07:26:12Z

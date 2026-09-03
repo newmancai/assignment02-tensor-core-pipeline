@@ -1,0 +1,807 @@
+[
+  {
+    "metric": "official_h96_fixed_flash",
+    "value": 1.0304,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_fixed_chunk",
+    "value": 2.4155,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_fixed_speedup_vs_chunk",
+    "value": 2.3442352484472053,
+    "unit": "x",
+    "source": "derived from Job 17926 means",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_ragged_6_flash",
+    "value": 0.8612,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_ragged_6_chunk",
+    "value": 2.4255,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_ragged_6_speedup_vs_chunk",
+    "value": 2.8164189503019044,
+    "unit": "x",
+    "source": "derived from Job 17926 means",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_8_x_1024_flash",
+    "value": 0.6963,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_8_x_1024_chunk",
+    "value": 2.3814,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h96_8_x_1024_speedup_vs_chunk",
+    "value": 3.4200775527789746,
+    "unit": "x",
+    "source": "derived from Job 17926 means",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_fixed_flash",
+    "value": 0.941,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_fixed_chunk",
+    "value": 1.6856,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_fixed_speedup_vs_chunk",
+    "value": 1.7912858660998938,
+    "unit": "x",
+    "source": "derived from Job 17926 means",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_ragged_6_flash",
+    "value": 0.6532,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_ragged_6_chunk",
+    "value": 1.699,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_ragged_6_speedup_vs_chunk",
+    "value": 2.601041028781384,
+    "unit": "x",
+    "source": "derived from Job 17926 means",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_8_x_1024_flash",
+    "value": 0.474,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_8_x_1024_chunk",
+    "value": 1.5964,
+    "unit": "ms",
+    "source": "01_official_benchmark_17926.log",
+    "notes": ""
+  },
+  {
+    "metric": "official_h64_8_x_1024_speedup_vs_chunk",
+    "value": 3.367932489451477,
+    "unit": "x",
+    "source": "derived from Job 17926 means",
+    "notes": ""
+  },
+  {
+    "metric": "chunk16_ftz_fraction",
+    "value": 0.0,
+    "unit": "fraction",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk16_neumann_sequence_cost_vs_c16",
+    "value": 1.0,
+    "unit": "x",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk16_workspace_per_head",
+    "value": 6.75,
+    "unit": "MiB",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk32_ftz_fraction",
+    "value": 0.46875,
+    "unit": "fraction",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk32_neumann_sequence_cost_vs_c16",
+    "value": 5.333333333333333,
+    "unit": "x",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk32_workspace_per_head",
+    "value": 7.125,
+    "unit": "MiB",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk64_ftz_fraction",
+    "value": 0.734375,
+    "unit": "fraction",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk64_neumann_sequence_cost_vs_c16",
+    "value": 26.666666666666668,
+    "unit": "x",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "chunk64_workspace_per_head",
+    "value": 8.0625,
+    "unit": "MiB",
+    "source": "04_chunk_analysis_17935.csv",
+    "notes": ""
+  },
+  {
+    "metric": "tcgen_l0_v128_grid12_inner64_speedup",
+    "value": 0.919742,
+    "unit": "x MMA/TCGEN",
+    "source": "03_tcgen05_probe_17937.csv",
+    "notes": ""
+  },
+  {
+    "metric": "tcgen_l0_v128_grid148_inner64_speedup",
+    "value": 0.903891,
+    "unit": "x MMA/TCGEN",
+    "source": "03_tcgen05_probe_17937.csv",
+    "notes": ""
+  },
+  {
+    "metric": "tcgen_l1_v128_grid12_inner64_speedup",
+    "value": 0.256278,
+    "unit": "x MMA/TCGEN",
+    "source": "03_tcgen05_probe_17937.csv",
+    "notes": ""
+  },
+  {
+    "metric": "tcgen_l1_v128_grid148_inner64_speedup",
+    "value": 0.256393,
+    "unit": "x MMA/TCGEN",
+    "source": "03_tcgen05_probe_17937.csv",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_v16_median",
+    "value": 0.5690719783306122,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_v16_latency_reduction_vs_v128",
+    "value": 27.10485731516916,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_v32_median",
+    "value": 0.5843999981880188,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_v32_latency_reduction_vs_v128",
+    "value": 25.14141817718996,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_v64_median",
+    "value": 0.6348960101604462,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_v64_latency_reduction_vs_v128",
+    "value": 18.673143270133245,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_compat_v128_median",
+    "value": 0.780672013759613,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_compat_v128_latency_reduction_vs_v128",
+    "value": 0.0,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_auto_median",
+    "value": 0.5697919726371765,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_fixed_1x8192_auto_latency_reduction_vs_v128",
+    "value": 27.012629811957286,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_v16_median",
+    "value": 0.5739520192146301,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_v16_latency_reduction_vs_v128",
+    "value": 26.8813646864184,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_v32_median",
+    "value": 0.5841280221939087,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_v32_latency_reduction_vs_v128",
+    "value": 25.584992470828112,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_v64_median",
+    "value": 0.6332799792289734,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_v64_latency_reduction_vs_v128",
+    "value": 19.32327737779039,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_compat_v128_median",
+    "value": 0.7849599719047546,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_compat_v128_latency_reduction_vs_v128",
+    "value": 0.0,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_auto_median",
+    "value": 0.5740159749984741,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_1x8192_auto_latency_reduction_vs_v128",
+    "value": 26.873217037349264,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_v16_median",
+    "value": 0.3218879997730255,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_v16_latency_reduction_vs_v128",
+    "value": 5.416076580901502,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_v32_median",
+    "value": 0.28723201155662537,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_v32_latency_reduction_vs_v128",
+    "value": 15.599430224978116,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_v64_median",
+    "value": 0.2810240089893341,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_v64_latency_reduction_vs_v128",
+    "value": 17.42359651829841,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_compat_v128_median",
+    "value": 0.34031999111175537,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_compat_v128_latency_reduction_vs_v128",
+    "value": 0.0,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_auto_median",
+    "value": 0.34035199880599976,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_ragged6_auto_latency_reduction_vs_v128",
+    "value": -0.009405176034420492,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_v16_median",
+    "value": 0.31379199028015137,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_v16_latency_reduction_vs_v128",
+    "value": -101.00440042040762,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_v32_median",
+    "value": 0.1685439944267273,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_v32_latency_reduction_vs_v128",
+    "value": -7.9635095655523855,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_v64_median",
+    "value": 0.15403199940919876,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_v64_latency_reduction_vs_v128",
+    "value": 1.332377352396063,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_compat_v128_median",
+    "value": 0.15611200034618378,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_compat_v128_latency_reduction_vs_v128",
+    "value": 0.0,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_auto_median",
+    "value": 0.15612800419330597,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_8x1024_auto_latency_reduction_vs_v128",
+    "value": -0.010251516274663893,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_v16_median",
+    "value": 0.2584640085697174,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_v16_latency_reduction_vs_v128",
+    "value": -106.30908635466051,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_v32_median",
+    "value": 0.17238399386405945,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_v32_latency_reduction_vs_v128",
+    "value": -37.598981278155264,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_v64_median",
+    "value": 0.1335040032863617,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_v64_latency_reduction_vs_v128",
+    "value": -6.564504261603887,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_compat_v128_median",
+    "value": 0.1252799928188324,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_compat_v128_latency_reduction_vs_v128",
+    "value": 0.0,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_auto_median",
+    "value": 0.12534399330615997,
+    "unit": "ms",
+    "source": "05_dispatch_upgrade_17947.csv; median of repeat medians",
+    "notes": ""
+  },
+  {
+    "metric": "dispatch_packed_32x256_auto_latency_reduction_vs_v128",
+    "value": -0.051085960245964325,
+    "unit": "%",
+    "source": "derived from Job 17947 medians",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_fixed_short_stateful_output_worst_rel_rmse",
+    "value": 0.5659519076895856,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_fixed_short_stateful_final_state_worst_rel_rmse",
+    "value": 0.5055681568153005,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_ragged_short_stateful_output_worst_rel_rmse",
+    "value": 0.5540893480228593,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_ragged_short_stateful_final_state_worst_rel_rmse",
+    "value": 0.4319328017765845,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_long_8192_random_output_worst_rel_rmse",
+    "value": 0.5698246341576715,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_long_8192_random_final_state_worst_rel_rmse",
+    "value": 0.4727708840264338,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_long_8192_memory_output_worst_rel_rmse",
+    "value": 0.9130895966363569,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_long_8192_memory_final_state_worst_rel_rmse",
+    "value": 0.8151206324063978,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_k3_fixed_8192_output_worst_rel_rmse",
+    "value": 0.5737014212095946,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_k3_fixed_8192_final_state_worst_rel_rmse",
+    "value": 0.4776599661038727,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_k3_ragged6_output_worst_rel_rmse",
+    "value": 0.5656528990949659,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_k3_ragged6_final_state_worst_rel_rmse",
+    "value": 0.4630450399579796,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_k3_packed_8x1024_output_worst_rel_rmse",
+    "value": 0.5680431914556082,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_k3_packed_8x1024_final_state_worst_rel_rmse",
+    "value": 0.4570611323704049,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv; max across requested references",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_finite_rows",
+    "value": 200,
+    "unit": "rows",
+    "source": "03_reference_correctness_17934.csv",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_rows_total",
+    "value": 200,
+    "unit": "rows",
+    "source": "03_reference_correctness_17934.csv",
+    "notes": ""
+  },
+  {
+    "metric": "valueslice_bitwise_rows_passed",
+    "value": 98,
+    "unit": "rows",
+    "source": "03_reference_correctness_17934.csv",
+    "notes": ""
+  },
+  {
+    "metric": "valueslice_bitwise_rows_total",
+    "value": 98,
+    "unit": "rows",
+    "source": "03_reference_correctness_17934.csv",
+    "notes": ""
+  },
+  {
+    "metric": "correctness_worst_rel_rmse",
+    "value": 0.9130895966363569,
+    "unit": "%",
+    "source": "03_reference_correctness_17934.csv",
+    "notes": ""
+  },
+  {
+    "metric": "amdahl_v128_grid12_modeled_full_k2_speedup",
+    "value": 0.9738523847913263,
+    "unit": "x",
+    "source": "derived from Job 17937 L0 inner64 and phase share 128/416",
+    "notes": ""
+  },
+  {
+    "metric": "amdahl_v128_grid148_modeled_full_k2_speedup",
+    "value": 0.9683201155268071,
+    "unit": "x",
+    "source": "derived from Job 17937 L0 inner64 and phase share 128/416",
+    "notes": ""
+  },
+  {
+    "metric": "phase6_static_hmma_atom_share",
+    "value": 0.3076923076923077,
+    "unit": "fraction",
+    "source": "source-code static count: 128 Phase-6 atoms / 416 total K2 atoms per chunk/head",
+    "notes": ""
+  },
+  {
+    "metric": "phase6_only_infinite_speedup_ceiling",
+    "value": 1.4444444444444444,
+    "unit": "x",
+    "source": "Amdahl model using 128/416 atom share",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_official_v128_duration",
+    "value": 1270.0,
+    "unit": "us",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_official_v128_cta_count",
+    "value": 12,
+    "unit": "CTA",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_official_v128_sm_throughput",
+    "value": 2.64,
+    "unit": "%",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_official_v128_dram_throughput",
+    "value": 1.24,
+    "unit": "%",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_official_v128_tensor_elapsed",
+    "value": 2.48,
+    "unit": "%",
+    "source": "05_targeted_ncu_metrics_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_valueslice_v16_duration",
+    "value": 901.22,
+    "unit": "us",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_valueslice_v16_cta_count",
+    "value": 96,
+    "unit": "CTA",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_valueslice_v16_sm_throughput",
+    "value": 7.22,
+    "unit": "%",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_valueslice_v16_dram_throughput",
+    "value": 1.83,
+    "unit": "%",
+    "source": "05_targeted_ncu_summary_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_valueslice_v16_tensor_elapsed",
+    "value": 3.5,
+    "unit": "%",
+    "source": "05_targeted_ncu_metrics_17965.csv",
+    "notes": ""
+  },
+  {
+    "metric": "ncu_valueslice_duration_reduction",
+    "value": 29.03779527559055,
+    "unit": "%",
+    "source": "derived from Job 17965 NCU durations",
+    "notes": ""
+  }
+]

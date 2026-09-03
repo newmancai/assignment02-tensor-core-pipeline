@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<text x="72" y="55" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#183044">ValueSlice needs sequence-distribution-aware dispatch</text>
+<text x="72" y="107" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#657786">Median latency reduction relative to V128; positive is faster, negative is slower</text>
+<polyline points="72.00,145.00 1528.00,145.00" fill="none" stroke="#DCE4E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="72" y="177" width="1456" height="710" rx="12" fill="#FFFFFF" stroke="#DCE4E8" stroke-width="1"/>
+<text x="96" y="197" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#183044">Workload distribution x ValueSlice</text>
+<text x="457.0" y="245" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#183044">V16</text>
+<text x="671.0" y="245" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#183044">V32</text>
+<text x="885.0" y="245" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#183044">V64</text>
+<text x="1099.0" y="245" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#183044">V128</text>
+<text x="1313.0" y="245" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#183044">Auto</text>
+<text x="322" y="322.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#183044">Fixed 1x8192</text>
+<text x="322" y="349.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#657786">N=1, T=8192</text>
+<rect x="350" y="285" width="207" height="86" rx="5" fill="#5C9F78" stroke="#FFFFFF" stroke-width="2"/>
+<text x="453.5" y="319" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">+27.1%</text>
+<text x="453.5" y="350" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.5691 ms</text>
+<rect x="564" y="285" width="207" height="86" rx="5" fill="#68A682" stroke="#FFFFFF" stroke-width="2"/>
+<text x="667.5" y="319" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">+25.1%</text>
+<text x="667.5" y="350" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.5844 ms</text>
+<rect x="778" y="285" width="207" height="86" rx="5" fill="#8FBDA2" stroke="#FFFFFF" stroke-width="2"/>
+<text x="881.5" y="319" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+18.7%</text>
+<text x="881.5" y="350" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.6349 ms</text>
+<rect x="992" y="285" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1095.5" y="319" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+0.0%</text>
+<text x="1095.5" y="350" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.7807 ms</text>
+<rect x="1206" y="285" width="207" height="86" rx="5" fill="#5DA079" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1309.5" y="319" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">+27.0%</text>
+<text x="1309.5" y="350" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.5698 ms</text>
+<text x="322" y="415.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#183044">Packed 1x8192</text>
+<text x="322" y="442.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#657786">N=1, T=8192</text>
+<rect x="350" y="378" width="207" height="86" rx="5" fill="#5EA079" stroke="#FFFFFF" stroke-width="2"/>
+<text x="453.5" y="412" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">+26.9%</text>
+<text x="453.5" y="443" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.5740 ms</text>
+<rect x="564" y="378" width="207" height="86" rx="5" fill="#65A580" stroke="#FFFFFF" stroke-width="2"/>
+<text x="667.5" y="412" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">+25.6%</text>
+<text x="667.5" y="443" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.5841 ms</text>
+<rect x="778" y="378" width="207" height="86" rx="5" fill="#8BBB9F" stroke="#FFFFFF" stroke-width="2"/>
+<text x="881.5" y="412" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+19.3%</text>
+<text x="881.5" y="443" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.6333 ms</text>
+<rect x="992" y="378" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1095.5" y="412" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+0.0%</text>
+<text x="1095.5" y="443" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.7850 ms</text>
+<rect x="1206" y="378" width="207" height="86" rx="5" fill="#5EA07A" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1309.5" y="412" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">+26.9%</text>
+<text x="1309.5" y="443" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.5740 ms</text>
+<text x="322" y="508.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#183044">Ragged 6</text>
+<text x="322" y="535.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#657786">N=6, T=8192</text>
+<rect x="350" y="471" width="207" height="86" rx="5" fill="#DFECE4" stroke="#FFFFFF" stroke-width="2"/>
+<text x="453.5" y="505" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+5.4%</text>
+<text x="453.5" y="536" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.3219 ms</text>
+<rect x="564" y="471" width="207" height="86" rx="5" fill="#A1C8B2" stroke="#FFFFFF" stroke-width="2"/>
+<text x="667.5" y="505" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+15.6%</text>
+<text x="667.5" y="536" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.2872 ms</text>
+<rect x="778" y="471" width="207" height="86" rx="5" fill="#96C1A8" stroke="#FFFFFF" stroke-width="2"/>
+<text x="881.5" y="505" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+17.4%</text>
+<text x="881.5" y="536" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.2810 ms</text>
+<rect x="992" y="471" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1095.5" y="505" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+0.0%</text>
+<text x="1095.5" y="536" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.3403 ms</text>
+<rect x="1206" y="471" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1309.5" y="505" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">-0.0%</text>
+<text x="1309.5" y="536" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.3404 ms</text>
+<text x="322" y="601.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#183044">8x1024</text>
+<text x="322" y="628.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#657786">N=8, T=8192</text>
+<rect x="350" y="564" width="207" height="86" rx="5" fill="#D85E5B" stroke="#FFFFFF" stroke-width="2"/>
+<text x="453.5" y="598" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">-101.0%</text>
+<text x="453.5" y="629" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#FFFFFF">0.3138 ms</text>
+<rect x="564" y="564" width="207" height="86" rx="5" fill="#FCF2F2" stroke="#FFFFFF" stroke-width="2"/>
+<text x="667.5" y="598" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">-8.0%</text>
+<text x="667.5" y="629" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1685 ms</text>
+<rect x="778" y="564" width="207" height="86" rx="5" fill="#F7FAF8" stroke="#FFFFFF" stroke-width="2"/>
+<text x="881.5" y="598" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+1.3%</text>
+<text x="881.5" y="629" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1540 ms</text>
+<rect x="992" y="564" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1095.5" y="598" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+0.0%</text>
+<text x="1095.5" y="629" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1561 ms</text>
+<rect x="1206" y="564" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1309.5" y="598" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">-0.0%</text>
+<text x="1309.5" y="629" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1561 ms</text>
+<text x="322" y="694.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#183044">32x256</text>
+<text x="322" y="721.5" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#657786">N=32, T=8192</text>
+<rect x="350" y="657" width="207" height="86" rx="5" fill="#D55652" stroke="#FFFFFF" stroke-width="2"/>
+<text x="453.5" y="691" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">-106.3%</text>
+<text x="453.5" y="722" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#FFFFFF">0.2585 ms</text>
+<rect x="564" y="657" width="207" height="86" rx="5" fill="#F0C3C2" stroke="#FFFFFF" stroke-width="2"/>
+<text x="667.5" y="691" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">-37.6%</text>
+<text x="667.5" y="722" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1724 ms</text>
+<rect x="778" y="657" width="207" height="86" rx="5" fill="#FCF5F4" stroke="#FFFFFF" stroke-width="2"/>
+<text x="881.5" y="691" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">-6.6%</text>
+<text x="881.5" y="722" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1335 ms</text>
+<rect x="992" y="657" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1095.5" y="691" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">+0.0%</text>
+<text x="1095.5" y="722" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1253 ms</text>
+<rect x="1206" y="657" width="207" height="86" rx="5" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2"/>
+<text x="1309.5" y="691" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#183044">-0.1%</text>
+<text x="1309.5" y="722" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#657786">0.1253 ms</text>
+<text x="350" y="790" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#4B956A">Green = faster than V128</text>
+<text x="650" y="790" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#657786">White = parity</text>
+<text x="850" y="790" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#D4504C">Red = slower than V128</text>
+<text x="350" y="833" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#183044">Auto safely selects V16 only for single-sequence long prefill; multi-sequence varlen falls back to V128.</text>
+<polyline points="72.00,935.00 1528.00,935.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="72" y="951" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#657786">Source: Job 17947, B300/SM103, H=12, D=128; each cell is the median across 3 repeat medians.</text>
+</svg>

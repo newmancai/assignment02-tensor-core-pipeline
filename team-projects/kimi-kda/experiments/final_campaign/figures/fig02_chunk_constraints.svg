@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="1600" height="1000" fill="#FFFFFF"/>
+<text x="72" y="55" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#183044">Why CHUNK=16 is a numerical and compute boundary</text>
+<text x="72" y="107" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#657786">Mechanical C=32/64 enlargement breaks the current unscaled path before workspace becomes dominant</text>
+<polyline points="72.00,145.00 1528.00,145.00" fill="none" stroke="#DCE4E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="72" y="180" width="455" height="700" rx="12" fill="#FFFFFF" stroke="#DCE4E8" stroke-width="1"/>
+<text x="96" y="200" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#183044">FTZ / overflow fraction</text>
+<polyline points="146.00,750.00 486.00,750.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134" y="750.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">0</text>
+<polyline points="146.00,655.00 486.00,655.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134" y="655.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">16</text>
+<polyline points="146.00,560.00 486.00,560.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134" y="560.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">32</text>
+<polyline points="146.00,465.00 486.00,465.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134" y="465.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">48</text>
+<polyline points="146.00,370.00 486.00,370.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134" y="370.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">64</text>
+<polyline points="146.00,275.00 486.00,275.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="134" y="275.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">80</text>
+<rect x="180" y="750.0" width="62" height="0.0" fill="#15557A" stroke="none" stroke-width="1"/>
+<text x="211" y="740.0" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">0.00</text>
+<text x="211" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">16</text>
+<rect x="285" y="471.6796875" width="62" height="278.3203125" fill="#D4504C" stroke="none" stroke-width="1"/>
+<text x="316" y="461.6796875" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">46.9</text>
+<text x="316" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">32</text>
+<rect x="390" y="313.96484375" width="62" height="436.03515625" fill="#D4504C" stroke="none" stroke-width="1"/>
+<text x="421" y="303.96484375" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">73.4</text>
+<text x="421" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">64</text>
+<text x="316.0" y="799" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">CHUNK</text>
+<text x="146" y="815" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#657786">% per channel</text>
+<rect x="572" y="180" width="455" height="700" rx="12" fill="#FFFFFF" stroke="#DCE4E8" stroke-width="1"/>
+<text x="596" y="200" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#183044">Naive Neumann cost / sequence</text>
+<polyline points="646.00,750.00 986.00,750.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="634" y="750.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">0</text>
+<polyline points="646.00,655.00 986.00,655.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="634" y="655.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">6</text>
+<polyline points="646.00,560.00 986.00,560.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="634" y="560.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">12</text>
+<polyline points="646.00,465.00 986.00,465.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="634" y="465.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">18</text>
+<polyline points="646.00,370.00 986.00,370.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="634" y="370.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">24</text>
+<polyline points="646.00,275.00 986.00,275.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="634" y="275.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">30</text>
+<rect x="680" y="734.1666666666666" width="62" height="15.833333333333334" fill="#15557A" stroke="none" stroke-width="1"/>
+<text x="711" y="724.1666666666666" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">1.00</text>
+<text x="711" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">16</text>
+<rect x="785" y="665.5555555555555" width="62" height="84.44444444444443" fill="#F28E2B" stroke="none" stroke-width="1"/>
+<text x="816" y="655.5555555555555" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">5.33</text>
+<text x="816" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">32</text>
+<rect x="890" y="327.7777777777777" width="62" height="422.2222222222223" fill="#F28E2B" stroke="none" stroke-width="1"/>
+<text x="921" y="317.7777777777777" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">26.7</text>
+<text x="921" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">64</text>
+<text x="816.0" y="799" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">CHUNK</text>
+<text x="646" y="815" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#657786">x vs C16</text>
+<rect x="1072" y="180" width="455" height="700" rx="12" fill="#FFFFFF" stroke="#DCE4E8" stroke-width="1"/>
+<text x="1096" y="200" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#183044">Workspace / head</text>
+<polyline points="1146.00,750.00 1486.00,750.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1134" y="750.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">0</text>
+<polyline points="1146.00,655.00 1486.00,655.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1134" y="655.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">1.8</text>
+<polyline points="1146.00,560.00 1486.00,560.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1134" y="560.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">3.6</text>
+<polyline points="1146.00,465.00 1486.00,465.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1134" y="465.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">5.4</text>
+<polyline points="1146.00,370.00 1486.00,370.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1134" y="370.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">7.2</text>
+<polyline points="1146.00,275.00 1486.00,275.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1134" y="275.0" text-anchor="end" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">9</text>
+<rect x="1180" y="393.75" width="62" height="356.25" fill="#15557A" stroke="none" stroke-width="1"/>
+<text x="1211" y="383.75" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">6.75</text>
+<text x="1211" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">16</text>
+<rect x="1285" y="373.9583333333333" width="62" height="376.0416666666667" fill="#128C8C" stroke="none" stroke-width="1"/>
+<text x="1316" y="363.9583333333333" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">7.12</text>
+<text x="1316" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">32</text>
+<rect x="1390" y="324.4791666666667" width="62" height="425.5208333333333" fill="#128C8C" stroke="none" stroke-width="1"/>
+<text x="1421" y="314.4791666666667" text-anchor="middle" dominant-baseline="auto" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#183044">8.06</text>
+<text x="1421" y="766" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">64</text>
+<text x="1316.0" y="799" text-anchor="middle" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#657786">CHUNK</text>
+<text x="1146" y="815" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#657786">MiB</text>
+<rect x="106" y="822" width="20" height="20" fill="#15557A" stroke="none" stroke-width="1"/>
+<text x="138" y="822" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#183044">Current safe boundary</text>
+<rect x="360" y="822" width="20" height="20" fill="#D4504C" stroke="none" stroke-width="1"/>
+<text x="392" y="822" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#D4504C">First FTZ/overflow at token 18 for C=32 and C=64</text>
+<polyline points="72.00,935.00 1528.00,935.00" fill="none" stroke="#DCE4E8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="72" y="951" text-anchor="start" dominant-baseline="hanging" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#657786">Source: Job 17935 analytical sweep, T=8192, H=12, D=128, lower_bound=-5. FLA block probe is not used as a FlashKDA timing claim.</text>
+</svg>

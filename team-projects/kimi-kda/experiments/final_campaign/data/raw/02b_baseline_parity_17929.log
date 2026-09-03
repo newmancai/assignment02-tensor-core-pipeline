@@ -1,0 +1,21 @@
+campaign=02b_baseline_parity
+started_utc=2026-09-03T06:57:32Z
+name, uuid, driver_version, clocks.current.sm [MHz], clocks.max.sm [MHz], memory.total [MiB]
+NVIDIA B300 SXM6 AC, GPU-<REDACTED>, 580.126.09, 1905 MHz, 2032 MHz, 275040 MiB
+label=official
+package=/home/lcpu/<USER_ID>/FlashKDA-c1-official/flash_kda/__init__.py
+extension=/home/lcpu/<USER_ID>/FlashKDA-c1-official/flash_kda_C.cpython-312-x86_64-linux-gnu.so
+label=patched_v128
+package=/home/lcpu/<USER_ID>/FlashKDA/flash_kda/__init__.py
+extension=/home/lcpu/<USER_ID>/FlashKDA/results/20260821_dispatch_boundary/integrated_dispatch/lib/flash_kda_C.cpython-312-x86_64-linux-gnu.so
+{'case': 'fixed_h12_t8192', 'tensor': 'out', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'fixed_h12_t8192', 'tensor': 'final_state', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'fixed_t513_bf16', 'tensor': 'out', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'fixed_t513_bf16', 'tensor': 'final_state', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'fixed_t513_fp32', 'tensor': 'out', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'fixed_t513_fp32', 'tensor': 'final_state', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'packed_h12_t8192', 'tensor': 'out', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'packed_h12_t8192', 'tensor': 'final_state', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'ragged_small_bf16', 'tensor': 'out', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+{'case': 'ragged_small_bf16', 'tensor': 'final_state', 'equal': True, 'max_abs': 0.0, 'rmse': 0.0}
+finished_utc=2026-09-03T06:57:38Z
