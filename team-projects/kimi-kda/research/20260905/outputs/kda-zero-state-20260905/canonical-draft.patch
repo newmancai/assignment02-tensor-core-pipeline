@@ -1,0 +1,111 @@
+--- a/csrc/smxx/fwd_kernel2.cuh
++++ b/csrc/smxx/fwd_kernel2.cuh
+@@ -145,7 +145,8 @@
+     bool HasStateOut = true,
+     bool StateFP32 = false,
+     bool IsVarlen = true,
+-    int StatePrefetch = 1
++    int StatePrefetch = 1,
++    int InitStrategy = 0
+ >
+ __global__ void __launch_bounds__(NumThreads) _flash_kda_fwd_recurrence(
+     CUTE_GRID_CONSTANT TmaLoadV const tma_load_v,
+@@ -164,11 +165,14 @@
+     int H,
+     int N,
+     int64_t const* cu_seqlens,
+-    int total_tiles
++    int total_tiles,
++    bool load_initial_state = true
+ ) {
+     using BF16 = cutlass::bfloat16_t;
+     using FP16 = cutlass::half_t;
+     static_assert(StatePrefetch >= 1 && StatePrefetch <= D / 16);
++    static_assert(InitStrategy != 3 || !StateFP32,
++                  "Runtime initial-state specialization is BF16-only");
+     using Layouts = K2Layouts<D, CHUNK, V>;
+     using MMALayout = typename Layouts::MMALayout;
+     using TransposedMMALayout = typename Layouts::TransposedMMALayout;
+@@ -262,7 +266,24 @@
+ 
+     // --- Load initial state
+ #ifndef TMA_DISABLE_ALL
++    // Shared by the original no-state specialization and runtime strategy 3.
++    // Keep the original generic-to-async fence and CTA synchronization: an
++    // empty sequence may proceed directly to the final-state TMA store.
++    auto zero_initial_state = [&]() {
++        BF16* buf = shared_storage.state_acc.begin();
++        constexpr int kTotal = cute::cosize_v<StateSmemLayout>;
++        for (int i = threadIdx.x; i < kTotal; i += NumThreads) {
++            buf[i] = BF16(0);
++        }
++        cutlass::arch::fence_view_async_shared();
++        __syncthreads();
++    };
++
+     if constexpr (HasStateIn && !StateFP32) {
++        // Strategy 0 folds this condition to true. Strategy 3 receives a
++        // CTA-uniform kernel argument; its false branch must not touch the
++        // dummy state descriptor or wait on an uninitialized TMA barrier.
++        if (InitStrategy != 3 || load_initial_state) {
+         // BF16 state: TMA load directly into state_acc
+         if (warp_role == WarpRole::LOAD_QKG && lane_predicate) {
+             using BarrierType = cutlass::arch::ClusterTransactionBarrier::ValueType;
+@@ -288,6 +309,9 @@
+         __syncthreads();
+         shared_storage.state_acc_tma_barrier.wait(0);
+         cutlass::arch::fence_view_async_shared();
++        } else {
++            zero_initial_state();
++        }
+     } else if constexpr (HasStateIn && StateFP32) {
+         // FP32 state: TMA load fp32 into pipeline buffer, then convert to bf16 in state_acc
+         using FP32StateSmemLayout = typename Layouts::FP32StateSmemLayout;
+@@ -328,16 +352,7 @@
+         __syncthreads();
+     } else {
+         // No state in: zero-initialize state_acc
+-        {
+-            BF16* buf = shared_storage.state_acc.begin();
+-            constexpr int kTotal = cute::cosize_v<StateSmemLayout>;
+-            for (int i = threadIdx.x; i < kTotal; i += NumThreads) {
+-                buf[i] = BF16(0);
+-            }
+-        }
+-        // generic writes -> visible to async proxy (TMA state store covers t_tiles==0)
+-        cutlass::arch::fence_view_async_shared();
+-        __syncthreads();
++        zero_initial_state();
+     }
+ #endif
+ 
+--- a/csrc/smxx/fwd_launch.cu
++++ b/csrc/smxx/fwd_launch.cu
+@@ -4,7 +4,7 @@
+ 
+ // ==================== launch_fwd ====================
+ template <int D, int K2Value, bool HasStateIn, bool HasStateOut, bool StateFP32, bool IsVarlen,
+-          int StatePrefetch = 1>
++          int StatePrefetch = 1, int InitStrategy = 0>
+ void launch_fwd_impl(
+     cutlass::bfloat16_t const* q_ptr,
+     cutlass::bfloat16_t const* k_ptr,
+@@ -202,7 +202,8 @@
+             decltype(tma_store_final_state),
+             decltype(tma_store_out),
+             CHUNK, D, kK2Value, kInputStages, kOutputStages, kK2Threads,
+-            HasStateIn, HasStateOut, StateFP32, IsVarlen, StatePrefetch
++            (InitStrategy == 3 ? true : HasStateIn), HasStateOut, StateFP32, IsVarlen,
++            StatePrefetch, InitStrategy
+         >;
+ 
+         cudaFuncSetAttribute(kernel2, cudaFuncAttributeMaxDynamicSharedMemorySize, smem_size_k2);
+@@ -217,7 +218,7 @@
+             tma_load_initial_state,
+             tma_store_final_state,
+             tma_store_out,
+-            out_ptr, T_total, H, N, cu_seqlens_ptr, total_tiles
++            out_ptr, T_total, H, N, cu_seqlens_ptr, total_tiles, HasStateIn
+         );
+     }
+ #endif

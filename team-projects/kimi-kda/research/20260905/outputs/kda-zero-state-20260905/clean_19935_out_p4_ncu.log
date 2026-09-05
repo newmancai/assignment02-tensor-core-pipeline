@@ -1,0 +1,8 @@
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 1422609 (/usr/bin/python3.12)
+{"baseline": "/home/lcpu/YOUR_USER_ID/kda-mainline-20260905/release_build/lib/flash_kda_release_C.cpython-312-x86_64-linux-gnu.so", "baseline_sha256": "34e2c68cf80de0bd24278afb035fdcd44e4a6205241dfcb9aab4ee95891bc486", "candidate": "/home/lcpu/YOUR_USER_ID/kda-zero-state-20260905/clean_build/lib/flash_kda_phase1_C.cpython-312-x86_64-linux-gnu.so", "candidate_sha256": "f6f80fa402cc1dc00b09a8082b10806bbe17c0e533d067e931dd774d270b9270", "device": {"device": 0, "l2_bytes": 132644864, "major": 10, "max_blocks_per_sm": 32, "max_threads_per_sm": 2048, "minor": 3, "registers_per_sm": 65536, "shared_memory_per_sm": 233472, "sm_count": 148, "warp_size": 32}, "experiment": "clean-phase1", "kind": "environment", "scope": "actual unchanged wrappers; no raw-ID proxies; event/graph/cache-perturbed/host-wall separate", "torch": "2.10.0+cu130", "wrapper_sha256": "c638962a3d333680e923884ba47ffcd1cc4f26b1db4b2097af9bfa01b0b4f50f"}
+==PROF== Profiling "_flash_kda_fwd_recurrence": 0%....50%....100% - 16 passes
+{"kind": "profile_complete", "state_mode": "out", "variant": "p4"}
+==PROF== Disconnected from process 1422609
+==PROF== Report: /home/lcpu/YOUR_USER_ID/kda-zero-state-20260905/clean_19935_out_p4.ncu-rep

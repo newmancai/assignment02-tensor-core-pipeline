@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-05",
+  "status": "Clean opt-in Phase1 latency candidate validated on one B300; not installed or published; two-stream no-initial-state regression recorded",
+  "upstream": {
+    "repository": "https://github.com/MoonshotAI/FlashKDA.git",
+    "commit": "1ce47ea3bb22c84eb9cc665028399cf35e8ffb0b"
+  },
+  "cutlass": {
+    "commit": "5c149f52a436782210263fb2f19b354443a61c6a",
+    "remote_status_short": ""
+  },
+  "patch_order": [
+    {
+      "path": "/workspace/assignment02-github/team-projects/kimi-kda/patches/0001-k2-value-slice-and-dispatch.patch",
+      "sha256": "d80377cf156b52e2b8fb64f72e2129bbad05d30c466cd641b10ed8971f798667"
+    },
+    {
+      "path": "/workspace/assignment02-github/team-projects/kimi-kda/patches/0002-dispatch-packed-single-sequence.patch",
+      "sha256": "f2165d0cc1b4e99a241e10c624d81dfd5d682fb6a7e7fdc92e3aff0989c18172"
+    },
+    {
+      "path": "/workspace/outputs/kda-mainline-20260905/hardening/0003-release-entry-hardening.patch",
+      "sha256": "0f888bf678f0111b5ad394bd4beda4641d472dbca9fc5e02c2e7988fc5bbaefe"
+    },
+    {
+      "path": "/workspace/outputs/kda-mainline-20260905/release/0004-guarded-v16-prefetch4.patch",
+      "sha256": "246a6aa347a1779215d5cdb72d84f2be18357ea0b77be8df987c8c46118b9a96"
+    },
+    {
+      "path": "/workspace/outputs/kda-zero-state-20260905/clean-phase1.patch",
+      "sha256": "fae72eccda8eea94d5609fd30df75f9855dc9c9c00231300b2af00f89da910d1"
+    }
+  ],
+  "source_sha256": {
+    "csrc/flash_kda.cpp": "2c07c7ef52007bc7d8f09bfca3d2ef870ad3f111ddea54d1474f65ffa4311b2d",
+    "csrc/smxx/fwd_kernel2.cuh": "950684947df54a3432732468c138a571bca08b44ab96b91c8540d9f0fd97db31",
+    "csrc/smxx/fwd_launch.cu": "ffe7a15ad1196d1b3d771a55b3f9bdc3900e9ddac5bd51b20f0f2cec27c9643c",
+    "setup.py": "487b01f3bdc8f9f232fc547b8f6519215899193e4ee076c5eae734c6858fbda8",
+    "flash_kda/__init__.py": "c638962a3d333680e923884ba47ffcd1cc4f26b1db4b2097af9bfa01b0b4f50f",
+    "flash_kda/dispatch.py": "74e59195d1bdad5a68f3ad9793d722c8195d4f5de3266f8609526d2360ac59b8"
+  },
+  "build": {
+    "host": "b300-login",
+    "source": "/home/lcpu/YOUR_USER_ID/kda-zero-state-20260905/clean_source",
+    "command_script": "/workspace/outputs/kda-zero-state-20260905/build_clean.sh",
+    "module": "flash_kda_phase1_C",
+    "binary": "/home/lcpu/YOUR_USER_ID/kda-zero-state-20260905/clean_build/lib/flash_kda_phase1_C.cpython-312-x86_64-linux-gnu.so",
+    "binary_sha256": "f6f80fa402cc1dc00b09a8082b10806bbe17c0e533d067e931dd774d270b9270",
+    "environment": {
+      "FLASH_KDA_ENABLE_V16_PREFETCH4": "1",
+      "FLASH_KDA_CUDA_ARCHS": "103a",
+      "FLASH_KDA_EXTENSION_NAME": "flash_kda_phase1_C",
+      "NVCC_THREADS": "8",
+      "MAX_JOBS": "2",
+      "FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH": "1"
+    },
+    "nvcc": "13.0.88",
+    "torch": "2.10.0+cu130",
+    "python": "3.12",
+    "driver": "580.126.09",
+    "ncu": "2025.3.1.0",
+    "dependencies": "Existing CUTLASS, venv, CUDA and .deps/python312-dev reused; no packages installed",
+    "build_completed_utc": "2026-09-05 03:55:42"
+  },
+  "device": {
+    "name": "NVIDIA B300 SXM6 AC",
+    "major": 10,
+    "minor": 3,
+    "sm_count": 148,
+    "l2_bytes": 132644864
+  },
+  "jobs": {
+    "19918": {
+      "scope": "Matched None/explicit-zero diagnostic; existing four-patch binary",
+      "performance_rows": 180,
+      "complete": true
+    },
+    "19920": {
+      "scope": "Initialization-only ablations; rejected",
+      "correctness_rows": 124,
+      "performance_rows": 165,
+      "complete": true
+    },
+    "19924": {
+      "scope": "Experimental Phase1 ring2/ring4, not clean binary",
+      "correctness_rows": 93,
+      "performance_rows": 132,
+      "complete": true
+    },
+    "19934": {
+      "scope": "Clean true wrappers, 40-shape timing, correctness, entry, concurrency and sanitizers",
+      "cross_path_correctness_rows": 134,
+      "state_chain_steps": 6,
+      "graph_nonself_rows": 80,
+      "graph_self_rows": 40,
+      "post_timing_nonself_rows": 80,
+      "concurrent_correctness_rows": 4,
+      "performance_rows": 360,
+      "performance_shapes": 40,
+      "guarded_performance_shapes": 34,
+      "fallback_performance_shapes": 6,
+      "concurrent_pair_timing_rows": 12,
+      "memcheck_errors": 0,
+      "synccheck_errors": 0,
+      "sanitizer_comparison_rows_per_tool": 20,
+      "entry_cases_pass": 5,
+      "multi_gpu": "SKIP",
+      "alias_extension": "SKIP",
+      "complete": true
+    },
+    "19935": {
+      "scope": "Separate four representative K2 profiles; fixed out/both x old/new",
+      "profiles": 4,
+      "passes_per_profile": 16,
+      "profile_exit_codes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "complete": true
+    }
+  },
+  "validation_limits": [
+    "Single B300 only; multi-GPU and separately compiled alias SKIP",
+    "34 optimized timing points do not exhaust every length in the guard",
+    "Two-stream out pair regresses 1.5157%; no serving throughput or model end-to-end gain established",
+    "Main Job19934 initial clock sample 1095 MHz; separate Job19935 GPC averages about 1.08 GHz vs Job19918 about 1.91 GHz; do not pool absolute timing across jobs",
+    "NCU cache-control none and clock-control none; 16 replay passes per single K2 launch are not independent repeated timing samples",
+    "No racecheck, continuous mixed-traffic stress, model-quality or full-model evaluation",
+    "No updated default package installation, commit, PR, or publication"
+  ],
+  "rollback": {
+    "build": "Rebuild with Phase6 P4 enabled but FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH unset/0 to restore Phase6-only V16",
+    "runtime": "Existing FLASH_KDA_K2_VALUE_SLICE=128 selects V128; raw override precedes dispatch off",
+    "warning": "Build-only flags cannot disable an existing binary at runtime; custom extension validated by binding independent real wrappers, not renaming .so"
+  },
+  "artifact_sha256": {
+    "clean-phase1.patch": "fae72eccda8eea94d5609fd30df75f9855dc9c9c00231300b2af00f89da910d1",
+    "build_clean.sh": "87080eb5137cdca00bf442989f5074fec8e78da77838df7a5177b849f10139aa",
+    "clean_probe.py": "70ae64ee55846f8097705739a46984cc0f59513f9942043f503c19377d817ed9",
+    "run_clean.sbatch": "e3985dc169a2748987eef85004fd78e42956dac38e02c253a59684908ff8d276",
+    "run_clean_profile.sbatch": "f6fb2a3b415cad6e573fd41ecc188b13c784e7358eef58a43d4e0cfa7af78701",
+    "build_clean.log": "751cea0609e94afbce291432aa88dbbeb2551acad4f8b5e829f30e29f8bf232f",
+    "clean_19934.log": "86ce52c8128b1a3158b61ff68476547de22464e1ea447879c005d3e24f1d6ce8",
+    "clean_19934_memcheck.log": "5c2a4e6684250261a12c4814d13b7ccbed329d911afb27a13f177b448fd992ab",
+    "clean_19934_synccheck.log": "5c2a4e6684250261a12c4814d13b7ccbed329d911afb27a13f177b448fd992ab",
+    "clean_profile_19935.log": "c4a58467322c6829d111358904c9ef42f279fa9a6d7dc7183c11669170e94cfd",
+    "clean_19935_out_p4_ncu.csv": "c81f18eeec26bcc96bc6b1e1c707b77a18286d1b4c45ba25c4076bdbaddb9f5b",
+    "clean_19935_out_phase1_ncu.csv": "e21a53f513209bec7391212c12a1e53c47dbad2347f0c91c69ac97c369b45b18",
+    "clean_19935_both_p4_ncu.csv": "04b9656e6e31cc685c1d203e73a43a3b1e0e70e1017d7413bfc61089152d1a20",
+    "clean_19935_both_phase1_ncu.csv": "2f533955f1d9568a755fc321367450dc4dcaf280f7bf8b8661403cc8d3787b07"
+  },
+  "baseline": {
+    "binary": "/home/lcpu/YOUR_USER_ID/kda-mainline-20260905/release_build/lib/flash_kda_release_C.cpython-312-x86_64-linux-gnu.so",
+    "sha256": "34e2c68cf80de0bd24278afb035fdcd44e4a6205241dfcb9aab4ee95891bc486",
+    "scope": "Four-patch Phase6 P4 candidate, not original P1"
+  },
+  "local_source": "/private/tmp/kda-clean-phase1.KHJ8t3",
+  "cpu_checks": {
+    "source_preservation": "PASS",
+    "actual_setup_checks": 20,
+    "actual_cpp_selector_checks": 234,
+    "old_build_contract_checks": 13,
+    "clean_summary_fixtures": 30,
+    "clean_summary_main_log_status": "PASS; issues=[]"
+  },
+  "selected_guard": {
+    "build_opt_in": true,
+    "arch": "103a explicitly, Phase6 P4 required",
+    "value_slice": 16,
+    "D": 128,
+    "C": 16,
+    "N": 1,
+    "H": 12,
+    "T_total_inclusive": [
+      2048,
+      8192
+    ],
+    "public_state": "not FP32",
+    "phase1_depth": {
+      "initial_absent": 4,
+      "initial_present": 2
+    },
+    "python_policy": "unchanged",
+    "runtime_concurrency_detection": false
+  }
+}

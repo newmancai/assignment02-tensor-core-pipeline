@@ -1,0 +1,8 @@
+==WARNING== Note: Running with uncontrolled GPU caches. Profiling results may be inconsistent.
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 1259754 (/usr/bin/python3.12)
+{"baseline": "/home/lcpu/YOUR_USER_ID/FlashKDA/results/20260821_dispatch_boundary/integrated_dispatch/lib/flash_kda_C.cpython-312-x86_64-linux-gnu.so", "candidate_sha256": "34e2c68cf80de0bd24278afb035fdcd44e4a6205241dfcb9aab4ee95891bc486", "device": {"device": 0, "l2_bytes": 132644864, "major": 10, "max_blocks_per_sm": 32, "max_threads_per_sm": 2048, "minor": 3, "registers_per_sm": 65536, "shared_memory_per_sm": 233472, "sm_count": 148, "warp_size": 32}, "extension": "/home/lcpu/YOUR_USER_ID/kda-mainline-20260905/release_build/lib/flash_kda_release_C.cpython-312-x86_64-linux-gnu.so", "kind": "environment", "scope": "actual Python wrapper; eager includes dispatch and workspace allocation; graph replay excludes Python; cache perturbation before start event", "torch": "2.10.0+cu130"}
+==PROF== Profiling "_flash_kda_fwd_recurrence": 0%....50%....100% - 16 passes
+{"kind": "profile_complete", "mode": "baseline"}
+==PROF== Disconnected from process 1259754
+==PROF== Report: /home/lcpu/YOUR_USER_ID/kda-mainline-20260905/release_19901_baseline.ncu-rep

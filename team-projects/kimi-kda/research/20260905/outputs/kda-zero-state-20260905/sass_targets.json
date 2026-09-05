@@ -1,0 +1,4832 @@
+{
+  "binary": "/home/lcpu/YOUR_USER_ID/kda-mainline-20260905/release_build/lib/flash_kda_release_C.cpython-312-x86_64-linux-gnu.so",
+  "binary_sha256": "34e2c68cf80de0bd24278afb035fdcd44e4a6205241dfcb9aab4ee95891bc486",
+  "variants": {
+    "0": {
+      "symbol": "_Z25_flash_kda_fwd_recurrenceIN4cute9TiledCopyINS0_9Copy_AtomIJNS0_11Copy_TraitsINS0_13SM90_TMA_LOADEJNS0_1CILi2048EEENS0_12AuxTmaParamsINS0_5tupleIJNS0_11ScaledBasisINS5_ILi1EEEJLi2EEEENS9_ISA_JLi1EEEENS9_IiJLi0EEEEEEERKNS0_6LayoutINS8_IJNS5_ILi8EEENS5_ILi16EEESA_EEENS8_IJSB_SC_NS9_ISA_JLi0EEEEEEEEERKNS0_7SwizzleILi0ELi4ELi3EEEEEEEEN7cutlass10bfloat16_tEEEENSF_INS8_IJSA_NS8_IJNS8_IJNS8_IJSG_SH_EEENS5_ILi2EEEEEEEEEEEENS8_IJNS5_ILi0EEENS8_IJNS8_IJNS8_IJSH_SA_EEENS5_ILi128EEEEEEEEEEEEEENS8_IJSA_SH_SH_EEEEENS1_INS2_IJNS3_IS4_JNS5_ILi512EEENS7_INS8_IJSJ_EEERKNSF_INS8_IJNS5_ILi32EEEEEES1C_EESR_EEEEESV_EEENSF_INS8_IJSA_NS8_IJNS8_IJS1D_SA_EEEEEEEEENS8_IJS12_NS8_IJNS8_IJSA_S12_EEEEEEEEEEES1E_EENS1_INS2_IJNS3_IS4_JS6_NS7_ISK_SN_SR_EEEEESV_EEENSF_INS8_IJSA_NS8_IJNS8_IJSX_SH_EEEEEEEEES17_EENS8_IJSA_SH_S14_EEEEES21_S21_NS1_INS2_IJNS3_IS4_JNS5_ILi4096EEENS7_INS8_IJSC_SJ_EEERKNSF_INS8_IJS14_SA_EEES23_EESR_EEEEEfEEENSF_INS8_IJSA_NS8_IJS24_EEEEEES1Q_EENS8_IJSA_S14_EEEEENS1_IS1V_S18_S19_EES2G_S21_NS1_INS2_IJNS3_INS0_14SM90_TMA_STOREEJS6_S1T_EEESV_EEES1Z_S20_EENS1_INS2_IJNS3_IS2H_JS6_SS_EEESV_EEES18_S19_EELi16ELi128ELi16ELi3ELi2ELi96ELb0ELb1ELb0ELb0ELi4EEvT_T0_T1_T2_T3_T4_T5_T6_T7_T8_T9_PSV_iiiPKli",
+      "resources": "REG:63 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:3748 TEXTURE:0 SURFACE:0 SAMPLER:0",
+      "full_sass_sha256": "8364d680c90a1db6522a96c5e3ca3829be02beb4cf7c4fc8516b2fca9f3a49ba",
+      "full_static_instructions": 1472,
+      "full_opcode_counts": {
+        "LDC": 5,
+        "S2R": 8,
+        "IMAD.MOV.U32": 13,
+        "BSSY": 9,
+        "ISETP.GE.U32.AND": 6,
+        "SEL": 20,
+        "ISETP.NE.AND": 24,
+        "BRA": 61,
+        "PLOP3.LUT": 22,
+        "P2R": 3,
+        "UMOV": 163,
+        "BRA.DIV": 5,
+        "ELECT": 7,
+        "BSYNC": 9,
+        "SHF.R.U32.HI": 3,
+        "SHFL.IDX": 4,
+        "S2UR": 14,
+        "UIADD3": 105,
+        "USHF.L.U32": 10,
+        "ULEA": 9,
+        "FENCE.VIEW.ASYNC.S": 4,
+        "SYNCS.EXCH.64": 10,
+        "NOP": 18,
+        "WARPSYNC.ALL": 3,
+        "BAR.SYNC.DEFER_BLOCKING": 6,
+        "LDCU": 4,
+        "ISETP.GT.U32.AND": 2,
+        "BSSY.RECONVERGENT": 9,
+        "IMAD.U32": 38,
+        "IABS": 2,
+        "R2UR": 48,
+        "I2F.RP": 1,
+        "MUFU.RCP": 1,
+        "VIADD": 16,
+        "F2I.FTZ.U32.TRUNC.NTZ": 1,
+        "IMAD.MOV": 1,
+        "PRMT": 51,
+        "UIMAD": 5,
+        "UIMAD.WIDE.U32": 3,
+        "LOP3.LUT": 21,
+        "IMAD": 22,
+        "LEA.HI": 1,
+        "UISETP.GT.U32.AND": 1,
+        "UISETP.GE.U32.AND": 1,
+        "ULOP3.LUT": 4,
+        "UISETP.GE.AND": 5,
+        "UISETP.NE.AND": 1,
+        "USHF.R.S32.HI": 3,
+        "ULEA.HI": 1,
+        "IADD3": 15,
+        "LEA": 12,
+        "STS.U16": 29,
+        "BSYNC.RECONVERGENT": 9,
+        "MOV": 28,
+        "MEMBAR.ALL.CTA": 2,
+        "ISETP.NE.OR": 2,
+        "BRA.U": 4,
+        "VIMNMX": 4,
+        "SHF.L.U32": 42,
+        "SYNCS.PHASECHK.TRANS64.TRYWAIT": 14,
+        "SYNCS.ARRIVE.TRANS64": 1,
+        "BPT.TRAP": 10,
+        "LDCU.64": 5,
+        "MOV.SPILL": 42,
+        "UTMALDG.3D": 54,
+        "UIADD3.X": 10,
+        "R2UR.FILL": 42,
+        "UTMALDG.1D": 1,
+        "UTMALDG.2D": 1,
+        "UISETP.LT.AND": 1,
+        "USEL": 1,
+        "IMAD.SHL.U32": 4,
+        "LDS.U16": 2,
+        "IMAD.IADD": 3,
+        "LDSM.16.M88.4": 27,
+        "HMMA.16816.F32.BF16": 52,
+        "FMUL.FTZ": 2,
+        "MUFU.TANH": 2,
+        "FFMA.FTZ": 66,
+        "F2FP.BF16.F32.PACK_AB": 49,
+        "HADD2.BF16_V2": 8,
+        "HMUL2.BF16_V2": 4,
+        "MOVM.16.MT88": 8,
+        "STSM.16.M88.4": 1,
+        "LDSM.16.MT88.4": 16,
+        "LDS": 16,
+        "STSM.16.MT88.4": 8,
+        "SYNCS.ARRIVE.TRANS64.A1T0": 1,
+        "SYNCS.ARRIVE.TRANS64.RED.A1T0": 2,
+        "LDC.64": 1,
+        "IMAD.WIDE": 1,
+        "IMAD.X": 3,
+        "UISETP.GT.AND": 1,
+        "LDS.128": 4,
+        "IMAD.WIDE.U32": 1,
+        "STG.E.U16": 32,
+        "UTMASTG.3D": 18,
+        "UTMACMDFLUSH": 2,
+        "DEPBAR.LE": 1,
+        "EXIT": 1,
+        "WARPSYNC.COLLECTIVE": 5,
+        "ENDCOLLECTIVE": 5,
+        "NANOSLEEP.SYNCS": 7,
+        "SYNCS.PHASECHK.TRANS64": 7
+      },
+      "initialization": [
+        [
+          "0x0910",
+          "UIADD3 UR4, UPT, UPT, UR29, 0xf, URZ"
+        ],
+        [
+          "0x0920",
+          "UIMAD UR23, UR29, UR30, URZ"
+        ],
+        [
+          "0x0930",
+          "USHF.R.S32.HI UR21, URZ, 0x1f, UR4"
+        ],
+        [
+          "0x0940",
+          "USHF.R.S32.HI UR22, URZ, 0x1f, UR23"
+        ],
+        [
+          "0x0950",
+          "ULEA.HI UR21, UR21, UR4, URZ, 0x4"
+        ],
+        [
+          "0x0960",
+          "USHF.R.S32.HI UR21, URZ, 0x4, UR21"
+        ],
+        [
+          "0x0970",
+          "@P1 BRA 0xad0"
+        ],
+        [
+          "0x0980",
+          "S2UR UR4, SR_CgaCtaId"
+        ],
+        [
+          "0x0990",
+          "UMOV UR5, 0x400"
+        ],
+        [
+          "0x09a0",
+          "IADD3 R5, PT, PT, R6, 0x600, RZ"
+        ],
+        [
+          "0x09b0",
+          "ULEA UR4, UR4, UR5, 0x18"
+        ],
+        [
+          "0x09c0",
+          "LEA R0, R6, UR4, 0x1"
+        ],
+        [
+          "0x09d0",
+          "STS.U16 [R0], RZ"
+        ],
+        [
+          "0x09e0",
+          "STS.U16 [R0+0xc0], RZ"
+        ],
+        [
+          "0x09f0",
+          "STS.U16 [R0+0x180], RZ"
+        ],
+        [
+          "0x0a00",
+          "STS.U16 [R0+0x240], RZ"
+        ],
+        [
+          "0x0a10",
+          "STS.U16 [R0+0x300], RZ"
+        ],
+        [
+          "0x0a20",
+          "STS.U16 [R0+0x3c0], RZ"
+        ],
+        [
+          "0x0a30",
+          "STS.U16 [R0+0x480], RZ"
+        ],
+        [
+          "0x0a40",
+          "STS.U16 [R0+0x540], RZ"
+        ],
+        [
+          "0x0a50",
+          "STS.U16 [R0+0x600], RZ"
+        ],
+        [
+          "0x0a60",
+          "STS.U16 [R0+0x6c0], RZ"
+        ],
+        [
+          "0x0a70",
+          "STS.U16 [R0+0x780], RZ"
+        ],
+        [
+          "0x0a80",
+          "STS.U16 [R0+0x840], RZ"
+        ],
+        [
+          "0x0a90",
+          "STS.U16 [R0+0x900], RZ"
+        ],
+        [
+          "0x0aa0",
+          "STS.U16 [R0+0x9c0], RZ"
+        ],
+        [
+          "0x0ab0",
+          "STS.U16 [R0+0xa80], RZ"
+        ],
+        [
+          "0x0ac0",
+          "STS.U16 [R0+0xb40], RZ"
+        ],
+        [
+          "0x0ad0",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x0ae0",
+          "ISETP.NE.AND P1, PT, R2, RZ, PT"
+        ],
+        [
+          "0x0af0",
+          "BSSY.RECONVERGENT B1, 0xe00"
+        ],
+        [
+          "0x0b00",
+          "@!P1 BRA 0xdf0"
+        ],
+        [
+          "0x0b10",
+          "ISETP.GE.U32.AND P1, PT, R2, 0x8, PT"
+        ],
+        [
+          "0x0b20",
+          "BSSY.RECONVERGENT B0, 0xc30"
+        ],
+        [
+          "0x0b30",
+          "LOP3.LUT R0, R4, 0x7, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x0b40",
+          "@!P1 BRA 0xc20"
+        ],
+        [
+          "0x0b50",
+          "S2UR UR4, SR_CgaCtaId"
+        ],
+        [
+          "0x0b60",
+          "UMOV UR5, 0x400"
+        ],
+        [
+          "0x0b70",
+          "ULEA UR4, UR4, UR5, 0x18"
+        ],
+        [
+          "0x0b80",
+          "LEA R2, R5.reuse, UR4, 0x1"
+        ],
+        [
+          "0x0b90",
+          "IADD3 R5, PT, PT, R5, 0x300, RZ"
+        ],
+        [
+          "0x0ba0",
+          "STS.U16 [R2], RZ"
+        ],
+        [
+          "0x0bb0",
+          "STS.U16 [R2+0xc0], RZ"
+        ],
+        [
+          "0x0bc0",
+          "STS.U16 [R2+0x180], RZ"
+        ],
+        [
+          "0x0bd0",
+          "STS.U16 [R2+0x240], RZ"
+        ],
+        [
+          "0x0be0",
+          "STS.U16 [R2+0x300], RZ"
+        ],
+        [
+          "0x0bf0",
+          "STS.U16 [R2+0x3c0], RZ"
+        ],
+        [
+          "0x0c00",
+          "STS.U16 [R2+0x480], RZ"
+        ],
+        [
+          "0x0c10",
+          "STS.U16 [R2+0x540], RZ"
+        ],
+        [
+          "0x0c20",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x0c30",
+          "ISETP.NE.AND P1, PT, R0, RZ, PT"
+        ],
+        [
+          "0x0c40",
+          "@!P1 BRA 0xdf0"
+        ],
+        [
+          "0x0c50",
+          "ISETP.GE.U32.AND P1, PT, R0, 0x4, PT"
+        ],
+        [
+          "0x0c60",
+          "BSSY.RECONVERGENT B0, 0xd30"
+        ],
+        [
+          "0x0c70",
+          "LOP3.LUT R4, R4, 0x3, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x0c80",
+          "@!P1 BRA 0xd20"
+        ],
+        [
+          "0x0c90",
+          "S2UR UR4, SR_CgaCtaId"
+        ],
+        [
+          "0x0ca0",
+          "UMOV UR5, 0x400"
+        ],
+        [
+          "0x0cb0",
+          "ULEA UR4, UR4, UR5, 0x18"
+        ],
+        [
+          "0x0cc0",
+          "LEA R0, R5.reuse, UR4, 0x1"
+        ],
+        [
+          "0x0cd0",
+          "IADD3 R5, PT, PT, R5, 0x180, RZ"
+        ],
+        [
+          "0x0ce0",
+          "STS.U16 [R0], RZ"
+        ],
+        [
+          "0x0cf0",
+          "STS.U16 [R0+0xc0], RZ"
+        ],
+        [
+          "0x0d00",
+          "STS.U16 [R0+0x180], RZ"
+        ],
+        [
+          "0x0d10",
+          "STS.U16 [R0+0x240], RZ"
+        ],
+        [
+          "0x0d20",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x0d30",
+          "ISETP.NE.AND P1, PT, R4, RZ, PT"
+        ],
+        [
+          "0x0d40",
+          "@!P1 BRA 0xdf0"
+        ],
+        [
+          "0x0d50",
+          "S2R R0, SR_CgaCtaId"
+        ],
+        [
+          "0x0d60",
+          "MOV R2, 0x400"
+        ],
+        [
+          "0x0d70",
+          "IMAD.MOV.U32 R3, RZ, RZ, RZ"
+        ],
+        [
+          "0x0d80",
+          "LEA R0, R0, R2, 0x18"
+        ],
+        [
+          "0x0d90",
+          "IMAD R2, R5, 0x2, R0"
+        ],
+        [
+          "0x0da0",
+          "IADD3 R3, PT, PT, R3, 0x1, RZ"
+        ],
+        [
+          "0x0db0",
+          "VIADD R5, R5, 0x60"
+        ],
+        [
+          "0x0dc0",
+          "STS.U16 [R2], RZ"
+        ],
+        [
+          "0x0dd0",
+          "ISETP.NE.AND P1, PT, R3, R4, PT"
+        ],
+        [
+          "0x0de0",
+          "@P1 BRA 0xd90"
+        ],
+        [
+          "0x0df0",
+          "BSYNC.RECONVERGENT B1"
+        ],
+        [
+          "0x0e00",
+          "MEMBAR.ALL.CTA"
+        ],
+        [
+          "0x0e10",
+          "FENCE.VIEW.ASYNC.S"
+        ],
+        [
+          "0x0e20",
+          "LOP3.LUT R0, R6, 0x60, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x0e30",
+          "BSSY B0, 0x27b0"
+        ],
+        [
+          "0x0e40",
+          "BAR.SYNC.DEFER_BLOCKING 0x0"
+        ],
+        [
+          "0x0e50",
+          "BAR.SYNC.DEFER_BLOCKING 0x0"
+        ],
+        [
+          "0x0e60",
+          "ISETP.NE.OR P1, PT, R0, 0x20, !P0"
+        ]
+      ],
+      "compute": [
+        [
+          "0x27a0",
+          "BSYNC B0"
+        ],
+        [
+          "0x27b0",
+          "ISETP.NE.AND P1, PT, R13, 0x2, PT"
+        ],
+        [
+          "0x27c0",
+          "@!P1 BRA 0x45b0"
+        ],
+        [
+          "0x27d0",
+          "UISETP.GE.AND UP0, UPT, UR29, 0x1, UPT"
+        ],
+        [
+          "0x27e0",
+          "PLOP3.LUT P0, PT, PT, PT, UP0, 0x80, 0x8"
+        ],
+        [
+          "0x27f0",
+          "ISETP.NE.OR P0, PT, R13, RZ, !P0"
+        ],
+        [
+          "0x2800",
+          "@P0 BRA 0x5630"
+        ],
+        [
+          "0x2810",
+          "S2UR UR4, SR_CTAID.Y"
+        ],
+        [
+          "0x2820",
+          "LDCU UR5, c[0x0][0xe88]"
+        ],
+        [
+          "0x2830",
+          "SHF.R.U32.HI R34, RZ, 0x2, R6"
+        ],
+        [
+          "0x2840",
+          "BSSY B1, 0x45a0"
+        ],
+        [
+          "0x2850",
+          "ISETP.NE.AND P2, PT, R14, RZ, PT"
+        ],
+        [
+          "0x2860",
+          "UISETP.LT.AND UP0, UPT, UR21, 0x1, UPT"
+        ],
+        [
+          "0x2870",
+          "LOP3.LUT R34, R34, 0x7, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2880",
+          "IMAD.MOV.U32 R47, RZ, RZ, 0x1"
+        ],
+        [
+          "0x2890",
+          "PLOP3.LUT P5, PT, P2, P5, PT, 0xf8, 0x8f"
+        ],
+        [
+          "0x28a0",
+          "IMAD.MOV.U32 R46, RZ, RZ, RZ"
+        ],
+        [
+          "0x28b0",
+          "MOV R45, RZ"
+        ],
+        [
+          "0x28c0",
+          "IMAD.MOV.U32 R29, RZ, RZ, RZ"
+        ],
+        [
+          "0x28d0",
+          "UIMAD UR5, UR4, UR5, UR23"
+        ],
+        [
+          "0x28e0",
+          "USEL UR4, UR21, 0x1, !UP0"
+        ],
+        [
+          "0x28f0",
+          "ULOP3.LUT UR5, UR5, 0x7, URZ, 0xc0, !UPT"
+        ],
+        [
+          "0x2900",
+          "UIADD3 UR4, UPT, UPT, -UR4, URZ, URZ"
+        ],
+        [
+          "0x2910",
+          "IADD3 R34, PT, PT, R34, UR5, RZ"
+        ],
+        [
+          "0x2920",
+          "IMAD.U32 R60, RZ, RZ, UR4"
+        ],
+        [
+          "0x2930",
+          "SHF.L.U32 R34, R34, 0x1, RZ"
+        ],
+        [
+          "0x2940",
+          "S2R R4, SR_TID.X"
+        ],
+        [
+          "0x2950",
+          "IMAD.MOV.U32 R0, RZ, RZ, 0x1"
+        ],
+        [
+          "0x2960",
+          "BSSY.RECONVERGENT B0, 0x2a40"
+        ],
+        [
+          "0x2970",
+          "ISETP.GE.U32.AND P0, PT, R4.reuse, 0x40, PT"
+        ],
+        [
+          "0x2980",
+          "ISETP.GE.U32.AND P1, PT, R4, 0x20, PT"
+        ],
+        [
+          "0x2990",
+          "SEL R0, R0, 0x2, !P0"
+        ],
+        [
+          "0x29a0",
+          "SEL R0, R0, RZ, P1"
+        ],
+        [
+          "0x29b0",
+          "ISETP.NE.AND P0, PT, R0, 0x2, PT"
+        ],
+        [
+          "0x29c0",
+          "SEL R0, RZ, 0x2, P0"
+        ],
+        [
+          "0x29d0",
+          "SEL R0, R0, 0x1, P1"
+        ],
+        [
+          "0x29e0",
+          "LOP3.LUT R0, R0, 0x1, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x29f0",
+          "ISETP.NE.AND P0, PT, R0, RZ, PT"
+        ],
+        [
+          "0x2a00",
+          "@!UPT UIADD3 URZ, UPT, UPT, URZ, URZ, URZ"
+        ],
+        [
+          "0x2a10",
+          "@P0 BRA 0x2a30"
+        ],
+        [
+          "0x2a20",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x2a30",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x2a40",
+          "S2R R28, SR_CgaCtaId"
+        ],
+        [
+          "0x2a50",
+          "MOV R0, 0x400"
+        ],
+        [
+          "0x2a60",
+          "BSSY B0, 0x2ad0"
+        ],
+        [
+          "0x2a70",
+          "SHF.L.U32 R2, R47, 0x1f, RZ"
+        ],
+        [
+          "0x2a80",
+          "LEA R28, R28, R0, 0x18"
+        ],
+        [
+          "0x2a90",
+          "IMAD R0, R45, 0x8, R28"
+        ],
+        [
+          "0x2aa0",
+          "SYNCS.PHASECHK.TRANS64.TRYWAIT P1, [R0+URZ+0xbdc0], R2"
+        ],
+        [
+          "0x2ab0",
+          "@!P1 BRA 0x5a20"
+        ],
+        [
+          "0x2ac0",
+          "BSYNC B0"
+        ],
+        [
+          "0x2ad0",
+          "BSSY.RECONVERGENT B0, 0x2b10"
+        ],
+        [
+          "0x2ae0",
+          "@!P6 BRA 0x2b00"
+        ],
+        [
+          "0x2af0",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x2b00",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x2b10",
+          "LEA R0, R29.reuse, R28, 0x3"
+        ],
+        [
+          "0x2b20",
+          "IMAD R5, R29, 0x3880, R28"
+        ],
+        [
+          "0x2b30",
+          "SHF.L.U32 R2, R46, 0x1f, RZ"
+        ],
+        [
+          "0x2b40",
+          "BSSY B0, 0x2b90"
+        ],
+        [
+          "0x2b50",
+          "SYNCS.PHASECHK.TRANS64.TRYWAIT P1, [R0+URZ+0xbd80], R2"
+        ],
+        [
+          "0x2b60",
+          "IADD3 R6, PT, PT, R34, R5, RZ"
+        ],
+        [
+          "0x2b70",
+          "@!P1 BRA 0x5a70"
+        ],
+        [
+          "0x2b80",
+          "BSYNC B0"
+        ],
+        [
+          "0x2b90",
+          "IMAD.SHL.U32 R3, R4.reuse, 0x10, RZ"
+        ],
+        [
+          "0x2ba0",
+          "WARPSYNC.ALL"
+        ],
+        [
+          "0x2bb0",
+          "IMAD.SHL.U32 R0, R4, 0x4, RZ"
+        ],
+        [
+          "0x2bc0",
+          "LOP3.LUT R2, R3.reuse, 0x80, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2bd0",
+          "LDS.U16 R7, [R6+0x1200]"
+        ],
+        [
+          "0x2be0",
+          "LOP3.LUT R30, R3, 0x1f0, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2bf0",
+          "BSSY.RECONVERGENT B0, 0x43e0"
+        ],
+        [
+          "0x2c00",
+          "LOP3.LUT R0, R2, 0x40, R0, 0xf8, !PT"
+        ],
+        [
+          "0x2c10",
+          "LDS.U16 R6, [R6+0x1210]"
+        ],
+        [
+          "0x2c20",
+          "SHF.L.U32 R2, R4, 0x3, RZ"
+        ],
+        [
+          "0x2c30",
+          "IMAD.IADD R30, R28, 0x1, R30"
+        ],
+        [
+          "0x2c40",
+          "SHF.R.U32.HI R44, RZ, 0x2, R4"
+        ],
+        [
+          "0x2c50",
+          "LOP3.LUT R0, R0, 0x38, R2, 0xf8, !PT"
+        ],
+        [
+          "0x2c60",
+          "IMAD R31, R29, 0x3880, R30"
+        ],
+        [
+          "0x2c70",
+          "LOP3.LUT R32, R2, 0xf8, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2c80",
+          "IADD3 R30, PT, PT, R30, 0x1000, RZ"
+        ],
+        [
+          "0x2c90",
+          "IMAD.SHL.U32 R0, R0, 0x2, RZ"
+        ],
+        [
+          "0x2ca0",
+          "LDSM.16.M88.4 R24, [R31+0x1280]"
+        ],
+        [
+          "0x2cb0",
+          "IMAD.SHL.U32 R32, R32, 0x2, RZ"
+        ],
+        [
+          "0x2cc0",
+          "LOP3.LUT R44, R44, 0x7, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2cd0",
+          "IMAD R30, R45, 0x200, R30"
+        ],
+        [
+          "0x2ce0",
+          "IADD3 R35, PT, PT, R28, R0, RZ"
+        ],
+        [
+          "0x2cf0",
+          "IMAD.IADD R32, R32, 0x1, R5.reuse"
+        ],
+        [
+          "0x2d00",
+          "LDSM.16.M88.4 R12, [R31+0x2280]"
+        ],
+        [
+          "0x2d10",
+          "IMAD R44, R44, 0x4, R5"
+        ],
+        [
+          "0x2d20",
+          "LDSM.16.M88.4 R40, [R35]"
+        ],
+        [
+          "0x2d30",
+          "LDSM.16.M88.4 R8, [R32+0x1480]"
+        ],
+        [
+          "0x2d40",
+          "LDSM.16.M88.4 R20, [R35+0x200]"
+        ],
+        [
+          "0x2d50",
+          "HMMA.16816.F32.BF16 R36, R24.reuse, R40, RZ"
+        ],
+        [
+          "0x2d60",
+          "SHF.L.U32 R2, R7, 0x10, RZ"
+        ],
+        [
+          "0x2d70",
+          "IMAD.U32 R3, R6, 0x10000, RZ"
+        ],
+        [
+          "0x2d80",
+          "HMMA.16816.F32.BF16 R24, R24, R42, RZ"
+        ],
+        [
+          "0x2d90",
+          "FMUL.FTZ R3, R3, 0.5"
+        ],
+        [
+          "0x2da0",
+          "FMUL.FTZ R2, R2, 0.5"
+        ],
+        [
+          "0x2db0",
+          "MUFU.TANH R6, R3"
+        ],
+        [
+          "0x2dc0",
+          "HMMA.16816.F32.BF16 R16, R12, R40, RZ"
+        ],
+        [
+          "0x2dd0",
+          "MUFU.TANH R2, R2"
+        ],
+        [
+          "0x2de0",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R20, R36"
+        ],
+        [
+          "0x2df0",
+          "IMAD.MOV.U32 R3, RZ, RZ, 0x3f000000"
+        ],
+        [
+          "0x2e00",
+          "HMMA.16816.F32.BF16 R24, R8, R22, R24"
+        ],
+        [
+          "0x2e10",
+          "LDSM.16.M88.4 R8, [R32+0x2480]"
+        ],
+        [
+          "0x2e20",
+          "FFMA.FTZ R2, R2, R3.reuse, 0.5"
+        ],
+        [
+          "0x2e30",
+          "HMMA.16816.F32.BF16 R12, R12, R42, RZ"
+        ],
+        [
+          "0x2e40",
+          "FFMA.FTZ R3, R6, R3, 0.5"
+        ],
+        [
+          "0x2e50",
+          "F2FP.BF16.F32.PACK_AB R2, R3, R2"
+        ],
+        [
+          "0x2e60",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R20, R16"
+        ],
+        [
+          "0x2e70",
+          "HMMA.16816.F32.BF16 R12, R8, R22, R12"
+        ],
+        [
+          "0x2e80",
+          "LDSM.16.M88.4 R8, [R32+0x1680]"
+        ],
+        [
+          "0x2e90",
+          "LDSM.16.M88.4 R20, [R35+0x400]"
+        ],
+        [
+          "0x2ea0",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R20, R36"
+        ],
+        [
+          "0x2eb0",
+          "HMMA.16816.F32.BF16 R24, R8, R22, R24"
+        ],
+        [
+          "0x2ec0",
+          "LDSM.16.M88.4 R8, [R32+0x2680]"
+        ],
+        [
+          "0x2ed0",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R20, R16"
+        ],
+        [
+          "0x2ee0",
+          "HMMA.16816.F32.BF16 R12, R8, R22, R12"
+        ],
+        [
+          "0x2ef0",
+          "LDSM.16.M88.4 R8, [R32+0x1880]"
+        ],
+        [
+          "0x2f00",
+          "LDSM.16.M88.4 R20, [R35+0x600]"
+        ],
+        [
+          "0x2f10",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R20, R36"
+        ],
+        [
+          "0x2f20",
+          "HMMA.16816.F32.BF16 R24, R8, R22, R24"
+        ],
+        [
+          "0x2f30",
+          "LDSM.16.M88.4 R8, [R32+0x2880]"
+        ],
+        [
+          "0x2f40",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R20, R16"
+        ],
+        [
+          "0x2f50",
+          "HMMA.16816.F32.BF16 R12, R8, R22, R12"
+        ],
+        [
+          "0x2f60",
+          "LDSM.16.M88.4 R8, [R32+0x1a80]"
+        ],
+        [
+          "0x2f70",
+          "LDSM.16.M88.4 R20, [R35+0x800]"
+        ],
+        [
+          "0x2f80",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R20, R36"
+        ],
+        [
+          "0x2f90",
+          "HMMA.16816.F32.BF16 R24, R8, R22, R24"
+        ],
+        [
+          "0x2fa0",
+          "LDSM.16.M88.4 R8, [R32+0x2a80]"
+        ],
+        [
+          "0x2fb0",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R20, R16"
+        ],
+        [
+          "0x2fc0",
+          "HMMA.16816.F32.BF16 R12, R8, R22, R12"
+        ],
+        [
+          "0x2fd0",
+          "LDSM.16.M88.4 R8, [R32+0x1c80]"
+        ],
+        [
+          "0x2fe0",
+          "LDSM.16.M88.4 R20, [R35+0xa00]"
+        ],
+        [
+          "0x2ff0",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R20, R36"
+        ],
+        [
+          "0x3000",
+          "HMMA.16816.F32.BF16 R24, R8, R22, R24"
+        ],
+        [
+          "0x3010",
+          "LDSM.16.M88.4 R8, [R32+0x2c80]"
+        ],
+        [
+          "0x3020",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R20, R16"
+        ],
+        [
+          "0x3030",
+          "HMMA.16816.F32.BF16 R12, R8, R22, R12"
+        ],
+        [
+          "0x3040",
+          "LDSM.16.M88.4 R8, [R32+0x1e80]"
+        ],
+        [
+          "0x3050",
+          "LDSM.16.M88.4 R20, [R35+0xc00]"
+        ],
+        [
+          "0x3060",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R20, R36"
+        ],
+        [
+          "0x3070",
+          "HMMA.16816.F32.BF16 R24, R8, R22, R24"
+        ],
+        [
+          "0x3080",
+          "LDSM.16.M88.4 R8, [R32+0x2e80]"
+        ],
+        [
+          "0x3090",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R20, R16"
+        ],
+        [
+          "0x30a0",
+          "HMMA.16816.F32.BF16 R12, R8, R22, R12"
+        ],
+        [
+          "0x30b0",
+          "LDSM.16.M88.4 R20, [R32+0x2080]"
+        ],
+        [
+          "0x30c0",
+          "LDSM.16.M88.4 R8, [R35+0xe00]"
+        ],
+        [
+          "0x30d0",
+          "HMMA.16816.F32.BF16 R36, R20.reuse, R8, R36"
+        ],
+        [
+          "0x30e0",
+          "HMMA.16816.F32.BF16 R24, R20, R10, R24"
+        ],
+        [
+          "0x30f0",
+          "LDSM.16.M88.4 R20, [R31+0x1000]"
+        ],
+        [
+          "0x3100",
+          "F2FP.BF16.F32.PACK_AB R7, R37, R36"
+        ],
+        [
+          "0x3110",
+          "F2FP.BF16.F32.PACK_AB R33, R39, R38"
+        ],
+        [
+          "0x3120",
+          "LDSM.16.M88.4 R36, [R31+0x4480]"
+        ],
+        [
+          "0x3130",
+          "F2FP.BF16.F32.PACK_AB R24, R25, R24"
+        ],
+        [
+          "0x3140",
+          "F2FP.BF16.F32.PACK_AB R26, R27, R26"
+        ],
+        [
+          "0x3150",
+          "HADD2.BF16_V2 R7, R20, -R7"
+        ],
+        [
+          "0x3160",
+          "HADD2.BF16_V2 R33, R21, -R33"
+        ],
+        [
+          "0x3170",
+          "HADD2.BF16_V2 R24, R22, -R24"
+        ],
+        [
+          "0x3180",
+          "HADD2.BF16_V2 R26, R23, -R26"
+        ],
+        [
+          "0x3190",
+          "HMUL2.BF16_V2 R33, R33, R2.reuse.H1_H1"
+        ],
+        [
+          "0x31a0",
+          "HMUL2.BF16_V2 R24, R24, R2.reuse.H0_H0"
+        ],
+        [
+          "0x31b0",
+          "HMUL2.BF16_V2 R26, R26, R2.reuse.H1_H1"
+        ],
+        [
+          "0x31c0",
+          "MOVM.16.MT88 R41, R33"
+        ],
+        [
+          "0x31d0",
+          "HMUL2.BF16_V2 R7, R7, R2.H0_H0"
+        ],
+        [
+          "0x31e0",
+          "MOVM.16.MT88 R20, R24"
+        ],
+        [
+          "0x31f0",
+          "MOVM.16.MT88 R21, R26"
+        ],
+        [
+          "0x3200",
+          "MOVM.16.MT88 R40, R7"
+        ],
+        [
+          "0x3210",
+          "LDSM.16.M88.4 R24, [R31+0x4680]"
+        ],
+        [
+          "0x3220",
+          "HMMA.16816.F32.BF16 R20, R36.reuse, R20, RZ"
+        ],
+        [
+          "0x3230",
+          "HMMA.16816.F32.BF16 R40, R36, R40, RZ"
+        ],
+        [
+          "0x3240",
+          "LDSM.16.M88.4 R36, [R32+0x3080]"
+        ],
+        [
+          "0x3250",
+          "F2FP.BF16.F32.PACK_AB R2, R21, R20"
+        ],
+        [
+          "0x3260",
+          "F2FP.BF16.F32.PACK_AB R3, R23, R22"
+        ],
+        [
+          "0x3270",
+          "IADD3 R22, PT, PT, R0, R5, RZ"
+        ],
+        [
+          "0x3280",
+          "IADD3 R0, PT, PT, R28, R0, RZ"
+        ],
+        [
+          "0x3290",
+          "MOVM.16.MT88 R2, R2"
+        ],
+        [
+          "0x32a0",
+          "F2FP.BF16.F32.PACK_AB R7, R41, R40"
+        ],
+        [
+          "0x32b0",
+          "F2FP.BF16.F32.PACK_AB R6, R43, R42"
+        ],
+        [
+          "0x32c0",
+          "MOVM.16.MT88 R3, R3"
+        ],
+        [
+          "0x32d0",
+          "MOVM.16.MT88 R20, R7"
+        ],
+        [
+          "0x32e0",
+          "MOVM.16.MT88 R21, R6"
+        ],
+        [
+          "0x32f0",
+          "HMMA.16816.F32.BF16 R16, R36.reuse, R8, R16"
+        ],
+        [
+          "0x3300",
+          "HMMA.16816.F32.BF16 R12, R36, R10, R12"
+        ],
+        [
+          "0x3310",
+          "HMMA.16816.F32.BF16 R8, R24.reuse, R20, RZ"
+        ],
+        [
+          "0x3320",
+          "F2FP.BF16.F32.PACK_AB R18, R19, R18"
+        ],
+        [
+          "0x3330",
+          "F2FP.BF16.F32.PACK_AB R16, R17, R16"
+        ],
+        [
+          "0x3340",
+          "HMMA.16816.F32.BF16 R24, R24, R2, RZ"
+        ],
+        [
+          "0x3350",
+          "F2FP.BF16.F32.PACK_AB R14, R15, R14"
+        ],
+        [
+          "0x3360",
+          "F2FP.BF16.F32.PACK_AB R11, R11, R10"
+        ],
+        [
+          "0x3370",
+          "F2FP.BF16.F32.PACK_AB R10, R13, R12"
+        ],
+        [
+          "0x3380",
+          "F2FP.BF16.F32.PACK_AB R8, R9, R8"
+        ],
+        [
+          "0x3390",
+          "HADD2.BF16_V2 R9, R18, R11"
+        ],
+        [
+          "0x33a0",
+          "F2FP.BF16.F32.PACK_AB R26, R27, R26"
+        ],
+        [
+          "0x33b0",
+          "HADD2.BF16_V2 R8, R16, R8"
+        ],
+        [
+          "0x33c0",
+          "F2FP.BF16.F32.PACK_AB R24, R25, R24"
+        ],
+        [
+          "0x33d0",
+          "HADD2.BF16_V2 R11, R14, R26"
+        ],
+        [
+          "0x33e0",
+          "HADD2.BF16_V2 R10, R10, R24"
+        ],
+        [
+          "0x33f0",
+          "STSM.16.M88.4 [R30+0xa980], R8"
+        ],
+        [
+          "0x3400",
+          "LDSM.16.MT88.4 R8, [R22+0x3280]"
+        ],
+        [
+          "0x3410",
+          "LDSM.16.MT88.4 R24, [R35]"
+        ],
+        [
+          "0x3420",
+          "LDS R23, [R44+0x4280]"
+        ],
+        [
+          "0x3430",
+          "LDS R30, [R44+0x42a0]"
+        ],
+        [
+          "0x3440",
+          "LDSM.16.MT88.4 R16, [R22+0x3480]"
+        ],
+        [
+          "0x3450",
+          "LDSM.16.MT88.4 R36, [R35+0x200]"
+        ],
+        [
+          "0x3460",
+          "LDS R32, [R44+0x42c0]"
+        ],
+        [
+          "0x3470",
+          "LDS R33, [R44+0x42e0]"
+        ],
+        [
+          "0x3480",
+          "LDSM.16.MT88.4 R40, [R35+0x400]"
+        ],
+        [
+          "0x3490",
+          "HMMA.16816.F32.BF16 R4, R8.reuse, R20, RZ"
+        ],
+        [
+          "0x34a0",
+          "SHF.L.U32 R12, R24.reuse, 0x10, RZ"
+        ],
+        [
+          "0x34b0",
+          "IMAD.U32 R14, R27.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x34c0",
+          "PRMT R24, R24, 0x7632, R24"
+        ],
+        [
+          "0x34d0",
+          "SHF.L.U32 R13, R26.reuse, 0x10, RZ"
+        ],
+        [
+          "0x34e0",
+          "HMMA.16816.F32.BF16 R8, R8, R2, RZ"
+        ],
+        [
+          "0x34f0",
+          "PRMT R26, R26, 0x7632, R26"
+        ],
+        [
+          "0x3500",
+          "SHF.L.U32 R15, R24, 0x10, RZ"
+        ],
+        [
+          "0x3510",
+          "PRMT R27, R27, 0x7632, R27"
+        ],
+        [
+          "0x3520",
+          "FFMA.FTZ R4, R23, R12, R4"
+        ],
+        [
+          "0x3530",
+          "IMAD.U32 R12, R25.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3540",
+          "PRMT R25, R25, 0x7632, R25"
+        ],
+        [
+          "0x3550",
+          "IMAD.U32 R31, R27, 0x10000, RZ"
+        ],
+        [
+          "0x3560",
+          "FFMA.FTZ R6, R30, R12, R6"
+        ],
+        [
+          "0x3570",
+          "IMAD.U32 R24, R25, 0x10000, RZ"
+        ],
+        [
+          "0x3580",
+          "SHF.L.U32 R25, R26, 0x10, RZ"
+        ],
+        [
+          "0x3590",
+          "FFMA.FTZ R8, R23.reuse, R13, R8"
+        ],
+        [
+          "0x35a0",
+          "FFMA.FTZ R10, R30.reuse, R14, R10"
+        ],
+        [
+          "0x35b0",
+          "FFMA.FTZ R5, R23.reuse, R15, R5"
+        ],
+        [
+          "0x35c0",
+          "FFMA.FTZ R7, R30.reuse, R24, R7"
+        ],
+        [
+          "0x35d0",
+          "FFMA.FTZ R9, R23, R25, R9"
+        ],
+        [
+          "0x35e0",
+          "HMMA.16816.F32.BF16 R12, R16.reuse, R20, RZ"
+        ],
+        [
+          "0x35f0",
+          "LDSM.16.MT88.4 R24, [R22+0x3680]"
+        ],
+        [
+          "0x3600",
+          "F2FP.BF16.F32.PACK_AB R48, R5, R4"
+        ],
+        [
+          "0x3610",
+          "FFMA.FTZ R11, R30, R31, R11"
+        ],
+        [
+          "0x3620",
+          "SHF.L.U32 R4, R36.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3630",
+          "LDS R23, [R44+0x4300]"
+        ],
+        [
+          "0x3640",
+          "PRMT R36, R36, 0x7632, R36"
+        ],
+        [
+          "0x3650",
+          "HMMA.16816.F32.BF16 R16, R16, R2, RZ"
+        ],
+        [
+          "0x3660",
+          "F2FP.BF16.F32.PACK_AB R49, R7, R6"
+        ],
+        [
+          "0x3670",
+          "LDS R30, [R44+0x4320]"
+        ],
+        [
+          "0x3680",
+          "SHF.L.U32 R6, R38.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3690",
+          "IMAD.U32 R5, R37.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x36a0",
+          "PRMT R37, R37, 0x7632, R37"
+        ],
+        [
+          "0x36b0",
+          "PRMT R38, R38, 0x7632, R38"
+        ],
+        [
+          "0x36c0",
+          "F2FP.BF16.F32.PACK_AB R50, R9, R8"
+        ],
+        [
+          "0x36d0",
+          "F2FP.BF16.F32.PACK_AB R51, R11, R10"
+        ],
+        [
+          "0x36e0",
+          "FFMA.FTZ R12, R32, R4, R12"
+        ],
+        [
+          "0x36f0",
+          "FFMA.FTZ R14, R33, R5, R14"
+        ],
+        [
+          "0x3700",
+          "SHF.L.U32 R5, R36, 0x10, RZ"
+        ],
+        [
+          "0x3710",
+          "IMAD.U32 R4, R39.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3720",
+          "PRMT R39, R39, 0x7632, R39"
+        ],
+        [
+          "0x3730",
+          "FFMA.FTZ R16, R32.reuse, R6, R16"
+        ],
+        [
+          "0x3740",
+          "FFMA.FTZ R18, R33, R4, R18"
+        ],
+        [
+          "0x3750",
+          "FFMA.FTZ R13, R32, R5, R13"
+        ],
+        [
+          "0x3760",
+          "SHF.L.U32 R5, R38, 0x10, RZ"
+        ],
+        [
+          "0x3770",
+          "IMAD.U32 R4, R37, 0x10000, RZ"
+        ],
+        [
+          "0x3780",
+          "F2FP.BF16.F32.PACK_AB R52, R13, R12"
+        ],
+        [
+          "0x3790",
+          "FFMA.FTZ R15, R33, R4, R15"
+        ],
+        [
+          "0x37a0",
+          "FFMA.FTZ R17, R32, R5, R17"
+        ],
+        [
+          "0x37b0",
+          "IMAD.U32 R12, R39, 0x10000, RZ"
+        ],
+        [
+          "0x37c0",
+          "IMAD.U32 R13, R41, 0x10000, RZ"
+        ],
+        [
+          "0x37d0",
+          "F2FP.BF16.F32.PACK_AB R53, R15, R14"
+        ],
+        [
+          "0x37e0",
+          "HMMA.16816.F32.BF16 R4, R24.reuse, R20, RZ"
+        ],
+        [
+          "0x37f0",
+          "SHF.L.U32 R14, R42, 0x10, RZ"
+        ],
+        [
+          "0x3800",
+          "FFMA.FTZ R19, R33, R12, R19"
+        ],
+        [
+          "0x3810",
+          "SHF.L.U32 R12, R40.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3820",
+          "IMAD.U32 R15, R43, 0x10000, RZ"
+        ],
+        [
+          "0x3830",
+          "PRMT R40, R40, 0x7632, R40"
+        ],
+        [
+          "0x3840",
+          "HMMA.16816.F32.BF16 R8, R24, R2, RZ"
+        ],
+        [
+          "0x3850",
+          "PRMT R41, R41, 0x7632, R41"
+        ],
+        [
+          "0x3860",
+          "PRMT R42, R42, 0x7632, R42"
+        ],
+        [
+          "0x3870",
+          "F2FP.BF16.F32.PACK_AB R54, R17, R16"
+        ],
+        [
+          "0x3880",
+          "IMAD.U32 R17, R41, 0x10000, RZ"
+        ],
+        [
+          "0x3890",
+          "SHF.L.U32 R16, R40, 0x10, RZ"
+        ],
+        [
+          "0x38a0",
+          "SHF.L.U32 R24, R42, 0x10, RZ"
+        ],
+        [
+          "0x38b0",
+          "F2FP.BF16.F32.PACK_AB R55, R19, R18"
+        ],
+        [
+          "0x38c0",
+          "FFMA.FTZ R4, R23, R12, R4"
+        ],
+        [
+          "0x38d0",
+          "PRMT R43, R43, 0x7632, R43"
+        ],
+        [
+          "0x38e0",
+          "FFMA.FTZ R6, R30.reuse, R13, R6"
+        ],
+        [
+          "0x38f0",
+          "LDS R18, [R44+0x4360]"
+        ],
+        [
+          "0x3900",
+          "FFMA.FTZ R8, R23.reuse, R14, R8"
+        ],
+        [
+          "0x3910",
+          "FFMA.FTZ R10, R30.reuse, R15, R10"
+        ],
+        [
+          "0x3920",
+          "FFMA.FTZ R5, R23.reuse, R16, R5"
+        ],
+        [
+          "0x3930",
+          "LDSM.16.MT88.4 R12, [R22+0x3880]"
+        ],
+        [
+          "0x3940",
+          "FFMA.FTZ R7, R30.reuse, R17, R7"
+        ],
+        [
+          "0x3950",
+          "FFMA.FTZ R9, R23, R24, R9"
+        ],
+        [
+          "0x3960",
+          "F2FP.BF16.F32.PACK_AB R40, R5, R4"
+        ],
+        [
+          "0x3970",
+          "LDSM.16.MT88.4 R24, [R35+0x600]"
+        ],
+        [
+          "0x3980",
+          "F2FP.BF16.F32.PACK_AB R41, R7, R6"
+        ],
+        [
+          "0x3990",
+          "IMAD.U32 R4, R43, 0x10000, RZ"
+        ],
+        [
+          "0x39a0",
+          "F2FP.BF16.F32.PACK_AB R42, R9, R8"
+        ],
+        [
+          "0x39b0",
+          "LDS R16, [R44+0x4340]"
+        ],
+        [
+          "0x39c0",
+          "FFMA.FTZ R11, R30, R4, R11"
+        ],
+        [
+          "0x39d0",
+          "F2FP.BF16.F32.PACK_AB R43, R11, R10"
+        ],
+        [
+          "0x39e0",
+          "LDSM.16.MT88.4 R8, [R22+0x3a80]"
+        ],
+        [
+          "0x39f0",
+          "HMMA.16816.F32.BF16 R4, R12.reuse, R20, RZ"
+        ],
+        [
+          "0x3a00",
+          "SHF.L.U32 R17, R24.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3a10",
+          "PRMT R24, R24, 0x7632, R24"
+        ],
+        [
+          "0x3a20",
+          "HMMA.16816.F32.BF16 R12, R12, R2, RZ"
+        ],
+        [
+          "0x3a30",
+          "SHF.L.U32 R19, R24, 0x10, RZ"
+        ],
+        [
+          "0x3a40",
+          "FFMA.FTZ R4, R16, R17, R4"
+        ],
+        [
+          "0x3a50",
+          "IMAD.U32 R17, R25.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3a60",
+          "PRMT R25, R25, 0x7632, R25"
+        ],
+        [
+          "0x3a70",
+          "FFMA.FTZ R6, R18, R17, R6"
+        ],
+        [
+          "0x3a80",
+          "SHF.L.U32 R17, R26.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3a90",
+          "PRMT R26, R26, 0x7632, R26"
+        ],
+        [
+          "0x3aa0",
+          "FFMA.FTZ R12, R16, R17, R12"
+        ],
+        [
+          "0x3ab0",
+          "IMAD.U32 R17, R27.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3ac0",
+          "PRMT R27, R27, 0x7632, R27"
+        ],
+        [
+          "0x3ad0",
+          "FFMA.FTZ R14, R18, R17, R14"
+        ],
+        [
+          "0x3ae0",
+          "FFMA.FTZ R5, R16, R19, R5"
+        ],
+        [
+          "0x3af0",
+          "IMAD.U32 R17, R25, 0x10000, RZ"
+        ],
+        [
+          "0x3b00",
+          "LDS R19, [R44+0x43a0]"
+        ],
+        [
+          "0x3b10",
+          "F2FP.BF16.F32.PACK_AB R56, R5, R4"
+        ],
+        [
+          "0x3b20",
+          "FFMA.FTZ R7, R18, R17, R7"
+        ],
+        [
+          "0x3b30",
+          "SHF.L.U32 R4, R26, 0x10, RZ"
+        ],
+        [
+          "0x3b40",
+          "F2FP.BF16.F32.PACK_AB R57, R7, R6"
+        ],
+        [
+          "0x3b50",
+          "FFMA.FTZ R13, R16, R4, R13"
+        ],
+        [
+          "0x3b60",
+          "IMAD.U32 R4, R27, 0x10000, RZ"
+        ],
+        [
+          "0x3b70",
+          "LDS R16, [R44+0x4380]"
+        ],
+        [
+          "0x3b80",
+          "F2FP.BF16.F32.PACK_AB R58, R13, R12"
+        ],
+        [
+          "0x3b90",
+          "STSM.16.MT88.4 [R35], R48"
+        ],
+        [
+          "0x3ba0",
+          "FFMA.FTZ R15, R18, R4, R15"
+        ],
+        [
+          "0x3bb0",
+          "HMMA.16816.F32.BF16 R4, R8.reuse, R20, RZ"
+        ],
+        [
+          "0x3bc0",
+          "LDSM.16.MT88.4 R36, [R35+0x800]"
+        ],
+        [
+          "0x3bd0",
+          "F2FP.BF16.F32.PACK_AB R59, R15, R14"
+        ],
+        [
+          "0x3be0",
+          "LDSM.16.MT88.4 R12, [R22+0x3c80]"
+        ],
+        [
+          "0x3bf0",
+          "HMMA.16816.F32.BF16 R8, R8, R2, RZ"
+        ],
+        [
+          "0x3c00",
+          "SHF.L.U32 R17, R36.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3c10",
+          "PRMT R36, R36, 0x7632, R36"
+        ],
+        [
+          "0x3c20",
+          "FFMA.FTZ R4, R16, R17, R4"
+        ],
+        [
+          "0x3c30",
+          "SHF.L.U32 R18, R36, 0x10, RZ"
+        ],
+        [
+          "0x3c40",
+          "IMAD.U32 R17, R37.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3c50",
+          "PRMT R37, R37, 0x7632, R37"
+        ],
+        [
+          "0x3c60",
+          "FFMA.FTZ R6, R19, R17, R6"
+        ],
+        [
+          "0x3c70",
+          "SHF.L.U32 R17, R38.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3c80",
+          "PRMT R38, R38, 0x7632, R38"
+        ],
+        [
+          "0x3c90",
+          "FFMA.FTZ R8, R16.reuse, R17, R8"
+        ],
+        [
+          "0x3ca0",
+          "IMAD.U32 R17, R39.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3cb0",
+          "PRMT R39, R39, 0x7632, R39"
+        ],
+        [
+          "0x3cc0",
+          "FFMA.FTZ R10, R19, R17, R10"
+        ],
+        [
+          "0x3cd0",
+          "FFMA.FTZ R5, R16, R18, R5"
+        ],
+        [
+          "0x3ce0",
+          "IMAD.U32 R17, R37, 0x10000, RZ"
+        ],
+        [
+          "0x3cf0",
+          "LDS R18, [R44+0x43e0]"
+        ],
+        [
+          "0x3d00",
+          "F2FP.BF16.F32.PACK_AB R48, R5, R4"
+        ],
+        [
+          "0x3d10",
+          "FFMA.FTZ R7, R19, R17, R7"
+        ],
+        [
+          "0x3d20",
+          "SHF.L.U32 R4, R38, 0x10, RZ"
+        ],
+        [
+          "0x3d30",
+          "F2FP.BF16.F32.PACK_AB R49, R7, R6"
+        ],
+        [
+          "0x3d40",
+          "FFMA.FTZ R9, R16, R4, R9"
+        ],
+        [
+          "0x3d50",
+          "IMAD.U32 R4, R39, 0x10000, RZ"
+        ],
+        [
+          "0x3d60",
+          "LDS R16, [R44+0x43c0]"
+        ],
+        [
+          "0x3d70",
+          "FFMA.FTZ R11, R19, R4, R11"
+        ],
+        [
+          "0x3d80",
+          "STSM.16.MT88.4 [R35+0x200], R52"
+        ],
+        [
+          "0x3d90",
+          "F2FP.BF16.F32.PACK_AB R50, R9, R8"
+        ],
+        [
+          "0x3da0",
+          "HMMA.16816.F32.BF16 R4, R12.reuse, R20, RZ"
+        ],
+        [
+          "0x3db0",
+          "LDSM.16.MT88.4 R24, [R35+0xa00]"
+        ],
+        [
+          "0x3dc0",
+          "F2FP.BF16.F32.PACK_AB R51, R11, R10"
+        ],
+        [
+          "0x3dd0",
+          "LDSM.16.MT88.4 R8, [R22+0x3e80]"
+        ],
+        [
+          "0x3de0",
+          "HMMA.16816.F32.BF16 R12, R12, R2, RZ"
+        ],
+        [
+          "0x3df0",
+          "LDS R30, [R44+0x4420]"
+        ],
+        [
+          "0x3e00",
+          "SHF.L.U32 R17, R24.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3e10",
+          "PRMT R24, R24, 0x7632, R24"
+        ],
+        [
+          "0x3e20",
+          "FFMA.FTZ R4, R16, R17, R4"
+        ],
+        [
+          "0x3e30",
+          "SHF.L.U32 R19, R24, 0x10, RZ"
+        ],
+        [
+          "0x3e40",
+          "IMAD.U32 R17, R25.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3e50",
+          "PRMT R25, R25, 0x7632, R25"
+        ],
+        [
+          "0x3e60",
+          "FFMA.FTZ R6, R18, R17, R6"
+        ],
+        [
+          "0x3e70",
+          "SHF.L.U32 R17, R26.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3e80",
+          "PRMT R26, R26, 0x7632, R26"
+        ],
+        [
+          "0x3e90",
+          "FFMA.FTZ R12, R16, R17, R12"
+        ],
+        [
+          "0x3ea0",
+          "IMAD.U32 R17, R27.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3eb0",
+          "PRMT R27, R27, 0x7632, R27"
+        ],
+        [
+          "0x3ec0",
+          "FFMA.FTZ R14, R18, R17, R14"
+        ],
+        [
+          "0x3ed0",
+          "FFMA.FTZ R5, R16, R19, R5"
+        ],
+        [
+          "0x3ee0",
+          "IMAD.U32 R17, R25, 0x10000, RZ"
+        ],
+        [
+          "0x3ef0",
+          "F2FP.BF16.F32.PACK_AB R52, R5, R4"
+        ],
+        [
+          "0x3f00",
+          "FFMA.FTZ R7, R18, R17, R7"
+        ],
+        [
+          "0x3f10",
+          "SHF.L.U32 R4, R26, 0x10, RZ"
+        ],
+        [
+          "0x3f20",
+          "F2FP.BF16.F32.PACK_AB R53, R7, R6"
+        ],
+        [
+          "0x3f30",
+          "FFMA.FTZ R13, R16, R4, R13"
+        ],
+        [
+          "0x3f40",
+          "IMAD.U32 R4, R27, 0x10000, RZ"
+        ],
+        [
+          "0x3f50",
+          "LDS R16, [R44+0x4400]"
+        ],
+        [
+          "0x3f60",
+          "F2FP.BF16.F32.PACK_AB R54, R13, R12"
+        ],
+        [
+          "0x3f70",
+          "STSM.16.MT88.4 [R35+0x400], R40"
+        ],
+        [
+          "0x3f80",
+          "FFMA.FTZ R15, R18, R4, R15"
+        ],
+        [
+          "0x3f90",
+          "HMMA.16816.F32.BF16 R4, R8.reuse, R20, RZ"
+        ],
+        [
+          "0x3fa0",
+          "LDSM.16.MT88.4 R36, [R35+0xc00]"
+        ],
+        [
+          "0x3fb0",
+          "F2FP.BF16.F32.PACK_AB R55, R15, R14"
+        ],
+        [
+          "0x3fc0",
+          "LDSM.16.MT88.4 R24, [R22+0x4080]"
+        ],
+        [
+          "0x3fd0",
+          "HMMA.16816.F32.BF16 R8, R8, R2, RZ"
+        ],
+        [
+          "0x3fe0",
+          "LDS R12, [R44+0x4440]"
+        ],
+        [
+          "0x3ff0",
+          "LDS R13, [R44+0x4460]"
+        ],
+        [
+          "0x4000",
+          "STSM.16.MT88.4 [R35+0x600], R56"
+        ],
+        [
+          "0x4010",
+          "LDSM.16.MT88.4 R40, [R35+0xe00]"
+        ],
+        [
+          "0x4020",
+          "STSM.16.MT88.4 [R35+0x800], R48"
+        ],
+        [
+          "0x4030",
+          "STSM.16.MT88.4 [R0+0xa00], R52"
+        ],
+        [
+          "0x4040",
+          "SHF.L.U32 R17, R36.reuse, 0x10, RZ"
+        ],
+        [
+          "0x4050",
+          "PRMT R36, R36, 0x7632, R36"
+        ],
+        [
+          "0x4060",
+          "FFMA.FTZ R4, R16, R17, R4"
+        ],
+        [
+          "0x4070",
+          "SHF.L.U32 R18, R36, 0x10, RZ"
+        ],
+        [
+          "0x4080",
+          "IMAD.U32 R17, R37.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x4090",
+          "PRMT R37, R37, 0x7632, R37"
+        ],
+        [
+          "0x40a0",
+          "FFMA.FTZ R6, R30, R17, R6"
+        ],
+        [
+          "0x40b0",
+          "SHF.L.U32 R17, R38.reuse, 0x10, RZ"
+        ],
+        [
+          "0x40c0",
+          "IMAD.U32 R19, R37, 0x10000, RZ"
+        ],
+        [
+          "0x40d0",
+          "PRMT R38, R38, 0x7632, R38"
+        ],
+        [
+          "0x40e0",
+          "FFMA.FTZ R8, R16, R17, R8"
+        ],
+        [
+          "0x40f0",
+          "SHF.L.U32 R23, R38, 0x10, RZ"
+        ],
+        [
+          "0x4100",
+          "IMAD.U32 R17, R39.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x4110",
+          "PRMT R39, R39, 0x7632, R39"
+        ],
+        [
+          "0x4120",
+          "FFMA.FTZ R10, R30, R17, R10"
+        ],
+        [
+          "0x4130",
+          "FFMA.FTZ R5, R16, R18, R5"
+        ],
+        [
+          "0x4140",
+          "FFMA.FTZ R7, R30, R19, R7"
+        ],
+        [
+          "0x4150",
+          "FFMA.FTZ R9, R16, R23, R9"
+        ],
+        [
+          "0x4160",
+          "HMMA.16816.F32.BF16 R16, R24.reuse, R20, RZ"
+        ],
+        [
+          "0x4170",
+          "HMMA.16816.F32.BF16 R20, R24, R2, RZ"
+        ],
+        [
+          "0x4180",
+          "F2FP.BF16.F32.PACK_AB R24, R5, R4"
+        ],
+        [
+          "0x4190",
+          "IMAD.U32 R2, R39, 0x10000, RZ"
+        ],
+        [
+          "0x41a0",
+          "SHF.L.U32 R4, R42, 0x10, RZ"
+        ],
+        [
+          "0x41b0",
+          "IMAD.U32 R3, R41.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x41c0",
+          "PRMT R41, R41, 0x7632, R41"
+        ],
+        [
+          "0x41d0",
+          "FFMA.FTZ R11, R30, R2, R11"
+        ],
+        [
+          "0x41e0",
+          "SHF.L.U32 R2, R40.reuse, 0x10, RZ"
+        ],
+        [
+          "0x41f0",
+          "IMAD.U32 R5, R43.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x4200",
+          "PRMT R40, R40, 0x7632, R40"
+        ],
+        [
+          "0x4210",
+          "PRMT R42, R42, 0x7632, R42"
+        ],
+        [
+          "0x4220",
+          "FFMA.FTZ R16, R12, R2, R16"
+        ],
+        [
+          "0x4230",
+          "PRMT R43, R43, 0x7632, R43"
+        ],
+        [
+          "0x4240",
+          "FFMA.FTZ R18, R13, R3, R18"
+        ],
+        [
+          "0x4250",
+          "SHF.L.U32 R2, R40, 0x10, RZ"
+        ],
+        [
+          "0x4260",
+          "IMAD.U32 R3, R41, 0x10000, RZ"
+        ],
+        [
+          "0x4270",
+          "F2FP.BF16.F32.PACK_AB R25, R7, R6"
+        ],
+        [
+          "0x4280",
+          "FFMA.FTZ R20, R12, R4, R20"
+        ],
+        [
+          "0x4290",
+          "SHF.L.U32 R4, R42, 0x10, RZ"
+        ],
+        [
+          "0x42a0",
+          "FFMA.FTZ R22, R13, R5, R22"
+        ],
+        [
+          "0x42b0",
+          "IMAD.U32 R5, R43, 0x10000, RZ"
+        ],
+        [
+          "0x42c0",
+          "FFMA.FTZ R17, R12.reuse, R2, R17"
+        ],
+        [
+          "0x42d0",
+          "FFMA.FTZ R19, R13.reuse, R3, R19"
+        ],
+        [
+          "0x42e0",
+          "FFMA.FTZ R21, R12, R4, R21"
+        ],
+        [
+          "0x42f0",
+          "FFMA.FTZ R23, R13, R5, R23"
+        ],
+        [
+          "0x4300",
+          "F2FP.BF16.F32.PACK_AB R26, R9, R8"
+        ],
+        [
+          "0x4310",
+          "F2FP.BF16.F32.PACK_AB R27, R11, R10"
+        ],
+        [
+          "0x4320",
+          "F2FP.BF16.F32.PACK_AB R16, R17, R16"
+        ],
+        [
+          "0x4330",
+          "F2FP.BF16.F32.PACK_AB R17, R19, R18"
+        ],
+        [
+          "0x4340",
+          "STSM.16.MT88.4 [R0+0xc00], R24"
+        ],
+        [
+          "0x4350",
+          "F2FP.BF16.F32.PACK_AB R18, R21, R20"
+        ],
+        [
+          "0x4360",
+          "F2FP.BF16.F32.PACK_AB R19, R23, R22"
+        ],
+        [
+          "0x4370",
+          "STSM.16.MT88.4 [R0+0xe00], R16"
+        ],
+        [
+          "0x4380",
+          "BAR.SYNC.DEFER_BLOCKING 0x8, 0x20"
+        ],
+        [
+          "0x4390",
+          "MEMBAR.ALL.CTA"
+        ],
+        [
+          "0x43a0",
+          "FENCE.VIEW.ASYNC.S"
+        ],
+        [
+          "0x43b0",
+          "@P0 BRA 0x43d0"
+        ],
+        [
+          "0x43c0",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x43d0",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x43e0",
+          "LEA R0, R45, R28, 0x3"
+        ],
+        [
+          "0x43f0",
+          "BSSY.RECONVERGENT B0, 0x4440"
+        ],
+        [
+          "0x4400",
+          "SYNCS.ARRIVE.TRANS64.A1T0 RZ, [R0+URZ+0xbdb0], RZ"
+        ],
+        [
+          "0x4410",
+          "@!P6 BRA 0x4430"
+        ],
+        [
+          "0x4420",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x4430",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x4440",
+          "IMAD R28, R29, 0x8, R28"
+        ],
+        [
+          "0x4450",
+          "BSSY.RECONVERGENT B0, 0x44c0"
+        ],
+        [
+          "0x4460",
+          "IADD3 R0, PT, PT, R28, 0xbd98, RZ"
+        ],
+        [
+          "0x4470",
+          "PRMT R0, RZ, 0x654, R0"
+        ],
+        [
+          "0x4480",
+          "SYNCS.ARRIVE.TRANS64.RED.A1T0 RZ, [R0+URZ], RZ"
+        ],
+        [
+          "0x4490",
+          "@!P5 BRA 0x44b0"
+        ],
+        [
+          "0x44a0",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x44b0",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x44c0",
+          "VIADD R60, R60, 0x1"
+        ],
+        [
+          "0x44d0",
+          "VIADD R29, R29, 0x1"
+        ],
+        [
+          "0x44e0",
+          "VIADD R45, R45, 0x1"
+        ],
+        [
+          "0x44f0",
+          "ISETP.NE.AND P0, PT, R60, RZ, PT"
+        ],
+        [
+          "0x4500",
+          "ISETP.NE.AND P2, PT, R29, 0x3, PT"
+        ],
+        [
+          "0x4510",
+          "ISETP.NE.AND P1, PT, R45, 0x2, PT"
+        ],
+        [
+          "0x4520",
+          "SEL R2, RZ, 0x1, P2"
+        ],
+        [
+          "0x4530",
+          "SEL R0, RZ, 0x1, P1"
+        ],
+        [
+          "0x4540",
+          "LOP3.LUT R46, R46, R2, RZ, 0x3c, !PT"
+        ],
+        [
+          "0x4550",
+          "LOP3.LUT R47, R47, R0, RZ, 0x3c, !PT"
+        ],
+        [
+          "0x4560",
+          "SEL R29, R29, RZ, P2"
+        ],
+        [
+          "0x4570",
+          "SEL R45, R45, RZ, P1"
+        ],
+        [
+          "0x4580",
+          "@P0 BRA 0x2940"
+        ],
+        [
+          "0x4590",
+          "BSYNC B1"
+        ],
+        [
+          "0x45a0",
+          "BRA 0x5630"
+        ]
+      ]
+    },
+    "1": {
+      "symbol": "_Z25_flash_kda_fwd_recurrenceIN4cute9TiledCopyINS0_9Copy_AtomIJNS0_11Copy_TraitsINS0_13SM90_TMA_LOADEJNS0_1CILi2048EEENS0_12AuxTmaParamsINS0_5tupleIJNS0_11ScaledBasisINS5_ILi1EEEJLi2EEEENS9_ISA_JLi1EEEENS9_IiJLi0EEEEEEERKNS0_6LayoutINS8_IJNS5_ILi8EEENS5_ILi16EEESA_EEENS8_IJSB_SC_NS9_ISA_JLi0EEEEEEEEERKNS0_7SwizzleILi0ELi4ELi3EEEEEEEEN7cutlass10bfloat16_tEEEENSF_INS8_IJSA_NS8_IJNS8_IJNS8_IJSG_SH_EEENS5_ILi2EEEEEEEEEEEENS8_IJNS5_ILi0EEENS8_IJNS8_IJNS8_IJSH_SA_EEENS5_ILi128EEEEEEEEEEEEEENS8_IJSA_SH_SH_EEEEENS1_INS2_IJNS3_IS4_JNS5_ILi512EEENS7_INS8_IJSJ_EEERKNSF_INS8_IJNS5_ILi32EEEEEES1C_EESR_EEEEESV_EEENSF_INS8_IJSA_NS8_IJNS8_IJS1D_SA_EEEEEEEEENS8_IJS12_NS8_IJNS8_IJSA_S12_EEEEEEEEEEES1E_EENS1_INS2_IJNS3_IS4_JS6_NS7_ISK_SN_SR_EEEEESV_EEENSF_INS8_IJSA_NS8_IJNS8_IJSX_SH_EEEEEEEEES17_EENS8_IJSA_SH_S14_EEEEES21_S21_NS1_INS2_IJNS3_IS4_JNS5_ILi4096EEENS7_INS8_IJSC_SJ_EEERKNSF_INS8_IJS14_SA_EEES23_EESR_EEEEEfEEENSF_INS8_IJSA_NS8_IJS24_EEEEEES1Q_EENS8_IJSA_S14_EEEEENS1_IS1V_S18_S19_EES2G_S21_NS1_INS2_IJNS3_INS0_14SM90_TMA_STOREEJS6_S1T_EEESV_EEES1Z_S20_EENS1_INS2_IJNS3_IS2H_JS6_SS_EEESV_EEES18_S19_EELi16ELi128ELi16ELi3ELi2ELi96ELb1ELb1ELb0ELb0ELi4EEvT_T0_T1_T2_T3_T4_T5_T6_T7_T8_T9_PSV_iiiPKli",
+      "resources": "REG:70 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:3748 TEXTURE:0 SURFACE:0 SAMPLER:0",
+      "full_sass_sha256": "abd2f316f3aca174a62fc3dbebe931eefd81412f2276477f43e3ce9ef3a34c56",
+      "full_static_instructions": 1456,
+      "full_opcode_counts": {
+        "LDC": 5,
+        "S2R": 3,
+        "IMAD.MOV.U32": 14,
+        "BSSY": 8,
+        "ISETP.GE.U32.AND": 2,
+        "SEL": 16,
+        "ISETP.NE.AND": 20,
+        "BRA": 59,
+        "PLOP3.LUT": 22,
+        "P2R": 4,
+        "UMOV": 202,
+        "BRA.DIV": 5,
+        "ELECT": 7,
+        "BSYNC": 8,
+        "SHF.R.U32.HI": 2,
+        "SHFL.IDX": 4,
+        "S2UR": 14,
+        "UIADD3": 123,
+        "USHF.L.U32": 12,
+        "ULEA": 8,
+        "FENCE.VIEW.ASYNC.S": 5,
+        "SYNCS.EXCH.64": 11,
+        "NOP": 16,
+        "WARPSYNC.ALL": 3,
+        "BAR.SYNC.DEFER_BLOCKING": 6,
+        "LDCU": 5,
+        "BSSY.RECONVERGENT": 6,
+        "IMAD.U32": 38,
+        "IABS": 2,
+        "R2UR": 49,
+        "I2F.RP": 1,
+        "MUFU.RCP": 1,
+        "VIADD": 16,
+        "F2I.FTZ.U32.TRUNC.NTZ": 1,
+        "LOP3.LUT": 15,
+        "ISETP.EQ.AND": 1,
+        "UIMAD": 6,
+        "UIMAD.WIDE.U32": 3,
+        "UISETP.GT.U32.AND": 1,
+        "UISETP.GE.U32.AND": 1,
+        "ULOP3.LUT": 4,
+        "UISETP.GE.AND": 5,
+        "UISETP.NE.AND": 1,
+        "USHF.R.S32.HI": 3,
+        "ULEA.HI": 1,
+        "LDCU.64": 6,
+        "MOV": 27,
+        "UIADD3.X": 11,
+        "SYNCS.ARRIVE.TRANS64": 2,
+        "UTMALDG.3D": 70,
+        "BSYNC.RECONVERGENT": 6,
+        "SHF.L.U32": 44,
+        "SYNCS.PHASECHK.TRANS64.TRYWAIT": 16,
+        "MEMBAR.ALL.CTA": 2,
+        "BRA.U": 4,
+        "IMAD": 17,
+        "VIMNMX": 4,
+        "LEA": 6,
+        "BPT.TRAP": 10,
+        "UTMALDG.1D": 1,
+        "MOV.SPILL": 33,
+        "R2UR.FILL": 33,
+        "UTMALDG.2D": 1,
+        "ISETP.NE.OR": 1,
+        "IMAD.SHL.U32": 4,
+        "UISETP.LT.AND": 1,
+        "IADD3": 7,
+        "USEL": 1,
+        "IMAD.IADD": 4,
+        "LDSM.16.M88.4": 27,
+        "LDS.U16": 2,
+        "HMMA.16816.F32.BF16": 52,
+        "FMUL.FTZ": 2,
+        "MUFU.TANH": 2,
+        "FFMA.FTZ": 66,
+        "F2FP.BF16.F32.PACK_AB": 49,
+        "HADD2.BF16_V2": 8,
+        "HMUL2.BF16_V2": 4,
+        "MOVM.16.MT88": 8,
+        "STSM.16.M88.4": 1,
+        "LDSM.16.MT88.4": 16,
+        "LDS": 16,
+        "PRMT": 50,
+        "STSM.16.MT88.4": 8,
+        "SYNCS.ARRIVE.TRANS64.A1T0": 1,
+        "SYNCS.ARRIVE.TRANS64.RED.A1T0": 2,
+        "LDC.64": 1,
+        "IMAD.WIDE": 1,
+        "IMAD.X": 3,
+        "ISETP.GT.U32.AND": 1,
+        "UISETP.GT.AND": 1,
+        "LDS.128": 4,
+        "IMAD.WIDE.U32": 1,
+        "STG.E.U16": 32,
+        "UTMASTG.3D": 18,
+        "UTMACMDFLUSH": 2,
+        "DEPBAR.LE": 1,
+        "EXIT": 1,
+        "WARPSYNC.COLLECTIVE": 5,
+        "ENDCOLLECTIVE": 5,
+        "NANOSLEEP.SYNCS": 8,
+        "SYNCS.PHASECHK.TRANS64": 8
+      },
+      "initialization": [
+        [
+          "0x0880",
+          "@!UP0 UIADD3 UR21, UPT, UPT, -UR21, URZ, URZ"
+        ],
+        [
+          "0x0890",
+          "@!UP1 ULOP3.LUT UR21, URZ, UR5, URZ, 0x33, !UPT"
+        ],
+        [
+          "0x08a0",
+          "UIADD3 UR5, UPT, UPT, UR21, 0xf, URZ"
+        ],
+        [
+          "0x08b0",
+          "UIMAD UR15, UR21, UR22, URZ"
+        ],
+        [
+          "0x08c0",
+          "USHF.R.S32.HI UR13, URZ, 0x1f, UR5"
+        ],
+        [
+          "0x08d0",
+          "USHF.R.S32.HI UR14, URZ, 0x1f, UR15"
+        ],
+        [
+          "0x08e0",
+          "ULEA.HI UR13, UR13, UR5, URZ, 0x4"
+        ],
+        [
+          "0x08f0",
+          "USHF.R.S32.HI UR13, URZ, 0x4, UR13"
+        ],
+        [
+          "0x0900",
+          "@!P2 BRA 0xee0"
+        ],
+        [
+          "0x0910",
+          "S2UR UR8, SR_CgaCtaId"
+        ],
+        [
+          "0x0920",
+          "LDCU.64 UR16, c[0x0][0x348]"
+        ],
+        [
+          "0x0930",
+          "MOV R0, 0x1000"
+        ],
+        [
+          "0x0940",
+          "LDCU UR12, c[0x0][0xe8c]"
+        ],
+        [
+          "0x0950",
+          "S2UR UR9, SR_CTAID.Y"
+        ],
+        [
+          "0x0960",
+          "UMOV UR5, 0x400"
+        ],
+        [
+          "0x0970",
+          "UMOV UR24, 0x1"
+        ],
+        [
+          "0x0980",
+          "UMOV UR6, 0x0"
+        ],
+        [
+          "0x0990",
+          "UIADD3 UR24, UPT, UPT, -UR24, 0x100000, URZ"
+        ],
+        [
+          "0x09a0",
+          "USHF.L.U32 UR25, UR24, 0xb, URZ"
+        ],
+        [
+          "0x09b0",
+          "USHF.L.U32 UR24, UR24, 0x1, URZ"
+        ],
+        [
+          "0x09c0",
+          "UMOV UR7, 0x10000000"
+        ],
+        [
+          "0x09d0",
+          "UMOV UR10, URZ"
+        ],
+        [
+          "0x09e0",
+          "UMOV UR18, 0x8"
+        ],
+        [
+          "0x09f0",
+          "UMOV UR19, UR11"
+        ],
+        [
+          "0x0a00",
+          "UMOV UR50, 0x10"
+        ],
+        [
+          "0x0a10",
+          "UIADD3 UR30, UP0, UPT, UR16, 0x800, URZ"
+        ],
+        [
+          "0x0a20",
+          "UMOV UR51, UR11"
+        ],
+        [
+          "0x0a30",
+          "UMOV UR42, 0x18"
+        ],
+        [
+          "0x0a40",
+          "UIADD3.X UR31, UPT, UPT, URZ, UR17, URZ, UP0, !UPT"
+        ],
+        [
+          "0x0a50",
+          "ULEA UR8, UR8, UR5, 0x18"
+        ],
+        [
+          "0x0a60",
+          "UMOV UR43, UR11"
+        ],
+        [
+          "0x0a70",
+          "UMOV UR74, 0x20"
+        ],
+        [
+          "0x0a80",
+          "UIADD3 UR16, UPT, UPT, UR8, 0x100, URZ"
+        ],
+        [
+          "0x0a90",
+          "UIADD3 UR48, UPT, UPT, UR8, 0x200, URZ"
+        ],
+        [
+          "0x0aa0",
+          "UIMAD UR12, UR22, UR12, UR9"
+        ],
+        [
+          "0x0ab0",
+          "UIADD3 UR9, UPT, UPT, UR8, 0xbdd0, URZ"
+        ],
+        [
+          "0x0ac0",
+          "UIADD3 UR40, UPT, UPT, UR8, 0x300, URZ"
+        ],
+        [
+          "0x0ad0",
+          "FENCE.VIEW.ASYNC.S"
+        ],
+        [
+          "0x0ae0",
+          "SYNCS.EXCH.64 URZ, [UR8+0xbdd0], UR24"
+        ],
+        [
+          "0x0af0",
+          "UIADD3 UR72, UPT, UPT, UR8, 0x400, URZ"
+        ],
+        [
+          "0x0b00",
+          "NOP"
+        ],
+        [
+          "0x0b10",
+          "UIADD3 UR32, UPT, UPT, UR8, 0x500, URZ"
+        ],
+        [
+          "0x0b20",
+          "UMOV UR20, UR12"
+        ],
+        [
+          "0x0b30",
+          "UMOV UR17, UR9"
+        ],
+        [
+          "0x0b40",
+          "UIADD3 UR64, UPT, UPT, UR8, 0x600, URZ"
+        ],
+        [
+          "0x0b50",
+          "UIADD3 UR56, UPT, UPT, UR8, 0x800, URZ"
+        ],
+        [
+          "0x0b60",
+          "UMOV UR52, UR12"
+        ],
+        [
+          "0x0b70",
+          "UMOV UR49, UR9"
+        ],
+        [
+          "0x0b80",
+          "UMOV UR44, UR12"
+        ],
+        [
+          "0x0b90",
+          "UMOV UR41, UR9"
+        ],
+        [
+          "0x0ba0",
+          "UMOV UR75, UR11"
+        ],
+        [
+          "0x0bb0",
+          "SYNCS.ARRIVE.TRANS64 RZ, [UR8+0xbdd0], R0"
+        ],
+        [
+          "0x0bc0",
+          "UTMALDG.3D [UR8], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0bd0",
+          "UMOV UR76, UR12"
+        ],
+        [
+          "0x0be0",
+          "UMOV UR73, UR9"
+        ],
+        [
+          "0x0bf0",
+          "UMOV UR34, 0x28"
+        ],
+        [
+          "0x0c00",
+          "UMOV UR35, UR11"
+        ],
+        [
+          "0x0c10",
+          "UMOV UR36, UR12"
+        ],
+        [
+          "0x0c20",
+          "UMOV UR33, UR9"
+        ],
+        [
+          "0x0c30",
+          "UIADD3 UR24, UPT, UPT, UR8, 0x700, URZ"
+        ],
+        [
+          "0x0c40",
+          "UTMALDG.3D [UR16], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0c50",
+          "UMOV UR66, 0x30"
+        ],
+        [
+          "0x0c60",
+          "UMOV UR67, UR11"
+        ],
+        [
+          "0x0c70",
+          "UMOV UR68, UR12"
+        ],
+        [
+          "0x0c80",
+          "UMOV UR65, UR9"
+        ],
+        [
+          "0x0c90",
+          "UMOV UR26, 0x38"
+        ],
+        [
+          "0x0ca0",
+          "UMOV UR27, UR11"
+        ],
+        [
+          "0x0cb0",
+          "UMOV UR28, UR12"
+        ],
+        [
+          "0x0cc0",
+          "UTMALDG.3D [UR48], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0cd0",
+          "UMOV UR25, UR9"
+        ],
+        [
+          "0x0ce0",
+          "UMOV UR58, 0x40"
+        ],
+        [
+          "0x0cf0",
+          "UMOV UR59, UR11"
+        ],
+        [
+          "0x0d00",
+          "UMOV UR60, UR12"
+        ],
+        [
+          "0x0d10",
+          "UMOV UR57, UR9"
+        ],
+        [
+          "0x0d20",
+          "UTMALDG.3D [UR40], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0d30",
+          "UTMALDG.3D [UR72], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0d40",
+          "UMOV UR10, 0x78"
+        ],
+        [
+          "0x0d50",
+          "UTMALDG.3D [UR32], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0d60",
+          "UIADD3 UR16, UPT, UPT, UR8, 0x900, URZ"
+        ],
+        [
+          "0x0d70",
+          "UTMALDG.3D [UR64], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0d80",
+          "UMOV UR18, 0x48"
+        ],
+        [
+          "0x0d90",
+          "UIADD3 UR48, UPT, UPT, UR8, 0xa00, URZ"
+        ],
+        [
+          "0x0da0",
+          "UTMALDG.3D [UR24], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0db0",
+          "UMOV UR50, 0x50"
+        ],
+        [
+          "0x0dc0",
+          "UIADD3 UR40, UPT, UPT, UR8, 0xb00, URZ"
+        ],
+        [
+          "0x0dd0",
+          "UTMALDG.3D [UR56], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0de0",
+          "UMOV UR42, 0x58"
+        ],
+        [
+          "0x0df0",
+          "UTMALDG.3D [UR16], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0e00",
+          "UIADD3 UR32, UPT, UPT, UR8, 0xc00, URZ"
+        ],
+        [
+          "0x0e10",
+          "UTMALDG.3D [UR48], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0e20",
+          "UMOV UR34, 0x60"
+        ],
+        [
+          "0x0e30",
+          "UTMALDG.3D [UR40], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0e40",
+          "UIADD3 UR24, UPT, UPT, UR8, 0xd00, URZ"
+        ],
+        [
+          "0x0e50",
+          "UTMALDG.3D [UR32], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0e60",
+          "UMOV UR26, 0x68"
+        ],
+        [
+          "0x0e70",
+          "UTMALDG.3D [UR24], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0e80",
+          "UIADD3 UR16, UPT, UPT, UR8, 0xe00, URZ"
+        ],
+        [
+          "0x0e90",
+          "UIADD3 UR8, UPT, UPT, UR8, 0xf00, URZ"
+        ],
+        [
+          "0x0ea0",
+          "UMOV UR18, 0x70"
+        ],
+        [
+          "0x0eb0",
+          "UTMALDG.3D [UR16], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0ec0",
+          "UTMALDG.3D [UR8], [UR30], desc[UR6]"
+        ],
+        [
+          "0x0ed0",
+          "NOP"
+        ],
+        [
+          "0x0ee0",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x0ef0",
+          "S2UR UR4, SR_CgaCtaId"
+        ],
+        [
+          "0x0f00",
+          "BAR.SYNC.DEFER_BLOCKING 0x0"
+        ],
+        [
+          "0x0f10",
+          "SHF.L.U32 R2, RZ, 0x1f, RZ"
+        ],
+        [
+          "0x0f20",
+          "UMOV UR5, 0x400"
+        ],
+        [
+          "0x0f30",
+          "ULEA UR4, UR4, UR5, 0x18"
+        ],
+        [
+          "0x0f40",
+          "MOV R0, UR4"
+        ],
+        [
+          "0x0f50",
+          "SYNCS.PHASECHK.TRANS64.TRYWAIT P0, [R0+URZ+0xbdd0], R2"
+        ],
+        [
+          "0x0f60",
+          "@!P0 BRA 0x57d0"
+        ],
+        [
+          "0x0f70",
+          "MEMBAR.ALL.CTA"
+        ],
+        [
+          "0x0f80",
+          "FENCE.VIEW.ASYNC.S"
+        ],
+        [
+          "0x0f90",
+          "BSSY B0, 0x2770"
+        ],
+        [
+          "0x0fa0",
+          "BAR.SYNC.DEFER_BLOCKING 0x0"
+        ]
+      ],
+      "compute": [
+        [
+          "0x2760",
+          "BSYNC B0"
+        ],
+        [
+          "0x2770",
+          "ISETP.NE.AND P0, PT, R24, 0x2, PT"
+        ],
+        [
+          "0x2780",
+          "@!P0 BRA 0x4490"
+        ],
+        [
+          "0x2790",
+          "UISETP.GE.AND UP0, UPT, UR21, 0x1, UPT"
+        ],
+        [
+          "0x27a0",
+          "PLOP3.LUT P0, PT, PT, PT, UP0, 0x80, 0x8"
+        ],
+        [
+          "0x27b0",
+          "ISETP.NE.OR P0, PT, R24, RZ, !P0"
+        ],
+        [
+          "0x27c0",
+          "@P0 BRA 0x5500"
+        ],
+        [
+          "0x27d0",
+          "S2UR UR4, SR_CTAID.Y"
+        ],
+        [
+          "0x27e0",
+          "LDCU UR5, c[0x0][0xe88]"
+        ],
+        [
+          "0x27f0",
+          "IMAD.SHL.U32 R5, R30, 0x10, RZ"
+        ],
+        [
+          "0x2800",
+          "ISETP.NE.AND P1, PT, R28, RZ, PT"
+        ],
+        [
+          "0x2810",
+          "IMAD.SHL.U32 R3, R30.reuse, 0x4, RZ"
+        ],
+        [
+          "0x2820",
+          "UISETP.LT.AND UP0, UPT, UR13, 0x1, UPT"
+        ],
+        [
+          "0x2830",
+          "IMAD.SHL.U32 R4, R30, 0x8, RZ"
+        ],
+        [
+          "0x2840",
+          "LOP3.LUT R2, R5.reuse, 0x80, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2850",
+          "BSSY B1, 0x4480"
+        ],
+        [
+          "0x2860",
+          "LOP3.LUT R65, R5, 0x1f0, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2870",
+          "IMAD.MOV.U32 R60, RZ, RZ, RZ"
+        ],
+        [
+          "0x2880",
+          "LOP3.LUT R2, R2, 0x40, R3, 0xf8, !PT"
+        ],
+        [
+          "0x2890",
+          "IMAD.MOV.U32 R28, RZ, RZ, RZ"
+        ],
+        [
+          "0x28a0",
+          "SHF.R.U32.HI R3, RZ, 0x2, R30"
+        ],
+        [
+          "0x28b0",
+          "IMAD.MOV.U32 R46, RZ, RZ, RZ"
+        ],
+        [
+          "0x28c0",
+          "LOP3.LUT R2, R2, 0x38, R4, 0xf8, !PT"
+        ],
+        [
+          "0x28d0",
+          "LOP3.LUT R45, R3, 0x7, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x28e0",
+          "LOP3.LUT R67, R4, 0xf8, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x28f0",
+          "IADD3 R65, PT, PT, R0, R65, RZ"
+        ],
+        [
+          "0x2900",
+          "SHF.L.U32 R29, R2, 0x1, RZ"
+        ],
+        [
+          "0x2910",
+          "UIMAD UR5, UR4, UR5, UR15"
+        ],
+        [
+          "0x2920",
+          "LOP3.LUT R64, R25, 0x1, RZ, 0xc0, !PT"
+        ],
+        [
+          "0x2930",
+          "USEL UR4, UR13, 0x1, !UP0"
+        ],
+        [
+          "0x2940",
+          "PLOP3.LUT P3, PT, P1, P6, PT, 0xf8, 0x8f"
+        ],
+        [
+          "0x2950",
+          "ULOP3.LUT UR5, UR5, 0x7, URZ, 0xc0, !UPT"
+        ],
+        [
+          "0x2960",
+          "MOV R47, 0x1"
+        ],
+        [
+          "0x2970",
+          "UIADD3 UR4, UPT, UPT, -UR4, URZ, URZ"
+        ],
+        [
+          "0x2980",
+          "IMAD.SHL.U32 R67, R67, 0x2, RZ"
+        ],
+        [
+          "0x2990",
+          "VIADD R66, R65, 0x1000"
+        ],
+        [
+          "0x29a0",
+          "VIADD R3, R45, UR5"
+        ],
+        [
+          "0x29b0",
+          "IMAD.U32 R63, RZ, RZ, UR4"
+        ],
+        [
+          "0x29c0",
+          "IMAD.IADD R34, R0, 0x1, R29"
+        ],
+        [
+          "0x29d0",
+          "SHF.L.U32 R44, R3, 0x1, RZ"
+        ],
+        [
+          "0x29e0",
+          "ISETP.NE.AND P1, PT, R64, RZ, PT"
+        ],
+        [
+          "0x29f0",
+          "BSSY.RECONVERGENT B0, 0x2a40"
+        ],
+        [
+          "0x2a00",
+          "@!UPT UIADD3 URZ, UPT, UPT, URZ, URZ, URZ"
+        ],
+        [
+          "0x2a10",
+          "@P1 BRA 0x2a30"
+        ],
+        [
+          "0x2a20",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x2a30",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x2a40",
+          "LEA R62, R46, R0, 0x3"
+        ],
+        [
+          "0x2a50",
+          "BSSY B0, 0x2aa0"
+        ],
+        [
+          "0x2a60",
+          "SHF.L.U32 R2, R47, 0x1f, RZ"
+        ],
+        [
+          "0x2a70",
+          "SYNCS.PHASECHK.TRANS64.TRYWAIT P0, [R62+URZ+0xbdc0], R2"
+        ],
+        [
+          "0x2a80",
+          "@!P0 BRA 0x5960"
+        ],
+        [
+          "0x2a90",
+          "BSYNC B0"
+        ],
+        [
+          "0x2aa0",
+          "BSSY.RECONVERGENT B0, 0x2ae0"
+        ],
+        [
+          "0x2ab0",
+          "@!P4 BRA 0x2ad0"
+        ],
+        [
+          "0x2ac0",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x2ad0",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x2ae0",
+          "LEA R61, R28.reuse, R0, 0x3"
+        ],
+        [
+          "0x2af0",
+          "IMAD R30, R28, 0x3880, R65"
+        ],
+        [
+          "0x2b00",
+          "SHF.L.U32 R2, R60, 0x1f, RZ"
+        ],
+        [
+          "0x2b10",
+          "SYNCS.PHASECHK.TRANS64.TRYWAIT P0, [R61+URZ+0xbd80], R2"
+        ],
+        [
+          "0x2b20",
+          "@!P0 BRA 0x59b0"
+        ],
+        [
+          "0x2b30",
+          "WARPSYNC.ALL"
+        ],
+        [
+          "0x2b40",
+          "LDSM.16.M88.4 R20, [R30+0x1280]"
+        ],
+        [
+          "0x2b50",
+          "IMAD R2, R28, 0x3880, R0"
+        ],
+        [
+          "0x2b60",
+          "BSSY.RECONVERGENT B0, 0x4290"
+        ],
+        [
+          "0x2b70",
+          "LDSM.16.M88.4 R12, [R34]"
+        ],
+        [
+          "0x2b80",
+          "IMAD.IADD R6, R67, 0x1, R2.reuse"
+        ],
+        [
+          "0x2b90",
+          "IMAD.IADD R3, R44, 0x1, R2.reuse"
+        ],
+        [
+          "0x2ba0",
+          "LDSM.16.M88.4 R16, [R30+0x2280]"
+        ],
+        [
+          "0x2bb0",
+          "IMAD R35, R45, 0x4, R2"
+        ],
+        [
+          "0x2bc0",
+          "LDSM.16.M88.4 R24, [R34+0x200]"
+        ],
+        [
+          "0x2bd0",
+          "LDSM.16.M88.4 R40, [R6+0x2480]"
+        ],
+        [
+          "0x2be0",
+          "LDSM.16.M88.4 R8, [R6+0x1480]"
+        ],
+        [
+          "0x2bf0",
+          "LDS.U16 R4, [R3+0x1200]"
+        ],
+        [
+          "0x2c00",
+          "LDS.U16 R3, [R3+0x1210]"
+        ],
+        [
+          "0x2c10",
+          "LDSM.16.M88.4 R52, [R6+0x2e80]"
+        ],
+        [
+          "0x2c20",
+          "HMMA.16816.F32.BF16 R36, R20.reuse, R12, RZ"
+        ],
+        [
+          "0x2c30",
+          "HMMA.16816.F32.BF16 R48, R20, R14, RZ"
+        ],
+        [
+          "0x2c40",
+          "HMMA.16816.F32.BF16 R20, R16.reuse, R12, RZ"
+        ],
+        [
+          "0x2c50",
+          "SHF.L.U32 R4, R4, 0x10, RZ"
+        ],
+        [
+          "0x2c60",
+          "HMMA.16816.F32.BF16 R16, R16, R14, RZ"
+        ],
+        [
+          "0x2c70",
+          "LDSM.16.M88.4 R12, [R34+0x400]"
+        ],
+        [
+          "0x2c80",
+          "IMAD.U32 R5, R3, 0x10000, RZ"
+        ],
+        [
+          "0x2c90",
+          "FMUL.FTZ R3, R4, 0.5"
+        ],
+        [
+          "0x2ca0",
+          "MOV R4, 0x3f000000"
+        ],
+        [
+          "0x2cb0",
+          "FMUL.FTZ R5, R5, 0.5"
+        ],
+        [
+          "0x2cc0",
+          "HMMA.16816.F32.BF16 R36, R8, R24.reuse, R36"
+        ],
+        [
+          "0x2cd0",
+          "MUFU.TANH R3, R3"
+        ],
+        [
+          "0x2ce0",
+          "HMMA.16816.F32.BF16 R20, R40, R24, R20"
+        ],
+        [
+          "0x2cf0",
+          "MUFU.TANH R5, R5"
+        ],
+        [
+          "0x2d00",
+          "HMMA.16816.F32.BF16 R48, R8, R26.reuse, R48"
+        ],
+        [
+          "0x2d10",
+          "LDSM.16.M88.4 R8, [R6+0x1680]"
+        ],
+        [
+          "0x2d20",
+          "FFMA.FTZ R3, R3, R4.reuse, 0.5"
+        ],
+        [
+          "0x2d30",
+          "HMMA.16816.F32.BF16 R40, R40, R26, R16"
+        ],
+        [
+          "0x2d40",
+          "LDSM.16.M88.4 R16, [R6+0x2680]"
+        ],
+        [
+          "0x2d50",
+          "FFMA.FTZ R4, R5, R4, 0.5"
+        ],
+        [
+          "0x2d60",
+          "F2FP.BF16.F32.PACK_AB R5, R4, R3"
+        ],
+        [
+          "0x2d70",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R12, R36"
+        ],
+        [
+          "0x2d80",
+          "HMMA.16816.F32.BF16 R48, R8, R14, R48"
+        ],
+        [
+          "0x2d90",
+          "LDSM.16.M88.4 R8, [R6+0x1880]"
+        ],
+        [
+          "0x2da0",
+          "HMMA.16816.F32.BF16 R24, R16.reuse, R12, R20"
+        ],
+        [
+          "0x2db0",
+          "LDSM.16.M88.4 R20, [R34+0x600]"
+        ],
+        [
+          "0x2dc0",
+          "HMMA.16816.F32.BF16 R40, R16, R14, R40"
+        ],
+        [
+          "0x2dd0",
+          "LDSM.16.M88.4 R12, [R6+0x2880]"
+        ],
+        [
+          "0x2de0",
+          "LDSM.16.M88.4 R16, [R34+0x800]"
+        ],
+        [
+          "0x2df0",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R20, R36"
+        ],
+        [
+          "0x2e00",
+          "HMMA.16816.F32.BF16 R48, R8, R22, R48"
+        ],
+        [
+          "0x2e10",
+          "LDSM.16.M88.4 R8, [R6+0x1a80]"
+        ],
+        [
+          "0x2e20",
+          "HMMA.16816.F32.BF16 R24, R12.reuse, R20, R24"
+        ],
+        [
+          "0x2e30",
+          "HMMA.16816.F32.BF16 R40, R12, R22, R40"
+        ],
+        [
+          "0x2e40",
+          "LDSM.16.M88.4 R20, [R6+0x2a80]"
+        ],
+        [
+          "0x2e50",
+          "LDSM.16.M88.4 R12, [R34+0xa00]"
+        ],
+        [
+          "0x2e60",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R16, R36"
+        ],
+        [
+          "0x2e70",
+          "HMMA.16816.F32.BF16 R48, R8, R18, R48"
+        ],
+        [
+          "0x2e80",
+          "LDSM.16.M88.4 R8, [R6+0x1c80]"
+        ],
+        [
+          "0x2e90",
+          "HMMA.16816.F32.BF16 R24, R20.reuse, R16, R24"
+        ],
+        [
+          "0x2ea0",
+          "HMMA.16816.F32.BF16 R40, R20, R18, R40"
+        ],
+        [
+          "0x2eb0",
+          "LDSM.16.M88.4 R16, [R6+0x2c80]"
+        ],
+        [
+          "0x2ec0",
+          "HMMA.16816.F32.BF16 R36, R8.reuse, R12, R36"
+        ],
+        [
+          "0x2ed0",
+          "HMMA.16816.F32.BF16 R20, R8, R14, R48"
+        ],
+        [
+          "0x2ee0",
+          "LDSM.16.M88.4 R8, [R6+0x1e80]"
+        ],
+        [
+          "0x2ef0",
+          "LDSM.16.M88.4 R48, [R34+0xc00]"
+        ],
+        [
+          "0x2f00",
+          "HMMA.16816.F32.BF16 R24, R16.reuse, R12, R24"
+        ],
+        [
+          "0x2f10",
+          "HMMA.16816.F32.BF16 R40, R16, R14, R40"
+        ],
+        [
+          "0x2f20",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R48, R36"
+        ],
+        [
+          "0x2f30",
+          "LDSM.16.M88.4 R36, [R34+0xe00]"
+        ],
+        [
+          "0x2f40",
+          "HMMA.16816.F32.BF16 R12, R8, R50, R20"
+        ],
+        [
+          "0x2f50",
+          "LDSM.16.M88.4 R8, [R6+0x2080]"
+        ],
+        [
+          "0x2f60",
+          "LDSM.16.M88.4 R20, [R30+0x1000]"
+        ],
+        [
+          "0x2f70",
+          "HMMA.16816.F32.BF16 R56, R52, R48, R24"
+        ],
+        [
+          "0x2f80",
+          "HMMA.16816.F32.BF16 R16, R8.reuse, R36, R16"
+        ],
+        [
+          "0x2f90",
+          "HMMA.16816.F32.BF16 R12, R8, R38, R12"
+        ],
+        [
+          "0x2fa0",
+          "F2FP.BF16.F32.PACK_AB R7, R19, R18"
+        ],
+        [
+          "0x2fb0",
+          "F2FP.BF16.F32.PACK_AB R8, R17, R16"
+        ],
+        [
+          "0x2fc0",
+          "HADD2.BF16_V2 R7, R21, -R7"
+        ],
+        [
+          "0x2fd0",
+          "HADD2.BF16_V2 R16, R20, -R8"
+        ],
+        [
+          "0x2fe0",
+          "F2FP.BF16.F32.PACK_AB R14, R15, R14"
+        ],
+        [
+          "0x2ff0",
+          "HMUL2.BF16_V2 R3, R7, R5.reuse.H1_H1"
+        ],
+        [
+          "0x3000",
+          "F2FP.BF16.F32.PACK_AB R7, R13, R12"
+        ],
+        [
+          "0x3010",
+          "LDSM.16.M88.4 R8, [R30+0x4480]"
+        ],
+        [
+          "0x3020",
+          "HMUL2.BF16_V2 R4, R16, R5.reuse.H0_H0"
+        ],
+        [
+          "0x3030",
+          "MOVM.16.MT88 R13, R3"
+        ],
+        [
+          "0x3040",
+          "MOVM.16.MT88 R12, R4"
+        ],
+        [
+          "0x3050",
+          "HADD2.BF16_V2 R3, R22, -R7"
+        ],
+        [
+          "0x3060",
+          "HADD2.BF16_V2 R7, R23, -R14"
+        ],
+        [
+          "0x3070",
+          "HMUL2.BF16_V2 R4, R3, R5.reuse.H0_H0"
+        ],
+        [
+          "0x3080",
+          "HMUL2.BF16_V2 R3, R7, R5.H1_H1"
+        ],
+        [
+          "0x3090",
+          "MOVM.16.MT88 R4, R4"
+        ],
+        [
+          "0x30a0",
+          "HMMA.16816.F32.BF16 R20, R8.reuse, R12, RZ"
+        ],
+        [
+          "0x30b0",
+          "MOVM.16.MT88 R5, R3"
+        ],
+        [
+          "0x30c0",
+          "LDSM.16.M88.4 R12, [R6+0x3080]"
+        ],
+        [
+          "0x30d0",
+          "HMMA.16816.F32.BF16 R16, R8, R4, RZ"
+        ],
+        [
+          "0x30e0",
+          "F2FP.BF16.F32.PACK_AB R5, R23, R22"
+        ],
+        [
+          "0x30f0",
+          "LDSM.16.M88.4 R8, [R30+0x4680]"
+        ],
+        [
+          "0x3100",
+          "F2FP.BF16.F32.PACK_AB R6, R21, R20"
+        ],
+        [
+          "0x3110",
+          "MOVM.16.MT88 R25, R5"
+        ],
+        [
+          "0x3120",
+          "MOVM.16.MT88 R24, R6"
+        ],
+        [
+          "0x3130",
+          "F2FP.BF16.F32.PACK_AB R4, R17, R16"
+        ],
+        [
+          "0x3140",
+          "HMMA.16816.F32.BF16 R20, R12, R36, R56"
+        ],
+        [
+          "0x3150",
+          "MOVM.16.MT88 R26, R4"
+        ],
+        [
+          "0x3160",
+          "F2FP.BF16.F32.PACK_AB R3, R19, R18"
+        ],
+        [
+          "0x3170",
+          "HMMA.16816.F32.BF16 R16, R52, R50, R40"
+        ],
+        [
+          "0x3180",
+          "MOVM.16.MT88 R27, R3"
+        ],
+        [
+          "0x3190",
+          "F2FP.BF16.F32.PACK_AB R22, R23, R22"
+        ],
+        [
+          "0x31a0",
+          "HMMA.16816.F32.BF16 R4, R8, R24, RZ"
+        ],
+        [
+          "0x31b0",
+          "HMMA.16816.F32.BF16 R12, R12, R38, R16"
+        ],
+        [
+          "0x31c0",
+          "F2FP.BF16.F32.PACK_AB R17, R21, R20"
+        ],
+        [
+          "0x31d0",
+          "HMMA.16816.F32.BF16 R8, R8, R26, RZ"
+        ],
+        [
+          "0x31e0",
+          "F2FP.BF16.F32.PACK_AB R4, R5, R4"
+        ],
+        [
+          "0x31f0",
+          "F2FP.BF16.F32.PACK_AB R3, R7, R6"
+        ],
+        [
+          "0x3200",
+          "F2FP.BF16.F32.PACK_AB R15, R15, R14"
+        ],
+        [
+          "0x3210",
+          "F2FP.BF16.F32.PACK_AB R16, R13, R12"
+        ],
+        [
+          "0x3220",
+          "HADD2.BF16_V2 R12, R17, R4"
+        ],
+        [
+          "0x3230",
+          "IMAD R4, R46, 0x200, R66"
+        ],
+        [
+          "0x3240",
+          "HADD2.BF16_V2 R13, R22, R3"
+        ],
+        [
+          "0x3250",
+          "IADD3 R3, PT, PT, R29, R2, RZ"
+        ],
+        [
+          "0x3260",
+          "F2FP.BF16.F32.PACK_AB R5, R11, R10"
+        ],
+        [
+          "0x3270",
+          "F2FP.BF16.F32.PACK_AB R14, R9, R8"
+        ],
+        [
+          "0x3280",
+          "HADD2.BF16_V2 R15, R15, R5"
+        ],
+        [
+          "0x3290",
+          "HADD2.BF16_V2 R14, R16, R14"
+        ],
+        [
+          "0x32a0",
+          "STSM.16.M88.4 [R4+0xa980], R12"
+        ],
+        [
+          "0x32b0",
+          "LDSM.16.MT88.4 R8, [R3+0x3280]"
+        ],
+        [
+          "0x32c0",
+          "LDSM.16.MT88.4 R20, [R34]"
+        ],
+        [
+          "0x32d0",
+          "LDS R2, [R35+0x4280]"
+        ],
+        [
+          "0x32e0",
+          "LDS R30, [R35+0x42a0]"
+        ],
+        [
+          "0x32f0",
+          "LDSM.16.MT88.4 R16, [R3+0x3480]"
+        ],
+        [
+          "0x3300",
+          "LDSM.16.MT88.4 R36, [R34+0x200]"
+        ],
+        [
+          "0x3310",
+          "LDS R31, [R35+0x42c0]"
+        ],
+        [
+          "0x3320",
+          "LDS R32, [R35+0x42e0]"
+        ],
+        [
+          "0x3330",
+          "LDSM.16.MT88.4 R40, [R34+0x400]"
+        ],
+        [
+          "0x3340",
+          "HMMA.16816.F32.BF16 R4, R8.reuse, R24, RZ"
+        ],
+        [
+          "0x3350",
+          "SHF.L.U32 R12, R20.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3360",
+          "IMAD.U32 R15, R23, 0x10000, RZ"
+        ],
+        [
+          "0x3370",
+          "PRMT R20, R20, 0x7632, R20"
+        ],
+        [
+          "0x3380",
+          "IMAD.U32 R13, R21.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3390",
+          "SHF.L.U32 R14, R22.reuse, 0x10, RZ"
+        ],
+        [
+          "0x33a0",
+          "HMMA.16816.F32.BF16 R8, R8, R26, RZ"
+        ],
+        [
+          "0x33b0",
+          "PRMT R21, R21, 0x7632, R21"
+        ],
+        [
+          "0x33c0",
+          "PRMT R22, R22, 0x7632, R22"
+        ],
+        [
+          "0x33d0",
+          "SHF.L.U32 R20, R20, 0x10, RZ"
+        ],
+        [
+          "0x33e0",
+          "IMAD.U32 R21, R21, 0x10000, RZ"
+        ],
+        [
+          "0x33f0",
+          "SHF.L.U32 R22, R22, 0x10, RZ"
+        ],
+        [
+          "0x3400",
+          "PRMT R33, R23, 0x7632, R33"
+        ],
+        [
+          "0x3410",
+          "FFMA.FTZ R4, R2, R12, R4"
+        ],
+        [
+          "0x3420",
+          "FFMA.FTZ R6, R30, R13, R6"
+        ],
+        [
+          "0x3430",
+          "FFMA.FTZ R8, R2, R14, R8"
+        ],
+        [
+          "0x3440",
+          "FFMA.FTZ R10, R30, R15, R10"
+        ],
+        [
+          "0x3450",
+          "FFMA.FTZ R5, R2, R20, R5"
+        ],
+        [
+          "0x3460",
+          "FFMA.FTZ R7, R30, R21, R7"
+        ],
+        [
+          "0x3470",
+          "FFMA.FTZ R9, R2, R22, R9"
+        ],
+        [
+          "0x3480",
+          "HMMA.16816.F32.BF16 R12, R16.reuse, R24, RZ"
+        ],
+        [
+          "0x3490",
+          "LDSM.16.MT88.4 R20, [R3+0x3680]"
+        ],
+        [
+          "0x34a0",
+          "F2FP.BF16.F32.PACK_AB R52, R5, R4"
+        ],
+        [
+          "0x34b0",
+          "IMAD.U32 R2, R33, 0x10000, RZ"
+        ],
+        [
+          "0x34c0",
+          "SHF.L.U32 R5, R38.reuse, 0x10, RZ"
+        ],
+        [
+          "0x34d0",
+          "LDS R33, [R35+0x4320]"
+        ],
+        [
+          "0x34e0",
+          "PRMT R38, R38, 0x7632, R38"
+        ],
+        [
+          "0x34f0",
+          "HMMA.16816.F32.BF16 R16, R16, R26, RZ"
+        ],
+        [
+          "0x3500",
+          "F2FP.BF16.F32.PACK_AB R53, R7, R6"
+        ],
+        [
+          "0x3510",
+          "FFMA.FTZ R11, R30, R2, R11"
+        ],
+        [
+          "0x3520",
+          "SHF.L.U32 R2, R36.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3530",
+          "LDS R30, [R35+0x4300]"
+        ],
+        [
+          "0x3540",
+          "PRMT R36, R36, 0x7632, R36"
+        ],
+        [
+          "0x3550",
+          "IMAD.U32 R4, R37.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3560",
+          "PRMT R37, R37, 0x7632, R37"
+        ],
+        [
+          "0x3570",
+          "F2FP.BF16.F32.PACK_AB R54, R9, R8"
+        ],
+        [
+          "0x3580",
+          "F2FP.BF16.F32.PACK_AB R55, R11, R10"
+        ],
+        [
+          "0x3590",
+          "FFMA.FTZ R12, R31, R2, R12"
+        ],
+        [
+          "0x35a0",
+          "IMAD.U32 R2, R39.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x35b0",
+          "PRMT R39, R39, 0x7632, R39"
+        ],
+        [
+          "0x35c0",
+          "FFMA.FTZ R14, R32, R4, R14"
+        ],
+        [
+          "0x35d0",
+          "IMAD.U32 R4, R37, 0x10000, RZ"
+        ],
+        [
+          "0x35e0",
+          "FFMA.FTZ R16, R31.reuse, R5, R16"
+        ],
+        [
+          "0x35f0",
+          "SHF.L.U32 R5, R38, 0x10, RZ"
+        ],
+        [
+          "0x3600",
+          "FFMA.FTZ R18, R32, R2, R18"
+        ],
+        [
+          "0x3610",
+          "SHF.L.U32 R2, R36, 0x10, RZ"
+        ],
+        [
+          "0x3620",
+          "FFMA.FTZ R13, R31.reuse, R2, R13"
+        ],
+        [
+          "0x3630",
+          "FFMA.FTZ R15, R32.reuse, R4, R15"
+        ],
+        [
+          "0x3640",
+          "FFMA.FTZ R17, R31, R5, R17"
+        ],
+        [
+          "0x3650",
+          "IMAD.U32 R2, R39, 0x10000, RZ"
+        ],
+        [
+          "0x3660",
+          "F2FP.BF16.F32.PACK_AB R48, R13, R12"
+        ],
+        [
+          "0x3670",
+          "HMMA.16816.F32.BF16 R4, R20.reuse, R24, RZ"
+        ],
+        [
+          "0x3680",
+          "LDSM.16.MT88.4 R36, [R34+0x600]"
+        ],
+        [
+          "0x3690",
+          "F2FP.BF16.F32.PACK_AB R49, R15, R14"
+        ],
+        [
+          "0x36a0",
+          "FFMA.FTZ R19, R32, R2, R19"
+        ],
+        [
+          "0x36b0",
+          "SHF.L.U32 R2, R40.reuse, 0x10, RZ"
+        ],
+        [
+          "0x36c0",
+          "LDSM.16.MT88.4 R12, [R3+0x3880]"
+        ],
+        [
+          "0x36d0",
+          "PRMT R40, R40, 0x7632, R40"
+        ],
+        [
+          "0x36e0",
+          "HMMA.16816.F32.BF16 R8, R20, R26, RZ"
+        ],
+        [
+          "0x36f0",
+          "F2FP.BF16.F32.PACK_AB R50, R17, R16"
+        ],
+        [
+          "0x3700",
+          "SHF.L.U32 R16, R42, 0x10, RZ"
+        ],
+        [
+          "0x3710",
+          "SHF.L.U32 R17, R40, 0x10, RZ"
+        ],
+        [
+          "0x3720",
+          "F2FP.BF16.F32.PACK_AB R51, R19, R18"
+        ],
+        [
+          "0x3730",
+          "PRMT R42, R42, 0x7632, R42"
+        ],
+        [
+          "0x3740",
+          "FFMA.FTZ R4, R30.reuse, R2, R4"
+        ],
+        [
+          "0x3750",
+          "IMAD.U32 R2, R41.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3760",
+          "PRMT R41, R41, 0x7632, R41"
+        ],
+        [
+          "0x3770",
+          "FFMA.FTZ R6, R33, R2, R6"
+        ],
+        [
+          "0x3780",
+          "IMAD.U32 R2, R43.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3790",
+          "PRMT R43, R43, 0x7632, R43"
+        ],
+        [
+          "0x37a0",
+          "FFMA.FTZ R8, R30, R16, R8"
+        ],
+        [
+          "0x37b0",
+          "IMAD.U32 R18, R41, 0x10000, RZ"
+        ],
+        [
+          "0x37c0",
+          "FFMA.FTZ R10, R33.reuse, R2, R10"
+        ],
+        [
+          "0x37d0",
+          "SHF.L.U32 R2, R42, 0x10, RZ"
+        ],
+        [
+          "0x37e0",
+          "LDS R16, [R35+0x4340]"
+        ],
+        [
+          "0x37f0",
+          "FFMA.FTZ R5, R30.reuse, R17, R5"
+        ],
+        [
+          "0x3800",
+          "FFMA.FTZ R7, R33, R18, R7"
+        ],
+        [
+          "0x3810",
+          "LDS R17, [R35+0x4360]"
+        ],
+        [
+          "0x3820",
+          "FFMA.FTZ R9, R30, R2, R9"
+        ],
+        [
+          "0x3830",
+          "F2FP.BF16.F32.PACK_AB R40, R5, R4"
+        ],
+        [
+          "0x3840",
+          "IMAD.U32 R2, R43, 0x10000, RZ"
+        ],
+        [
+          "0x3850",
+          "F2FP.BF16.F32.PACK_AB R41, R7, R6"
+        ],
+        [
+          "0x3860",
+          "LDS R18, [R35+0x43a0]"
+        ],
+        [
+          "0x3870",
+          "F2FP.BF16.F32.PACK_AB R42, R9, R8"
+        ],
+        [
+          "0x3880",
+          "FFMA.FTZ R11, R33, R2, R11"
+        ],
+        [
+          "0x3890",
+          "SHF.L.U32 R2, R36.reuse, 0x10, RZ"
+        ],
+        [
+          "0x38a0",
+          "IMAD.U32 R8, R37.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x38b0",
+          "PRMT R36, R36, 0x7632, R36"
+        ],
+        [
+          "0x38c0",
+          "HMMA.16816.F32.BF16 R4, R12.reuse, R24, RZ"
+        ],
+        [
+          "0x38d0",
+          "PRMT R37, R37, 0x7632, R37"
+        ],
+        [
+          "0x38e0",
+          "SHF.L.U32 R9, R36, 0x10, RZ"
+        ],
+        [
+          "0x38f0",
+          "F2FP.BF16.F32.PACK_AB R43, R11, R10"
+        ],
+        [
+          "0x3900",
+          "HMMA.16816.F32.BF16 R12, R12, R26, RZ"
+        ],
+        [
+          "0x3910",
+          "IMAD.U32 R10, R37, 0x10000, RZ"
+        ],
+        [
+          "0x3920",
+          "FFMA.FTZ R4, R16, R2, R4"
+        ],
+        [
+          "0x3930",
+          "SHF.L.U32 R2, R38.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3940",
+          "PRMT R38, R38, 0x7632, R38"
+        ],
+        [
+          "0x3950",
+          "FFMA.FTZ R6, R17, R8, R6"
+        ],
+        [
+          "0x3960",
+          "IMAD.U32 R8, R39.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3970",
+          "PRMT R39, R39, 0x7632, R39"
+        ],
+        [
+          "0x3980",
+          "FFMA.FTZ R12, R16, R2, R12"
+        ],
+        [
+          "0x3990",
+          "SHF.L.U32 R2, R38, 0x10, RZ"
+        ],
+        [
+          "0x39a0",
+          "FFMA.FTZ R14, R17.reuse, R8, R14"
+        ],
+        [
+          "0x39b0",
+          "FFMA.FTZ R5, R16.reuse, R9, R5"
+        ],
+        [
+          "0x39c0",
+          "FFMA.FTZ R7, R17, R10, R7"
+        ],
+        [
+          "0x39d0",
+          "LDSM.16.MT88.4 R8, [R3+0x3a80]"
+        ],
+        [
+          "0x39e0",
+          "FFMA.FTZ R13, R16, R2, R13"
+        ],
+        [
+          "0x39f0",
+          "F2FP.BF16.F32.PACK_AB R56, R5, R4"
+        ],
+        [
+          "0x3a00",
+          "IMAD.U32 R2, R39, 0x10000, RZ"
+        ],
+        [
+          "0x3a10",
+          "F2FP.BF16.F32.PACK_AB R57, R7, R6"
+        ],
+        [
+          "0x3a20",
+          "LDS R16, [R35+0x4380]"
+        ],
+        [
+          "0x3a30",
+          "F2FP.BF16.F32.PACK_AB R58, R13, R12"
+        ],
+        [
+          "0x3a40",
+          "FFMA.FTZ R15, R17, R2, R15"
+        ],
+        [
+          "0x3a50",
+          "STSM.16.MT88.4 [R34], R52"
+        ],
+        [
+          "0x3a60",
+          "F2FP.BF16.F32.PACK_AB R59, R15, R14"
+        ],
+        [
+          "0x3a70",
+          "LDSM.16.MT88.4 R20, [R34+0x800]"
+        ],
+        [
+          "0x3a80",
+          "HMMA.16816.F32.BF16 R4, R8.reuse, R24, RZ"
+        ],
+        [
+          "0x3a90",
+          "HMMA.16816.F32.BF16 R8, R8, R26, RZ"
+        ],
+        [
+          "0x3aa0",
+          "SHF.L.U32 R2, R20.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3ab0",
+          "IMAD.U32 R12, R21.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3ac0",
+          "PRMT R20, R20, 0x7632, R20"
+        ],
+        [
+          "0x3ad0",
+          "PRMT R21, R21, 0x7632, R21"
+        ],
+        [
+          "0x3ae0",
+          "SHF.L.U32 R13, R20, 0x10, RZ"
+        ],
+        [
+          "0x3af0",
+          "FFMA.FTZ R4, R16, R2, R4"
+        ],
+        [
+          "0x3b00",
+          "SHF.L.U32 R2, R22.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3b10",
+          "LDS R20, [R35+0x43c0]"
+        ],
+        [
+          "0x3b20",
+          "PRMT R22, R22, 0x7632, R22"
+        ],
+        [
+          "0x3b30",
+          "FFMA.FTZ R6, R18, R12, R6"
+        ],
+        [
+          "0x3b40",
+          "IMAD.U32 R12, R23.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3b50",
+          "PRMT R23, R23, 0x7632, R23"
+        ],
+        [
+          "0x3b60",
+          "IMAD.U32 R14, R21, 0x10000, RZ"
+        ],
+        [
+          "0x3b70",
+          "FFMA.FTZ R8, R16, R2, R8"
+        ],
+        [
+          "0x3b80",
+          "LDS R21, [R35+0x43e0]"
+        ],
+        [
+          "0x3b90",
+          "SHF.L.U32 R2, R22, 0x10, RZ"
+        ],
+        [
+          "0x3ba0",
+          "FFMA.FTZ R10, R18, R12, R10"
+        ],
+        [
+          "0x3bb0",
+          "FFMA.FTZ R5, R16, R13, R5"
+        ],
+        [
+          "0x3bc0",
+          "FFMA.FTZ R7, R18, R14, R7"
+        ],
+        [
+          "0x3bd0",
+          "LDSM.16.MT88.4 R12, [R3+0x3c80]"
+        ],
+        [
+          "0x3be0",
+          "FFMA.FTZ R9, R16, R2, R9"
+        ],
+        [
+          "0x3bf0",
+          "F2FP.BF16.F32.PACK_AB R52, R5, R4"
+        ],
+        [
+          "0x3c00",
+          "IMAD.U32 R2, R23, 0x10000, RZ"
+        ],
+        [
+          "0x3c10",
+          "F2FP.BF16.F32.PACK_AB R53, R7, R6"
+        ],
+        [
+          "0x3c20",
+          "STSM.16.MT88.4 [R34+0x200], R48"
+        ],
+        [
+          "0x3c30",
+          "F2FP.BF16.F32.PACK_AB R54, R9, R8"
+        ],
+        [
+          "0x3c40",
+          "FFMA.FTZ R11, R18, R2, R11"
+        ],
+        [
+          "0x3c50",
+          "LDSM.16.MT88.4 R36, [R34+0xa00]"
+        ],
+        [
+          "0x3c60",
+          "F2FP.BF16.F32.PACK_AB R55, R11, R10"
+        ],
+        [
+          "0x3c70",
+          "LDSM.16.MT88.4 R16, [R3+0x3e80]"
+        ],
+        [
+          "0x3c80",
+          "LDS R30, [R35+0x4420]"
+        ],
+        [
+          "0x3c90",
+          "HMMA.16816.F32.BF16 R4, R12.reuse, R24, RZ"
+        ],
+        [
+          "0x3ca0",
+          "HMMA.16816.F32.BF16 R12, R12, R26, RZ"
+        ],
+        [
+          "0x3cb0",
+          "SHF.L.U32 R2, R36.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3cc0",
+          "IMAD.U32 R8, R37.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3cd0",
+          "PRMT R36, R36, 0x7632, R36"
+        ],
+        [
+          "0x3ce0",
+          "PRMT R37, R37, 0x7632, R37"
+        ],
+        [
+          "0x3cf0",
+          "SHF.L.U32 R9, R36, 0x10, RZ"
+        ],
+        [
+          "0x3d00",
+          "IMAD.U32 R10, R37, 0x10000, RZ"
+        ],
+        [
+          "0x3d10",
+          "FFMA.FTZ R4, R20, R2, R4"
+        ],
+        [
+          "0x3d20",
+          "SHF.L.U32 R2, R38.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3d30",
+          "FFMA.FTZ R6, R21, R8, R6"
+        ],
+        [
+          "0x3d40",
+          "PRMT R38, R38, 0x7632, R38"
+        ],
+        [
+          "0x3d50",
+          "IMAD.U32 R8, R39.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3d60",
+          "PRMT R39, R39, 0x7632, R39"
+        ],
+        [
+          "0x3d70",
+          "FFMA.FTZ R12, R20, R2, R12"
+        ],
+        [
+          "0x3d80",
+          "SHF.L.U32 R2, R38, 0x10, RZ"
+        ],
+        [
+          "0x3d90",
+          "FFMA.FTZ R14, R21.reuse, R8, R14"
+        ],
+        [
+          "0x3da0",
+          "FFMA.FTZ R5, R20.reuse, R9, R5"
+        ],
+        [
+          "0x3db0",
+          "FFMA.FTZ R7, R21, R10, R7"
+        ],
+        [
+          "0x3dc0",
+          "FFMA.FTZ R13, R20, R2, R13"
+        ],
+        [
+          "0x3dd0",
+          "IMAD.U32 R2, R39, 0x10000, RZ"
+        ],
+        [
+          "0x3de0",
+          "LDS R20, [R35+0x4400]"
+        ],
+        [
+          "0x3df0",
+          "F2FP.BF16.F32.PACK_AB R48, R5, R4"
+        ],
+        [
+          "0x3e00",
+          "HMMA.16816.F32.BF16 R8, R16.reuse, R24, RZ"
+        ],
+        [
+          "0x3e10",
+          "STSM.16.MT88.4 [R34+0x400], R40"
+        ],
+        [
+          "0x3e20",
+          "F2FP.BF16.F32.PACK_AB R49, R7, R6"
+        ],
+        [
+          "0x3e30",
+          "FFMA.FTZ R15, R21, R2, R15"
+        ],
+        [
+          "0x3e40",
+          "F2FP.BF16.F32.PACK_AB R50, R13, R12"
+        ],
+        [
+          "0x3e50",
+          "LDSM.16.MT88.4 R40, [R34+0xc00]"
+        ],
+        [
+          "0x3e60",
+          "HMMA.16816.F32.BF16 R16, R16, R26, RZ"
+        ],
+        [
+          "0x3e70",
+          "F2FP.BF16.F32.PACK_AB R51, R15, R14"
+        ],
+        [
+          "0x3e80",
+          "LDS R31, [R35+0x4460]"
+        ],
+        [
+          "0x3e90",
+          "SHF.L.U32 R2, R40.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3ea0",
+          "PRMT R40, R40, 0x7632, R40"
+        ],
+        [
+          "0x3eb0",
+          "FFMA.FTZ R8, R20, R2, R8"
+        ],
+        [
+          "0x3ec0",
+          "SHF.L.U32 R4, R40, 0x10, RZ"
+        ],
+        [
+          "0x3ed0",
+          "IMAD.U32 R2, R41.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3ee0",
+          "PRMT R41, R41, 0x7632, R41"
+        ],
+        [
+          "0x3ef0",
+          "FFMA.FTZ R10, R30, R2, R10"
+        ],
+        [
+          "0x3f00",
+          "SHF.L.U32 R2, R42.reuse, 0x10, RZ"
+        ],
+        [
+          "0x3f10",
+          "IMAD.U32 R5, R41, 0x10000, RZ"
+        ],
+        [
+          "0x3f20",
+          "PRMT R42, R42, 0x7632, R42"
+        ],
+        [
+          "0x3f30",
+          "FFMA.FTZ R16, R20, R2, R16"
+        ],
+        [
+          "0x3f40",
+          "IMAD.U32 R2, R43.reuse, 0x10000, RZ"
+        ],
+        [
+          "0x3f50",
+          "SHF.L.U32 R21, R42, 0x10, RZ"
+        ],
+        [
+          "0x3f60",
+          "PRMT R43, R43, 0x7632, R43"
+        ],
+        [
+          "0x3f70",
+          "FFMA.FTZ R18, R30, R2, R18"
+        ],
+        [
+          "0x3f80",
+          "FFMA.FTZ R9, R20, R4, R9"
+        ],
+        [
+          "0x3f90",
+          "FFMA.FTZ R11, R30, R5, R11"
+        ],
+        [
+          "0x3fa0",
+          "FFMA.FTZ R17, R20, R21, R17"
+        ],
+        [
+          "0x3fb0",
+          "IMAD.U32 R2, R43, 0x10000, RZ"
+        ],
+        [
+          "0x3fc0",
+          "LDSM.16.MT88.4 R20, [R3+0x4080]"
+        ],
+        [
+          "0x3fd0",
+          "F2FP.BF16.F32.PACK_AB R12, R9, R8"
+        ],
+        [
+          "0x3fe0",
+          "F2FP.BF16.F32.PACK_AB R13, R11, R10"
+        ],
+        [
+          "0x3ff0",
+          "LDS R3, [R35+0x4440]"
+        ],
+        [
+          "0x4000",
+          "F2FP.BF16.F32.PACK_AB R14, R17, R16"
+        ],
+        [
+          "0x4010",
+          "FFMA.FTZ R19, R30, R2, R19"
+        ],
+        [
+          "0x4020",
+          "STSM.16.MT88.4 [R34+0x600], R56"
+        ],
+        [
+          "0x4030",
+          "F2FP.BF16.F32.PACK_AB R15, R19, R18"
+        ],
+        [
+          "0x4040",
+          "LDSM.16.MT88.4 R36, [R34+0xe00]"
+        ],
+        [
+          "0x4050",
+          "STSM.16.MT88.4 [R34+0x800], R52"
+        ],
+        [
+          "0x4060",
+          "STSM.16.MT88.4 [R34+0xa00], R48"
+        ],
+        [
+          "0x4070",
+          "STSM.16.MT88.4 [R34+0xc00], R12"
+        ],
+        [
+          "0x4080",
+          "HMMA.16816.F32.BF16 R4, R20.reuse, R24, RZ"
+        ],
+        [
+          "0x4090",
+          "HMMA.16816.F32.BF16 R20, R20, R26, RZ"
+        ],
+        [
+          "0x40a0",
+          "SHF.L.U32 R2, R36.reuse, 0x10, RZ"
+        ],
+        [
+          "0x40b0",
+          "IMAD.U32 R8, R37, 0x10000, RZ"
+        ],
+        [
+          "0x40c0",
+          "PRMT R36, R36, 0x7632, R36"
+        ],
+        [
+          "0x40d0",
+          "IMAD.U32 R10, R39, 0x10000, RZ"
+        ],
+        [
+          "0x40e0",
+          "SHF.L.U32 R9, R38.reuse, 0x10, RZ"
+        ],
+        [
+          "0x40f0",
+          "PRMT R37, R37, 0x7632, R37"
+        ],
+        [
+          "0x4100",
+          "FFMA.FTZ R4, R3, R2, R4"
+        ],
+        [
+          "0x4110",
+          "PRMT R38, R38, 0x7632, R38"
+        ],
+        [
+          "0x4120",
+          "FFMA.FTZ R6, R31, R8, R6"
+        ],
+        [
+          "0x4130",
+          "PRMT R11, R39, 0x7632, R11"
+        ],
+        [
+          "0x4140",
+          "IMAD.U32 R8, R37, 0x10000, RZ"
+        ],
+        [
+          "0x4150",
+          "SHF.L.U32 R2, R36, 0x10, RZ"
+        ],
+        [
+          "0x4160",
+          "SHF.L.U32 R11, R11, 0x10, RZ"
+        ],
+        [
+          "0x4170",
+          "FFMA.FTZ R20, R3, R9, R20"
+        ],
+        [
+          "0x4180",
+          "SHF.L.U32 R9, R38, 0x10, RZ"
+        ],
+        [
+          "0x4190",
+          "FFMA.FTZ R22, R31, R10, R22"
+        ],
+        [
+          "0x41a0",
+          "FFMA.FTZ R5, R3, R2, R5"
+        ],
+        [
+          "0x41b0",
+          "FFMA.FTZ R7, R31, R8, R7"
+        ],
+        [
+          "0x41c0",
+          "FFMA.FTZ R21, R3, R9, R21"
+        ],
+        [
+          "0x41d0",
+          "FFMA.FTZ R23, R31, R11, R23"
+        ],
+        [
+          "0x41e0",
+          "F2FP.BF16.F32.PACK_AB R4, R5, R4"
+        ],
+        [
+          "0x41f0",
+          "F2FP.BF16.F32.PACK_AB R5, R7, R6"
+        ],
+        [
+          "0x4200",
+          "F2FP.BF16.F32.PACK_AB R6, R21, R20"
+        ],
+        [
+          "0x4210",
+          "F2FP.BF16.F32.PACK_AB R7, R23, R22"
+        ],
+        [
+          "0x4220",
+          "STSM.16.MT88.4 [R34+0xe00], R4"
+        ],
+        [
+          "0x4230",
+          "BAR.SYNC.DEFER_BLOCKING 0x8, 0x20"
+        ],
+        [
+          "0x4240",
+          "MEMBAR.ALL.CTA"
+        ],
+        [
+          "0x4250",
+          "FENCE.VIEW.ASYNC.S"
+        ],
+        [
+          "0x4260",
+          "@P1 BRA 0x4280"
+        ],
+        [
+          "0x4270",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x4280",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x4290",
+          "SYNCS.ARRIVE.TRANS64.A1T0 RZ, [R62+URZ+0xbdb0], RZ"
+        ],
+        [
+          "0x42a0",
+          "BSSY.RECONVERGENT B0, 0x42e0"
+        ],
+        [
+          "0x42b0",
+          "@!P4 BRA 0x42d0"
+        ],
+        [
+          "0x42c0",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x42d0",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x42e0",
+          "IADD3 R2, PT, PT, R61, 0xbd98, RZ"
+        ],
+        [
+          "0x42f0",
+          "BSSY.RECONVERGENT B0, 0x4350"
+        ],
+        [
+          "0x4300",
+          "PRMT R2, RZ, 0x654, R2"
+        ],
+        [
+          "0x4310",
+          "SYNCS.ARRIVE.TRANS64.RED.A1T0 RZ, [R2+URZ], RZ"
+        ],
+        [
+          "0x4320",
+          "@!P3 BRA 0x4340"
+        ],
+        [
+          "0x4330",
+          "BPT.TRAP 0x1"
+        ],
+        [
+          "0x4340",
+          "BSYNC.RECONVERGENT B0"
+        ],
+        [
+          "0x4350",
+          "VIADD R3, R63, 0x1"
+        ],
+        [
+          "0x4360",
+          "VIADD R28, R28, 0x1"
+        ],
+        [
+          "0x4370",
+          "VIADD R2, R46, 0x1"
+        ],
+        [
+          "0x4380",
+          "ISETP.NE.AND P2, PT, R3, RZ, PT"
+        ],
+        [
+          "0x4390",
+          "ISETP.NE.AND P1, PT, R28, 0x3, PT"
+        ],
+        [
+          "0x43a0",
+          "ISETP.NE.AND P0, PT, R2, 0x2, PT"
+        ],
+        [
+          "0x43b0",
+          "SEL R5, RZ, 0x1, P1"
+        ],
+        [
+          "0x43c0",
+          "SEL R4, RZ, 0x1, P0"
+        ],
+        [
+          "0x43d0",
+          "LOP3.LUT R5, R60, R5, RZ, 0x3c, !PT"
+        ],
+        [
+          "0x43e0",
+          "LOP3.LUT R4, R47, R4, RZ, 0x3c, !PT"
+        ],
+        [
+          "0x43f0",
+          "SEL R28, R28, RZ, P1"
+        ],
+        [
+          "0x4400",
+          "SEL R2, R2, RZ, P0"
+        ],
+        [
+          "0x4410",
+          "@!P2 BRA 0x4470"
+        ],
+        [
+          "0x4420",
+          "MOV R47, R4"
+        ],
+        [
+          "0x4430",
+          "IMAD.MOV.U32 R60, RZ, RZ, R5"
+        ],
+        [
+          "0x4440",
+          "MOV R63, R3"
+        ],
+        [
+          "0x4450",
+          "IMAD.MOV.U32 R46, RZ, RZ, R2"
+        ],
+        [
+          "0x4460",
+          "BRA 0x29e0"
+        ],
+        [
+          "0x4470",
+          "BSYNC B1"
+        ],
+        [
+          "0x4480",
+          "BRA 0x5500"
+        ]
+      ]
+    }
+  }
+}

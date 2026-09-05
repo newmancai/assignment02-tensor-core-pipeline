@@ -1,0 +1,17 @@
+{
+  "source": "/private/tmp/kda-release-prefetch4.DStLoA",
+  "patch_sha256": "246a6aa347a1779215d5cdb72d84f2be18357ea0b77be8df987c8c46118b9a96",
+  "apply_forward_check": "PASS",
+  "apply_reverse_check": "PASS",
+  "build_contract": {"status": "PASS", "checks": 13},
+  "actual_launch_selector_cpu": {
+    "status": "PASS",
+    "checks_per_configuration": 17,
+    "configurations": ["default_no_macro", "explicit_macro_zero", "optin_macro_one"],
+    "total_checks": 51
+  },
+  "python_policy_unchanged": true,
+  "hardened_binding_unchanged": true,
+  "release_binary_build": "PENDING",
+  "release_binary_gpu_validation": "PENDING"
+}
