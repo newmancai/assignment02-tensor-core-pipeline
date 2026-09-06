@@ -1,0 +1,6 @@
+Sat Sep  5 03:57:23 UTC 2026
+{"kind":"profile_exit","state":"out","variant":"p4","exit_code":0}
+{"kind":"profile_exit","state":"out","variant":"phase1","exit_code":0}
+{"kind":"profile_exit","state":"both","variant":"p4","exit_code":0}
+{"kind":"profile_exit","state":"both","variant":"phase1","exit_code":0}
+Sat Sep  5 03:57:40 UTC 2026

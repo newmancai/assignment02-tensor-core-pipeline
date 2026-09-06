@@ -1,0 +1,71 @@
+diff --git a/csrc/flash_kda.cpp b/csrc/flash_kda.cpp
+--- a/csrc/flash_kda.cpp
++++ b/csrc/flash_kda.cpp
+@@ -1,5 +1,7 @@
+ #include <torch/extension.h>
++#include <c10/cuda/CUDAGuard.h>
+ #include <c10/cuda/CUDAStream.h>
++#include <cstdint>
+ #include "fwd.h"
+ 
+ #ifdef K2_VALUE_SLICE
+@@ -83,6 +85,25 @@
+ ) {
+     TORCH_CHECK(q.is_cuda() && k.is_cuda() && v.is_cuda() && g.is_cuda() && beta.is_cuda() && out.is_cuda() && workspace.is_cuda(),
+                 "all tensors must be on CUDA");
++    const auto input_device = q.device();
++    const auto check_same_device = [&](const torch::Tensor& tensor, const char* name) {
++        TORCH_CHECK(tensor.device() == input_device,
++                    name, " must be on ", input_device, ", got ", tensor.device());
++    };
++    check_same_device(k, "k");
++    check_same_device(v, "v");
++    check_same_device(g, "g");
++    check_same_device(beta, "beta");
++    check_same_device(out, "out");
++    check_same_device(workspace, "workspace");
++    check_same_device(A_log, "A_log");
++    check_same_device(dt_bias, "dt_bias");
++    if (initial_state) check_same_device(*initial_state, "initial_state");
++    if (final_state) check_same_device(*final_state, "final_state");
++    if (cu_seqlens) check_same_device(*cu_seqlens, "cu_seqlens");
++    // Hold the input device through ATen copies and the CUDA launches; restore
++    // the caller's device on exit, including validation exceptions.
++    const c10::cuda::CUDAGuard device_guard(input_device);
+     TORCH_CHECK(q.is_contiguous() && k.is_contiguous() && v.is_contiguous() && g.is_contiguous() && beta.is_contiguous() && out.is_contiguous() && workspace.is_contiguous(),
+                 "all tensors must be contiguous");
+ 
+@@ -173,6 +194,11 @@
+ 
+     // Transpose beta: [T_total, H] -> [H, T_total] (1D TMA, no T alignment constraint)
+     auto beta_t = beta_2d.t().contiguous();
++    // If T_total == 1 or H == 1, contiguous() can preserve a view's storage
++    // offset. TMA requires a 16-byte-aligned base, not just contiguous strides.
++    if ((reinterpret_cast<std::uintptr_t>(beta_t.data_ptr()) & 15) != 0) {
++        beta_t = beta_t.clone(at::MemoryFormat::Contiguous);
++    }
+     auto beta_t_ptr = reinterpret_cast<cutlass::bfloat16_t const*>(beta_t.data_ptr<at::BFloat16>());
+ 
+     auto workspace_ptr = workspace.data_ptr();
+diff --git a/setup.py b/setup.py
+--- a/setup.py
++++ b/setup.py
+@@ -67,6 +67,9 @@
+ 
+ 
+ def make_cuda_extension(name, experiment_flags):
++    # The default slice is read by the C++ binding, not the CUDA translation
++    # unit. Keep that define consistent without forwarding CUDA-only flags.
++    binding_flags = [flag for flag in experiment_flags if flag.startswith('-DK2_VALUE_SLICE=')]
+     return CUDAExtension(
+         name=name,
+         sources=[
+@@ -80,7 +83,7 @@
+             os.path.join(this_dir, 'csrc'),
+         ],
+         extra_compile_args={
+-            'cxx': ['-O3', '-Wno-psabi'],
++            'cxx': ['-O3', '-Wno-psabi', *binding_flags],
+             'nvcc': [
+                 '-O3',
+                 '-U__CUDA_NO_HALF_OPERATORS__',

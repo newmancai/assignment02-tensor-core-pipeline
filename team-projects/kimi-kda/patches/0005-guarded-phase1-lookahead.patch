@@ -1,0 +1,148 @@
+--- a/csrc/smxx/fwd_kernel2.cuh
++++ b/csrc/smxx/fwd_kernel2.cuh
+@@ -145,7 +145,8 @@
+     bool HasStateOut = true,
+     bool StateFP32 = false,
+     bool IsVarlen = true,
+-    int StatePrefetch = 1
++    int StatePrefetch = 1,
++    int Phase1Prefetch = 1
+ >
+ __global__ void __launch_bounds__(NumThreads) _flash_kda_fwd_recurrence(
+     CUTE_GRID_CONSTANT TmaLoadV const tma_load_v,
+@@ -169,6 +170,7 @@
+     using BF16 = cutlass::bfloat16_t;
+     using FP16 = cutlass::half_t;
+     static_assert(StatePrefetch >= 1 && StatePrefetch <= D / 16);
++    static_assert(Phase1Prefetch == 1 || Phase1Prefetch == 2 || Phase1Prefetch == 4);
+     using Layouts = K2Layouts<D, CHUNK, V>;
+     using MMALayout = typename Layouts::MMALayout;
+     using TransposedMMALayout = typename Layouts::TransposedMMALayout;
+@@ -556,7 +558,58 @@
+ 
+             // ======== Phase 1: Dual GEMM k@s and q@s (k-loop, 2 blocks per warp) ========
+             constexpr int K_BLOCKS = decltype(cute::size<1>(k_decayed))::value / 16;
++
++            if constexpr (Phase1Prefetch > 1) {
++                static_assert(V == 16 && kBlocksPerWarp == 1,
++                              "Phase1 lookahead is restricted to one V16 block per warp");
++                static_assert(Phase1Prefetch <= K_BLOCKS);
++
++                // Three independent raw-fragment rings: k, q, and the state
++                // block shared by both GEMMs. Preserve the original operand
++                // transforms and ascending-k accumulator update order.
++                decltype(tCrAi_k) ring_k[Phase1Prefetch];
++                decltype(tCrAi_q) ring_q[Phase1Prefetch];
++                decltype(tCrBi) ring_state[Phase1Prefetch];
++
++                #pragma unroll
++                for (int i = 0; i < Phase1Prefetch; ++i) {
++                    copy(smem_tiled_copy_A, smem_thr_copy_A.partition_S(
++                        local_tile(k_decayed, make_shape(Int<16>{}, Int<16>{}), make_coord(0, i))),
++                        smem_thr_copy_A.retile_D(ring_k[i]));
++                    copy(smem_tiled_copy_A, smem_thr_copy_A.partition_S(
++                        local_tile(q_decayed, make_shape(Int<16>{}, Int<16>{}), make_coord(0, i))),
++                        smem_thr_copy_A.retile_D(ring_q[i]));
++                    copy(smem_tiled_copy_B, smem_thr_copy_B.partition_S(
++                        local_tile(s_acc, make_shape(Int<16>{}, Int<16>{}), make_coord(warp_id * kBlocksPerWarp, i))),
++                        smem_thr_copy_B.retile_D(ring_state[i]));
++                }
+ 
++                #pragma unroll
++                for (int k = 0; k < K_BLOCKS; ++k) {
++                    const int slot = k % Phase1Prefetch;
++                    cute::transform(ring_k[slot], tCrA_k, cute::identity{});
++                    cute::transform(ring_q[slot], tCrA_q, cute::identity{});
++                    cute::transform(ring_state[slot], tCrB, cute::identity{});
++
++                    gemm(thr_mma, tCrA_k(_,_,Int<0>{}), tCrB(_,_,Int<0>{}), u_acc[0]);
++                    gemm(thr_mma, tCrA_q(_,_,Int<0>{}), tCrB(_,_,Int<0>{}), out_acc[0]);
++
++                    // Both consumers have finished before this slot is
++                    // overwritten. Its next consumer is k + lookahead;
++                    // never issue an out-of-range tail load.
++                    if (k + Phase1Prefetch < K_BLOCKS) {
++                        copy(smem_tiled_copy_A, smem_thr_copy_A.partition_S(
++                            local_tile(k_decayed, make_shape(Int<16>{}, Int<16>{}), make_coord(0, k + Phase1Prefetch))),
++                            smem_thr_copy_A.retile_D(ring_k[slot]));
++                        copy(smem_tiled_copy_A, smem_thr_copy_A.partition_S(
++                            local_tile(q_decayed, make_shape(Int<16>{}, Int<16>{}), make_coord(0, k + Phase1Prefetch))),
++                            smem_thr_copy_A.retile_D(ring_q[slot]));
++                        copy(smem_tiled_copy_B, smem_thr_copy_B.partition_S(
++                            local_tile(s_acc, make_shape(Int<16>{}, Int<16>{}), make_coord(warp_id * kBlocksPerWarp, k + Phase1Prefetch))),
++                            smem_thr_copy_B.retile_D(ring_state[slot]));
++                    }
++                }
++            } else {
+             copy(smem_tiled_copy_A, smem_thr_copy_A.partition_S(
+                 local_tile(k_decayed, make_shape(Int<16>{}, Int<16>{}), make_coord(0, 0))), tCrAi_k_view);
+             copy(smem_tiled_copy_A, smem_thr_copy_A.partition_S(
+@@ -596,6 +649,7 @@
+                     gemm(thr_mma, tCrA_q(_,_,Int<0>{}), tCrB(_,_,Int<0>{}), out_acc[1]);
+                 }
+             }
++            }
+ 
+             // ======== Phase 2: Cast out (keep in regs), load v/INV/beta ========
+             SFragT out_bf16[kBlocksPerWarp];
+--- a/csrc/smxx/fwd_launch.cu
++++ b/csrc/smxx/fwd_launch.cu
+@@ -4,7 +4,7 @@
+ 
+ // ==================== launch_fwd ====================
+ template <int D, int K2Value, bool HasStateIn, bool HasStateOut, bool StateFP32, bool IsVarlen,
+-          int StatePrefetch = 1>
++          int StatePrefetch = 1, int Phase1Prefetch = 1>
+ void launch_fwd_impl(
+     cutlass::bfloat16_t const* q_ptr,
+     cutlass::bfloat16_t const* k_ptr,
+@@ -202,7 +202,7 @@
+             decltype(tma_store_final_state),
+             decltype(tma_store_out),
+             CHUNK, D, kK2Value, kInputStages, kOutputStages, kK2Threads,
+-            HasStateIn, HasStateOut, StateFP32, IsVarlen, StatePrefetch
++            HasStateIn, HasStateOut, StateFP32, IsVarlen, StatePrefetch, Phase1Prefetch
+         >;
+ 
+         cudaFuncSetAttribute(kernel2, cudaFuncAttributeMaxDynamicSharedMemorySize, smem_size_k2);
+@@ -259,7 +259,12 @@
+             // envelope. Default builds and all other shapes retain Prefetch1.
+             if constexpr (D == 128 && !StateFP32) {
+                 if (N == 1 && H == 12 && T_total >= 2048 && T_total <= 8192) {
+-                    launch_fwd_impl<D, 16, HasStateIn, HasStateOut, StateFP32, IsVarlen, 4>(
++#if defined(FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH) && FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH
++                    constexpr int kPhase1Prefetch = HasStateIn ? 2 : 4;
++#else
++                    constexpr int kPhase1Prefetch = 1;
++#endif
++                    launch_fwd_impl<D, 16, HasStateIn, HasStateOut, StateFP32, IsVarlen, 4, kPhase1Prefetch>(
+                         q_ptr, k_ptr, v_ptr, g_bf16_ptr, beta_ptr, initial_state_ptr, scale,
+                         final_state_ptr, out_ptr, workspace_ptr, total_tiles, T_total, H, N,
+                         cu_seqlens_ptr, A_log_ptr, dt_bias_ptr, gate_scale, stream);
+--- a/setup.py
++++ b/setup.py
+@@ -17,14 +17,22 @@
+ 
+ 
+ def get_release_flags():
+-    """Build-time opt-in for the guarded B300 V16 state-prefetch candidate."""
++    """Build-time opt-ins for the guarded B300 V16 prefetch candidates."""
++    phase1_enabled = is_flag_set("FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH")
++    if phase1_enabled and not is_flag_set("FLASH_KDA_ENABLE_V16_PREFETCH4"):
++        raise RuntimeError(
++            "FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH requires FLASH_KDA_ENABLE_V16_PREFETCH4=1"
++        )
+     if not is_flag_set("FLASH_KDA_ENABLE_V16_PREFETCH4"):
+         return []
+     if os.getenv("FLASH_KDA_CUDA_ARCHS", "").strip().lower() != "103a":
+         raise RuntimeError(
+             "FLASH_KDA_ENABLE_V16_PREFETCH4 requires explicit FLASH_KDA_CUDA_ARCHS=103a"
+         )
+-    return ["-DFLASH_KDA_ENABLE_V16_PREFETCH4=1"]
++    flags = ["-DFLASH_KDA_ENABLE_V16_PREFETCH4=1"]
++    if phase1_enabled:
++        flags.append("-DFLASH_KDA_ENABLE_V16_PHASE1_PREFETCH=1")
++    return flags
+ 
+ 
+ def get_experiment_flags():

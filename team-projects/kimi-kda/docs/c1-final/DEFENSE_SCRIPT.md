@@ -1,6 +1,6 @@
 # C1 10 分钟答辩逐页讲稿
 
-对应演示文稿：[`FlashKDA_SM100_decision_defense.pptx`](FlashKDA_SM100_decision_defense.pptx)
+对应演示文稿：[`FlashKDA_SM100_decision_defense_20260906.pptx`](FlashKDA_SM100_decision_defense_20260906.pptx)
 
 总时间严格按 **10 页 / 600 秒** 设计。正常语速约每分钟 220–260 个汉字；现场应优先说每页的“必须说”，若被打断则跳过“可省略”。所有性能数字只在各自一致的计时口径内比较。
 
@@ -8,30 +8,30 @@
 
 | 页码 | 主题 | 时间 | 累计 |
 |---:|---|---:|---:|
-| 1 | 问题与最终判断 | 45 s | 0:45 |
+| 1 | 问题与分级判断 | 45 s | 0:45 |
 | 2 | 官方 benchmark 复现 | 55 s | 1:40 |
 | 3 | SASS 与 NCU：真正瓶颈 | 70 s | 2:50 |
 | 4 | CHUNK=16，为什么不能机械放大 | 55 s | 3:45 |
 | 5 | `tcgen05+TMEM` 直接替换实验 | 70 s | 4:55 |
-| 6 | 挑战设计：ValueSlice | 65 s | 6:00 |
-| 7 | 性能、反例与最终 dispatcher | 70 s | 7:10 |
-| 8 | 正确性与 BF16 state 边界 | 55 s | 8:05 |
-| 9 | 从 operator 到 Kimi K3/通信/SLO | 65 s | 9:10 |
-| 10 | go/no-go 与最终回答 | 50 s | 10:00 |
+| 6 | 第一层优化：ValueSlice | 65 s | 6:00 |
+| 7 | 三层优化阶梯 | 70 s | 7:10 |
+| 8 | 单调用收益与并发负例 | 55 s | 8:05 |
+| 9 | 验证闭环与系统边界 | 65 s | 9:10 |
+| 10 | STOP / KEEP / NEXT | 50 s | 10:00 |
 
 ---
 
-## 第 1 页：问题与最终判断（45 秒）
+## 第 1 页：问题与分级判断（45 秒）
 
 ### 必须说
 
-“我们只回答 C1 一个问题：FlashKDA 官方 kernel 的 Tensor Core atom 仍是 SM80 `mma.sync`，迁到 SM100 值不值得？我们的答案分两层：**不值得机械地全面换成 `tcgen05`；值得为 B300/SM103 做受保护的专用路径，但优先级是 recurrence 并行度，而不是指令代际。**
+“我们只回答 C1 一个问题：FlashKDA 官方 kernel 的 Tensor Core atom 仍是 SM80 `mma.sync`，迁到 SM100 值不值得？我们的答案是：**不值得机械地全面换成 `tcgen05`；值得为 B300/SM103 做受保护的专用路径，但优先级是 recurrence 并行度和流水调度，而不是指令代际。**
 
-我们按题目规定走三阶段：先复现和测量，再逐项分析，最后动手挑战。挑战允许负结果，所以我们的目标不是证明新硬件一定快，而是给出可发布的 stop/go 决策。”
+最终形成了三层优化：ValueSlice 增加跨 CTA 并行度，Phase-6 Prefetch4 隐藏 state 读取延迟，Phase-1 再按有无初态选择 lookahead。第一层结论最稳；后两层是默认关闭、尚未发布的低并发延迟候选，因为最新双流实验已经暴露吞吐取舍。”
 
 ### 可省略
 
-“SM80”在这里仅指 MMA atom，不代表整个 kernel 都停留在 SM80；官方实现已经使用 TMA 等较新的搬运能力。
+“SM80”在这里仅指 MMA atom，不代表整个 kernel 都停留在 SM80；官方实现已经使用 TMA 等较新的搬运能力。所有实测结论限定在单张 B300/SM103，不外推为所有 SM100-family 产品结论。
 
 ### 转场
 
@@ -67,7 +67,7 @@ H96 是 K3 官方对照形状：fixed、ragged6、8×1024 的 FlashKDA 分别是
 
 但 profiler 给出的瓶颈不是 Tensor Core 峰值。在 K3 TP8 代表形状 `T8192,H12,D128` 上，每卡 96 除以 8，只剩 12 个 head。官方 recurrence grid 就是 12 CTA，对 B300 的 148 个 SM，单波最多只覆盖 8.1%。Job 17965 中官方 V128 的 NCU duration 是 1.27 毫秒，SM throughput 2.64%，DRAM throughput 1.24%，tensor pipe 的 elapsed-cycle 口径只有 2.48%。
 
-ValueSlice 把 grid 扩成 96 CTA 后，NCU duration 降到 901.22 微秒，SM/DRAM 升到 7.22%/1.83%。所以它既不是传统 compute-bound，也不是 HBM bandwidth-bound；首要边界是 **grid underfill、chunk recurrence critical path 和 CTA 内 TMA/issue latency**。”
+ValueSlice 把 grid 扩成 96 CTA 后，NCU duration 降到 901.22 微秒，SM/DRAM 升到 7.22%/1.83%。所以它既不是传统 compute-bound，也不是 HBM bandwidth-bound；第一层边界是 **grid underfill**，扩展 grid 后仍要处理 chunk recurrence critical path 和 CTA 内 TMA/issue latency。这也解释了为什么后续优化继续落在流水调度，而不是换 MMA。”
 
 ### 口径提醒
 
@@ -113,7 +113,7 @@ K3 正式 V128、grid12、inner64 时，L0 的 `mma_time/tcgen_time` 只有 0.92
 
 ---
 
-## 第 6 页：挑战设计——ValueSlice（65 秒）
+## 第 6 页：第一层优化——ValueSlice（65 秒）
 
 ### 必须说
 
@@ -121,7 +121,7 @@ K3 正式 V128、grid12、inner64 时，L0 的 `mma_time/tcgen_time` 只有 0.92
 
 grid 从 `(N,H)` 变成 `(N,H,D/V)`。H12 下，V128、V64、V32、V16 分别是 12、24、48、96 CTA。总 Tensor FLOP 不变，收益来自更高整卡并行度；代价是 q、k、gate 等 slice-independent 输入会被多个 CTA 重复请求。
 
-这仍然是 SM100 迁移挑战，因为题目明确允许‘并行度重构’，而我们的改动由 B300/SM103 的 148 SM underfill 触发，并以该架构的资源和 workload 做 dispatcher gate。迁移的目标是用好目标架构，不是强制出现某条新指令。”
+这仍然是 SM100 迁移挑战，因为题目明确允许‘并行度重构’，而我们的改动由 B300/SM103 的 148 SM underfill 触发，并以该架构的资源和 workload 做 shape/device guard。迁移的目标是用好目标架构，不是强制出现某条新指令。ValueSlice 解决的是跨 CTA 的第一层 underfill，但每个 V16 CTA 内部仍有串行 state 流水，这成为后两层优化的入口。”
 
 ### 指图
 
@@ -129,75 +129,71 @@ grid 从 `(N,H)` 变成 `(N,H,D/V)`。H12 下，V128、V64、V32、V16 分别是
 
 ### 转场
 
-“关键是这种切分不能只展示最佳点，必须同时展示反例，并让 dispatcher 安全地捕获它。”
+“下面把 ValueSlice、Phase-6 和 Phase-1 放在同一条性能阶梯上，先说明三层各自解决什么。”
 
 ---
 
-## 第 7 页：性能、反例与最终 dispatcher（70 秒）
+## 第 7 页：三层优化阶梯（70 秒）
 
 ### 必须说
 
-“所有 case 的 total tokens 都是 8192、H12、D128。fixed 单序列 V128 是 0.7807 毫秒，V16 是约 0.569 毫秒，auto 为 0.5698，降低 27.0%。packed 单序列更贴近 serving 调用：V128 0.7850，最终 auto 0.5740，降低 26.9%。
+“这一页把主线压成三层。官方 V128/P1 在 TP8 的 H12 形状只有 12 CTA。第一层 ValueSlice 把它扩成 96 CTA，Job17947 的 fixed 单序列降时 27.0%，解决整卡 grid underfill。
 
-但同样 8192 tokens，ragged6 最优是 V64，降低 17.4%；8×1024 的最佳收益只有 1.3%，低于 3% guard；32×256 时 V16 反而慢 106%。这说明总 token 数相同也不能用同一个 slice，高并发短序列本身已经提供 CTA。
+第二层不再增加 CTA，而把 Phase-6 的 state 预取窗口从 1 拉到 4。Job19901 相对旧 V16，有初态新增降时 19.40%，无初态新增 9.02%。
 
-补丁 `0002` 修复了 packed 单序列漏选：只读 `cu_seqlens.numel()` 元数据，nseq=1 复用 fixed B1 标定，不读取 GPU 上的长度值，也不触发 host sync；nseq 大于 1 继续保守回退 V128。最终形式不是无条件 V16，而是 **guarded ValueSlice + V128 fallback**。”
+第三层为 Phase-1 的 k、q、state 建 fragment ring，无初态用 lookahead4，有初态用 lookahead2。Job19934 中，完整候选相对同作业 V128，首段降低 37.23%，续段降低 45.52%。
+
+三层作用于不同边界：ValueSlice 解决跨 CTA underfill，后两层拉长 V16 CTA 内的 load-use 距离。最后一层的 37.23% 和 45.52% 已是累计结果，不能再与 27%、19.40% 或 9.02% 相加；不同 Job 的绝对毫秒也不横向拼接。”
 
 ### 转场
 
-“然后我们验证，性能收益没有靠放宽误差换来。”
+“单调用的阶梯成立后，下一页看它在准入域和两个 stream 下是否仍然成立。”
 
 ---
 
-## 第 8 页：正确性与 BF16 state 边界（55 秒）
+## 第 8 页：单调用收益与并发负例（55 秒）
 
 ### 必须说
 
-“正确性分三层。第一，官方扩展和 patched V128 的 10 个 tensor 全部 bitwise equal。第二，V16/V32/V64 对 V128 的 98 条 comparison row 全部 bitwise equal，最坏 relative RMSE 为零。第三，对题目指定的 FLA `naive.py` 和 `chunk.py` 做独立参考对拍，完整 CSV 的 200 条 comparison row 全部 finite；所有独立参考关系的观测最坏 relative RMSE 是 0.9131%。
+“Job19934 只用同输入、同作业配对。34 个准入域单调用点在四种计时口径的中位数上都获益，Phase-1 相对已有 P4 的 eager 增量为 5.15% 到 12.40%。T8192 上，无初态从 0.950848 降到 0.862208 毫秒，降低 9.32%；有初态从 0.796144 降到 0.743968 毫秒，降低 6.55%。
 
-这里我们刻意不说‘200/200 统一阈值通过’，因为长序列和 K3 行没有统一预注册 hard threshold。我们只报告 finite 和观测误差。
+但两个 stream 给出必须公开的反例：无初态 joined pair 从 1.147440 增到 1.164832 毫秒，回归 1.52%，三轮一致；有初态只回归约 0.03%，基本持平。joined pair 不能除以二冒充单请求 latency。
 
-BF16 state 方面，T8192 long-memory 对 naive 的 output/state 是 0.8240%/0.7405%。但 public buffer 切成 FP32 后内部仍按 BF16 舍入，所以这不是完整 FP32 recurrence 对照，也不能替代模型级 perplexity 或任务精度。”
+当前 guard 只看 `N1/H12/D128/C16/BF16/T2K–8K`，不感知 GPU 的实时并发。因此 0004 和 0005 均默认关闭；运行时可以强制 V128，但恢复 Phase6-only V16 需要单独二进制。”
 
 ### 转场
 
-“最后把 27% 算子收益放回 Kimi 系统，说明哪些能说、哪些不能说。”
+“并发负例决定了启用边界，下一页再看数值验证是否闭环，以及 operator 收益能外推到哪里。”
 
 ---
 
-## 第 9 页：从 operator 到 Kimi K3、通信和 SLO（65 秒）
+## 第 9 页：验证闭环与系统边界（65 秒）
 
 ### 必须说
 
-“FlashKDA forward 是 KDA prefill 的直接组成部分，所以最可能受益的是 TP8、低并发、长 prompt 的 TTFT 组成部分。但 **27% 只是算子降时，不是 TTFT 降 27%**。
+“Kernel 侧的验证闭环成立。原参考矩阵 200 条 comparison row 全部 finite，其中 98 条 ValueSlice 对 V128 逐位一致，独立参考关系的观测最坏 relative RMSE 是 0.913%。最新干净候选又完成 120 加 14 条跨路径 bitwise 回归，state chain、Graph、计时后检查和双流正确性通过；memcheck 与 synccheck 都是零错误。
 
-设 FlashKDA forward 占完整 prefill 的比例为 `p`，一阶 prefill 降时约为 `0.27p`。当 p 是 20%、40%、60% 时，只能推断 5.4%、10.8%、16.2% 的 prefill 降时；SLO goodput 还取决于 TTFT/TPOT 哪个约束绑定、continuous batching、排队和资源重叠。69/93 是层数比例，不是时间比例。
+边界同样明确：BF16 state 仍只是 kernel 数值对拍，public FP32 buffer 不等于全 FP32 recurrence，也没有完整模型 accuracy 证据。
 
-本挑战不声称 decode/TPOT 加速：T=1 会回退 V128，纯 decode 还有独立 fused KDA decode。也不声称 TP8 通信改善：单 B300 没有 NCCL 实测，局部 K2 不改变 collective 消息体。
-
-卡内下一步则很明确：ValueSlice 会重复搬公共输入，CTA Cluster、DSM 和 TMA multicast 可以让 slice CTA 共享一次搬运。纸面 source-request 模型给出最多 81.3% common-input 请求可消除，但必须再测 cluster residency、同步和真实 duration。”
+系统外推只展示首段。若 FlashKDA forward 占完整 prefill 的比例为 `p`，Job19934 的 37.23% operator 降时给出一阶敏感性 `0.3723p`；p 为 20%、40%、60% 时，对应约 7.4%、14.9%、22.3%。这不是 37% TTFT，更不是 TPOT、SLO goodput、TP8/NCCL 或多请求 throughput 实测。69/93 是层数比例，不是 wall-time 占比。”
 
 ### 转场
 
-“因此最终不是简单的‘迁’或‘不迁’，而是一张按证据分层的发布决策表。”
+“单卡 kernel 证据闭环，但系统证据仍有缺口，所以最后压缩成 STOP、KEEP 和 NEXT。”
 
 ---
 
-## 第 10 页：go/no-go 与最终回答（50 秒）
+## 第 10 页：STOP / KEEP / NEXT（50 秒）
 
 ### 必须说
 
-“最终四项决策：
+“STOP 是全面 `mma.sync` 到 `tcgen05`：V128 Phase-6 的乐观 probe 只有 0.920 倍，当前不合入；只有跨 phase、TMEM-resident 的完整数据流过 gate，才重新开启。
 
-第一，全面 `mma.sync` 到 `tcgen05` 是 NO-GO，因为正式 V128 的乐观 Phase-6 probe 仍慢 8.7%。
+KEEP 是 V128 fallback 加 guarded V16/P4/Phase1。ValueSlice 保留 shape/device guard；P4 和 Phase-1 默认关闭，完整候选相对同作业 V128 降低 37.23% 和 45.52%，但随时能回退 V128。
 
-第二，CHUNK32/64 机械放大是 NO-GO，因为当前数值路径在 token18 失效，朴素 Neumann 代价增长 5.33 倍和 26.67 倍。
+NEXT 是并发矩阵与真实 K3/TP8 关键路径。先解决无初态双流 1.52% 回归和实时并发不可见，再评估 Cluster/multicast 与跨 Phase TCGEN。
 
-第三，guarded ValueSlice 是 GO：它针对 12 CTA/148 SM 的真实瓶颈，fixed 和 packed 单序列约降时 27%，98/98 ValueSlice 对照 bitwise equal，同时用高并发反例界定启用域。
-
-第四，Cluster + TMA multicast 是 NEXT，用来减少 ValueSlice 的重复搬运。
-
-所以对题目的直接回答是：**SM100 值得利用，但利用 SM100 不等于把 SM80 MMA 全换掉。当前值得交付的是受保护的并行度专版，不值得交付的是全面指令替换。**”
+一句话回答：**SM100 的价值在重塑并行与数据流，不在替换一条看起来更新的指令。**”
 
 ### 结束句
 
@@ -207,8 +203,8 @@ BF16 state 方面，T8192 long-memory 对 naive 的 output/state 是 0.8240%/0.7
 
 ## 现场节奏与应急删减
 
-- 8:05 前必须讲完第 8 页；否则第 9 页只说 `0.27p`、无 decode/NCCL 实测和 cluster 下一步。
+- 8:05 前必须讲完第 8 页；否则第 9 页只说最新 120+14 bitwise、`0.3723p` 只是敏感性分析，以及无模型/TP8 实测。
 - 第 2 页不逐项念 H64；第 4 页不展开 Neumann 公式；第 5 页不解释所有 V/grid 组合。
 - 若老师提前追问，在当前页用一句话回答后说“这个边界在第 8/9/10 页会完整回答”，不要打乱主线。
-- 最后必须保留 20 秒完整说出“NO-GO / NO-GO / GO / NEXT”和一句话结论。
+- 最后必须保留 20 秒完整说出“STOP / KEEP / NEXT”和一句话结论。
 - 所有数字若一时记不清，优先报方向、形状和证据 job，不现场猜小数。
