@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "stage": 12,
+  "date": "2026-09-11",
+  "device": "NVIDIA B300 SXM6 AC",
+  "architecture": "sm_103a",
+  "framework": {
+    "typed_axes": [
+      "mma_route",
+      "value_slice",
+      "compute_warps",
+      "accumulator_carrier",
+      "operand_b_layout",
+      "materialization_placement",
+      "scheduler",
+      "pipeline",
+      "tmem_lifetime",
+      "producer_ready_layout",
+      "bf16_rounding_boundary"
+    ],
+    "portfolio_roles": [
+      "layout",
+      "residency",
+      "scheduler",
+      "parallelism",
+      "numerics"
+    ],
+    "typed_physical_layouts": [
+      "hmma_a_fragment",
+      "hmma_b_fragment",
+      "tcgen05_32b_swizzled_mk",
+      "tcgen05_32b_swizzled_nk",
+      "tmem_accumulator",
+      "tmem_operand_a"
+    ],
+    "layout_safety_rule": "a tmem_accumulator is not a tmem_operand_a without an explicit verified transform",
+    "cpu_tests_passed": 108,
+    "dataflow_canonicalization": {
+      "recurrence_steps": 64,
+      "before_materializations": 2,
+      "after_materializations": 1,
+      "before_bytes_per_cta": 65536,
+      "after_bytes_per_cta": 32768,
+      "semantic_boundary": "no rewrite crosses explicit FP32-to-BF16 rounding"
+    }
+  },
+  "envelopes": [
+    {
+      "envelope_id": "hmma-v32-v64-warp-density",
+      "scope": "B300 public-full cold-L2; H12 balanced nseq3 V32 and nseq6 V64; child speedup versus immediate incumbent",
+      "envelope_digest": "envelope:a88d7be286940c243f57470b218b49b17accaabb0b250e32f6778d313653ecf2",
+      "closed": true,
+      "slurm_job": 25316,
+      "build_attempt_before_repair": 25309,
+      "correctness": "finite and bitwise-equal output and final state versus official before timing",
+      "designs": [
+        {
+          "name": "hmma-v32-baseline",
+          "canonical_id": "design-ir:6d5fbc0923e9ce849cb0489a25749c5137713e9d51adee50b3ac6305cdfcf058",
+          "compute_warps": 2,
+          "median_ms": 0.2466575,
+          "speedup_vs_official": 1.3071201970343493,
+          "disposition": "qualified"
+        },
+        {
+          "name": "hmma-v32-paired",
+          "canonical_id": "design-ir:19342f1f95fc2f202c7b5e24ad8cc44e26d2ddb883016430b63fe19851bc3e44",
+          "compute_warps": 1,
+          "median_ms": 0.291531,
+          "speedup_vs_baseline": 0.8460764035385603,
+          "speedup_vs_official": 1.1059235552994364,
+          "disposition": "measured_below_gate"
+        },
+        {
+          "name": "hmma-v64-baseline",
+          "canonical_id": "design-ir:3105d82a01b5cc1f1422de630489af291fbf4dc16f27e96399b70dbdefadad9e",
+          "compute_warps": 4,
+          "median_ms": 0.16888225,
+          "speedup_vs_official": 1.183513957209831,
+          "disposition": "qualified"
+        },
+        {
+          "name": "hmma-v64-paired",
+          "canonical_id": "design-ir:b285584eb88fd7a6a6d997a3d12c11ed77b29a6e40cb9228410b48778fa7b866",
+          "compute_warps": 2,
+          "median_ms": 0.18960925,
+          "speedup_vs_baseline": 0.8906857128541988,
+          "speedup_vs_official": 1.0541389726503323,
+          "disposition": "measured_below_gate"
+        }
+      ],
+      "missing_design_ids": []
+    },
+    {
+      "envelope_id": "tcgen-v16-global-b-layout",
+      "scope": "B300 Phase-6 V16 mechanism probe; inner=64; physical child versus logical preferred-layout parent",
+      "envelope_digest": "envelope:2cf2bec6f7e06e471581ed9eee15f8eb27d9a2c11823145d2ff824af3c93a6d6",
+      "closed": true,
+      "slurm_job": 25380,
+      "supersedes_slurm_job": 25317,
+      "patch_attempt_before_repair": 25311,
+      "correctness": "all probe validation cases passed with corrected Swizzle<1,4,3> addressing and K-nondegenerate A input before timing",
+      "evidence_refs": [
+        "04_evidence/agent_rounds/round11_tcgen_revalidation/logical_b.csv",
+        "04_evidence/agent_rounds/round11_tcgen_revalidation/physical_b.csv",
+        "04_evidence/agent_rounds/round11_tcgen_revalidation/slurm-layout-25380.out"
+      ],
+      "designs": [
+        {
+          "name": "tcgen-v16-logical-bridge",
+          "canonical_id": "design-ir:4a2879bfe61884dbe7e86c59e53204fafe8e0aa67380e49c437d1dbdba821c25",
+          "inner64_us": 77.05184,
+          "speedup_vs_parent": 1.0,
+          "disposition": "qualified_as_incumbent"
+        },
+        {
+          "name": "tcgen-v16-producer-ready",
+          "canonical_id": "design-ir:f2b2b8184c2d0607fe8d8d4a369f7a4a18778bab2c1217e5d98415fda92c69fe",
+          "inner64_us": 77.623839,
+          "speedup_vs_logical": 0.9926311393862141,
+          "speedup_vs_hmma": 0.9460617775722514,
+          "disposition": "measured_below_gate"
+        }
+      ],
+      "missing_design_ids": []
+    },
+    {
+      "envelope_id": "p34-single-allocation-shared-carrier",
+      "scope": "B300 P3-to-BF16-round-to-P4 dual-MMA mechanism probe; grids 12/96; inner 1/64; tcgen05 single TMEM allocation and shared carrier versus fused HMMA",
+      "envelope_digest": "envelope:97b51ca1e2d26342d995385a4b1db7dce2c66ea830340cd672b16c5f99ea791d",
+      "closed": true,
+      "slurm_job": 25377,
+      "correctness": "exact BF16 output validation for P3 carrier, second issue, HMMA and tcgen05 at inner 1/2/4 with corrected swizzle and K-nondegenerate inputs",
+      "evidence_refs": [
+        "04_evidence/agent_rounds/round10_p34/p34_lifecycle.csv",
+        "04_evidence/agent_rounds/round10_p34/p34_lifecycle.log",
+        "04_evidence/agent_rounds/round10_p34/slurm-25377.out"
+      ],
+      "designs": [
+        {
+          "name": "p34-hmma-grid12-inner1",
+          "canonical_id": "design-ir:5a006f1e5ad2746ec10d451a6132f035c37d90f0f09ee9b5fce0802a4989844e",
+          "median_us": 6.67136,
+          "speedup_vs_hmma": 1.0,
+          "disposition": "short-residency-incumbent"
+        },
+        {
+          "name": "p34-tcgen-shared-grid12-inner1",
+          "canonical_id": "design-ir:04f7416ebe737df026ba2274113f768dda80c2da6cf56ce05d3760a4b9fcc32a",
+          "median_us": 8.72,
+          "speedup_vs_hmma": 0.7650642201834862,
+          "disposition": "measured_below_gate"
+        },
+        {
+          "name": "p34-hmma-grid12-inner64",
+          "canonical_id": "design-ir:262d2325edfec7de0d2c13af1798619e6833693255fe491bca05719d95f4e700",
+          "median_us": 65.582881,
+          "speedup_vs_hmma": 1.0,
+          "disposition": "long-residency-parent"
+        },
+        {
+          "name": "p34-tcgen-shared-grid12-inner64",
+          "canonical_id": "design-ir:c15a6696512f37ba068ece5cb52b32e4cad7d9ccd18df4bc71597140deb0a023",
+          "median_us": 45.353761,
+          "speedup_vs_hmma": 1.446029595749886,
+          "disposition": "qualified-mechanism"
+        },
+        {
+          "name": "p34-hmma-grid96-inner1",
+          "canonical_id": "design-ir:362617209583c07aef66da98020eaa424922c097b6b32b288143f5ec124c7244",
+          "median_us": 6.90784,
+          "speedup_vs_hmma": 1.0,
+          "disposition": "short-residency-incumbent"
+        },
+        {
+          "name": "p34-tcgen-shared-grid96-inner1",
+          "canonical_id": "design-ir:6f30f6dde0afdfdf279244e518c5a190a3dd0bb3a51a34f88151912b4b797b6f",
+          "median_us": 9.744,
+          "speedup_vs_hmma": 0.708933,
+          "disposition": "measured_below_gate"
+        },
+        {
+          "name": "p34-hmma-grid96-inner64",
+          "canonical_id": "design-ir:f3ba6666700fc68ac2351c1dc013bdde1d0200d632686c2616e751d8ee44dfb8",
+          "median_us": 65.593119,
+          "speedup_vs_hmma": 1.0,
+          "disposition": "long-residency-parent"
+        },
+        {
+          "name": "p34-tcgen-shared-grid96-inner64",
+          "canonical_id": "design-ir:242dcac2c6bc897c36ab86d6ec5c4ae1a214117d80a9b72ef9be3d63afa61fe1",
+          "median_us": 45.860481,
+          "speedup_vs_hmma": 1.430275,
+          "disposition": "qualified-mechanism"
+        }
+      ],
+      "missing_design_ids": []
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "name": "p34-direct-tmem-a-unpack16",
+      "slurm_job": 25382,
+      "correctness": "failed all 24576 BF16 outputs for inner 1/2/4",
+      "disposition": "rejected_before_timing",
+      "evidence_ref": "04_evidence/agent_rounds/round12_tmem_carrier_rejection/job25382_validation.log"
+    },
+    {
+      "name": "p34-direct-tmem-a-lowword",
+      "slurm_job": 25385,
+      "correctness": "failed all 24576 BF16 outputs for inner 1/2/4 with the same mismatch pattern as the unpack candidate",
+      "disposition": "rejected_before_timing",
+      "evidence_ref": "04_evidence/agent_rounds/round12_tmem_carrier_rejection/job25385_validation.log"
+    }
+  ],
+  "closure_boundary": {
+    "closed": [
+      "HMMA V32/V64 one-versus-two 16-column blocks per compute warp on the declared profiles",
+      "tcgen05 V16 logical-versus-producer-ready global B layout in the Phase-6 mechanism probe",
+      "P3-to-P4 HMMA versus single-allocation tcgen05 shared-carrier lifecycle for grids 12/96 and inner 1/64",
+      "two direct D-fragment-to-A-TMEM layouts rejected by exact correctness before timing",
+      "two-hop register-to-logical-shared-to-preferred-shared materialization chain in the typed dataflow IR"
+    ],
+    "open": [
+      "integration of the validated P3/P4 lifecycle into a full public-call P1-P6 kernel",
+      "a CUTLASS/CuTe-derived D-fragment-to-A-TMEM transform that passes exact validation",
+      "shape-gated portfolio dispatch across M64/M128/split/slab/persistent families",
+      "new algorithms or layouts outside the declared typed envelopes"
+    ],
+    "claim": "closed under the declared finite typed grammar and measured scopes; not a proof of a global GPU optimum"
+  }
+}

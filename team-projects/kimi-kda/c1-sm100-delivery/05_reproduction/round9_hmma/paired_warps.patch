@@ -1,0 +1,18 @@
+diff --git a/csrc/smxx/fwd_launch.cu b/csrc/smxx/fwd_launch.cu
+index ffe7a15..d04de25 100644
+--- a/csrc/smxx/fwd_launch.cu
++++ b/csrc/smxx/fwd_launch.cu
+@@ -189,7 +189,12 @@ void launch_fwd_impl(
+     // ===== Launch Kernel 2 (recurrence) =====
+ #if BLOCK_LEVEL_K2 >= 0
+     {
+-        constexpr int kK2ComputeWarps = (kK2Value / 16 < 4) ? (kK2Value / 16) : 4;
++        // V32/V64 used one warp for every 16-column block.  The kernel body
++        // already carries two block fragments per warp for V128; reuse that
++        // mapping for the smaller slices instead of launching idle control
++        // overhead in twice as many compute warps.
++        constexpr int kK2ComputeWarps =
++            (kK2Value <= 16) ? 1 : ((kK2Value / 32 < 4) ? kK2Value / 32 : 4);
+         constexpr int kK2Threads = 32 * (2 + kK2ComputeWarps);
+         using SharedStorageK2T = SharedStorageK2<K2L, kInputStages, kOutputStages>;
+         int smem_size_k2 = sizeof(SharedStorageK2T);

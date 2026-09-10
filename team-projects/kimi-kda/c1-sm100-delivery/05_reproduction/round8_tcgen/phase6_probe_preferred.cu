@@ -52,13 +52,15 @@ constexpr int kThreads = 128;
 
 __host__ __device__ inline int swizzle_32b_offset(int row, int col_byte) {
     // One compact K=16 BF16 row is 32 bytes.  The 32B swizzle atom is
-    // 8 rows x 32 bytes and repeats on a 256-byte boundary.
+    // Swizzle<1,4,3> in byte units: address bit 4 is XORed with bit 7.
+    // With a 32-byte row, bit 7 is row bit 2.  The 8-row atom repeats on
+    // a 256-byte boundary.
     const int atom = row >> 3;
     const int row_in_atom = row & 7;
     const int chunk16 = col_byte >> 4;
     const int byte_in_chunk = col_byte & 15;
     return atom * 256 + row_in_atom * 32 +
-           ((chunk16 ^ (row_in_atom & 1)) << 4) + byte_in_chunk;
+           ((chunk16 ^ ((row_in_atom >> 2) & 1)) << 4) + byte_in_chunk;
 }
 
 __device__ inline uint64_t make_desc_sm100(uint32_t shared_address,
@@ -584,7 +586,10 @@ static Buffers allocate_and_initialize(int grid,
     for (int block = 0; block < grid; ++block) {
         for (int m = 0; m < kM; ++m) {
             for (int k = 0; k < kK; ++k) {
-                const int value = ((m * 5 + k * 3 + block) % 3) - 1;
+                // Keep K genuinely non-constant so correctness checks expose
+                // any misplaced swizzle sub-block instead of cancelling it in
+                // the dot product.
+                const int value = ((m * 5 + k * 2 + block) % 3) - 1;
                 a[(size_t(block) * kM + m) * kK + k] =
                     __float2bfloat16(float(value));
             }

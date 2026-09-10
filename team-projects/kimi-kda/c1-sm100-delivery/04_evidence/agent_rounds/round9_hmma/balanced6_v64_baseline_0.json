@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "case": "balanced6_v64",
+  "lengths": [
+    1366,
+    1366,
+    1365,
+    1365,
+    1365,
+    1365
+  ],
+  "variant": "baseline",
+  "block": 0,
+  "scope": "preallocated public-full forward plus same-stream state copy-back",
+  "identity": {
+    "module": "flash_kda_phase1_C",
+    "binary": "/home/lcpu/61681696/kda-zero-state-20260905/clean_build/lib/flash_kda_phase1_C.cpython-312-x86_64-linux-gnu.so",
+    "binary_sha256": "f6f80fa402cc1dc00b09a8082b10806bbe17c0e533d067e931dd774d270b9270",
+    "value_slice": 64,
+    "compute_warps": 4,
+    "device": "NVIDIA B300 SXM6 AC",
+    "capability": [
+      10,
+      3
+    ]
+  },
+  "correctness": {
+    "output": {
+      "finite": true,
+      "bitwise": true,
+      "max_abs": 0.0
+    },
+    "state": {
+      "finite": true,
+      "bitwise": true,
+      "max_abs": 0.0
+    }
+  },
+  "status": "measured",
+  "samples_ms": [
+    0.194562,
+    0.172387,
+    0.169891,
+    0.170851,
+    0.170434,
+    0.169314,
+    0.166946,
+    0.168066,
+    0.169954,
+    0.169027,
+    0.168323,
+    0.169059,
+    0.176515,
+    0.166626,
+    0.16765,
+    0.169666,
+    0.169922,
+    0.168963,
+    0.168931,
+    0.167459,
+    0.167842,
+    0.166466,
+    0.169986,
+    0.168898,
+    0.167971,
+    0.167299,
+    0.168578,
+    0.168098,
+    0.167586,
+    0.171298,
+    0.169187,
+    0.167939,
+    0.167939,
+    0.168418,
+    0.169314,
+    0.169634,
+    0.169826,
+    0.168995,
+    0.176259,
+    0.169059
+  ],
+  "median_ms": 0.16901100000000002,
+  "calls": 58
+}

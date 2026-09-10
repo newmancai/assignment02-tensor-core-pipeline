@@ -17,8 +17,14 @@ and its reproducibility summary are indexed by `PAPER_FINALIZATION.md`.
 The source-to-ISA review of the original FlashKDA SM80 MMA path, its scoped
 negative `tcgen05` result, and the new typed migration/failure-memory contract
 are recorded in `STAGE11_MMA_MIGRATION_REVIEW.md`.
-The single-file continuation point for the complete Stage 11 state, B300 job
-24111 and the next P3/P4 implementation is `HANDOFF_STAGE11.md`.
+The Stage 12 cross-route design grammar, compound portfolio coordinator,
+layout canonicalizer, finite-envelope closure certificates, and new B300
+measurements are summarized in
+`../03_reports/STAGE12_TYPED_IR_SEARCH_CLOSURE_20260911.md`.
+The single-file continuation point for the complete Stage 11 state and B300
+job 24111 is `HANDOFF_STAGE11.md`; the formerly open P3/P4 implementation now
+has compiled, exact-validation and timing evidence in
+`../04_evidence/agent_rounds/round10_p34/`.
 The audited open-source execution/search stack and its exact integration
 boundary are recorded in `OPEN_SOURCE_MULTI_AGENT_STACK.md`; pinned source
 snapshots and licenses live under `third_party/`.
@@ -34,7 +40,7 @@ FlashKDA schedule families:
 - the B300 value-sliced schedule;
 - a CAKE-class BT16 prepare/chain schedule.
 
-It contains fourteen small layers:
+It contains seventeen small layers:
 
 1. `kda_ir.model`: typed roles, buffers, barriers, operations, resources, and
    recurrence decomposition;
@@ -64,6 +70,14 @@ It contains fourteen small layers:
 14. `kda_ir.mma_migration`: a site-level SM80→SM100 migration contract with
     frozen math/rounding semantics, tcgen05/TMEM lifecycle checks, full
     candidate hashes, and scoped negative-result memory.
+15. `kda_ir.design_ir`: finite cross-route architecture axes plus typed SSA
+    dataflow and conservative layout canonicalization that cannot cross a
+    BF16 rounding boundary.
+16. `kda_ir.portfolio_search`: compatible multi-role patch composition and a
+    quality-diversity elite archive keyed by physical mechanism.
+17. `kda_ir.closure`: scope-explicit finite-envelope certificates that list
+    uncovered semantic designs instead of promoting a local plateau to a
+    global-optimum claim.
 
 Stage 11 additionally freezes a two-factor causal ladder in
 `evidence/stage11_tcgen05_causal_ladder_preregistration.json`: P3/P4 shared
@@ -72,8 +86,11 @@ The ladder prevents one-path negatives or CAKE full-stack results from being
 promoted into an opcode-level rule.
 
 The frontier intentionally avoids pretending that a static resource heuristic
-is a trustworthy latency model. Verified candidates still require compilation,
-correctness, and B300 measurement before performance ranking.
+or the materialization byte model is a trustworthy latency model. Verified
+candidates still require compilation, correctness, and B300 measurement before
+performance ranking. The current suite contains 108 CPU tests, including the
+explicit rule that a TMEM accumulator layout cannot masquerade as an A-operand
+layout without a verified transform.
 
 Run the CPU-only vertical-slice checks:
 

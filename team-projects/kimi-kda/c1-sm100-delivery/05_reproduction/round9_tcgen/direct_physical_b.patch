@@ -1,0 +1,45 @@
+--- a/phase6_probe_preferred.cu
++++ b/phase6_probe_preferred.cu
+@@ -52,0 +53,11 @@
++__host__ __device__ inline size_t global_b_index(int block, int k, int n,
++                                                  int value_extent) {
++#if defined(KDA_B_GLOBAL_PHYSICAL) && KDA_B_GLOBAL_PHYSICAL
++    // Producer-ready B^T[V,K]: consecutive K values for one output column.
++    return (size_t(block) * value_extent + n) * kK + k;
++#else
++    // Public logical B[K,V].
++    return (size_t(block) * kK + k) * value_extent + n;
++#endif
++}
++
+@@ -139 +149,0 @@
+-    const size_t block_b = size_t(blockIdx.x) * kK * V;
+@@ -146 +156,4 @@
+-        shared_b[i] = global_b[block_b + i];
++        const int k = i / V;
++        const int n = i % V;
++        shared_b[i] =
++            global_b[global_b_index(int(blockIdx.x), k, n, V)];
+@@ -303 +316,4 @@
+-            shared_b_logical[i] = global_b[block_b + i];
++            const int k = i / V;
++            const int n = i % V;
++            shared_b_logical[i] =
++                global_b[global_b_index(int(blockIdx.x), k, n, V)];
+@@ -315 +331 @@
+-                global_b[block_b + k * V + n];
++                global_b[global_b_index(int(blockIdx.x), k, n, V)];
+@@ -600 +616 @@
+-                b[(size_t(block) * kK + k) * V + n] =
++                b[global_b_index(block, k, n, V)] =
+@@ -650 +666 @@
+-                               b[(size_t(block) * kK + k) * V + n]);
++                               b[global_b_index(block, k, n, V)]);
+@@ -990 +1006,6 @@
+-        "not_full_K2=1\n");
++        "not_full_K2=1,global_b_layout="
++#if defined(KDA_B_GLOBAL_PHYSICAL) && KDA_B_GLOBAL_PHYSICAL
++        "producer_ready_nk\n");
++#else
++        "logical_kv\n");
++#endif

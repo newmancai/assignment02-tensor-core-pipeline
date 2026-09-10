@@ -187,7 +187,7 @@ producer/MMA/consumer pipeline。
 
 如果无法构造完全结构匹配的 T0，应将结果称为“tcgen05 + 必要协议包联合效应”，而
 不是纯 ISA 因果。完整实验定义见
-[`experiments/sm100_open_round1/TCGEN_OPTION_VALUE.md`](experiments/sm100_open_round1/TCGEN_OPTION_VALUE.md)。
+[`TCGEN_OPTION_VALUE.md`](TCGEN_OPTION_VALUE.md)。
 
 ## 六、内部有效性修正
 
@@ -215,7 +215,7 @@ symbols，反转 load order 会显著改变绝对时间。即使 Python 使用 `
 - failure scope：失败只能成为带 applicability key 的 prior，不能升级成 verifier ban。
 
 当前路径索引为
-[`experiments/sm100_open_round1/paths/index.json`](experiments/sm100_open_round1/paths/index.json)。
+[`../07_experiment_history/sm100_open_round1/paths/index.json`](../07_experiment_history/sm100_open_round1/paths/index.json)。
 H3 有完整 prototype-scope IR；CAKE 为 source-grounded partial reconstruction，已记录真实
 routes、tcgen/TMEM family、fused-m128 resources/roles/pipelines，同时明确缺少完整 per-site
 MNK、所有 descriptor layout、prepare-chain barrier graph 和 per-route SASS counts。
@@ -224,36 +224,36 @@ MNK、所有 descriptor layout、prepare-chain barrier graph 和 per-route SASS 
 
 ### 官方、CHUNK 和历史主线
 
-- 原始任务：[`../TASK.md`](../TASK.md)
-- Stage11 迁移审查：[`STAGE11_MMA_MIGRATION_REVIEW.md`](STAGE11_MMA_MIGRATION_REVIEW.md)
-- 历史机器可读结论：[`evidence/stage11_mma_migration_memory.json`](evidence/stage11_mma_migration_memory.json)
-- 原 C1 报告：[`../../../../assignment02-github/team-projects/kimi-kda/docs/c1-final/FINAL_REPORT.md`](../../../../assignment02-github/team-projects/kimi-kda/docs/c1-final/FINAL_REPORT.md)
+- 原始任务：[`../00_task/TASK.md`](../00_task/TASK.md)
+- Stage11 迁移审查：[`history/STAGE11_MMA_MIGRATION_REVIEW.md`](history/STAGE11_MMA_MIGRATION_REVIEW.md)
+- 历史机器可读结论：[`../04_evidence/direct_tcgen/stage11_mma_migration_memory.json`](../04_evidence/direct_tcgen/stage11_mma_migration_memory.json)
+- 原 C1 报告：[`../../docs/c1-final/FINAL_REPORT.md`](../../docs/c1-final/FINAL_REPORT.md)
 
 ### 本轮正式结果
 
 - CAKE/official isolated CUPTI：
-  [`experiments/sm100_open_round1/evidence/b300_stage12_cake_official_isolated_pair.json`](experiments/sm100_open_round1/evidence/b300_stage12_cake_official_isolated_pair.json)
+  [`../04_evidence/cake/b300_stage12_cake_official_isolated_pair.json`](../04_evidence/cake/b300_stage12_cake_official_isolated_pair.json)
 - H3/official isolated CUPTI：
-  [`experiments/sm100_open_round1/evidence/h3_b300_isolated_process_cupti.json`](experiments/sm100_open_round1/evidence/h3_b300_isolated_process_cupti.json)
+  [`../04_evidence/h3/h3_b300_isolated_process_cupti.json`](../04_evidence/h3/h3_b300_isolated_process_cupti.json)
 - H3 GPU correctness：
-  [`experiments/sm100_open_round1/evidence/h3_gpu_correctness.json`](experiments/sm100_open_round1/evidence/h3_gpu_correctness.json)
+  [`../04_evidence/h3/h3_gpu_correctness.json`](../04_evidence/h3/h3_gpu_correctness.json)
 - H3 source/binary manifest：
-  [`experiments/sm100_open_round1/evidence/h3_source_manifest.json`](experiments/sm100_open_round1/evidence/h3_source_manifest.json)
+  [`../04_evidence/h3/h3_source_manifest.json`](../04_evidence/h3/h3_source_manifest.json)
 - CAKE source/binary manifest：
-  [`experiments/sm100_open_round1/evidence/cake_source_binary_manifest.json`](experiments/sm100_open_round1/evidence/cake_source_binary_manifest.json)
+  [`../04_evidence/cake/cake_source_binary_manifest.json`](../04_evidence/cake/cake_source_binary_manifest.json)
 - CAKE partial IR：
-  [`experiments/sm100_open_round1/ir/cake_sm100_full_stack.json`](experiments/sm100_open_round1/ir/cake_sm100_full_stack.json)
+  [`../04_evidence/cake/cake_sm100_full_stack.json`](../04_evidence/cake/cake_sm100_full_stack.json)
 - H3 IR：
-  [`experiments/sm100_open_round1/ir/h3_precomputed_pw_c16.json`](experiments/sm100_open_round1/ir/h3_precomputed_pw_c16.json)
+  [`../04_evidence/h3/h3_precomputed_pw_c16.json`](../04_evidence/h3/h3_precomputed_pw_c16.json)
 
 ### 答辩材料
 
 - 64 问自审：
-  [`experiments/sm100_open_round1/DEFENSE_SELF_AUDIT.md`](experiments/sm100_open_round1/DEFENSE_SELF_AUDIT.md)
+  [`DEFENSE_SELF_AUDIT.md`](DEFENSE_SELF_AUDIT.md)
 - 本轮状态：
-  [`experiments/sm100_open_round1/CURRENT_MAINLINE_STATUS.md`](experiments/sm100_open_round1/CURRENT_MAINLINE_STATUS.md)
+  [`CURRENT_MAINLINE_STATUS.md`](CURRENT_MAINLINE_STATUS.md)
 - 多路径复盘：
-  [`experiments/sm100_open_round1/ROUND1_REVIEW.md`](experiments/sm100_open_round1/ROUND1_REVIEW.md)
+  [`ROUND1_REVIEW.md`](ROUND1_REVIEW.md)
 
 ## 九、可说与不可说
 
@@ -290,7 +290,7 @@ guarded v2 决策都已形成闭环。
 
 按 HMMA proposer、tcgen05 proposer、evidence critic、deterministic executor 和经验回写
 的闭环结构，又执行了两轮等 proposal/GPU challenger 数的开放探索。完整复盘见
-[`experiments/sm100_open_round1/dual_ir_agent_rounds/TWO_ROUND_REVIEW.md`](experiments/sm100_open_round1/dual_ir_agent_rounds/TWO_ROUND_REVIEW.md)。
+[`../07_experiment_history/sm100_open_round1/dual_ir_agent_rounds/TWO_ROUND_REVIEW.md`](../07_experiment_history/sm100_open_round1/dual_ir_agent_rounds/TWO_ROUND_REVIEW.md)。
 
 新增结论是：当前强化 HMMA 的 H12 packed dispatch 仍有明显空洞；V64 在 mixed6 与
 balanced6 上分别比 V128 快 1.2172x 和 1.1723x，且 output/state 对官方 bitwise。
@@ -312,3 +312,15 @@ search-only 两 block epoch 中比 Cake 快 1.0366x，应进入正式 qualificat
 Python/native/header 执行身份要求已经统一到
 [`FRAMEWORK_SCOPE_CORRECTION_20260910.md`](FRAMEWORK_SCOPE_CORRECTION_20260910.md)。
 旧 Stage9 cpc grammar 只保留为历史 case-study backend，不再作为通用探索限制。
+
+## 十二、2026-09-11 Typed IR 与 P3/P4 机制上界补充
+
+本补充不改写上文已冻结的 public-full headline，而是解决“局部闭包之后还有没有可执行结构空间”。我们新增了跨 HMMA/tcgen05 的 `KernelDesign`、带 shape/dtype/layout/carrier 的数据流 IR、五角色 typed patch 组合和有限域闭包证书；108 项 CPU 测试全部通过，其中显式禁止把 TMEM accumulator 布局冒充成 A-operand 布局。规范化在不跨越 FP32→BF16 舍入边界的前提下，将 `register→logical shared→preferred shared` 从两次 materialization 降为一次，64 步模型的写入上界由 65,536 B/CTA 降为 32,768 B/CTA。
+
+三组 B300 结果把搜索边界分开：
+
+- HMMA V32/V64 每 warp 合并两个 16-column block 分别只有当前基线的 0.8461x/0.8907x，该局部并行度轴关闭；
+- 修正 `Swizzle<1,4,3>` 并改用 K-非退化验证后，producer-ready global B 在 inner=64 为 logical 的 0.99263x、HMMA 的 0.94606x，单独全局布局轴关闭；
+- P3→BF16 round→P4 双 MMA 探针只分配一次 TMEM，在 inner=64 上为 HMMA 的 1.4460x（grid12）/1.4303x（grid96），而 inner=1 仅为 0.7651x/0.7089x。
+
+第三组为“迁移值得，但必须有足够长驻留期”提供了直接机制证据。两种未做显式布局变换的 D-fragment→A-TMEM 直通候选均在计时前失败全部 24,576 个输出，因此未被包装成性能结论。完整推导、原始数字、正负证据和可重开条件见 [`STAGE12_TYPED_IR_SEARCH_CLOSURE_20260911.md`](STAGE12_TYPED_IR_SEARCH_CLOSURE_20260911.md)。

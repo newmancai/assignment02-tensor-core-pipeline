@@ -26,7 +26,7 @@ GPU 标注；团队大作业 C1 另含代码、正式报告、答辩材料和论
 | M4 | 完整 GEMM、TMA、pipeline | 4.1–4.3、4.5 已完成并在 B300 验证；4.4 为选做 |
 | M5 | 低精度与 block scaling | 5.1–5.5 必做项已完成；Host/B300 回归通过 |
 | M6 | TileLang lowering 对照 | 已完成 |
-| Team C1 | FlashKDA 从 SM80 MMA 迁移到 SM100 是否值得 | 冻结内容完成，2026-09-11 署名复核完成 |
+| Team C1 | FlashKDA 从 SM80 MMA 迁移到 SM100 是否值得 | 提交材料完整；2026-09-11 完成 Typed IR、双支路新实验与局部闭包复核 |
 
 ## C1 大作业速览
 
@@ -36,6 +36,10 @@ GPU 标注；团队大作业 C1 另含代码、正式报告、答辩材料和论
 围绕数据驻留、布局、并行度、流水和 dispatch 协同重组的 SM100 全栈路径取得
 明确收益。因此交付建议是：只对已认证 profile 启用受条件保护的 SM100 后端，
 其余场景回退 HMMA。
+
+2026-09-11 的 Typed IR 扩展又验证了这个 dispatch 判断：P3→P4 双 MMA 机制探针在
+inner=64 时 tcgen05 达 HMMA 的 1.43–1.45x，inner=1 却只有 0.71–0.77x。详细数据、
+修正后的 swizzle 验证和局部闭包边界见 C1 的 Stage 12 报告。
 
 - [正式技术报告](team-projects/kimi-kda/c1-sm100-delivery/03_reports/SM100_MAINLINE_DELIVERY.md)
 - [论文 PDF](team-projects/kimi-kda/c1-sm100-delivery/02_paper/main.pdf)

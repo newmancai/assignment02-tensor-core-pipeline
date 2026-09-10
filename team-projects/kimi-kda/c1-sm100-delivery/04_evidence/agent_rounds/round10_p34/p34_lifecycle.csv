@@ -1,0 +1,5 @@
+grid,inner,warmup,iters,repeats,hmma_median_us,tcgen_median_us,tcgen_speedup,hmma_phase_us,tcgen_phase_us,hmma_regs,tcgen_regs,hmma_smem_B,tcgen_smem_B,hmma_active_blocks_per_sm,tcgen_active_blocks_per_sm,scope
+12,1,30,200,7,6.671360,8.720000,0.765064,6.671360,8.720000,32,32,9216,9228,16,1,p3_bf16_round_p4_single_tmem_allocation_smem_carrier
+12,64,30,200,7,65.582881,45.353761,1.446030,1.024733,0.708653,32,32,9216,9228,16,1,p3_bf16_round_p4_single_tmem_allocation_smem_carrier
+96,1,30,200,7,6.907840,9.744000,0.708933,6.907840,9.744000,32,32,9216,9228,16,1,p3_bf16_round_p4_single_tmem_allocation_smem_carrier
+96,64,30,200,7,65.593119,45.860481,1.430275,1.024892,0.716570,32,32,9216,9228,16,1,p3_bf16_round_p4_single_tmem_allocation_smem_carrier

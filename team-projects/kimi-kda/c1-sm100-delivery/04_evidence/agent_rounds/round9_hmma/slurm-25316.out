@@ -1,0 +1,142 @@
+name, uuid, clocks.current.sm [MHz], memory.total [MiB]
+NVIDIA B300 SXM6 AC, GPU-689f6481-e310-b8ed-4641-37c4ac1c76b4, 120 MHz, 275040 MiB
+{
+  "schema_version": 1,
+  "candidate": "HMMA V32/V64 paired-column-block compute warps",
+  "status": "built",
+  "started_utc": "2026-09-10T16:54:18.222695+00:00",
+  "finished_utc": "2026-09-10T16:55:40.381168+00:00",
+  "base_source_sha256": {
+    "csrc/smxx/fwd_kernel2.cuh": "950684947df54a3432732468c138a571bca08b44ab96b91c8540d9f0fd97db31",
+    "csrc/smxx/fwd_launch.cu": "ffe7a15ad1196d1b3d771a55b3f9bdc3900e9ddac5bd51b20f0f2cec27c9643c",
+    "setup.py": "487b01f3bdc8f9f232fc547b8f6519215899193e4ee076c5eae734c6858fbda8",
+    "csrc/flash_kda.cpp": "2c07c7ef52007bc7d8f09bfca3d2ef870ad3f111ddea54d1474f65ffa4311b2d"
+  },
+  "patch_sha256": "eed6cd199815d16e600e080336ae21046d501cf94751772533631860a917a340",
+  "patch_output": "patching file csrc/smxx/fwd_launch.cu\n",
+  "patched_source_sha256": {
+    "csrc/smxx/fwd_kernel2.cuh": "950684947df54a3432732468c138a571bca08b44ab96b91c8540d9f0fd97db31",
+    "csrc/smxx/fwd_launch.cu": "3f5fe537b17cccb73c54f8aef5a145e4b1e88d643eb71375f39944c1a8d659ce",
+    "setup.py": "487b01f3bdc8f9f232fc547b8f6519215899193e4ee076c5eae734c6858fbda8",
+    "csrc/flash_kda.cpp": "2c07c7ef52007bc7d8f09bfca3d2ef870ad3f111ddea54d1474f65ffa4311b2d"
+  },
+  "command": [
+    "/home/lcpu/61681696/FlashKDA/.venv/bin/python",
+    "setup.py",
+    "build_ext",
+    "--build-lib",
+    "/home/lcpu/61681696/kda-stage12-typed-ir/round9-hmma-build-25316/build/lib",
+    "--build-temp",
+    "/home/lcpu/61681696/kda-stage12-typed-ir/round9-hmma-build-25316/build/temp",
+    "--force"
+  ],
+  "returncode": 0,
+  "environment": {
+    "CUDA_HOME": "/usr/local/cuda-13.0",
+    "MAX_JOBS": "2",
+    "NVCC_THREADS": "8",
+    "FLASH_KDA_CUDA_ARCHS": "103a",
+    "FLASH_KDA_EXTENSION_NAME": "flash_kda_paired_warps_C"
+  },
+  "binaries": [
+    {
+      "path": "/home/lcpu/61681696/kda-stage12-typed-ir/round9-hmma-build-25316/build/lib/flash_kda_paired_warps_C.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "085d768f8498794e50109092e2550241e00cbbd3a114c9b75e5d2fc4e7e3e014"
+    }
+  ],
+  "ptxas_resource_lines": [
+    "ptxas info    : Used 64 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 54 registers, used 9 barriers",
+    "ptxas info    : Used 77 registers, used 9 barriers",
+    "ptxas info    : Used 74 registers, used 9 barriers",
+    "ptxas info    : Used 95 registers, used 9 barriers",
+    "ptxas info    : Used 58 registers, used 9 barriers",
+    "ptxas info    : Used 73 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 54 registers, used 9 barriers",
+    "ptxas info    : Used 66 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 46 registers, used 9 barriers",
+    "ptxas info    : Used 66 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 46 registers, used 9 barriers",
+    "ptxas info    : Used 75 registers, used 9 barriers",
+    "ptxas info    : Used 74 registers, used 9 barriers",
+    "ptxas info    : Used 96 registers, used 9 barriers",
+    "ptxas info    : Used 58 registers, used 9 barriers",
+    "ptxas info    : Used 73 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 54 registers, used 9 barriers",
+    "ptxas info    : Used 32 registers, used 1 barriers",
+    "ptxas info    : Used 64 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 54 registers, used 9 barriers",
+    "ptxas info    : Used 77 registers, used 9 barriers",
+    "ptxas info    : Used 72 registers, used 9 barriers, 16 bytes cumulative stack size",
+    "ptxas info    : Used 95 registers, used 9 barriers",
+    "ptxas info    : Used 58 registers, used 9 barriers",
+    "ptxas info    : Used 73 registers, used 9 barriers",
+    "ptxas info    : Used 72 registers, used 9 barriers, 32 bytes cumulative stack size",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 54 registers, used 9 barriers",
+    "ptxas info    : Used 66 registers, used 9 barriers",
+    "ptxas info    : Used 72 registers, used 9 barriers, 16 bytes cumulative stack size",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 46 registers, used 9 barriers",
+    "ptxas info    : Used 66 registers, used 9 barriers",
+    "ptxas info    : Used 72 registers, used 9 barriers, 32 bytes cumulative stack size",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 46 registers, used 9 barriers",
+    "ptxas info    : Used 76 registers, used 9 barriers",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 96 registers, used 9 barriers",
+    "ptxas info    : Used 58 registers, used 9 barriers",
+    "ptxas info    : Used 73 registers, used 9 barriers",
+    "ptxas info    : Used 72 registers, used 9 barriers, 24 bytes cumulative stack size",
+    "ptxas info    : Used 78 registers, used 9 barriers",
+    "ptxas info    : Used 54 registers, used 9 barriers",
+    "ptxas info    : Used 32 registers, used 1 barriers",
+    "ptxas info    : Used 32 registers, used 0 barriers"
+  ]
+}
+balanced3_v32_official_0 measured 0.322692
+balanced3_v32_baseline_0 measured 0.24651299999999998
+balanced3_v32_paired_0 measured 0.291988
+balanced3_v32_baseline_1 measured 0.24680200000000002
+balanced3_v32_paired_1 measured 0.291074
+balanced3_v32_official_1 measured 0.32213
+balanced6_v64_official_0 measured 0.199827
+balanced6_v64_baseline_0 measured 0.16901100000000002
+balanced6_v64_paired_0 measured 0.1894885
+balanced6_v64_baseline_1 measured 0.1687535
+balanced6_v64_paired_1 measured 0.18973
+balanced6_v64_official_1 measured 0.199922
+[
+  {
+    "case": "balanced3_v32",
+    "median_ms": {
+      "official": 0.322411,
+      "baseline": 0.2466575,
+      "paired": 0.291531
+    },
+    "paired_over_baseline": 0.8460764035385603,
+    "paired_over_official": 1.1059235552994364
+  },
+  {
+    "case": "balanced6_v64",
+    "median_ms": {
+      "official": 0.1998745,
+      "baseline": 0.16888225,
+      "paired": 0.18960925
+    },
+    "paired_over_baseline": 0.8906857128541988,
+    "paired_over_official": 1.0541389726503323
+  }
+]

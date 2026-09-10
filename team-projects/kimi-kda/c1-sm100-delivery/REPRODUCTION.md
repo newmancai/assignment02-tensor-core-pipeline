@@ -12,6 +12,10 @@
 4. **CAKE/official 合并**：分别采集隔离 worker 结果，再由 `combine_isolated_cake_official.py` 合并。
 5. **第八轮双分支**：HMMA 与 tcgen05 使用各自目录中的 README、source 和 batch 文件；预算以 `04_evidence/agent_rounds/round8_budget_receipt.json` 为准。
 6. **证据分析**：使用 `analyze_round_evidence.py` 检查 block median、speedup、correctness 和晋级状态。
+7. **Stage 12 HMMA**：按 `05_reproduction/round9_hmma/README.md` 构建 paired-warps，并与官方及当前 ValueSlice baseline 做 fresh-worker public-full 比较。
+8. **Stage 12 tcgen 布局**：按 `05_reproduction/round9_tcgen/README.md` 比较 logical 与 producer-ready B；必须使用修正 swizzle 与 K-非退化输入的 Job 25380 口径，Job 25317 已被 supersede。
+9. **Stage 12 P3/P4 lifecycle**：按 `05_reproduction/round10_tcgen/README.md` 运行正确的 shared-carrier 探针；先要求 inner=1/2/4 逐 bit PASS，再计时 grids 12/96 和 inner 1/64。该项仍是 mechanism probe，不得升级成 public-full 结论。
+10. **闭包审计**：运行 108 项 agent-framework 测试，并核对 `04_evidence/agent_rounds/round9_closure_certificate.json` 的 envelope digest、缺失列表和 correctness-rejected 候选。
 
 ## 3. 正式计时要求
 
@@ -46,4 +50,3 @@
 ## 6. 未归档的大文件
 
 为保持交付包精简，本目录没有复制完整编译缓存、全部原始日志和大体积 NCU `.ncu-rep`。它们仍保留在原实验树中，摘要和哈希由 `04_evidence/official/SHA256SUMS`、各 manifest 与 `SOURCE_MAP.tsv` 指向。需要做 profiler 深挖时再从原位置读取，不应仅凭归档中的汇总 CSV 推断全部 stall 原因。
-

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "round": 9,
+  "candidate": "tcgen05 V16 producer-ready physical B^T global contract",
+  "scope": "Phase-6 state+gate mechanism probe; not public-full FlashKDA",
+  "validation_passed": true,
+  "comparison": [
+    {
+      "inner": 1,
+      "logical_preferred_us": 10.25568,
+      "producer_ready_physical_us": 10.25632,
+      "physical_over_logical_speedup": 0.9999375994508751,
+      "physical_tcgen_over_hmma": 0.8003026426632553
+    },
+    {
+      "inner": 64,
+      "logical_preferred_us": 77.05184,
+      "producer_ready_physical_us": 77.623839,
+      "physical_over_logical_speedup": 0.9926311426055595,
+      "physical_tcgen_over_hmma": 0.9460619565595048
+    }
+  ],
+  "interpretation_boundary": "The physical input removes the strided logical-KV read from the probe. It estimates a producer-ready contract but does not prove that Phase 4 can emit the layout for free in the integrated kernel."
+}

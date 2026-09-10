@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "case": "balanced3_v32",
+  "lengths": [
+    2731,
+    2731,
+    2730
+  ],
+  "variant": "paired",
+  "block": 0,
+  "scope": "preallocated public-full forward plus same-stream state copy-back",
+  "identity": {
+    "module": "flash_kda_paired_warps_C",
+    "binary": "/home/lcpu/61681696/kda-stage12-typed-ir/round9-hmma-build-25316/build/lib/flash_kda_paired_warps_C.cpython-312-x86_64-linux-gnu.so",
+    "binary_sha256": "085d768f8498794e50109092e2550241e00cbbd3a114c9b75e5d2fc4e7e3e014",
+    "value_slice": 32,
+    "compute_warps": 1,
+    "device": "NVIDIA B300 SXM6 AC",
+    "capability": [
+      10,
+      3
+    ]
+  },
+  "correctness": {
+    "output": {
+      "finite": true,
+      "bitwise": true,
+      "max_abs": 0.0
+    },
+    "state": {
+      "finite": true,
+      "bitwise": true,
+      "max_abs": 0.0
+    }
+  },
+  "status": "measured",
+  "samples_ms": [
+    0.315876,
+    0.295492,
+    0.295268,
+    0.291524,
+    0.292644,
+    0.29018,
+    0.29882,
+    0.291588,
+    0.29194,
+    0.292036,
+    0.292036,
+    0.291333,
+    0.292004,
+    0.290372,
+    0.29706,
+    0.290404,
+    0.290404,
+    0.289668,
+    0.291908,
+    0.294244,
+    0.294276,
+    0.290148,
+    0.292068,
+    0.291716,
+    0.297732,
+    0.291781,
+    0.292324,
+    0.29066,
+    0.293124,
+    0.291972,
+    0.292292,
+    0.292004,
+    0.291108,
+    0.291652,
+    0.290084,
+    0.29274,
+    0.29242,
+    0.291396,
+    0.291204,
+    0.292196
+  ],
+  "median_ms": 0.291988,
+  "calls": 58
+}

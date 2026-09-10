@@ -58,15 +58,63 @@
       "outcome": "Round8 preferred staging is 1.227x over scalar tcgen05 but 0.955x versus resident HMMA; mechanism recovered, practical screen below gate"
     },
     {
+      "path_id": "hmma-paired-column-block-warps",
+      "parent_ids": ["optimized-hmma-valueslice-prefetch"],
+      "implementation_ref": "05_reproduction/round9_hmma/paired_warps.patch",
+      "ir_ref": "06_agent_framework/kda_ir/design_ir.py:paired_warp_hmma_design",
+      "representation_status": "typed_design_and_compiled_public_full_candidate_complete",
+      "evidence_refs": [
+        "04_evidence/agent_rounds/round9_hmma/summary.json",
+        "04_evidence/agent_rounds/round9_closure_certificate.json"
+      ],
+      "correctness_status": "finite_and_bitwise_equal_output_and_final_state_before_timing",
+      "measurement_scope": "B300 isolated-process public-full cold-L2; H12 balanced nseq3 V32 and nseq6 V64",
+      "outcome": "paired compute-warps regress versus current baselines at 0.8461x and 0.8907x; the declared warp-density subspace is closed"
+    },
+    {
+      "path_id": "phase6-v16-producer-ready-global-b",
+      "parent_ids": ["phase6-v16-thin-n"],
+      "implementation_ref": "05_reproduction/round9_tcgen/direct_physical_b.patch",
+      "ir_ref": "06_agent_framework/kda_ir/design_ir.py:tcgen_phase6_bridge_program",
+      "representation_status": "typed_design_and_compiled_mechanism_probe_complete",
+      "evidence_refs": [
+        "04_evidence/agent_rounds/round11_tcgen_revalidation/logical_b.csv",
+        "04_evidence/agent_rounds/round11_tcgen_revalidation/physical_b.csv",
+        "04_evidence/agent_rounds/round11_tcgen_revalidation/slurm-layout-25380.out",
+        "04_evidence/agent_rounds/round9_closure_certificate.json"
+      ],
+      "correctness_status": "revalidated_with_correct_swizzle_and_K_nondegenerate_inputs_all_cases_passed_before_timing; job25317 superseded by job25380",
+      "measurement_scope": "B300 Phase-6 V16 mechanism probe; inner 1 and 64",
+      "outcome": "producer-ready physical input is 0.99994x and 0.99263x versus logical preferred layout; inner64 is 0.94606x versus HMMA; local global-B layout subspace is closed"
+    },
+    {
       "path_id": "p34-cross-phase-tmem",
-      "parent_ids": ["official-sm80-mma", "phase6-v16-thin-n"],
-      "implementation_ref": null,
-      "ir_ref": "kda_ir/mma_migration_fixtures.py:p34_shared_lifecycle_candidate",
-      "representation_status": "typed_design_complete_cuda_missing",
-      "evidence_refs": [],
-      "correctness_status": "unimplemented",
-      "measurement_scope": "unmeasured",
-      "outcome": "needs_compiled_lane_verified_end_to_end_carrier; generic tcgen05 st/ld precedents exist but do not provide the P3/P4 lane-and-rounding oracle"
+      "parent_ids": ["official-sm80-mma", "phase6-v16-producer-ready-global-b"],
+      "implementation_ref": "05_reproduction/round10_tcgen/p34_lifecycle_probe.cu",
+      "ir_ref": "06_agent_framework/kda_ir/design_ir.py:tcgen_phase6_bridge_program",
+      "representation_status": "typed_lifecycle_and_compiled_dual_mma_mechanism_probe_complete",
+      "evidence_refs": [
+        "04_evidence/agent_rounds/round10_p34/p34_lifecycle.csv",
+        "04_evidence/agent_rounds/round10_p34/p34_lifecycle.log",
+        "04_evidence/agent_rounds/round9_closure_certificate.json"
+      ],
+      "correctness_status": "exact_BF16_P3_carrier_second_issue_and_final_output_passed_for_inner_1_2_4",
+      "measurement_scope": "B300 P3-to-BF16-round-to-P4 dual-MMA mechanism; grids 12/96; inner 1/64",
+      "outcome": "single-allocation tcgen05 shared-carrier is 1.4460x/1.4303x over fused HMMA at inner64 but 0.7651x/0.7089x at inner1; long residency is the gating variable, full public-call integration remains open"
+    },
+    {
+      "path_id": "p34-direct-tmem-a-rejected",
+      "parent_ids": ["p34-cross-phase-tmem"],
+      "implementation_ref": "04_evidence/agent_rounds/round12_tmem_carrier_rejection/",
+      "ir_ref": "06_agent_framework/kda_ir/design_ir.py",
+      "representation_status": "two_compiled_candidate_layouts_preserved_as_negative_evidence",
+      "evidence_refs": [
+        "04_evidence/agent_rounds/round12_tmem_carrier_rejection/job25382_validation.log",
+        "04_evidence/agent_rounds/round12_tmem_carrier_rejection/job25385_validation.log"
+      ],
+      "correctness_status": "both_candidates_failed_all_24576_outputs_before_timing",
+      "measurement_scope": "B300 exact-validation-only; inner 1/2/4",
+      "outcome": "direct accumulator-fragment writeback is not a legal A-TMEM layout identity; reopen only with an explicit CuTe-derived D-to-A transform"
     },
     {
       "path_id": "cake-sm100-full-stack",

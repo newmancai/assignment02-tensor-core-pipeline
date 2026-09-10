@@ -1,0 +1,72 @@
+mismatch path=tcgen_tmem_carrier inner=1 index=0 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=1 index=1 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=1 index=2 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=1 index=3 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=1 index=4 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=1 index=5 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=1 index=6 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=1 index=7 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=1 index=8 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=1 index=9 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=1 index=10 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=1 index=11 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=1 index=12 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=1 index=13 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=1 index=14 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=1 index=15 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=1 index=16 got=43 want=96
+mismatch path=tcgen_tmem_carrier inner=1 index=17 got=-51 want=-91
+mismatch path=tcgen_tmem_carrier inner=1 index=18 got=8 want=-5
+mismatch path=tcgen_tmem_carrier inner=1 index=19 got=43 want=96
+mismatch path=tcgen_tmem_carrier inner=2 index=0 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=2 index=1 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=2 index=2 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=2 index=3 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=2 index=4 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=2 index=5 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=2 index=6 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=2 index=7 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=2 index=8 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=2 index=9 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=2 index=10 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=2 index=11 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=2 index=12 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=2 index=13 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=2 index=14 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=2 index=15 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=2 index=16 got=43 want=96
+mismatch path=tcgen_tmem_carrier inner=2 index=17 got=-51 want=-91
+mismatch path=tcgen_tmem_carrier inner=2 index=18 got=8 want=-5
+mismatch path=tcgen_tmem_carrier inner=2 index=19 got=43 want=96
+mismatch path=tcgen_tmem_carrier inner=4 index=0 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=4 index=1 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=4 index=2 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=4 index=3 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=4 index=4 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=4 index=5 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=4 index=6 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=4 index=7 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=4 index=8 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=4 index=9 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=4 index=10 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=4 index=11 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=4 index=12 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=4 index=13 got=51 want=11
+mismatch path=tcgen_tmem_carrier inner=4 index=14 got=-43 want=80
+mismatch path=tcgen_tmem_carrier inner=4 index=15 got=-8 want=-91
+mismatch path=tcgen_tmem_carrier inner=4 index=16 got=43 want=96
+mismatch path=tcgen_tmem_carrier inner=4 index=17 got=-51 want=-91
+mismatch path=tcgen_tmem_carrier inner=4 index=18 got=8 want=-5
+mismatch path=tcgen_tmem_carrier inner=4 index=19 got=43 want=96
+META,device=NVIDIA B300 SXM6 AC,cc=10.3,sm_count=148,driver=13000,runtime=13000,D=128,N=16,K=16,threads=128,not_full_K2=1
+VALIDATE,path=tcgen_phase3_carrier,grid=12,inner=1,PASS,bad=0
+VALIDATE,path=tcgen_second_issue_a0,grid=12,inner=1,PASS,bad=0
+VALIDATE,path=hmma,grid=12,inner=1,PASS,bad=0
+VALIDATE,path=tcgen_shared_carrier,grid=12,inner=1,PASS,bad=0
+VALIDATE,path=tcgen_tmem_carrier,grid=12,inner=1,FAIL,bad=24576
+VALIDATE,path=hmma,grid=12,inner=2,PASS,bad=0
+VALIDATE,path=tcgen_shared_carrier,grid=12,inner=2,PASS,bad=0
+VALIDATE,path=tcgen_tmem_carrier,grid=12,inner=2,FAIL,bad=24576
+VALIDATE,path=hmma,grid=12,inner=4,PASS,bad=0
+VALIDATE,path=tcgen_shared_carrier,grid=12,inner=4,PASS,bad=0
+VALIDATE,path=tcgen_tmem_carrier,grid=12,inner=4,FAIL,bad=24576
