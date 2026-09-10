@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="980" viewBox="0 0 1800 980" role="img" aria-labelledby="title desc">
+  <title id="title">mbarrier 可复用代际与 parity 调试时空图</title>
+  <desc id="desc">上半部分展示四轮 tcgen05 MMA、commit、barrier parity 等待和 TMEM 读取的正确时序；下半部分展示固定等待 phase 0 在第二轮指向旧代际而导致提前读取或挂死。</desc>
+  <defs>
+    <style>
+      .title { font: 600 31px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #17212b; }
+      .subtitle { font: 400 17px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #52606d; }
+      .label { font: 500 18px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #24323f; }
+      .small { font: 400 15px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #52606d; }
+      .block { font: 500 16px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #17212b; }
+      .white { fill: #ffffff; }
+      .axis { stroke: #8b98a5; stroke-width: 1.5; }
+      .grid { stroke: #d8dee4; stroke-width: 1; stroke-dasharray: 5 6; }
+      .lane { stroke: #d8dee4; stroke-width: 1; }
+      .flow { stroke: #556574; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .flow-red { stroke: #c4384b; stroke-width: 2.6; fill: none; marker-end: url(#arrow-red); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#556574"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#c4384b"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="980" fill="#ffffff"/>
+  <text x="42" y="52" class="title">3.3 · mbarrier generation / parity 调试时空图</text>
+  <text x="42" y="84" class="subtitle">逻辑时序示意（非实测 cycle）：一次 arrival 完成一个 generation，下一代 parity 随即翻转</text>
+
+  <rect x="280" y="112" width="1460" height="510" fill="#fbfcfd"/>
+  <rect x="295" y="126" width="1428" height="46" fill="#eaf6f2"/>
+  <text x="312" y="156" class="label">正确版本：wait parity = round &amp; 1</text>
+
+  <line x1="305" y1="590" x2="1720" y2="590" class="axis"/>
+  <text x="945" y="617" class="small">逻辑时间 →</text>
+  <g>
+    <line x1="330" y1="178" x2="330" y2="590" class="grid"/>
+    <line x1="680" y1="178" x2="680" y2="590" class="grid"/>
+    <line x1="1030" y1="178" x2="1030" y2="590" class="grid"/>
+    <line x1="1380" y1="178" x2="1380" y2="590" class="grid"/>
+    <line x1="1720" y1="178" x2="1720" y2="590" class="grid"/>
+    <text x="488" y="580" class="small">round 0 · parity 0</text>
+    <text x="838" y="580" class="small">round 1 · parity 1</text>
+    <text x="1188" y="580" class="small">round 2 · parity 0</text>
+    <text x="1535" y="580" class="small">round 3 · parity 1</text>
+  </g>
+
+  <g>
+    <text x="52" y="230" class="label">elected lane</text>
+    <text x="52" y="255" class="small">发射异步工作</text>
+    <text x="52" y="342" class="label">mbarrier</text>
+    <text x="52" y="367" class="small">generation 状态</text>
+    <text x="52" y="456" class="label">all warps</text>
+    <text x="52" y="481" class="small">等待当前代际</text>
+    <text x="52" y="543" class="label">TMEM → registers</text>
+    <line x1="280" y1="280" x2="1740" y2="280" class="lane"/>
+    <line x1="280" y1="392" x2="1740" y2="392" class="lane"/>
+    <line x1="280" y1="500" x2="1740" y2="500" class="lane"/>
+  </g>
+
+  <g>
+    <rect x="355" y="197" width="162" height="58" rx="4" fill="#f4a261"/>
+    <text x="436" y="222" text-anchor="middle" class="block">tcgen05.mma r0</text>
+    <text x="436" y="243" text-anchor="middle" class="small">async issue</text>
+    <rect x="526" y="207" width="94" height="38" rx="3" fill="#ef8354"/>
+    <text x="573" y="231" text-anchor="middle" class="block white">commit</text>
+    <rect x="455" y="311" width="170" height="58" rx="4" fill="#e9c46a"/>
+    <text x="540" y="336" text-anchor="middle" class="block">arrive · p0</text>
+    <text x="540" y="357" text-anchor="middle" class="small">pending 1 → 0</text>
+    <line x1="625" y1="300" x2="625" y2="380" stroke="#b37b18" stroke-width="2"/>
+    <text x="638" y="300" class="small">flip → p1</text>
+    <rect x="548" y="425" width="105" height="52" rx="4" fill="#2a9d8f"/>
+    <text x="601" y="456" text-anchor="middle" class="block white">wait p0</text>
+    <rect x="629" y="516" width="82" height="44" rx="4" fill="#457b9d"/>
+    <text x="670" y="544" text-anchor="middle" class="block white">ld r0</text>
+    <path d="M573 245 L573 300 L540 300 L540 309" class="flow"/>
+    <path d="M625 370 L625 398 L601 398 L601 423" class="flow"/>
+    <path d="M653 451 L670 451 L670 514" class="flow"/>
+  </g>
+
+  <g>
+    <rect x="705" y="197" width="162" height="58" rx="4" fill="#f4a261"/>
+    <text x="786" y="222" text-anchor="middle" class="block">tcgen05.mma r1</text>
+    <text x="786" y="243" text-anchor="middle" class="small">async issue</text>
+    <rect x="876" y="207" width="94" height="38" rx="3" fill="#ef8354"/>
+    <text x="923" y="231" text-anchor="middle" class="block white">commit</text>
+    <rect x="805" y="311" width="170" height="58" rx="4" fill="#e9c46a"/>
+    <text x="890" y="336" text-anchor="middle" class="block">arrive · p1</text>
+    <text x="890" y="357" text-anchor="middle" class="small">pending 1 → 0</text>
+    <line x1="975" y1="300" x2="975" y2="380" stroke="#b37b18" stroke-width="2"/>
+    <text x="988" y="300" class="small">flip → p0</text>
+    <rect x="898" y="425" width="105" height="52" rx="4" fill="#2a9d8f"/>
+    <text x="951" y="456" text-anchor="middle" class="block white">wait p1</text>
+    <rect x="979" y="516" width="82" height="44" rx="4" fill="#457b9d"/>
+    <text x="1020" y="544" text-anchor="middle" class="block white">ld r1</text>
+    <path d="M923 245 L923 300 L890 300 L890 309" class="flow"/>
+    <path d="M975 370 L975 398 L951 398 L951 423" class="flow"/>
+    <path d="M1003 451 L1020 451 L1020 514" class="flow"/>
+  </g>
+
+  <g>
+    <rect x="1055" y="197" width="162" height="58" rx="4" fill="#f4a261"/>
+    <text x="1136" y="222" text-anchor="middle" class="block">tcgen05.mma r2</text>
+    <text x="1136" y="243" text-anchor="middle" class="small">async issue</text>
+    <rect x="1226" y="207" width="94" height="38" rx="3" fill="#ef8354"/>
+    <text x="1273" y="231" text-anchor="middle" class="block white">commit</text>
+    <rect x="1155" y="311" width="170" height="58" rx="4" fill="#e9c46a"/>
+    <text x="1240" y="336" text-anchor="middle" class="block">arrive · p0</text>
+    <text x="1240" y="357" text-anchor="middle" class="small">pending 1 → 0</text>
+    <line x1="1325" y1="300" x2="1325" y2="380" stroke="#b37b18" stroke-width="2"/>
+    <text x="1338" y="300" class="small">flip → p1</text>
+    <rect x="1248" y="425" width="105" height="52" rx="4" fill="#2a9d8f"/>
+    <text x="1301" y="456" text-anchor="middle" class="block white">wait p0</text>
+    <rect x="1329" y="516" width="82" height="44" rx="4" fill="#457b9d"/>
+    <text x="1370" y="544" text-anchor="middle" class="block white">ld r2</text>
+    <path d="M1273 245 L1273 300 L1240 300 L1240 309" class="flow"/>
+    <path d="M1325 370 L1325 398 L1301 398 L1301 423" class="flow"/>
+    <path d="M1353 451 L1370 451 L1370 514" class="flow"/>
+  </g>
+
+  <g>
+    <rect x="1405" y="197" width="162" height="58" rx="4" fill="#f4a261"/>
+    <text x="1486" y="222" text-anchor="middle" class="block">tcgen05.mma r3</text>
+    <text x="1486" y="243" text-anchor="middle" class="small">async issue</text>
+    <rect x="1576" y="207" width="94" height="38" rx="3" fill="#ef8354"/>
+    <text x="1623" y="231" text-anchor="middle" class="block white">commit</text>
+    <rect x="1505" y="311" width="170" height="58" rx="4" fill="#e9c46a"/>
+    <text x="1590" y="336" text-anchor="middle" class="block">arrive · p1</text>
+    <text x="1590" y="357" text-anchor="middle" class="small">pending 1 → 0</text>
+    <line x1="1675" y1="300" x2="1675" y2="380" stroke="#b37b18" stroke-width="2"/>
+    <text x="1560" y="394" class="small">flip → p0</text>
+    <rect x="1598" y="425" width="105" height="52" rx="4" fill="#2a9d8f"/>
+    <text x="1651" y="456" text-anchor="middle" class="block white">wait p1</text>
+    <rect x="1658" y="516" width="64" height="44" rx="4" fill="#457b9d"/>
+    <text x="1690" y="544" text-anchor="middle" class="block white">ld r3</text>
+    <path d="M1623 245 L1623 300 L1590 300 L1590 309" class="flow"/>
+    <path d="M1675 370 L1675 398 L1651 398 L1651 423" class="flow"/>
+    <path d="M1703 451 L1718 451 L1718 514" class="flow"/>
+  </g>
+
+  <rect x="280" y="656" width="1460" height="270" fill="#fff7f5"/>
+  <text x="305" y="696" class="label" fill="#a5283a">错误版本：每轮固定 wait phase 0</text>
+  <text x="305" y="725" class="small">round 0 会“看起来正常”，因为第一次等待恰好就是 p0；真正能暴露 bug 的最小用例是 rounds ≥ 2。</text>
+
+  <rect x="335" y="768" width="245" height="66" rx="4" fill="#e9c46a"/>
+  <text x="458" y="795" text-anchor="middle" class="block">上一代 p0 已完成</text>
+  <text x="458" y="818" text-anchor="middle" class="small">round 0 的历史状态</text>
+
+  <rect x="680" y="768" width="238" height="66" rx="4" fill="#f4a261"/>
+  <text x="799" y="795" text-anchor="middle" class="block">round 1 MMA 在飞</text>
+  <text x="799" y="818" text-anchor="middle" class="small">本轮应等待 p1</text>
+
+  <rect x="1010" y="758" width="220" height="86" rx="4" fill="#d1495b"/>
+  <text x="1120" y="790" text-anchor="middle" class="block white">错误：wait p0</text>
+  <text x="1120" y="816" text-anchor="middle" class="small white">指向旧 generation</text>
+
+  <rect x="1350" y="725" width="315" height="60" rx="4" fill="#f7c9cf"/>
+  <text x="1508" y="751" text-anchor="middle" class="block">提前返回 → 读取在飞 TMEM</text>
+  <text x="1508" y="773" text-anchor="middle" class="small">结果错误或不稳定</text>
+  <rect x="1350" y="822" width="315" height="60" rx="4" fill="#f7c9cf"/>
+  <text x="1508" y="848" text-anchor="middle" class="block">无法匹配 → 自旋等待</text>
+  <text x="1508" y="870" text-anchor="middle" class="small">20 s timeout / 挂死</text>
+
+  <path d="M580 801 L665 801" class="flow"/>
+  <path d="M918 801 L995 801" class="flow-red"/>
+  <path d="M1230 782 C1290 782 1290 755 1335 755" class="flow-red"/>
+  <path d="M1230 820 C1290 820 1290 852 1335 852" class="flow-red"/>
+
+  <g transform="translate(310,946)">
+    <rect x="0" y="-15" width="24" height="14" fill="#f4a261"/><text x="34" y="-3" class="small">MMA / commit</text>
+    <rect x="190" y="-15" width="24" height="14" fill="#e9c46a"/><text x="224" y="-3" class="small">barrier arrival</text>
+    <rect x="395" y="-15" width="24" height="14" fill="#2a9d8f"/><text x="429" y="-3" class="small">正确等待</text>
+    <rect x="570" y="-15" width="24" height="14" fill="#457b9d"/><text x="604" y="-3" class="small">TMEM load</text>
+    <rect x="750" y="-15" width="24" height="14" fill="#d1495b"/><text x="784" y="-3" class="small">错误依赖</text>
+  </g>
+</svg>

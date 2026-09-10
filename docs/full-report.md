@@ -9,7 +9,7 @@
 | 成员 A | 待对应成员填写 |
 | 成员 B | 待对应成员填写 |
 | 成员 C | 李奥 |
-| 完成日期 | 2026-09-02 |
+| 归档复核日期 | 2026-09-10 |
 | 代码目录 | `assignment02-tensor-core-pipeline/` |
 
 > 注意：M0–M6 在题面中属于非团队作业。如果课程要求独立提交，本模板只用于进度协调和互审，最终代码与报告应按课程要求独立完成。
@@ -402,14 +402,15 @@ barrier 初始化 arrival count 为 1；每轮 commit 后等待 `round & 1`，�
 依次为 0、1、0、1。原错误版固定等待 0，从第二轮开始可能等待旧 generation，
 导致提前读取仍在更新的 TMEM，或在错误代际上无限等待。
 
-### 状态变化图
+### 代际时空图
 
-```text
-init: phase 0 pending
-round 0 commit -> phase 0 complete -> reset phase 1
-round 1 commit -> phase 1 complete -> reset phase 0
-round 2 commit -> phase 0 complete -> reset phase 1
-```
+![mbarrier 可复用代际与 parity 调试时空图](../M3-tcgen05/3.3-mbarrier-debug/figures/mbarrier-generation-timeline.svg)
+
+图把正确版四轮 parity 交替与错误版第二轮旧代际等待放在同一张泳道图中。
+我们刻意没有把错误版 `rounds=1` 的 PASS 当成正确性证据：第一轮还没有复用
+barrier，固定 phase 0 恰好与正确等待相同。2 轮是能区分两个假设的最小反例，
+4 轮检查错误累积，两个 seed 排除输入偶然性，20 s timeout 同时捕获错误结果和
+挂死。这一测试设计体现的是“先构造可证伪的最小实验”，而不只是事后抄出修复行。
 
 ### 修复后判测
 
@@ -505,15 +506,19 @@ TMA 与 MMA 之间的串行等待。上述 4.1 NCU 数据进一步排除了 HBM 
 
 ### 流水时空图
 
-```text
-时间 →       t0          t1          t2          t3
-TMA producer load S0     load S1     load S2     refill S0
-MMA consumer             use S0      use S1      use S2
-barrier       full0       full1       full2       empty0→reuse
-```
+![S=3 TMA 与 tcgen05 MMA 多级流水时空图](../M4-gemm/4.3-pipeline/figures/tma-mma-pipeline-s3.svg)
 
 每个 stage 有 `full[s]`（producer→consumer 的 RAW 保护）和 `empty[s]`
-（consumer→producer 的 WAR 保护）；消费完成后才能覆写环形槽位。
+（consumer→producer 的 WAR 保护）；消费完成后才能覆写环形槽位。图按硬件资源
+分泳道，明确区分 preload、steady state 与 drain，并放大 S0 从 K0 到 K3 的
+安全复用。单个 elected lane 的依赖顺序不等于 TMA/MMA 两个异步引擎串行。
+
+我们的初始判断不是“stage 越深越好”，而是“收益取决于 grid 是否已经能靠
+block 间调度隐藏延迟”。4096³ 的 2048 CTA 支持这一判断，S=2 最好；thin-M
+只有 128 CTA，S=3/S=6 才显示更深预取的价值。随后 occupancy API 又推翻了
+简单的 shared-memory 字节除法：估算的 4/3/2/1 blocks/SM 实际均为 1，因此
+最终报告保留了反例并收窄解释，而没有为了故事整齐把曲线硬归因于 occupancy
+逐级下降。
 
 ### 分析
 
@@ -796,7 +801,7 @@ tcgen05 支持能力误写成本次实际选择结果。
 
 - [x] 目录与题号完整
 - [x] 表格单位完整
-- [x] 本报告 C 部分无新增图片，表格与文本可直接渲染
+- [x] 3.3 barrier 代际图与 4.3 流水时空图同时提供 SVG/PNG，图文可直接渲染
 - [x] 命令和关键输出已保留
 - [x] 引用的峰值、带宽注明口径和来源
 - [x] 三部分报告格式一致

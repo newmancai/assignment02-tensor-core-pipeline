@@ -1,7 +1,7 @@
 # 汇总文档
 
-- [`full-report.md`](full-report.md)：覆盖 M0–M6 的总报告；A/B/C 技术内容已填写，
-  仅 A/B 姓名仍待对应成员补充。
+- [`full-report.md`](full-report.md)：覆盖 M0–M6 的总报告；全部必做技术内容、
+  判测与性能归因已填写，仅 A/B 姓名仍待本人补充。
 - [`a-owner-handoff.md`](a-owner-handoff.md)：A 负责人完成项、命令、测试结果和
   M2 → M3 交接参数。
 - [`b-owner-handoff.md`](b-owner-handoff.md)：B 负责人 3.1–3.4、4.1–4.3 的
@@ -12,4 +12,5 @@
   指标的文本证据。
 
 小题级别的快速说明放在对应题目文件夹，完整叙述和表格留在总报告中。
-
+题面要求与这些交付物的逐项对应关系见根目录
+[`SUBMISSION_CHECKLIST.md`](../SUBMISSION_CHECKLIST.md)。

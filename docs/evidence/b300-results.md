@@ -110,7 +110,8 @@ Excessive global sectors      15728640 / 117440512 (about 13%)
 原始证据：
 
 - [`M4-gemm/4.1-tiled/evidence/m41-details.txt`](../../M4-gemm/4.1-tiled/evidence/m41-details.txt)
-- [`M4-gemm/4.1-tiled/evidence/m41-detailed.ncu-rep`](../../M4-gemm/4.1-tiled/evidence/m41-detailed.ncu-rep)
+- 原始 `.ncu-rep` 因嵌入集群账号与绝对路径只在本机保存；SHA-256：
+  `0e8e5e0f661e5365745f7e13e03ca80f83464d7328f82dc9036f91dce82f8d7a`
 
 ## 4.2 TMA
 
@@ -164,7 +165,8 @@ occupancy 21.48%；NCU advisory 将 6.2% theoretical occupancy 的限制归因�
 required shared memory。原始证据：
 
 - [`M4-gemm/4.3-pipeline/evidence/m43-s2-details.txt`](../../M4-gemm/4.3-pipeline/evidence/m43-s2-details.txt)
-- [`M4-gemm/4.3-pipeline/evidence/m43-s2-basic.ncu-rep`](../../M4-gemm/4.3-pipeline/evidence/m43-s2-basic.ncu-rep)
+- 原始 `.ncu-rep` 因嵌入集群账号与绝对路径只在本机保存；SHA-256：
+  `130e8f8d11f8f908b9e074c6e00b02a53412414285d5d3c5c1138f882e2d20d4`
 
 加入 occupancy 输出后的正常模式回归：Slurm Job 14931。两种形状、四种 stage
 全部 `exact PASS`；性能分别为：

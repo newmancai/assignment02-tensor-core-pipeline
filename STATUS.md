@@ -1,6 +1,6 @@
 # 完成状态
 
-## 已完成并实测
+## M0–M6 必做项
 
 - M0：0.1、0.2、0.3
 - M1：1.1、1.2、1.3、1.4、1.5
@@ -14,27 +14,35 @@ M0/M1/M3/M4/M5/M6 的 GPU 结果来自 NVIDIA B300；M2、M5.1、M5.2 为
 Host 判测。M5 最终统一回归为 Slurm Job 15409/15414，5.4 十个形状全部
 PASS，三次中位数相对公平两步基线加速 1.06–1.84×。
 
-## 尚待完成
+2026-09-10 归档复核中，本机 M1/M2 回归通过；C1 Agent 框架 93 项测试通过；
+M5 在 `b300-login` 的隔离临时目录中复跑，7 项测试通过。已有 B300 证据足以
+覆盖题面要求，因此没有重复申请 GPU 作业。
 
-- M4.4 为选做，本次未纳入必做交付
-- M5.3(d) 为选做，本次未纳入必做交付
-- 团队 C2 尚待推进
+## Team C1：FlashKDA → SM100
 
-## 团队 C1：Kimi KDA / FlashKDA
+C1 已按“代码 + 报告 + 答辩 + 论文”完成冻结归档，统一入口为
+[`team-projects/kimi-kda/c1-sm100-delivery/`](team-projects/kimi-kda/c1-sm100-delivery/)。
 
-- 已在 B300 上复现并定位 K2 低并行度瓶颈。
-- 已实现 V16/V32/V64/V128 ValueSlice 与受保护的资源感知 dispatcher。
-- fixed BF16/FP32、ragged、stateful 和 CUDA Graph 正确性通过。
-- 2026-09-01 Slurm Job 14592 独立复跑：forward 高价值区间降低
-  9.37%–26.10%，state-carrying trace 降低 5.68%。
-- 报告初稿、答辩骨架、可应用到官方 `1ce47ea` 的补丁已归档在
-  [`team-projects/kimi-kda/`](team-projects/kimi-kda/)。
-- 仍需团队补成员信息，并决定是否继续做 CTA Cluster + TMA multicast、
-  选择性 tcgen05 和完整模型级实验。
+- 代码：补丁、实现快照、复现脚本和 MARPE Agent 框架已归档；
+- 报告：主线报告、研究复盘、证据索引与答辩自审已归档；
+- 答辩：15 页公开脱敏版 PPTX 与固定版 PDF 已逐页检查；
+- 论文：8 页 PDF、LaTeX 源码、参考文献与构建入口齐全；
+- 证据：B300 原始文本、汇总数据、SASS/NCU 派生结果和 SHA-256 清单齐全。
 
-选做与团队 C2 目录仍保留课程骨架，不应被描述为已经通过判测。
+冻结结论是 guarded hybrid：在已认证 B300/SM103 profile 上启用受保护的
+SM100 全栈路径，其余场景保留 HMMA fallback。机械替换 `mma.sync → tcgen05`
+为 NO-GO；完整模型、多卡和真实并发矩阵属于后续研究边界，不冒充已完成结果。
 
-## 提交前收口
+## 题面中的选做项
 
-- 填写成员姓名、日期等仍为空的人工信息。
-- 公开前确认课程允许发布题目衍生代码。
+- M4.4：未纳入必做交付；
+- M5.3(d)：未纳入必做交付；
+- Team C2：未开展。
+
+选做目录可以保留课程骨架，但不应描述为已经通过判测。
+
+## 提交前仅剩人工确认
+
+- 在 [`docs/full-report.md`](docs/full-report.md) 填写成员 A、B 的真实姓名；
+- 确认课程允许公开 starter code 的衍生实现和答案；
+- 由维护者决定是否以及采用何种许可证。

@@ -27,21 +27,27 @@ mbar_wait(mbar_addr, static_cast<uint32_t>(round & 1));
 源码还提供 `BUGGY_PHASE` 宏，定义后恢复“每轮固定等待 phase 0”的错误，
 用于复现实验。
 
-## barrier 状态变化
+## barrier 代际时空图
 
-正确版本：
+![mbarrier 可复用代际与 parity 调试时空图](figures/mbarrier-generation-timeline.svg)
 
-```text
-init                 phase=0  pending=1
-round 0 commit done  phase=0  pending:1->0  => next phase=1, pending=1
-round 1 commit done  phase=1  pending:1->0  => next phase=0, pending=1
-round 2 commit done  phase=0  pending:1->0  => next phase=1, pending=1
-round 3 commit done  phase=1  pending:1->0  => next phase=0, pending=1
-```
+[SVG 矢量原图](figures/mbarrier-generation-timeline.svg) ·
+[PNG 高清图](figures/mbarrier-generation-timeline.png)
 
-错误版本在 round 1 仍等待 phase 0。此时 phase 0 已属于上一 generation，
-等待可能针对错误代际提前返回，也可能无法等到期望状态。若提前返回，
-`tcgen05.ld` 会与尚未完成的 MMA 竞争；若不能返回，程序挂死。
+图的上半部分把 elected lane 的异步发射、mbarrier arrival、所有 warp 的等待和
+TMEM 读取放在同一时间轴上；下半部分单独放大错误版的第二轮。错误版在 round 1
+仍等待 phase 0，此时 phase 0 已属于上一 generation：等待可能针对旧代际提前
+返回，也可能永远匹配不到本轮完成事件。前者会让 `tcgen05.ld` 与尚未完成的
+MMA 竞争，后者表现为挂死。
+
+## 我们的调试判断
+
+最容易误判的现象是错误版 `rounds=1` 也会 PASS。我们没有把这个单点结果当成
+“barrier 写对了”，因为第一轮根本没有复用 barrier，固定 phase 0 恰好与正确
+相位相同。于是测试被刻意扩展为 1/2/4 轮：2 轮是能触发代际翻转的最小反例，
+4 轮用于观察错误是否会累积；再用两个 seed 排除输入偶然性，并用 20 s timeout
+把“错误结果”和“等待旧代际导致的挂死”都纳入失败口径。这个判断路径比只给出
+`round & 1` 的答案更重要：先找能区分两个假设的最小实验，再扩大覆盖范围。
 
 ## B300 现象
 

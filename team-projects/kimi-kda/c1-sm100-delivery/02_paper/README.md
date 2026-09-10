@@ -1,21 +1,32 @@
-# MARPE compact paper source
+# MARPE paper
 
-The 2026-09-10 source follows the single-column CAKE manuscript layout published with arXiv:2608.12629: 11 pt `article`, Letter paper, 1-inch margins, T1 fonts, numeric compressed citations, and a small `unsrtnat` bibliography. The current build is eight Letter pages. It presents the FlashKDA SM80-HMMA-to-SM100 mainline, the H0/H1/T0/T1/T2 challenge, open proposals, program IR, scoped experience IR, execution identity, and the eight-round B300 dual-lane campaign.
+本目录包含 C1 的 8 页论文固定版 [`main.pdf`](main.pdf)、LaTeX 源文件
+[`main.tex`](main.tex)、参考文献 [`references.bib`](references.bib) 和模板来源说明
+[`TEMPLATE_PROVENANCE.md`](TEMPLATE_PROVENANCE.md)。
 
-The architecture section identifies MARPE's open-source basis and adaptation boundary. It attributes parallel branch search and candidate allocation to PIKE, and isolated GPU execution, profiling, Git episodes, and ABBA validation to Atrex Kernel Agent. The paper claims the HMMA/tcgen05 dual-branch Program IR, scoped Experience IR, matched-opportunity budget protocol, and proof-carrying candidate promotion as its original layer. The experiments are explicitly described as a narrow-width dual-branch closed loop and do not claim a multi-agent advantage over a single agent because no matched single-agent ablation has been run.
+论文采用单栏 Letter 版式，叙述 FlashKDA SM80-HMMA→SM100 主线、
+H0/H1/T0/T1/T2 挑战、开放 proposal、Program IR、带作用域的 Experience IR、
+执行身份，以及 B300 上八轮双分支闭环。结果明确区分 qualified result、scoped
+screen 与 mechanism probe；没有在缺少单 Agent 配对消融时声称 multi-agent
+优于单 Agent。
 
-Figure 1 is designed to remain readable when captured for the defense presentation. The rebuilt PDF is `../../output/pdf/runtime-profile-evolution-mainline-20260910.pdf`. The scope and final stopping boundary are documented in `../../FRAMEWORK_SCOPE_CORRECTION_20260910.md` and `../../experiments/sm100_open_round1/dual_ir_agent_rounds/DEFAULT_KNOWLEDGE_SATURATION_REVIEW_20260910.md`.
+## 构建
 
-Build with TeX Live:
+安装 Tectonic 后，在本目录运行：
 
 ```bash
 make
 ```
 
-Or build with Tectonic:
+需要强制重建时运行：
 
 ```bash
-tectonic main.tex
+make rebuild
 ```
 
-Qualified results, scoped screens, and mechanism probes are labeled separately. The paper claims default-knowledge high-value proposal saturation only under the frozen B300 existing-carrier envelope; it does not claim a global theoretical optimum or completed production H1/T1/T2 verdict.
+也可以直接运行 `tectonic main.tex`。产物写入本目录的 `main.pdf`。
+
+主线范围修正见
+[`../03_reports/FRAMEWORK_SCOPE_CORRECTION_20260910.md`](../03_reports/FRAMEWORK_SCOPE_CORRECTION_20260910.md)，
+最终知识饱和与停止边界见
+[`../03_reports/DEFAULT_KNOWLEDGE_SATURATION_REVIEW_20260910.md`](../03_reports/DEFAULT_KNOWLEDGE_SATURATION_REVIEW_20260910.md)。

@@ -9,4 +9,4 @@
 | 性能数据 | 2.753 ms，49.9 TFLOPS；cuBLAS 976.2 TFLOPS；达成率 5.1% |
 | 现象 | NCU：SM 46.62%、Memory 30.97%、DRAM 0.38%、Issue Slots Busy 41.40%，约 13% excessive global sectors |
 | 结论 | 主要瓶颈是普通 staging 的地址/指令开销、访问合并和单缓冲延迟，不是 HBM 带宽或 Tensor Core 峰值 |
-| 证据链接 | [CUDA 源码](01_tiled.cu)、[NCU 文本](evidence/m41-details.txt)、[NCU 报告](evidence/m41-detailed.ncu-rep)、[B300 输出](../../docs/evidence/b300-results.md#41-tiled-gemm) |
+| 证据链接 | [CUDA 源码](01_tiled.cu)、[NCU 文本](evidence/m41-details.txt)、[B300 输出](../../docs/evidence/b300-results.md#41-tiled-gemm)；原始 `.ncu-rep` 因嵌入集群元数据仅在本机保存 |

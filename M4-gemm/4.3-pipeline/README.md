@@ -40,23 +40,32 @@ buffer 使用 opt-in dynamic shared memory，并通过
 关键 hazard 是不能只依据“下一 tile 是否存在”盲目预取。任何 stage 在被
 TMA 覆写前，都必须确认使用它的 MMA batch 已通过 `empty[s]` 完成。
 
-## S=3 稳态时空图
+## S=3 流水时空图
 
-```text
-时间      t0          t1          t2          t3          t4
-stage 0   TMA K0      MMA K0      TMA K3      MMA K3      TMA K6
-stage 1   TMA K1      ready       MMA K1      TMA K4      MMA K4
-stage 2   TMA K2      ready       ready       MMA K2      TMA K5
+![S=3 TMA 与 tcgen05 MMA 多级流水时空图](figures/tma-mma-pipeline-s3.svg)
 
-issue lane:
-          preload ----------------->
-                      wait full0 / issue MMA0 / wait empty0 / refill K3
-                                  wait full1 / issue MMA1 / refill K4
-```
+[SVG 矢量原图](figures/tma-mma-pipeline-s3.svg) ·
+[PNG 高清图](figures/tma-mma-pipeline-s3.png)
 
-TMA 和 tcgen05 MMA 都是异步执行。单个 elected lane 按依赖顺序发射，不代表
-两个硬件引擎串行；其他已预取 stage 的 TMA transaction 可以与当前 MMA
-重叠。
+图上半部分按硬件资源拆成 issue lane、TMA engine、`full[s]`、MMA/TMEM engine
+和 `empty[s]` 五条泳道，并明确区分 preload、steady state 与 drain。下半部分
+放大 stage 0 的 `K0 → K3` 复用：`full[0]` 防止 MMA 早读，`empty[0]` 防止
+TMA 在 MMA 完成前覆写。TMA 和 tcgen05 MMA 都是异步执行；单个 elected lane
+按依赖顺序发射，不代表两个硬件引擎串行。
+
+## 我们的设计判断
+
+实现前的直觉是“stage 越深，越能隐藏 TMA 延迟”，但每多一级也要付出 24 KiB
+shared memory、更多 barrier 代际管理和更小的资源余量，因此我们预先把结论设为
+**形状相关**，没有把更深流水当成单调优化。实测也支持这一点：4096³ 有约
+13.8 个 CTA waves，S=2 最好；thin-M 只有 128 CTA，不足 148 个 SM 的一波，
+才更依赖 block 内预取，S=3/S=6 更有价值。
+
+另一个被数据修正的直觉是“用 shared-memory 总量相除即可得到 blocks/SM”。
+简单估算给出 4/3/2/1，但 occupancy API 对 S=2/3/4/6 均返回 1，NCU 也把
+S=2 的上限归因于 required shared memory。我们因此没有用漂亮但错误的容量
+除法解释曲线，而是把结论收窄为：深 stage 继续消耗容量余量，但当前 kernel
+从 S=2 起就已受实际分配约束限制为 1 block/SM。
 
 ## 4096³ 梯子结果
 
@@ -114,8 +123,9 @@ shared memory；即当前动态 shared-memory 配置/硬件分配约束在 S=2 �
 把上限压到 1 block/SM。性能回落不能解释成“blocks/SM 从 4 逐级降到 1”，
 但 stage 增长仍持续减少容量余量。
 
-证据：[S=2 NCU 文本](evidence/m43-s2-details.txt)；
-[NCU 报告](evidence/m43-s2-basic.ncu-rep)。
+公开证据为 [S=2 NCU 文本](evidence/m43-s2-details.txt)。原始 `.ncu-rep` 会嵌入
+集群账号与绝对路径，只在本机保存并由 Git 忽略；其 SHA-256 为
+`130e8f8d11f8f908b9e074c6e00b02a53412414285d5d3c5c1138f882e2d20d4`。
 
 当前 accumulator 只使用 64 个 TMEM column，而 stage 数每增加一级都会新增
 24 KiB shared memory。因此继续增加 stage 时，shared memory 会先成为

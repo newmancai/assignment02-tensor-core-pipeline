@@ -86,9 +86,11 @@ DRAM 吞吐只有 0.38%，排除了 HBM 带宽饱和；ALU 是利用率最高的
 store，且单缓冲等待造成延迟气泡。4.1 的瓶颈是普通 staging 的指令/地址
 开销、访问合并与延迟，而不是 HBM 峰值或 Tensor Core 算力屋顶。
 
-证据：[详细文本](evidence/m41-details.txt)；
-[可由 Nsight Compute 重新打开的报告](evidence/m41-detailed.ncu-rep)。采集期间
-profiler 会重放 kernel，不能用 NCU 下的耗时替换上面的正常 benchmark 数据。
+公开证据为[详细文本](evidence/m41-details.txt)。原始 `.ncu-rep` 会嵌入集群账号
+与绝对路径，只在本机保存并由 Git 忽略；其 SHA-256 为
+`0e8e5e0f661e5365745f7e13e03ca80f83464d7328f82dc9036f91dce82f8d7a`。
+采集期间 profiler 会重放 kernel，不能用 NCU 下的耗时替换上面的正常
+benchmark 数据。
 
 ## 与下一阶的关系
 

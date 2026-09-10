@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1050" viewBox="0 0 1800 1050" role="img" aria-labelledby="title desc">
+  <title id="title">S=3 TMA 与 tcgen05 MMA 多级流水时空图</title>
+  <desc id="desc">图中上半部分以共享时间轴展示 issue lane、TMA 引擎、full barrier、MMA/TMEM 引擎和 empty barrier 的预热、稳态与排空；下半部分放大 stage 0 从 K0 到 K3 的安全复用顺序。</desc>
+  <defs>
+    <style>
+      .title { font: 600 31px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #17212b; }
+      .subtitle { font: 400 17px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #52606d; }
+      .label { font: 500 18px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #24323f; }
+      .small { font: 400 15px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #52606d; }
+      .block { font: 500 16px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #17212b; }
+      .white { fill: #ffffff; }
+      .axis { stroke: #8b98a5; stroke-width: 1.5; }
+      .grid { stroke: #d8dee4; stroke-width: 1; stroke-dasharray: 5 6; }
+      .lane { stroke: #d8dee4; stroke-width: 1; }
+      .dep { stroke: #7d8790; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .raw { stroke: #b37714; stroke-width: 2.4; fill: none; marker-end: url(#arrow-gold); }
+      .war { stroke: #247f75; stroke-width: 2.4; fill: none; marker-end: url(#arrow-teal); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,3 L0,6 Z" fill="#7d8790"/></marker>
+    <marker id="arrow-gold" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,3 L0,6 Z" fill="#b37714"/></marker>
+    <marker id="arrow-teal" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,3 L0,6 Z" fill="#247f75"/></marker>
+  </defs>
+
+  <rect width="1800" height="1050" fill="#ffffff"/>
+  <text x="42" y="52" class="title">4.3 · S=3 TMA / tcgen05 MMA 多级流水时空图</text>
+  <text x="42" y="84" class="subtitle">逻辑时序示意（非实测 cycle）：阶段颜色标识 ring slot；泳道表示硬件资源，异步引擎可以真正重叠</text>
+
+  <rect x="278" y="112" width="1462" height="574" fill="#fbfcfd"/>
+  <rect x="315" y="126" width="387" height="42" fill="#fff5e8"/>
+  <text x="509" y="153" text-anchor="middle" class="label">PRELOAD · 填满 K0/K1/K2</text>
+  <rect x="702" y="126" width="792" height="42" fill="#eaf6f2"/>
+  <text x="1098" y="153" text-anchor="middle" class="label">STEADY STATE · TMA(K+3) ↔ MMA(K)</text>
+  <rect x="1494" y="126" width="220" height="42" fill="#eef2f6"/>
+  <text x="1604" y="153" text-anchor="middle" class="label">DRAIN</text>
+
+  <g>
+    <text x="52" y="229" class="label">elected issue lane</text>
+    <text x="52" y="254" class="small">依赖排序 / 指令发射</text>
+    <text x="52" y="334" class="label">TMA engine</text>
+    <text x="52" y="359" class="small">global → shared</text>
+    <text x="52" y="442" class="label">full[s]</text>
+    <text x="52" y="467" class="small">RAW：数据可读</text>
+    <text x="52" y="544" class="label">MMA / TMEM engine</text>
+    <text x="52" y="569" class="small">shared → TMEM</text>
+    <text x="52" y="648" class="label">empty[s]</text>
+    <text x="52" y="673" class="small">WAR：槽位可覆写</text>
+    <line x1="278" y1="278" x2="1740" y2="278" class="lane"/>
+    <line x1="278" y1="385" x2="1740" y2="385" class="lane"/>
+    <line x1="278" y1="489" x2="1740" y2="489" class="lane"/>
+    <line x1="278" y1="594" x2="1740" y2="594" class="lane"/>
+  </g>
+
+  <g>
+    <line x1="315" y1="170" x2="315" y2="686" class="grid"/>
+    <line x1="515" y1="170" x2="515" y2="686" class="grid"/>
+    <line x1="715" y1="170" x2="715" y2="686" class="grid"/>
+    <line x1="915" y1="170" x2="915" y2="686" class="grid"/>
+    <line x1="1115" y1="170" x2="1115" y2="686" class="grid"/>
+    <line x1="1315" y1="170" x2="1315" y2="686" class="grid"/>
+    <line x1="1515" y1="170" x2="1515" y2="686" class="grid"/>
+    <line x1="1715" y1="170" x2="1715" y2="686" class="grid"/>
+  </g>
+
+  <g>
+    <rect x="330" y="199" width="182" height="54" rx="4" fill="#457b9d"/>
+    <text x="421" y="222" text-anchor="middle" class="block white">issue preload</text>
+    <text x="421" y="243" text-anchor="middle" class="small white">K0 / K1 / K2</text>
+    <rect x="536" y="199" width="154" height="54" rx="4" fill="#6b8eaa"/>
+    <text x="613" y="222" text-anchor="middle" class="block white">wait full0</text>
+    <text x="613" y="243" text-anchor="middle" class="small white">issue MMA0</text>
+    <rect x="739" y="199" width="154" height="54" rx="4" fill="#6b8eaa"/>
+    <text x="816" y="222" text-anchor="middle" class="block white">empty0 → K3</text>
+    <text x="816" y="243" text-anchor="middle" class="small white">wait full1 / MMA1</text>
+    <rect x="939" y="199" width="154" height="54" rx="4" fill="#6b8eaa"/>
+    <text x="1016" y="222" text-anchor="middle" class="block white">empty1 → K4</text>
+    <text x="1016" y="243" text-anchor="middle" class="small white">wait full2 / MMA2</text>
+    <rect x="1139" y="199" width="154" height="54" rx="4" fill="#6b8eaa"/>
+    <text x="1216" y="222" text-anchor="middle" class="block white">empty2 → K5</text>
+    <text x="1216" y="243" text-anchor="middle" class="small white">wait full0 / MMA3</text>
+    <rect x="1339" y="199" width="154" height="54" rx="4" fill="#6b8eaa"/>
+    <text x="1416" y="222" text-anchor="middle" class="block white">MMA4 / MMA5</text>
+    <text x="1416" y="243" text-anchor="middle" class="small white">no refill</text>
+    <rect x="1539" y="199" width="154" height="54" rx="4" fill="#455a6b"/>
+    <text x="1616" y="222" text-anchor="middle" class="block white">wait empty2</text>
+    <text x="1616" y="243" text-anchor="middle" class="small white">epilogue</text>
+  </g>
+
+  <g>
+    <rect x="330" y="307" width="164" height="54" rx="3" fill="#f4a261"/>
+    <text x="412" y="340" text-anchor="middle" class="block">TMA K0 · S0</text>
+    <rect x="505" y="307" width="164" height="54" rx="3" fill="#f6bd7c"/>
+    <text x="587" y="340" text-anchor="middle" class="block">TMA K1 · S1</text>
+    <rect x="680" y="307" width="164" height="54" rx="3" fill="#ffd166"/>
+    <text x="762" y="340" text-anchor="middle" class="block">TMA K2 · S2</text>
+    <rect x="850" y="307" width="164" height="54" rx="3" fill="#f4a261"/>
+    <text x="932" y="340" text-anchor="middle" class="block">TMA K3 · S0</text>
+    <rect x="1050" y="307" width="164" height="54" rx="3" fill="#f6bd7c"/>
+    <text x="1132" y="340" text-anchor="middle" class="block">TMA K4 · S1</text>
+    <rect x="1250" y="307" width="164" height="54" rx="3" fill="#ffd166"/>
+    <text x="1332" y="340" text-anchor="middle" class="block">TMA K5 · S2</text>
+  </g>
+
+  <g>
+    <circle cx="494" cy="436" r="11" fill="#e9c46a"/><text x="494" y="470" text-anchor="middle" class="small">full0</text>
+    <circle cx="669" cy="436" r="11" fill="#e9c46a"/><text x="669" y="470" text-anchor="middle" class="small">full1</text>
+    <circle cx="844" cy="436" r="11" fill="#e9c46a"/><text x="844" y="470" text-anchor="middle" class="small">full2</text>
+    <circle cx="1014" cy="436" r="11" fill="#e9c46a"/><text x="1014" y="470" text-anchor="middle" class="small">full0′</text>
+    <circle cx="1214" cy="436" r="11" fill="#e9c46a"/><text x="1214" y="470" text-anchor="middle" class="small">full1′</text>
+    <circle cx="1414" cy="436" r="11" fill="#e9c46a"/><text x="1414" y="470" text-anchor="middle" class="small">full2′</text>
+  </g>
+
+  <g>
+    <rect x="520" y="516" width="174" height="55" rx="3" fill="#2a9d8f"/>
+    <text x="607" y="550" text-anchor="middle" class="block white">MMA K0 · S0</text>
+    <rect x="710" y="516" width="174" height="55" rx="3" fill="#3fb5a8"/>
+    <text x="797" y="550" text-anchor="middle" class="block white">MMA K1 · S1</text>
+    <rect x="900" y="516" width="174" height="55" rx="3" fill="#65c3b8"/>
+    <text x="987" y="550" text-anchor="middle" class="block white">MMA K2 · S2</text>
+    <rect x="1090" y="516" width="174" height="55" rx="3" fill="#2a9d8f"/>
+    <text x="1177" y="550" text-anchor="middle" class="block white">MMA K3 · S0</text>
+    <rect x="1280" y="516" width="174" height="55" rx="3" fill="#3fb5a8"/>
+    <text x="1367" y="550" text-anchor="middle" class="block white">MMA K4 · S1</text>
+    <rect x="1470" y="516" width="174" height="55" rx="3" fill="#65c3b8"/>
+    <text x="1557" y="550" text-anchor="middle" class="block white">MMA K5 · S2</text>
+  </g>
+
+  <g>
+    <circle cx="694" cy="642" r="11" fill="#76b7ae"/><text x="694" y="674" text-anchor="middle" class="small">empty0</text>
+    <circle cx="884" cy="642" r="11" fill="#76b7ae"/><text x="884" y="674" text-anchor="middle" class="small">empty1</text>
+    <circle cx="1074" cy="642" r="11" fill="#76b7ae"/><text x="1074" y="674" text-anchor="middle" class="small">empty2</text>
+    <circle cx="1264" cy="642" r="11" fill="#76b7ae"/><text x="1264" y="674" text-anchor="middle" class="small">empty0′</text>
+    <circle cx="1454" cy="642" r="11" fill="#76b7ae"/><text x="1454" y="674" text-anchor="middle" class="small">empty1′</text>
+    <circle cx="1644" cy="642" r="11" fill="#76b7ae"/><text x="1644" y="674" text-anchor="middle" class="small">empty2′</text>
+  </g>
+
+  <g>
+    <path d="M494 361 L494 424" class="raw"/>
+    <path d="M494 447 C494 485 540 483 552 512" class="raw"/>
+    <path d="M669 361 L669 424" class="raw"/>
+    <path d="M669 447 C669 485 730 483 742 512" class="raw"/>
+    <path d="M844 361 L844 424" class="raw"/>
+    <path d="M844 447 C844 485 920 483 932 512" class="raw"/>
+    <path d="M1014 447 C1014 485 1100 483 1122 512" class="raw"/>
+    <path d="M1214 447 C1214 485 1290 483 1312 512" class="raw"/>
+    <path d="M1414 447 C1414 485 1480 483 1502 512" class="raw"/>
+    <path d="M694 571 L694 630" class="war"/>
+    <path d="M705 642 C780 642 780 385 850 340" class="war"/>
+    <path d="M884 571 L884 630" class="war"/>
+    <path d="M895 642 C980 642 980 385 1050 340" class="war"/>
+    <path d="M1074 571 L1074 630" class="war"/>
+    <path d="M1085 642 C1180 642 1180 385 1250 340" class="war"/>
+  </g>
+
+  <rect x="278" y="722" width="1462" height="272" fill="#fffaf2"/>
+  <text x="304" y="760" class="label">Stage 0 复用放大：两个 barrier 把 RAW 与 WAR 分开</text>
+  <line x1="332" y1="922" x2="1698" y2="922" class="axis"/>
+
+  <rect x="352" y="805" width="210" height="60" rx="4" fill="#f4a261"/>
+  <text x="457" y="832" text-anchor="middle" class="block">TMA 写入 K0 → S0</text>
+  <text x="457" y="854" text-anchor="middle" class="small">producer owns slot</text>
+  <circle cx="640" cy="835" r="13" fill="#e9c46a"/>
+  <text x="640" y="878" text-anchor="middle" class="small">full0 arrives</text>
+  <rect x="724" y="805" width="230" height="60" rx="4" fill="#2a9d8f"/>
+  <text x="839" y="832" text-anchor="middle" class="block white">MMA 读取 K0 / S0</text>
+  <text x="839" y="854" text-anchor="middle" class="small white">consumer owns slot</text>
+  <circle cx="1037" cy="835" r="13" fill="#76b7ae"/>
+  <text x="1037" y="878" text-anchor="middle" class="small">empty0 arrives</text>
+  <rect x="1132" y="805" width="226" height="60" rx="4" fill="#f4a261"/>
+  <text x="1245" y="832" text-anchor="middle" class="block">TMA 覆写 K3 → S0</text>
+  <text x="1245" y="854" text-anchor="middle" class="small">next generation</text>
+  <rect x="1442" y="805" width="226" height="60" rx="4" fill="#2a9d8f"/>
+  <text x="1555" y="832" text-anchor="middle" class="block white">MMA 读取 K3 / S0</text>
+  <text x="1555" y="854" text-anchor="middle" class="small white">ring continues</text>
+
+  <path d="M562 835 L623 835" class="raw"/>
+  <path d="M653 835 L708 835" class="raw"/>
+  <path d="M954 835 L1020 835" class="war"/>
+  <path d="M1050 835 L1116 835" class="war"/>
+  <path d="M1358 835 L1426 835" class="raw"/>
+
+  <text x="490" y="953" text-anchor="middle" class="small">full[s]：防止 MMA 在 TMA 完成前读取（RAW）</text>
+  <text x="1195" y="953" text-anchor="middle" class="small">empty[s]：防止 TMA 在 MMA 完成前覆写（WAR）</text>
+
+  <g transform="translate(310,1023)">
+    <rect x="0" y="-15" width="24" height="14" fill="#f4a261"/><text x="34" y="-3" class="small">TMA / shared tile</text>
+    <rect x="215" y="-15" width="24" height="14" fill="#2a9d8f"/><text x="249" y="-3" class="small">tcgen05 MMA / TMEM</text>
+    <circle cx="492" cy="-8" r="8" fill="#e9c46a"/><text x="510" y="-3" class="small">full barrier</text>
+    <circle cx="680" cy="-8" r="8" fill="#76b7ae"/><text x="698" y="-3" class="small">empty barrier</text>
+    <rect x="900" y="-15" width="24" height="14" fill="#457b9d"/><text x="934" y="-3" class="small">issue lane</text>
+  </g>
+</svg>

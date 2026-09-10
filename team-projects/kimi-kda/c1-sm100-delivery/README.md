@@ -12,13 +12,14 @@
 
 ## 快速入口
 
-1. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pdf`](01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pdf)：15 页答辩固定版。
-2. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pptx`](01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pptx)：可编辑答辩稿。
-3. [`DEFENSE_BRIEF.md`](DEFENSE_BRIEF.md)：答辩主线、必记数字和追问边界。
-4. [`02_paper/main.pdf`](02_paper/main.pdf)：论文版核心叙述；源文件在同目录。
-5. [`RETROSPECTIVE.md`](RETROSPECTIVE.md)：完整研究复盘。
-6. [`EVIDENCE_INDEX.md`](EVIDENCE_INDEX.md)：结论到证据的索引。
-7. [`REPRODUCTION.md`](REPRODUCTION.md)：B300 复验顺序与计时要求。
+1. [`03_reports/SM100_MAINLINE_DELIVERY.md`](03_reports/SM100_MAINLINE_DELIVERY.md)：C1 正式技术报告，完整回答题目主线与六个讨论点。
+2. [`02_paper/main.pdf`](02_paper/main.pdf)：8 页论文；LaTeX 源码与一键构建入口在同目录。
+3. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pdf`](01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pdf)：15 页答辩固定版。
+4. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pptx`](01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pptx)：可编辑答辩稿。
+5. [`DEFENSE_BRIEF.md`](DEFENSE_BRIEF.md)：答辩主线、必记数字和追问边界。
+6. [`RETROSPECTIVE.md`](RETROSPECTIVE.md)：完整研究复盘与后续指导。
+7. [`EVIDENCE_INDEX.md`](EVIDENCE_INDEX.md)：结论到证据的索引。
+8. [`REPRODUCTION.md`](REPRODUCTION.md)：B300 复验顺序与计时要求。
 
 ## 归档结构
 

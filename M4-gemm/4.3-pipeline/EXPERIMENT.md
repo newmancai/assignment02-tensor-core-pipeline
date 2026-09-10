@@ -9,4 +9,4 @@
 | 性能数据 | 4096³：301.8/288.5/253.3/183.3 TFLOPS；thin-M：168.5/207.4/189.4/210.5 TFLOPS |
 | 现象 | 四种 stage 实际均为 1 block/SM；4096³ 有约 13.8 waves，thin-M 的 128 CTA 不足一个完整 wave |
 | 结论 | 深 stage 对低 grid 并发形状更有价值；性能回落不能归因于 blocks/SM 逐级下降，但 shared memory 仍以每 stage 24 KiB 消耗容量余量 |
-| 证据链接 | [CUDA 源码](03_pipeline.cu)、[S=2 NCU 文本](evidence/m43-s2-details.txt)、[S=2 NCU 报告](evidence/m43-s2-basic.ncu-rep)、[B300 sweep 输出](../../docs/evidence/b300-results.md#43-stage-sweep) |
+| 证据链接 | [CUDA 源码](03_pipeline.cu)、[S=2 NCU 文本](evidence/m43-s2-details.txt)、[B300 sweep 输出](../../docs/evidence/b300-results.md#43-stage-sweep)；原始 `.ncu-rep` 因嵌入集群元数据仅在本机保存 |
