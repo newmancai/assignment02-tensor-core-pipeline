@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "evidence/attempts/20260909070302-23177-stage7-kimi-k3-tp8-h12-prepare-ncu.json": "69f8cbf89aa1579116b13e74ea931acc47c014e6fdb04986b9fbdc8e80286b84",
+    "evidence/attempts/20260909071644-23195-stage7-kimi-k3-tp8-h12-prepare-ncu.json": "e5bea7c0406377960cdf0749a09d70150ebd142559c9b0ae1968320ffa3af47e",
+    "evidence/b300_stage7_h12_phase_activity.json": "e7a12cd1f2764991ea8682f6080924b682bb2ab7688e207cdf42c88919616515",
+    "evidence/b300_stage7_h12_phase_activity_accounting.json": "4dfd58ac19ba0fab12d5d97acfcb34e4adfd1bf71ed8fe7b494844a0983afff0",
+    "evidence/b300_stage7_h12_prepare_ncu_accounting.json": "e5bea7c0406377960cdf0749a09d70150ebd142559c9b0ae1968320ffa3af47e",
+    "evidence/b300_stage7_h12_prepare_ncu_summary.json": "7f2ea80caeebe978c03d3da0ee78701af3b9db45117851fb4cf2cdf65364367f",
+    "evidence/stage7_autonomous_agent_replay.json": "2eb50861c88b05d2a4adde88e46543cc5937372c38d9399fc3c3b0a2c94ad319"
+  },
+  "checks": {
+    "account_exit_zero": true,
+    "agent_replay_activates_all_profiles": true,
+    "chain_delta_under_one_microsecond": true,
+    "correctness": true,
+    "four_profiles": true,
+    "ncu_account_exit_zero": true,
+    "ncu_active_period_throughput_increases": true,
+    "ncu_failed_attempt_retained": true,
+    "ncu_grid_1536_to_684": true,
+    "ncu_instruction_drop_under_10_percent": true,
+    "ncu_profiled_duration_decreases": true,
+    "ncu_resource_footprint_unchanged": true,
+    "ncu_waves_2_08_to_0_92": true,
+    "prepare_delta_positive_95": true,
+    "prepare_explains_at_least_95_percent": true,
+    "scope_identical": true,
+    "separate_prepare_chain_modules": true
+  },
+  "claim_boundary": "The cpc=4 to cpc=9 gain is attributed to the prepare launch on the four Stage 6 selection profiles. Representative NCU counters support a CTA decomposition and scheduling-wave mechanism, but do not make NCU duration an authoritative timing gate, qualify a new deployment policy, establish cross-device transfer, or prove a multi-agent advantage.",
+  "schema_version": 1,
+  "status": "prepare_phase_attributed_ncu_mechanism_supported_and_agent_loop_replayed",
+  "summary": {
+    "allocated_gpu_seconds": 7.559421451296657,
+    "estimated_energy_joules": 1622.87,
+    "full_span_saving_range_us": [
+      18.239999999999952,
+      18.54449999999997
+    ],
+    "max_chunks_vs_chain_time_pearson": 0.9999994843907271,
+    "ncu_grid_size": [
+      1536,
+      684
+    ],
+    "ncu_instruction_relative_change": -0.03961268330814627,
+    "ncu_profiled_duration_relative_change": -0.17743190661478603,
+    "ncu_waves_per_sm": [
+      2.08,
+      0.92
+    ],
+    "prepare_fraction_of_full_delta_range": [
+      0.9748746442607387,
+      0.9885690789473714
+    ],
+    "prepare_saving_cv": 0.004093322547861279,
+    "prepare_saving_mean_us": 18.051999999999996,
+    "prepare_saving_range_us": [
+      17.983999999999995,
+      18.17649999999999
+    ],
+    "stage7_total_allocated_gpu_seconds": 17.311264251358807,
+    "stage7_total_attempts": 3,
+    "stage7_total_estimated_energy_joules": 3548.48
+  }
+}

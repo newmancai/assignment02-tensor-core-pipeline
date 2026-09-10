@@ -3,7 +3,7 @@
 ## ——面向 Kimi K3 的 B300/SM103 复现、量化分析与并行度重构挑战
 
 > C1 最终报告
-> 实验日期：2026-09-03；主线增量复核至 2026-09-05
+> 实验日期：2026-09-03；主线增量复核至 2026-09-05；profile 补充验证至 2026-09-09
 > 实验对象：NVIDIA B300 SXM6 AC（compute capability 10.3）
 
 ## 摘要
@@ -18,7 +18,9 @@
 
 发布判断因此更精确：保留 V128 `mma.sync` fallback 和既有 guarded ValueSlice；Phase-6 P4 与 Phase-1 lookahead 作为**编译期默认关闭、单请求延迟导向**的 B300 候选。无初态双 stream 的两个请求 joined-pair 时间从 **1.147440 ms 增至 1.164832 ms（回归 1.52%）**，证明当前 shape guard 不等于运行时并发感知。该结论只覆盖单张 B300 上的 FlashKDA forward；没有把 27%、37% 或 46% 算子结果写成 Kimi K3 的 TTFT、TPOT、SLO goodput 或多卡收益。
 
-**关键词：** FlashKDA；Kimi Delta Attention；B300；SM103；`mma.sync`；`tcgen05`；TMEM；ValueSlice；软件预取；prefill
+贯穿这些结果的工程观点是：**Kernel is cheap，可信的 profile-to-policy 决策才昂贵。** 这里的 “cheap” 指候选 kernel 已容易生成，而不是 GPU 时间不重要。我们因此把最终贡献从若干孤立 patch 提炼为可自优化的 Runtime Profile Agent：上一轮的 verifier、screen 和 qualification 结论会进入 conclusions-only memory，驱动下一轮 proposal；工具完成 typed 去重、证据门控，并在预算耗尽或证据 plateau 时停止。论文阶段又在独立 H12 BT16 route 上，用禁止候选筛选的 W384/W768 前瞻实验验证 resident-grid-capacity 规则；四个 profile 为 **1.0133×–1.1354×**，最弱 Bonferroni 单侧 98.75% 下界为 **1.0129×**。该证据只支持 shadow recommendation，且不能与 ValueSlice 主线收益合并。
+
+**关键词：** FlashKDA；Kimi Delta Attention；B300；SM103；Runtime Profile Agent；Agent 自优化；`mma.sync`；`tcgen05`；TMEM；ValueSlice；软件预取；prefill
 
 ---
 
@@ -47,7 +49,29 @@
 - **[纸面模型]** 根据矩阵规模、数据类型或请求次数推算的代价，不冒充 profiler 实测；
 - **[系统推断]** 从 operator 数据到 Kimi prefill、并发和 SLO 的条件性外推。
 
-### 1.3 SM103 新能力分别是什么，与题目有什么关系
+### 1.3 “Kernel is cheap”：为什么需要 Runtime Profile Agent
+
+生成或改写一个 kernel candidate 已经相对便宜；难点是避免在错误 workload、错误物理 route 或错误统计口径上选中它。本项目因此不把贡献定义为“又写了几个 kernel”，而是实现一个 **Runtime Profile Agent**，把 C1 的迁移决策拆成五个可审计环节。
+
+| 环节 | 结构化对象 | 要避免的误判 |
+|---|---|---|
+| Profile | local heads、seq lengths、total/max chunks、packed/fixed、SM count | 用 H96 官方表代替 TP8 每卡 H12，或忽略长序列关键路径 |
+| Diagnose | SASS、NCU/Nsys/CUPTI、grid geometry、resource receipt | 看到旧指令就假定 compute-bound，或把低 occupancy 当唯一因果 |
+| Propose | typed schedule delta、canonical candidate ID | 让自然语言 Agent 直接改任意 CUDA，或重复测同一语义候选 |
+| Verify/measure | output/final state、scope parity、paired timing、置信下界 | winner's curse、跨 job 拼绝对时间、只报正样本 |
+| Resolve | profile/resource/evidence-bound policy 与 fallback reason | 把单点 winner 写死，或把未知域默认为已支持 |
+
+Agent 可以提出 ValueSlice、prefetch、cpc 或 `tcgen05` 候选，但 typed verifier、compiler receipt、correctness oracle、B300 executor 和 activation gate 保持确定性。这样，`tcgen05` 的负结果也是有效产出；ValueSlice 与 prefetch 的正结果也只有在反例和 fallback 明确后才进入候选策略。
+
+#### Agent 如何自优化
+
+自优化发生在候选策略层，而不是让模型在线修改生产 kernel。第 `r` 轮的 proposal source 会读取前 `r-1` 轮的 **conclusions-only memory**，其中只保存 candidate ID、通过或拒绝状态、证据引用和置信区间，不保存隐藏推理或未经压缩的测量数组。新候选先被规范化为 typed schedule 和 content-addressed ID；语义重复候选只测一次，verifier 拒绝原因会成为下一轮约束。通过 screen 的 top-k 候选进入独立 qualification，只有正确性、scope parity、正的置信下界和 fallback 全部满足时才更新 incumbent。若没有新候选、测量预算耗尽、连续若干轮没有更强证据，循环分别以 `no_new_candidates`、`screen_budget_exhausted` 或 `evidence_plateau` 停止。
+
+因此它的“学习信号”不是 Agent 投票，而是可重放的 verifier diagnostic 和硬件证据。LLM 或多角色 Agent 可以扩大 proposal 的覆盖面，但不能自行越过 verifier、measurement 或 activation gate。当前原型证明了这套闭环程序与停止逻辑，尚未证明生产环境中的长期在线自演化收益。
+
+论文阶段的 profile 工具源码随作业归档在 [`tools/runtime-profile-agent/`](../../tools/runtime-profile-agent/)。它不是完整生产 dispatcher，而是把“profile → 物理假设 → typed proposal → 测量 → shadow policy”闭环做成可复查的原型。
+
+### 1.4 SM103 新能力分别是什么，与题目有什么关系
 
 | 能力 | 含义 | 与 FlashKDA C1 的关系 |
 |---|---|---|
@@ -124,9 +148,37 @@ FlashKDA forward 的 K1 可以沿 token/chunk 展开；K2 则负责跨 chunk rec
 
 9 月 5 日的后续 profile 正是沿着“ValueSlice 已扩 grid、但 CTA 内仍有等待”继续推进。Phase-6 P4 和 Phase-1 lookahead 都保持 96 CTA、96 threads 和约 49.664 KiB shared memory；收益主要伴随 issue/eligible 提高和 short-scoreboard 降低，而不是 occupancy 上升或 HBM bytes 下降。详细数据放在 §4.5–4.6，不能与本节 Job 17965 的 V128/V16 profiler 绝对时间串成一条跨作业加速链。
 
+### 2.5 Agent 如何在挑战之前得出主线判断
+
+我们由确定性 parser 直接从上述 SASS、H12 targeted NCU 和
+Phase-6 `tcgen05` 原始 CSV 生成同一个 `MmaMigrationProfile`，
+再由 Runtime Profile Agent 的确定性
+assessment 先生成结论，再生成候选。这一顺序避免了“先选一个想做的
+kernel，再为它挑证据”。
+
+| Agent finding | 物理证据 | 对 MMA 搜索的约束 |
+|---|---|---|
+| `MMA001` | recurrence SASS: HMMA 3,640，TCGEN/UTCMMA 0 | 题面指令路径成立 |
+| `MMA002` | 12 CTA / 148 SM；SM/DRAM 2.64%/1.24% | 不得把“旧 MMA”等同于 compute-bound |
+| `MMA003` | state 的 128 个 Value 行语义独立，切分不改变单元素归约顺序 | 先搜 Value 并行分解和 issue overlap |
+| `MMA004` | V128 Phase-6 L0/L1 为 0.920×/0.256× | 停止 direct swap |
+| `MMA005` | V16 core-only L0 1.501×，加入整合包络后 L1 0.778× | 若重开 `tcgen05`，必须搜跨 phase TMEM residency，而非孤立指令 |
+| `MMA006` | 主导 phase M=16，当前 atom M=16，`tcgen05` 最小 M=64；只有 Phase-6 M=128 自然匹配 | 不对整条 recurrence 做指令级机械替换 |
+| `MMA007` | V128 active blocks/SM: L0 `12→1`，L1 `5→1`；L1 SMEM `41472→45580 B`，registers `38→39` | 必须把与 TMEM/协议路径伴随的驻留下降纳入 gate，不只看单条 MMA 吞吐 |
+
+因此 Agent 在进入挑战前已回答主问题：**不全面机械迁移
+`tcgen05`；保留已验证的 `m16n8k16` 路径，先优化它的独立工作暴露和
+TMA/MMA load-use 距离。** 输入及可重放输出分别见
+[`c1_b300_h12_mma_profile.json`](../../experiments/runtime_profile_evolution/c1_b300_h12_mma_profile.json)
+和
+[`c1_b300_h12_mma_assessment.json`](../../experiments/runtime_profile_evolution/c1_b300_h12_mma_assessment.json)。
+其中不包含挑战后的 ValueSlice 性能结果；`12→96 CTA`、挑战降时和并发反例只在阶段三用于验证候选并回写 memory。
+
 ---
 
 ## 3. 阶段二：六个讨论点——结论与证据
+
+本节是对 Agent 主线判断的逐项展开，而不是在挑战结果之后倒推理由。挑战阶段只实现和验证本节保留的候选。
 
 ### 3.1 讨论点一：CHUNK=16 的三个理由，32/64 谁先破？
 
@@ -246,7 +298,7 @@ grid underfill + chunk recurrence critical path + CTA 内 TMA/issue latency
 
 ### 4.1 为什么这仍然是“迁移 SM100 是否值得”的挑战
 
-题目允许挑战“只换指令、大 CHUNK+rescale、并行度重构”之一。前两条在进入完整实现前已被定量 gate 否决：Phase-6 direct swap 的乐观 microbench 为负，机械大 CHUNK 首先数值失效。本项目因此选择**并行度重构**，直接针对 B300/SM103 上观察到的 12 CTA/148 SM，而不是为使用新指令而使用新指令。
+题目允许挑战“只换指令、大 CHUNK+rescale、并行度重构”之一。已有实验否定了所测 Phase-6 direct swap 的性能收益，并发现机械扩大 CHUNK 会使当前指数路径数值失效；这些结果没有否定大 CHUNK + rescale/block solve，也没有穷尽其他 SM100 数据流。该阶段选择**并行度重构**，针对 B300/SM103 上观察到的 12 CTA/148 SM，完成题目允许的一条挑战路线。它保留 HMMA，因此属于相关优化证据，不能代替对 MMA 迁移价值的分析。
 
 9 月 3 日的 ValueSlice 先利用 Value 行独立性增加 CTA；9 月 5 日的增量再在每个 V16 CTA 内利用同一 chunk 的独立 keyblock 拉开 load/use 距离。前者处理卡级 underfill，后者处理单 compute warp 的发射等待；两级都保持时间 chunk 之间的 recurrence 串行依赖。
 
@@ -337,6 +389,27 @@ Phase-1 候选同样默认关闭，且依赖 Phase-6 P4：构建需要同时设�
 
 9 月 5 日的新结果进一步提高了比较门槛：未来 `tcgen05` 候选必须在完整 forward 中击败 guarded ValueSlice + 分阶段预取，而不能只战胜 9 月 3 日的 V128 microbench 基线。它仍不证明跨 Phase 1/3/4/6 的 TMEM-resident 重写永远无收益。
 
+### 4.8 Runtime Profile Agent：从固定 cpc 到物理容量规则
+
+论文阶段又在独立的 H12 BT16 CAKE-generated prepare/chain route 上验证 profile 工具。它不修改 MMA、数值算法或 public ABI，只让工具根据 workload 与编译后物理资源推荐 prepare 的 chunks-per-CTA。
+
+容量规则为 `cpc_cap(W,H,S,R) = ceil(W / floor(S*R/H))`，其中 `W/H/S/R` 分别是 total chunks、local heads、SM 数和该 prepare kernel 的实测 resident CTA/SM。本次 `H=12,S=148,R=5`，resident grid capacity 为 740 CTA；`R=5` 绑定该 kernel 的 45,056 B shared memory、128 threads、寄存器和 occupancy receipt，不是 B300 通用常数。
+
+首次 GPU 查询前封存 W384/W768、cpc7/cpc13、八个独立进程 epoch、ABBA/BAAB 顺序与 Bonferroni 单侧 98.75% 判据，并禁止 candidate screen 或邻域搜索。
+
+| Profile | W | cpc9→预测值 | grid 变化 | Speedup | 单侧 98.75% lower |
+|---|---:|---:|---:|---:|---:|
+| Fixed 6144 | 384 | 9→7 | 516→660 | 1.0133× | 1.0129× |
+| Balanced 4-way | 384 | 9→7 | 516→660 | 1.0331× | 1.0322× |
+| Fixed 12288 | 768 | 9→13 | 1032→720 | 1.0494× | 1.0488× |
+| Balanced 4-way | 768 | 9→13 | 1032→720 | 1.1354× | 1.1352× |
+
+四个 profile 的 output/final state 最大绝对差均为 0，八个 process epoch 全部同方向。W384 需要增加 CTA、W768 需要减少 CTA，两边都加速，因此结果否定“CTA 越多越好”和“CTA 越少越好”的单调解释。
+
+资格通过后才运行 CUPTI。prepare 节省 3.89–31.57 µs，解释 97.98%–101.16% 的 full-span 节省；chain 的 95% 区间均在事前冻结的 ±1% 等价带内。该证据把 profile 工具从事后调参推进到前瞻预测和阶段机制互证，但当前只产生 shadow recommendation。完整说明和证书见 [`runtime_profile_evolution/`](../../experiments/runtime_profile_evolution/)，不能与官方 FlashKDA ValueSlice/P4/Phase-1 百分比合并。
+
+这一容量规则是闭环可迁移的物理结论之一：Agent 不记住“cpc7 永远更快”，而是记住候选成立所需的 workload 和 resource receipt，再由下一轮 proposal 针对新的 `W/H/S/R` 重新计算。W384 选择更小 cpc、W768 选择更大 cpc，正好说明自优化应学习物理条件与适用域，而不是记忆单点赢家。
+
 ---
 
 ## 5. 从算子到 Kimi K3：prefill、并发、SLO、通信与环境边界
@@ -405,6 +478,7 @@ B300 更大的 shared memory、L2、显存、带宽和新低精度能力，能�
 8. Phase-6/Phase-1 guard 接受 `2048≤T≤8192`，但性能只覆盖有限整数、state/layout 组合；34 个准入域样本不等于穷尽整个区间。
 9. Phase-1 无初态 L4 存在 8 B stack 和真实 local spill；其 SASS 还伴随 Phase 6 重排。NCU 支持调度机制，但不能把全部收益归因到某一个 PC 或声称消除了动态指令。
 10. 两级预取默认编译关闭；现有 guard 不感知其它 stream/request，尚未完成实际包安装/回滚、完整模型或多产品资格验证。
+11. Runtime Profile Agent 的 capacity rule 只在同一 B300/H12/BT16 CAKE-generated route 与同一 prepare resource receipt 上前瞻验证；它不是官方 FlashKDA 补丁的叠加加速，也没有跨 kernel、跨 GPU 验证。
 
 ---
 
@@ -419,6 +493,8 @@ B300 更大的 shared memory、L2、显存、带宽和新低精度能力，能�
 相反，B300 上最明确的瓶颈是 TP8 单请求 H12 导致的 12 CTA/148 SM underfill。ValueSlice 保持总 Tensor FLOP 和每个 Value 行的运算顺序不变，把 grid 扩到 96 CTA，fixed 与 packed 单请求均获得约 27% operator 降时。9 月 5 日又证明，在 96 CTA 内优化 Phase-6/Phase-1 load-use 调度，可让 `T8192,H12` 同作业相对 V128 的完整 forward 累计降低 37.23%（首段无初态）或 45.52%（有初态续段）。这两个数字不是同一 state 合约，也不是端到端模型收益。
 
 多短序列反例和无初态双 stream 1.52% 回归证明新路径不能无条件启用。因此正确的产品形式是：**V128 `mma.sync` fallback + guarded ValueSlice + 默认关闭、由部署明确选择的 Phase-6/Phase-1 latency 候选**。下一步先补真实并发/调用分布、端到端 K3 和多卡集成，再决定是否默认启用以及是否投入 Cluster/TMA multicast。
+
+Runtime Profile Agent 将这个产品判断抽象为更一般的原则：**不要把 kernel winner 写死，要把策略绑定到 workload profile 与编译后物理 receipt。** W384/W768 的方向反转实验表明，目标不是单调增加或减少 CTA，而是让 prepare grid 落入合适的 resident-capacity 区间。该证据来自另一条 route，所以当前只作为 shadow policy 和方法论，不改写正式 dispatcher。
 
 如果未来要重新打开 `tcgen05` 路线，下一道 gate 不是再做一次孤立指令替换，而是让 Phases 1/3/4/6 共享转置布局和 TMEM 生命周期，并在完整四阶段边界内同时通过最终 guarded 基线的正确性、净性能、并发和 profiler 判据。在此之前，全面 SM100 MMA 重写不值得；受保护的 SM100 并行度与流水专用化值得继续推进。
 
@@ -441,6 +517,7 @@ B300 更大的 shared memory、L2、显存、带宽和新低精度能力，能�
 | Phase-6 四种 state 合约 | 19903 | [`state_matrix_19903.log`](../../experiments/mainline_20260905/data/state_matrix_19903.log) |
 | Phase-1 干净验收与双流负例 | 19934 | [`clean_19934.log`](../../experiments/mainline_20260905/data/clean_19934.log)、[`memcheck`](../../experiments/mainline_20260905/data/clean_19934_memcheck.log)、[`synccheck`](../../experiments/mainline_20260905/data/clean_19934_synccheck.log) |
 | Phase-1 SASS/NCU 机制互证 | 19935 | [`clean_profile_19935.log`](../../experiments/mainline_20260905/data/clean_profile_19935.log)、[四份 NCU CSV](../../experiments/mainline_20260905/data/) |
+| Runtime Profile Agent 前瞻容量规则与 CUPTI 归因 | 2026-09-09 | [`实验说明`](../../experiments/runtime_profile_evolution/README.md)、[`资格证书`](../../experiments/runtime_profile_evolution/b300_prospective_capacity_certificate.json)、[`机制证书`](../../experiments/runtime_profile_evolution/b300_prepare_mechanism_certificate.json) |
 
 代码交付：
 
@@ -472,3 +549,4 @@ baseline 版本与 ValueSlice 基础工作树 hash 见 [`SOURCE_MANIFEST.md`](..
 - Job 19934 只在开头采样到一次 1095 MHz；不同 job 的绝对毫秒和不同工具的 duration 不横向拼接，也不按频率比例校正；
 - 0004/0005 均为编译期默认关闭；`N=1` 不代表 GPU 上只有一个活跃请求，运行时取消构建 flag 不能关闭已编译路径；
 - 27%、37% 和 46% 都是指定形状/状态契约下的 FlashKDA forward operator 降时，不是 TTFT、TPOT、SLO goodput 或多卡收益实测。
+- Runtime Profile Agent 的 1.0133×–1.1354× 来自另一条 H12 BT16 CAKE-generated route；四项比较以八个独立进程 epoch 为统计单位并使用 Bonferroni 单侧 98.75% 下界，不能与 ValueSlice/P4/Phase-1 百分比合并。

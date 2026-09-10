@@ -1,0 +1,110 @@
+{
+  "answer": "Do not mechanically migrate the whole FlashKDA recurrence from mma.sync to tcgen05. Keep the verified m16n8k16 path, first optimize its exposed parallelism and issue pipeline, and reopen tcgen05 only for a cross-phase TMEM-resident dataflow.",
+  "claim_boundary": "Decision applies to the measured single-B300/SM103a Kimi-K3 H12 prefill recurrence and the archived Phase-6 probes; decode, other GPUs, and an unimplemented cross-phase TMEM design remain out of scope.",
+  "findings": [
+    {
+      "code": "MMA001",
+      "conclusion": "The measured recurrence uses HMMA rather than tcgen05.",
+      "evidence": "SASS contains 3640 recurrence HMMA instructions and 0 TCGEN/UTCMMA.",
+      "evidence_refs": [
+        "experiments/data/sass_opcode_summary.csv"
+      ]
+    },
+    {
+      "code": "MMA002",
+      "conclusion": "The first-order limiter is grid/recurrence latency, not peak Tensor Core or HBM throughput.",
+      "evidence": "Official recurrence launches 12/148 CTAs/SMs (8.1% coverage) at 2.64% SM and 1.24% DRAM throughput.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/05_targeted_ncu_summary_17965.csv"
+      ]
+    },
+    {
+      "code": "MMA003",
+      "conclusion": "The Value dimension exposes legal parallel work without breaking chunk recurrence.",
+      "evidence": "The state has 128 independent Value rows; partitioning rows does not change the reduction order within an output element.",
+      "evidence_refs": [
+        "experiments/final_campaign/analysis_tcgen05.md"
+      ]
+    },
+    {
+      "code": "MMA004",
+      "conclusion": "A Phase-6-only tcgen05 replacement does not beat the present V128 dataflow.",
+      "evidence": "V128 MMA/tcgen speedup is 0.920x in L0 and 0.256x in L1.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv"
+      ]
+    },
+    {
+      "code": "MMA005",
+      "conclusion": "The remaining tcgen05 opportunity is dataflow integration, not a bare instruction swap.",
+      "evidence": "V16 core-only L0 reaches 1.501x, but the integration envelope falls to 0.778x.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv"
+      ]
+    },
+    {
+      "code": "MMA006",
+      "conclusion": "The dominant M=16 phases match the current atom; only the M=128 state update is a natural tcgen05 site.",
+      "evidence": "Dominant phase M=16, current MMA atom M=16, tcgen05 minimum M=64, and Phase-6 M=128.",
+      "evidence_refs": [
+        "experiments/final_campaign/analysis_tcgen05.md"
+      ]
+    },
+    {
+      "code": "MMA007",
+      "conclusion": "The measured tcgen05 path sharply reduces active-block residency.",
+      "evidence": "For V128, active blocks/SM change from 12 to 1 in L0 and from 5 to 1 in L1; L1 static SMEM is 41472 versus 45580 bytes and registers are 38 versus 39.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv"
+      ]
+    }
+  ],
+  "profile_id": "b300-sm103a-kimi-k3-h12-t8192-prefill",
+  "proposals": [
+    {
+      "action": "keep",
+      "change": "Retain mma.sync and expose independent Value rows as additional CTAs.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/05_targeted_ncu_summary_17965.csv",
+        "experiments/final_campaign/analysis_tcgen05.md"
+      ],
+      "gate": "Output and final state remain bitwise equal; select by workload/device guard.",
+      "physical_target": "grid underfill",
+      "proposal_id": "mma-existing-path-parallelism",
+      "rank": 1
+    },
+    {
+      "action": "measure",
+      "change": "Search typed Phase-6 and Phase-1 prefetch distances without changing arithmetic order.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/05_targeted_ncu_summary_17965.csv"
+      ],
+      "gate": "Require scope-identical paired timing, correctness, and a positive confidence lower bound.",
+      "physical_target": "TMA/MMA load-use latency inside each CTA",
+      "proposal_id": "mma-existing-path-issue-overlap",
+      "rank": 2
+    },
+    {
+      "action": "measure",
+      "change": "Keep operands or accumulators TMEM-resident across multiple compatible phases.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv"
+      ],
+      "gate": "Reopen only if an integrated K2 slice beats the optimized mma.sync incumbent and reports its compiled residency.",
+      "physical_target": "TMEM allocation, reformat, readback, and synchronization overhead",
+      "proposal_id": "tcgen05-cross-phase-residency",
+      "rank": 3
+    },
+    {
+      "action": "stop",
+      "change": "Replace only the Phase-6 MMA while preserving the current surrounding dataflow.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv"
+      ],
+      "gate": "Stopped when the optimistic V128 core probe is already below 1.0x.",
+      "physical_target": "instruction generation alone",
+      "proposal_id": "tcgen05-phase6-direct-swap",
+      "rank": 4
+    }
+  ]
+}

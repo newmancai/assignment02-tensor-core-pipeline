@@ -1,0 +1,823 @@
+{
+  "affected_observation_count": 6,
+  "all_affected_lower_bounds_above_one": true,
+  "analysis": "b300-stage6-runtime-profile-mechanism-retrospective",
+  "claim_boundary": "Descriptive post-hoc analysis of six affected B300 observations; correlations prioritize counterfactual experiments and are not a learned deployment policy or causal attribution.",
+  "feature_log_speedup_pearson": {
+    "baseline_prepare_waves": -0.06177055708071339,
+    "chunk_cv": 0.3751123571985835,
+    "effective_sequence_parallelism": 0.811353683838672,
+    "max_chunks": -0.38688282026529436,
+    "total_chunks": -0.059872732626856294,
+    "waves_removed": -0.01862809255642875
+  },
+  "mechanism_hypotheses": [
+    {
+      "falsifier": "prepare-only timing does not fall when cpc=9 removes prepare waves",
+      "hypothesis": "prepare CTA launch and scheduling overhead",
+      "priority": 1
+    },
+    {
+      "falsifier": "matched-total-chunk profiles with different maximum sequence lengths show identical end-to-end gains and phase attribution",
+      "hypothesis": "prepare/chain critical-path mixture",
+      "priority": 2
+    },
+    {
+      "falsifier": "matched rectangular grids show no latency discontinuity across an SM-wave boundary",
+      "hypothesis": "tail and wave quantization interaction",
+      "priority": 3
+    }
+  ],
+  "next_experiment": {
+    "cpc_candidates": [
+      3,
+      4,
+      6,
+      9,
+      11,
+      12
+    ],
+    "principle": "match total chunks while varying recurrent critical path",
+    "profiles": [
+      {
+        "name": "fixed-8192",
+        "seq_lens": [
+          8192
+        ]
+      },
+      {
+        "name": "uniform-2048x4",
+        "seq_lens": [
+          2048,
+          2048,
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "balanced-4096x2",
+        "seq_lens": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "skew-64-64-64-8000",
+        "seq_lens": [
+          64,
+          64,
+          64,
+          8000
+        ]
+      }
+    ],
+    "required_counters": [
+      "public_total",
+      "prepare_only",
+      "chain_only"
+    ]
+  },
+  "observed_rows": [
+    {
+      "affected": false,
+      "bootstrap_95": [
+        1.0005397574727044,
+        1.002779836916778
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.4453125,
+        "tail_utilization_delta": -0.06409266409266412,
+        "waves_removed": 11
+      },
+      "layout": "packed",
+      "name": "h12_packed_512x32",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 32.0,
+        "layout": "packed",
+        "max_chunk_fraction": 0.03125,
+        "max_chunks": 32,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 3072,
+            "scheduled_ctas": 3072,
+            "tail_utilization": 0.9884169884169884,
+            "wave_quantized": false,
+            "waves": 21
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 1368,
+            "scheduled_ctas": 1368,
+            "tail_utilization": 0.9243243243243243,
+            "wave_quantized": false,
+            "waves": 10
+          }
+        ],
+        "seq_lens": [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 1024
+      },
+      "route": "direct_m128",
+      "seq_lens": [
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "speedup": 1.0017942667439235,
+      "split": "development"
+    },
+    {
+      "affected": false,
+      "bootstrap_95": [
+        0.9963636363636365,
+        1.0012165450121653
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.5,
+        "tail_utilization_delta": 0.0,
+        "waves_removed": 1
+      },
+      "layout": "packed",
+      "name": "h12_packed_128x8",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 8.0,
+        "layout": "packed",
+        "max_chunk_fraction": 0.125,
+        "max_chunks": 8,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 192,
+            "scheduled_ctas": 192,
+            "tail_utilization": 0.6486486486486487,
+            "wave_quantized": false,
+            "waves": 2
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 96,
+            "scheduled_ctas": 96,
+            "tail_utilization": 0.6486486486486487,
+            "wave_quantized": false,
+            "waves": 1
+          }
+        ],
+        "seq_lens": [
+          128,
+          128,
+          128,
+          128,
+          128,
+          128,
+          128,
+          128
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 64
+      },
+      "route": "direct_m128",
+      "seq_lens": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "speedup": 0.9987864077669902,
+      "split": "development"
+    },
+    {
+      "affected": false,
+      "bootstrap_95": [
+        0.9954925586859573,
+        1.0025856496444732
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.5,
+        "tail_utilization_delta": -0.32432432432432434,
+        "waves_removed": 0
+      },
+      "layout": "fixed",
+      "name": "h12_fixed_512",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 1.0,
+        "layout": "fixed",
+        "max_chunk_fraction": 1.0,
+        "max_chunks": 32,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 96,
+            "scheduled_ctas": 96,
+            "tail_utilization": 0.6486486486486487,
+            "wave_quantized": false,
+            "waves": 1
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 48,
+            "scheduled_ctas": 48,
+            "tail_utilization": 0.32432432432432434,
+            "wave_quantized": false,
+            "waves": 1
+          }
+        ],
+        "seq_lens": [
+          512
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 32
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        512
+      ],
+      "speedup": 0.998708844415752,
+      "split": "development"
+    },
+    {
+      "affected": true,
+      "bootstrap_95": [
+        1.0344320406539744,
+        1.0391217810419648
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.4453125,
+        "tail_utilization_delta": -0.0191646191646192,
+        "waves_removed": 6
+      },
+      "layout": "fixed",
+      "name": "h12_fixed_8192",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 1.0,
+        "layout": "fixed",
+        "max_chunk_fraction": 1.0,
+        "max_chunks": 512,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 1536,
+            "scheduled_ctas": 1536,
+            "tail_utilization": 0.9434889434889435,
+            "wave_quantized": false,
+            "waves": 11
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 684,
+            "scheduled_ctas": 684,
+            "tail_utilization": 0.9243243243243243,
+            "wave_quantized": false,
+            "waves": 5
+          }
+        ],
+        "seq_lens": [
+          8192
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 512
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        8192
+      ],
+      "speedup": 1.0368545020092972,
+      "split": "development"
+    },
+    {
+      "affected": true,
+      "bootstrap_95": [
+        1.0788811651894155,
+        1.0830461517670114
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.4496124031007752,
+        "tail_utilization_delta": -0.010319410319410305,
+        "waves_removed": 6
+      },
+      "layout": "packed",
+      "name": "h12_packed_mixed",
+      "profile": {
+        "chunk_cv": 0.6892985091563983,
+        "effective_sequence_parallelism": 2.6822916666666665,
+        "layout": "packed",
+        "max_chunk_fraction": 0.37281553398058254,
+        "max_chunks": 192,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 1548,
+            "scheduled_ctas": 1548,
+            "tail_utilization": 0.9508599508599509,
+            "wave_quantized": false,
+            "waves": 11
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 696,
+            "scheduled_ctas": 696,
+            "tail_utilization": 0.9405405405405406,
+            "wave_quantized": false,
+            "waves": 5
+          }
+        ],
+        "seq_lens": [
+          1300,
+          547,
+          2048,
+          963,
+          271,
+          3063
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 515
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        1300,
+        547,
+        2048,
+        963,
+        271,
+        3063
+      ],
+      "speedup": 1.080688553577495,
+      "split": "development"
+    },
+    {
+      "affected": false,
+      "bootstrap_95": [
+        0.9998360540134983,
+        1.015992757996379
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.4453125,
+        "tail_utilization_delta": -0.0191646191646192,
+        "waves_removed": 6
+      },
+      "layout": "packed",
+      "name": "h12_packed_1024x8",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 8.0,
+        "layout": "packed",
+        "max_chunk_fraction": 0.125,
+        "max_chunks": 64,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 1536,
+            "scheduled_ctas": 1536,
+            "tail_utilization": 0.9434889434889435,
+            "wave_quantized": false,
+            "waves": 11
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 684,
+            "scheduled_ctas": 684,
+            "tail_utilization": 0.9243243243243243,
+            "wave_quantized": false,
+            "waves": 5
+          }
+        ],
+        "seq_lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 512
+      },
+      "route": "direct_m128",
+      "seq_lens": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ],
+      "speedup": 1.0123717561858783,
+      "split": "development"
+    },
+    {
+      "affected": false,
+      "bootstrap_95": [
+        0.9969290717716148,
+        1.0027092585441204
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.5,
+        "tail_utilization_delta": 0.0,
+        "waves_removed": 1
+      },
+      "layout": "fixed",
+      "name": "h12_holdout_fixed_1024",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 1.0,
+        "layout": "fixed",
+        "max_chunk_fraction": 1.0,
+        "max_chunks": 64,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 192,
+            "scheduled_ctas": 192,
+            "tail_utilization": 0.6486486486486487,
+            "wave_quantized": false,
+            "waves": 2
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 96,
+            "scheduled_ctas": 96,
+            "tail_utilization": 0.6486486486486487,
+            "wave_quantized": false,
+            "waves": 1
+          }
+        ],
+        "seq_lens": [
+          1024
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 64
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        1024
+      ],
+      "speedup": 0.9994285370548603,
+      "split": "heldout"
+    },
+    {
+      "affected": false,
+      "bootstrap_95": [
+        0.9969460892930186,
+        1.0006547314578005
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.46875,
+        "tail_utilization_delta": -0.2567567567567568,
+        "waves_removed": 1
+      },
+      "layout": "fixed",
+      "name": "h12_holdout_fixed_2048_boundary",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 1.0,
+        "layout": "fixed",
+        "max_chunk_fraction": 1.0,
+        "max_chunks": 128,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 384,
+            "scheduled_ctas": 384,
+            "tail_utilization": 0.8648648648648649,
+            "wave_quantized": false,
+            "waves": 3
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 180,
+            "scheduled_ctas": 180,
+            "tail_utilization": 0.6081081081081081,
+            "wave_quantized": false,
+            "waves": 2
+          }
+        ],
+        "seq_lens": [
+          2048
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 128
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        2048
+      ],
+      "speedup": 0.9987979541383751,
+      "split": "heldout"
+    },
+    {
+      "affected": true,
+      "bootstrap_95": [
+        1.0026324985061645,
+        1.005797054717052
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.453125,
+        "tail_utilization_delta": -0.08108108108108114,
+        "waves_removed": 3
+      },
+      "layout": "fixed",
+      "name": "h12_holdout_fixed_4096",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 1.0,
+        "layout": "fixed",
+        "max_chunk_fraction": 1.0,
+        "max_chunks": 256,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 768,
+            "scheduled_ctas": 768,
+            "tail_utilization": 0.8648648648648649,
+            "wave_quantized": false,
+            "waves": 6
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 348,
+            "scheduled_ctas": 348,
+            "tail_utilization": 0.7837837837837838,
+            "wave_quantized": false,
+            "waves": 3
+          }
+        ],
+        "seq_lens": [
+          4096
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 256
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        4096
+      ],
+      "speedup": 1.0039778689830612,
+      "split": "heldout"
+    },
+    {
+      "affected": true,
+      "bootstrap_95": [
+        1.0112805170537116,
+        1.0137832528230788
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.4453125,
+        "tail_utilization_delta": -0.06409266409266412,
+        "waves_removed": 11
+      },
+      "layout": "fixed",
+      "name": "h12_holdout_fixed_16384",
+      "profile": {
+        "chunk_cv": 0.0,
+        "effective_sequence_parallelism": 1.0,
+        "layout": "fixed",
+        "max_chunk_fraction": 1.0,
+        "max_chunks": 1024,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 3072,
+            "scheduled_ctas": 3072,
+            "tail_utilization": 0.9884169884169884,
+            "wave_quantized": false,
+            "waves": 21
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 1368,
+            "scheduled_ctas": 1368,
+            "tail_utilization": 0.9243243243243243,
+            "wave_quantized": false,
+            "waves": 10
+          }
+        ],
+        "seq_lens": [
+          16384
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 1024
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        16384
+      ],
+      "speedup": 1.0122459627606606,
+      "split": "heldout"
+    },
+    {
+      "affected": true,
+      "bootstrap_95": [
+        1.0346793505963912,
+        1.0396621193217845
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.4453125,
+        "tail_utilization_delta": -0.0191646191646192,
+        "waves_removed": 6
+      },
+      "layout": "packed",
+      "name": "h12_holdout_packed_skew",
+      "profile": {
+        "chunk_cv": 1.6779242198323499,
+        "effective_sequence_parallelism": 1.024,
+        "layout": "packed",
+        "max_chunk_fraction": 0.9765625,
+        "max_chunks": 500,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 1536,
+            "scheduled_ctas": 1536,
+            "tail_utilization": 0.9434889434889435,
+            "wave_quantized": false,
+            "waves": 11
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 684,
+            "scheduled_ctas": 684,
+            "tail_utilization": 0.9243243243243243,
+            "wave_quantized": false,
+            "waves": 5
+          }
+        ],
+        "seq_lens": [
+          64,
+          64,
+          64,
+          8000
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 512
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        64,
+        64,
+        64,
+        8000
+      ],
+      "speedup": 1.0371274792164553,
+      "split": "heldout"
+    },
+    {
+      "affected": true,
+      "bootstrap_95": [
+        1.0205155527874061,
+        1.026822946715972
+      ],
+      "cpc4_to_cpc9": {
+        "scheduled_cta_ratio": 0.44761904761904764,
+        "tail_utilization_delta": 0.006756756756756799,
+        "waves_removed": 5
+      },
+      "layout": "packed",
+      "name": "h12_holdout_packed_irregular",
+      "profile": {
+        "chunk_cv": 0.846024481404597,
+        "effective_sequence_parallelism": 1.672,
+        "layout": "packed",
+        "max_chunk_fraction": 0.5980861244019139,
+        "max_chunks": 250,
+        "num_heads": 12,
+        "prepare_grids": [
+          {
+            "chunks_per_cta": 4,
+            "rectangular_ctas": 1260,
+            "scheduled_ctas": 1260,
+            "tail_utilization": 0.9459459459459459,
+            "wave_quantized": false,
+            "waves": 9
+          },
+          {
+            "chunks_per_cta": 9,
+            "rectangular_ctas": 564,
+            "scheduled_ctas": 564,
+            "tail_utilization": 0.9527027027027027,
+            "wave_quantized": false,
+            "waves": 4
+          }
+        ],
+        "seq_lens": [
+          333,
+          777,
+          1555,
+          3999
+        ],
+        "sm_count": 148,
+        "token_quantum": 16,
+        "total_chunks": 418
+      },
+      "route": "bt16_prepare_chain_m64",
+      "seq_lens": [
+        333,
+        777,
+        1555,
+        3999
+      ],
+      "speedup": 1.0239340130931,
+      "split": "heldout"
+    }
+  ],
+  "schema_version": 1,
+  "source_evidence": [
+    "evidence/b300_stage4_h12_cpc_pair_v2.json",
+    "evidence/b300_stage5_h12_cpc_heldout.json"
+  ]
+}

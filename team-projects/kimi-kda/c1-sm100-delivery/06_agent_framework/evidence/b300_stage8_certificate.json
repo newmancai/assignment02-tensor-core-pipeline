@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "evidence/b300_stage6_h12_profile_matrix.json": "72348fdc2d3363c1fd4a1c4db4cc2e3653e6438444b33d2c1046973085998613",
+    "evidence/b300_stage8_h12_workscale_matrix.json": "7cc77e4c6d456ae9448db8e25ad24e2825d71f4d950171d7c3cdf86be247f642",
+    "evidence/b300_stage8_h12_workscale_matrix_accounting.json": "64714b223468a25b5d6f85dceb89060f2d1af69ea6e563a26ba3d75c10255827",
+    "evidence/b300_stage8_h12_workscale_pair.json": "d550d84c88b7709b6804c1b7e67bfeaa0d606a499b80fb5a991c86ac1a07a78c",
+    "evidence/b300_stage8_h12_workscale_pair_accounting.json": "ff055d5cb1c6a1a5f33f933a4b9e392b05e9c75bdb23904113bc89885861005d",
+    "evidence/b300_stage8_h12_workscale_phase.json": "5b76fd53cfa3ab5cbf8d93a1ecc747bcfcebe21547c7cc1a45822a9d0b304aef",
+    "evidence/b300_stage8_h12_workscale_phase_accounting.json": "54277069e654a5dd790742c2f0b29726eeb38b0288325d5e1fb0d5273fbc1fad"
+  },
+  "checks": {
+    "all_accounting_exit_zero": true,
+    "all_pair_lower_bounds_positive": true,
+    "all_prepare_deltas_positive_95": true,
+    "chain_change_under_one_microsecond": true,
+    "pair_correct_and_scope_identical": true,
+    "phase_correct_and_scope_identical": true,
+    "prediction_hits_all_new_screens": true,
+    "prepare_explains_at_least_95_percent": true,
+    "screen_correct_and_scope_identical": true,
+    "screen_preregistered": true,
+    "three_level_scaling_law": true
+  },
+  "claim_boundary": "The one-resident-wave cpc formula predicted the screen winner at W=256, W=512, and W=1024 on one B300 for this unchanged H12 prepare kernel. Stage 8 paired and phase tests reuse selection profiles; deployment, other head counts, resource footprints, devices, and multi-agent advantage require separate qualification.",
+  "physical_policy": {
+    "conditions": {
+      "num_heads": 12,
+      "resident_ctas_per_sm": 5,
+      "sm_count": 148,
+      "unchanged_prepare_resource_footprint": true
+    },
+    "formula": "ceil(total_chunks / floor((sm_count * resident_ctas_per_sm) / num_heads))",
+    "predicted_and_screen_winner_cpc": {
+      "1024": 17,
+      "256": 5,
+      "512": 9
+    }
+  },
+  "schema_version": 1,
+  "status": "resident_wave_scaling_confirmed_on_two_new_work_levels",
+  "summary": {
+    "full_span_saving_range_us": [
+      4.71999999999997,
+      11.248500000000035
+    ],
+    "minimum_bootstrap_95_lower": 1.0194678102387145,
+    "paired_speedup_geomean": 1.047419559540079,
+    "paired_speedup_range": [
+      1.0208756583813043,
+      1.0859006142525542
+    ],
+    "prepare_saving_range_us": [
+      5.088999999999999,
+      11.232
+    ],
+    "profiles": 4,
+    "stage8_allocated_gpu_seconds": 26.533223301172256,
+    "stage8_attempts": 3,
+    "stage8_estimated_energy_joules": 5924.95
+  }
+}

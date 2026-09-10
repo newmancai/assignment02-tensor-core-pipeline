@@ -1,0 +1,73 @@
+{
+  "budget_contract": {
+    "gpu_balance_tolerance_fraction": 0.05,
+    "gpu_seconds_per_arm": 60.0,
+    "proposal_slots_per_arm": 24,
+    "proposal_tokens_per_arm": 150000,
+    "qualification_slots_per_arm": 4,
+    "screen_slots_per_arm": 24,
+    "trajectories": 3
+  },
+  "candidate_space": {
+    "cpc_values": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      12,
+      16,
+      17,
+      18,
+      20,
+      24,
+      32
+    ],
+    "features": [
+      "total_chunks",
+      "max_chunks",
+      "num_sequences",
+      "resident_grid_capacity_ctas"
+    ],
+    "language": "typed_runtime_policy_v1",
+    "max_policy_depth": 2,
+    "mutations": [
+      "set_prepare_chunks_per_cta",
+      "piecewise_profile_predicate"
+    ],
+    "raw_cuda_edits": false
+  },
+  "candidate_space_digest": "b10c897de3c1f6cdfba4dc79b3868dc8ae45b6ddd374a33250a2f804f31daf63",
+  "claim_boundary": "This file freezes the comparison design. It contains no multi-agent performance result and cannot support an emergence claim.",
+  "protocol": {
+    "arms": [
+      "single_generalist",
+      "single_roleplay",
+      "multi_homogeneous",
+      "multi_role_conclusions"
+    ],
+    "authority": "KIR_verifier_correctness_oracle_paired_CUPTI_gate",
+    "baseline_for_multiagent_claim": [
+      "single_roleplay",
+      "multi_homogeneous"
+    ],
+    "deduplication": "duplicates_consume_proposal_slots_but_measure_once",
+    "emergence_requirement": "at least one cross-lineage compound typed candidate whose heldout gain exceeds both parents by the preregistered noise margin",
+    "gpu_executor": "single_B300_FIFO_round_robin_across_arms",
+    "heldout": "opaque_ids_sealed_until_policy_freeze",
+    "memory": "conclusions_only_for_multi_role_arm",
+    "negative_interpretations": {
+      "multi_homogeneous_matches_multi_role": "best_of_N_not_collaboration",
+      "no_communication_matches_multi_role": "independent_search_width_only",
+      "single_roleplay_matches_multi_role": "role_workflow_not_multi_agent"
+    },
+    "primary_metric": "uniform_shape_weighted_heldout_log_speedup",
+    "primary_test": "paired episode difference: multi_role must beat both single_roleplay and multi_homogeneous with a positive 95% lower bound"
+  },
+  "protocol_digest": "cbfcecd38249aef16d1c4641b8719c2b249a8ff4bef10874affa9f13df08541a",
+  "schema_version": 1,
+  "status": "preregistered_not_executed"
+}

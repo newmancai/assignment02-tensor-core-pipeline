@@ -1,0 +1,375 @@
+{
+  "allowed_cpc": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    12,
+    16,
+    17,
+    18,
+    20,
+    24,
+    32
+  ],
+  "objective": "uniform_profile_mean_log_speedup; lower latency is better",
+  "public_payload_sha256": "974943a1e7d46369a161228ab43b5b64055bf36755a2a22619f36041d9225f17",
+  "route": "bt16_prepare_chain_m64",
+  "rows": [
+    {
+      "max_chunks": 512,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 514.435
+        },
+        {
+          "cpc": 4,
+          "latency_us": 519.218
+        },
+        {
+          "cpc": 6,
+          "latency_us": 520.547
+        },
+        {
+          "cpc": 9,
+          "latency_us": 501.346
+        },
+        {
+          "cpc": 12,
+          "latency_us": 508.275
+        }
+      ],
+      "num_sequences": 1,
+      "profile_id": "h12_profile_fixed_8192",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 512
+    },
+    {
+      "max_chunks": 262,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 308.3995
+        },
+        {
+          "cpc": 4,
+          "latency_us": 313.25
+        },
+        {
+          "cpc": 6,
+          "latency_us": 314.755
+        },
+        {
+          "cpc": 9,
+          "latency_us": 294.594
+        },
+        {
+          "cpc": 12,
+          "latency_us": 302.6725
+        }
+      ],
+      "num_sequences": 2,
+      "profile_id": "h12_profile_balanced_2",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 512
+    },
+    {
+      "max_chunks": 134,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 203.5865
+        },
+        {
+          "cpc": 4,
+          "latency_us": 208.673
+        },
+        {
+          "cpc": 6,
+          "latency_us": 210.305
+        },
+        {
+          "cpc": 9,
+          "latency_us": 188.8965
+        },
+        {
+          "cpc": 12,
+          "latency_us": 197.058
+        }
+      ],
+      "num_sequences": 4,
+      "profile_id": "h12_profile_balanced_4",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 512
+    },
+    {
+      "max_chunks": 500,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 502.8035
+        },
+        {
+          "cpc": 4,
+          "latency_us": 508.1465
+        },
+        {
+          "cpc": 6,
+          "latency_us": 510.194
+        },
+        {
+          "cpc": 9,
+          "latency_us": 489.6195
+        },
+        {
+          "cpc": 12,
+          "latency_us": 497.074
+        }
+      ],
+      "num_sequences": 4,
+      "profile_id": "h12_profile_skew",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 512
+    },
+    {
+      "max_chunks": 256,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 271.0905
+        },
+        {
+          "cpc": 4,
+          "latency_us": 274.374
+        },
+        {
+          "cpc": 5,
+          "latency_us": 261.6035
+        },
+        {
+          "cpc": 6,
+          "latency_us": 263.299
+        },
+        {
+          "cpc": 8,
+          "latency_us": 268.018
+        },
+        {
+          "cpc": 9,
+          "latency_us": 272.0185
+        },
+        {
+          "cpc": 12,
+          "latency_us": 275.41
+        },
+        {
+          "cpc": 16,
+          "latency_us": 291.3145
+        },
+        {
+          "cpc": 17,
+          "latency_us": 291.3305
+        },
+        {
+          "cpc": 18,
+          "latency_us": 296.9615
+        },
+        {
+          "cpc": 20,
+          "latency_us": 303.831
+        },
+        {
+          "cpc": 24,
+          "latency_us": 308.579
+        }
+      ],
+      "num_sequences": 1,
+      "profile_id": "h12_w256_fixed_4096",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 256
+    },
+    {
+      "max_chunks": 67,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 115.6335
+        },
+        {
+          "cpc": 4,
+          "latency_us": 119.8255
+        },
+        {
+          "cpc": 5,
+          "latency_us": 107.619
+        },
+        {
+          "cpc": 6,
+          "latency_us": 108.753
+        },
+        {
+          "cpc": 8,
+          "latency_us": 113.4245
+        },
+        {
+          "cpc": 9,
+          "latency_us": 117.65
+        },
+        {
+          "cpc": 12,
+          "latency_us": 121.649
+        },
+        {
+          "cpc": 16,
+          "latency_us": 136.817
+        },
+        {
+          "cpc": 17,
+          "latency_us": 136.785
+        },
+        {
+          "cpc": 18,
+          "latency_us": 142.577
+        },
+        {
+          "cpc": 20,
+          "latency_us": 149.987
+        },
+        {
+          "cpc": 24,
+          "latency_us": 153.458
+        }
+      ],
+      "num_sequences": 4,
+      "profile_id": "h12_w256_balanced_4",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 256
+    },
+    {
+      "max_chunks": 1024,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 1007.042
+        },
+        {
+          "cpc": 4,
+          "latency_us": 999.766
+        },
+        {
+          "cpc": 5,
+          "latency_us": 997.7375
+        },
+        {
+          "cpc": 6,
+          "latency_us": 992.043
+        },
+        {
+          "cpc": 8,
+          "latency_us": 1011.914
+        },
+        {
+          "cpc": 9,
+          "latency_us": 985.352
+        },
+        {
+          "cpc": 12,
+          "latency_us": 1015.882
+        },
+        {
+          "cpc": 16,
+          "latency_us": 1046.6835
+        },
+        {
+          "cpc": 17,
+          "latency_us": 971.226
+        },
+        {
+          "cpc": 18,
+          "latency_us": 976.9535
+        },
+        {
+          "cpc": 20,
+          "latency_us": 987.098
+        },
+        {
+          "cpc": 24,
+          "latency_us": 992.009
+        }
+      ],
+      "num_sequences": 1,
+      "profile_id": "h12_w1024_fixed_16384",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 1024
+    },
+    {
+      "max_chunks": 262,
+      "measurements": [
+        {
+          "cpc": 3,
+          "latency_us": 381.316
+        },
+        {
+          "cpc": 4,
+          "latency_us": 373.3325
+        },
+        {
+          "cpc": 5,
+          "latency_us": 372.611
+        },
+        {
+          "cpc": 6,
+          "latency_us": 367.156
+        },
+        {
+          "cpc": 8,
+          "latency_us": 386.9
+        },
+        {
+          "cpc": 9,
+          "latency_us": 360.628
+        },
+        {
+          "cpc": 12,
+          "latency_us": 391.2515
+        },
+        {
+          "cpc": 16,
+          "latency_us": 421.3635
+        },
+        {
+          "cpc": 17,
+          "latency_us": 345.444
+        },
+        {
+          "cpc": 18,
+          "latency_us": 352.434
+        },
+        {
+          "cpc": 20,
+          "latency_us": 362.292
+        },
+        {
+          "cpc": 24,
+          "latency_us": 368.485
+        }
+      ],
+      "num_sequences": 4,
+      "profile_id": "h12_w1024_balanced_4",
+      "resident_grid_capacity_ctas": 740,
+      "total_chunks": 1024
+    }
+  ],
+  "schema_version": 1,
+  "source_sha256": {
+    "evidence/b300_stage6_h12_profile_matrix.json": "72348fdc2d3363c1fd4a1c4db4cc2e3653e6438444b33d2c1046973085998613",
+    "evidence/b300_stage8_h12_workscale_matrix.json": "7cc77e4c6d456ae9448db8e25ad24e2825d71f4d950171d7c3cdf86be247f642"
+  },
+  "target": "NVIDIA B300 SXM6 AC / sm_103a",
+  "visibility": "proposal_agents_may_read; heldout profiles and prior conclusions excluded"
+}

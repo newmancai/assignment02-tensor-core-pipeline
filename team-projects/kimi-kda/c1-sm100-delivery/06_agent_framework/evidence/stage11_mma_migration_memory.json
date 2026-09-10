@@ -1,0 +1,289 @@
+{
+  "candidate": {
+    "baseline_sha256": "f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed",
+    "candidate_id": "mma256:265cffbb40ad4c8a25eabef162958666558756a0f515f684a531388b1d0a8426",
+    "capability_table_sha256": "c123aa09d551f635629a6219617991410b371ef6f2802ee4b63e2ac11bcbc529",
+    "chunk": 16,
+    "comparison_baseline_id": "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed",
+    "instructions": [
+      {
+        "accumulator_space": "tmem",
+        "cta_group": 1,
+        "family": "sm100_tcgen05",
+        "form_id": "dense.bf16.f32.cta1.m128n128k16",
+        "instruction_mnk": [
+          128,
+          128,
+          16
+        ],
+        "site_id": "k2_phase6_state_update"
+      }
+    ],
+    "launch_topology": {
+      "grid_ctas": 12,
+      "ownership_axis": "sequence_head",
+      "role_map": [
+        [
+          "load",
+          1
+        ],
+        [
+          "compute",
+          4
+        ],
+        [
+          "store",
+          1
+        ]
+      ],
+      "value_slices": 1
+    },
+    "math_sites": [
+      {
+        "accumulator_dtype": "f32",
+        "input_dtype": "bf16",
+        "logical_mnk": [
+          128,
+          128,
+          16
+        ],
+        "operand_major": [
+          "k",
+          "k"
+        ],
+        "output_dtype": "bf16",
+        "rounding_dag_sha256": "f4348190252ab56909b4609d27b3462017e76934d3dc611ab89af3979fe83f2c",
+        "site_id": "k2_phase6_state_update",
+        "source_ref": "FlashKDA/csrc/smxx/fwd_kernel2.cuh:659"
+      }
+    ],
+    "mutation_paths": [
+      "instructions.k2_phase6_state_update",
+      "protocols.k2_phase6_state_update",
+      "resources"
+    ],
+    "name": "tcgen05-phase6-direct-swap",
+    "parent_ids": [],
+    "preserves_rounding_dag": true,
+    "preserves_token_order": true,
+    "protocols": [
+      {
+        "alloc_dominates_issue": true,
+        "alloc_owner": "mma_warp",
+        "commit_has_wait": true,
+        "dealloc_owner": "mma_warp",
+        "issue_has_commit": true,
+        "issuer_threads": 1,
+        "live_from": 0,
+        "live_until": 0,
+        "readback_dominates_dealloc": true,
+        "site_id": "k2_phase6_state_update",
+        "tmem_column_begin": 0,
+        "tmem_column_end": 128,
+        "wait_dominates_readback": true
+      }
+    ],
+    "resources": {
+      "predicted_resident_ctas_per_sm": 1,
+      "registers_per_thread": 39,
+      "shared_bytes": 45580,
+      "threads_per_cta": 192,
+      "tmem_columns": 128
+    },
+    "schema_version": "typed_mma_migration_v2",
+    "target_arch": "sm_103a",
+    "tier": "instruction_only",
+    "tiles": [
+      {
+        "logical_mnk": [
+          128,
+          128,
+          16
+        ],
+        "physical_mnk": [
+          128,
+          128,
+          16
+        ],
+        "site_id": "k2_phase6_state_update",
+        "suppresses_padded_stores": false,
+        "transform": "identity",
+        "zero_fills_padding": false
+      }
+    ],
+    "tmem_carriers": []
+  },
+  "cross_path_summary": {
+    "all_correct": true,
+    "evidence_ref": "evidence/b300_stage11_cake_vs_official_h12.json",
+    "interpretation": "Refutes extrapolating the direct-swap loss into a blanket SM100-migration negative; does not isolate tcgen05 causality.",
+    "job_id": "NVIDIA B300 SXM6 AC",
+    "profiles": 6,
+    "raw_speedup_geomean": 2.6552349355965297,
+    "raw_speedup_max": 3.3965448033100727,
+    "raw_speedup_min": 2.126460487535378,
+    "sha256": "fa4cdcb732d217746c4e4c236c25a13aa2f20180e0bb9e41de66b054b4792c94"
+  },
+  "decision": "stop_direct_swap_keep_cross_phase_reopenable",
+  "evidence_digests_verified": {
+    "experiments/data/sass_opcode_summary.csv": "f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed",
+    "experiments/final_campaign/analysis_tcgen05.md": "f4348190252ab56909b4609d27b3462017e76934d3dc611ab89af3979fe83f2c",
+    "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv": "501b77df8c2103d0a0298b7d692606c8dbad6f41f749e842d73dff0d2bbccacb",
+    "experiments/final_campaign/data/raw/05_targeted_ncu_summary_17965.csv": "147a3d0dd7a055af85d0e3afe7d9447d5dcc158048cd18d34854e93323a51d2f"
+  },
+  "failure_cards": [
+    {
+      "applicability_key": "b300-sm103a-kimi-k3-h12-t8192-prefill:phase6:v128:grid12:inner64:l0",
+      "candidate_id": "mma256:265cffbb40ad4c8a25eabef162958666558756a0f515f684a531388b1d0a8426",
+      "causal_status": "observed_and_sass_confirmed",
+      "do_not_generalize_beyond": "This does not reject cross-phase TMEM residency, another GPU/toolchain, decode, or a full dataflow rewrite.",
+      "evidence_refs": [
+        "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv",
+        "experiments/final_campaign/analysis_tcgen05.md"
+      ],
+      "evidence_sha256": [
+        "501b77df8c2103d0a0298b7d692606c8dbad6f41f749e842d73dff0d2bbccacb",
+        "f4348190252ab56909b4609d27b3462017e76934d3dc611ab89af3979fe83f2c"
+      ],
+      "exact_conditions": [
+        "NVIDIA B300 SXM6 AC / sm_103a",
+        "Kimi-K3 TP8 local_heads=12, D=128, CHUNK=16",
+        "Phase-6 logical m128n128k16, BF16 inputs, FP32 accumulate",
+        "L0 preferred on-chip layout, grid=12, inner=64"
+      ],
+      "failure_class": "no_practical_gain",
+      "observed_speedup": 0.919742,
+      "reopen_condition": [
+        "A typed design keeps compatible intermediates TMEM-resident across Phases 1/3/4/6.",
+        "A changed target/toolchain/resource receipt invalidates this applicability key."
+      ],
+      "state": "slower",
+      "surviving_fact": "After amortizing fixed protocol cost, direct Phase-6 tcgen05 remained slower than mma.sync (0.919742x).",
+      "technique_id": "tcgen05-phase6-direct-swap"
+    }
+  ],
+  "knowledge_claims": [
+    {
+      "applicability_key": "b300-sm103a-kimi-k3-h12-t8192-prefill:phase6:v128:grid12:inner64:l0",
+      "challenges": [
+        {
+          "challenge_id": "cake-full-stack-sm100",
+          "changed_subtrees": [
+            "math_sites",
+            "tmem_carriers",
+            "launch_topology",
+            "roles",
+            "pipelines"
+          ],
+          "evidence_refs": [
+            "evidence/b300_stage11_cake_vs_official_h12.json"
+          ],
+          "family": "cross_phase_full_stack",
+          "held_fixed": [
+            "public_math_contract",
+            "CHUNK16",
+            "B300",
+            "Kimi-K3-H12-profiles"
+          ],
+          "status": "observed_refute"
+        },
+        {
+          "challenge_id": "cross-phase-carrier",
+          "changed_subtrees": [
+            "math_sites",
+            "tmem_carriers",
+            "protocols"
+          ],
+          "evidence_refs": [],
+          "family": "lifecycle_amortization",
+          "held_fixed": [
+            "launch_topology.grid_ctas=12",
+            "CHUNK16",
+            "rounding_dag"
+          ],
+          "status": "planned"
+        },
+        {
+          "challenge_id": "value-slice-thin-n",
+          "changed_subtrees": [
+            "launch_topology.value_slices",
+            "launch_topology.grid_ctas",
+            "tiles"
+          ],
+          "evidence_refs": [
+            "evidence/stage11_v16_b300/stage11_v16_tcgen_probe_24111.csv"
+          ],
+          "family": "parallelism_and_tile",
+          "held_fixed": [
+            "per-site lifecycle",
+            "CHUNK16",
+            "rounding_dag"
+          ],
+          "status": "inconclusive"
+        },
+        {
+          "challenge_id": "saturated-hoisted-control",
+          "changed_subtrees": [
+            "launch_topology.grid_ctas",
+            "protocols.alloc_scope"
+          ],
+          "evidence_refs": [],
+          "family": "mechanism_control",
+          "held_fixed": [
+            "math_site",
+            "m128n128k16",
+            "rounding_dag"
+          ],
+          "status": "planned"
+        }
+      ],
+      "claim_id": "direct-m128-negative-v1",
+      "competing_mechanisms": [
+        "per-site TMEM allocation/completion overhead",
+        "grid-12 latency hiding",
+        "TMEM readback and BF16 materialization",
+        "SMEM descriptor feed and single-thread issue latency"
+      ],
+      "disposition": "scoped_prior",
+      "invalidation_keys": [
+        "A typed design keeps compatible intermediates TMEM-resident across Phases 1/3/4/6.",
+        "A changed target/toolchain/resource receipt invalidates this applicability key."
+      ],
+      "kind": "performance_decision",
+      "maturity": "single_path_observation",
+      "proposition": "Do not repeat the same isolated Phase-6 m128n128 tcgen05 swap.",
+      "supporting_evidence": [
+        "mma256:265cffbb40ad4c8a25eabef162958666558756a0f515f684a531388b1d0a8426",
+        "experiments/final_campaign/data/raw/03_tcgen05_probe_17937.csv",
+        "experiments/final_campaign/analysis_tcgen05.md"
+      ]
+    }
+  ],
+  "profile_id": "b300-sm103a-kimi-k3-h12-t8192-prefill",
+  "reopenable_hypothesis": {
+    "entry_gate": "preserve CHUNK16, token order, and archived BF16/FP16 rounding DAG",
+    "name": "tcgen05-cross-phase-tmem-residency",
+    "qualification_gate": "public output+final-state correctness and paired lower confidence bound above the optimized mma.sync incumbent",
+    "required_sites": [
+      "k2_phase1",
+      "k2_phase3",
+      "k2_phase4",
+      "k2_phase6_state_update"
+    ],
+    "state": "inconclusive",
+    "tier": "warp_role_or_pipeline_remap"
+  },
+  "schema_version": "stage11_mma_memory_v1",
+  "v16_screen_summary": {
+    "correctness": "output_and_state_probe_passed",
+    "evidence_ref": "evidence/stage11_v16_b300/stage11_v16_tcgen_probe_24111.csv",
+    "interpretation": "Thin-N tcgen05 has a positive amortized preferred-layout core, but per-iteration scalar materialization erases it; this is a mechanism screen, not completion of the full ValueSlice cell.",
+    "job_id": 24111,
+    "l0_inner1_speedup": 0.750502,
+    "l0_inner64_speedup": 1.615021,
+    "l1_inner1_speedup": 0.807351,
+    "l1_inner64_speedup": 0.778523,
+    "sha256": "3167a3cb73ea90e245f8d6ae38dd2f7be742367ad7e67459a2adb5b544949fa4",
+    "target": "NVIDIA B300 SXM6 AC / sm_103a"
+  }
+}

@@ -17,8 +17,8 @@ Remote staging and execution:
 ```bash
 scp profile_k2_targeted_ncu.py export_targeted_ncu.py \
   run_05_targeted_ncu.sbatch \
-  b300-login:/home/lcpu/<USER_ID>/FlashKDA/profile/c1-final/
-ssh b300-login \
+  <B300_LOGIN_HOST>:/home/lcpu/<USER_ID>/FlashKDA/profile/c1-final/
+ssh <B300_LOGIN_HOST> \
   'sbatch /home/lcpu/<USER_ID>/FlashKDA/profile/c1-final/run_05_targeted_ncu.sbatch'
 ```
 

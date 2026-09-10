@@ -1,0 +1,7 @@
+{
+  "algorithm": "sha256-canonical-json-v1",
+  "heldout_digest": "69f2eeccde1df2466694299a1790e7ee1184ca595e81b3eaadd3e06a8390218f",
+  "profile_count": 8,
+  "schema_version": 1,
+  "status": "sealed_before_policy_freeze"
+}

@@ -191,11 +191,28 @@ Job19934 使用独立源和 build 目录、原 `setup.py` 构建的新 `.so`。�
 
 这些检查不是全模型精度或全面 racecheck。multi-GPU guard 与单独 alias 扩展仍为 SKIP，候选也没有实际安装覆盖、完整 K3 checkpoint、TP8/NCCL 或 serving SLO 验证。因此应称“干净、可复现、单卡通过的 opt-in candidate”，不能称“生产发布完成”。
 
+## 30. “Kernel is cheap” 到底是什么意思？你们的核心贡献是 kernel 还是 profile 工具？
+
+这里的 cheap 指**候选生成成本相对下降**，不是说 kernel 性能、GPU 时间或正确性不重要。生成式工具可以迅速给出很多 CUDA 变体，但它们不知道当前请求走哪条物理 route、瓶颈属于 grid、recurrence、issue、memory 还是 MMA，也容易从一次 benchmark 选出偶然 winner。
+
+我们的核心贡献是 Runtime Profile Agent：把 workload profile、compiled resource receipt、SASS/NCU/CUPTI、typed proposal、正确性、配对统计、反例和 fallback 连成决策闭环。它不是到挑战阶段才出现：前置 MMA assessment 直接从原始 SASS、H12 NCU 和 `tcgen05` CSV 生成 `MMA001–MMA007` 七条 finding，其中 tile 几何与 active-block residency 明确解释了为什么不能机械替换；然后先输出“停止 direct swap，保留并优化当前 `mma.sync`”，再把 ValueSlice 和 issue overlap 交给挑战验证。`tcgen05` 没过 gate 同样是有效结论。
+
+最强的验证是独立 H12 BT16 route 的前瞻实验。工具用 `total chunks/local heads/SM count/resident CTA capacity` 在不 screen 的条件下预测 W384 用 cpc7、W768 用 cpc13，四个 profile 全部通过；最弱 Bonferroni 单侧 98.75% 下界为 1.0129×，CUPTI 又把 97.98%–101.16% 的 full-span 节省归到 prepare。但它仍是 shadow-only，不能与 ValueSlice 加速相加，也没有跨 kernel/跨 GPU 证明。
+
+## 31. 你们说 Agent 会“自优化”，具体优化了什么？
+
+它优化的是下一轮的候选策略，不是在线改模型权重。上一轮的 typed verifier 拒绝码、screen latency、qualification 置信区间和 activation 状态进入 conclusions-only memory，下一轮 proposer 据此避开已证伪结构并生成新 schedule。系统按 schedule 内容去重，只把 top-k 正确候选送入昂贵 qualification；新候选只有在正确性、scope parity、正的置信下界和 fallback 全部成立时才能替换 incumbent。
+
+闭环也会自行停止：没有新候选、screen budget 用尽或连续 evidence plateau 都有明确停止原因。当前 44 项 CPU 测试覆盖了原始证据取数、前置 MMA 证据判断、去重、验证、测量、置信门控、记忆和停止逻辑；B300 数据验证了其中的物理策略，但还不能声称已经完成生产环境长期在线自演化。
+
 ## 一页速记
 
 | 若只来得及说一句 | 回答 |
 |---|---|
-| 总结论 | 不做全面 `tcgen05`；ValueSlice GO；P4/Phase-1 为默认关闭的分层 opt-in |
+| 总结论 | Kernel is cheap；核心是以 profile + 物理 receipt + 证据门槛决定 STOP/KEEP/SHADOW |
+| Agent 起点 | 先用 SASS/NCU/grid/probe 回答迁移问题，再提出 MMA 挑战候选 |
+| Agent 自优化 | 结论记忆反馈下一轮 proposal；typed 去重、证据门控，预算或 plateau 时停止 |
+| Profile 工具 | W384/W768 无 screen 预测 cpc7/cpc13，4/4 通过；仍为 shadow-only |
 | `tcgen05` | V128 Phase-6 乐观摊销仍 0.920×，慢 8.7% |
 | 瓶颈 | 12 CTA 对 148 SM，SM/DRAM 2.64%/1.24%，首要是 underfill |
 | ValueSlice | grid 12→96；fixed/packed-one 约 −27.0%/−26.9% |

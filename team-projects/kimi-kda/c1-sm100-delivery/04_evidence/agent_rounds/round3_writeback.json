@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "round": 3,
+  "hardware": {
+    "name": "NVIDIA B300 SXM6 AC",
+    "gpu_uuid": "GPU-778768b4-6c9e-e483-890e-0812760948ae",
+    "physical_sm_count": 148,
+    "observed_sm_clock_mhz_at_job_start": 1095
+  },
+  "results": [
+    {
+      "proposal_id": "r3-hmma-h12-balanced8-v64",
+      "profile": "H12 packed balanced8, total=8192",
+      "medians_ms": {
+        "official": 0.2664575,
+        "hmma_v128": 0.266066,
+        "hmma_v64": 0.26306575,
+        "cake": 0.1065605
+      },
+      "challenger_speedup": 1.0114049132,
+      "bootstrap_95": [1.0096604060, 1.0132498089],
+      "correctness": "passed; HMMA output and state bitwise to official",
+      "evidence_status": "scoped_observation",
+      "permitted_use": "ranking_prior",
+      "claim": "V64 remains slightly faster at nseq=8 but misses the registered 1.03 practical gate; the strong nseq=6 gain does not transfer in magnitude.",
+      "next_retest": "balanced nseq=7 to locate the V64/V128 crossover"
+    },
+    {
+      "proposal_id": "r3-tcgen-h96-s173-qualification",
+      "profile": "H96 packed mixed6, total=8192",
+      "medians_ms": {
+        "official": 1.495961,
+        "cake": 0.57041925,
+        "m128_h96_p1_s173": 0.5521965,
+        "virtual152_s166": 0.9450385
+      },
+      "cake_over_s173": 1.0329698744,
+      "bootstrap_95": [1.0317858266, 1.0348115660],
+      "correctness": "passed under frozen official-peer output/state contract",
+      "route_identity": "all four challenger blocks observed m128_h96_p1_s173 on sm103a",
+      "evidence_status": "qualification_passed",
+      "permitted_use": "qualification_candidate_for_guarded_deployment",
+      "claim": "H96 s173 reproducibly improves the public full call over Cake by about 3.3% on the exact mixed6 profile.",
+      "reopen_conditions": [
+        "profile or state contract changes",
+        "route/source/binary identity changes",
+        "a stronger Cake or tcgen05 carrier appears"
+      ]
+    }
+  ],
+  "remote_jobs": [24856, 24857],
+  "raw_evidence": [
+    "results/round3-hmma-job-24856",
+    "results/round3-tcgen-qual-job-24857"
+  ],
+  "saturation_status": "continue",
+  "reason": "HMMA crossover remains unresolved and tcgen05 has open schedule and structural proposals."
+}

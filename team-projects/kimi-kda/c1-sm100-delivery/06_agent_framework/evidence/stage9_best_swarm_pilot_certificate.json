@@ -1,0 +1,50 @@
+{
+  "activation": {
+    "authorized": false,
+    "reason": "single pilot trajectory and heterogeneous per-profile confidence bounds"
+  },
+  "agent": {
+    "calls": 8,
+    "tool_events": 0,
+    "total_tokens": 137317
+  },
+  "artifact_sha256": {
+    "commitment": "e896d10511545dd6353ab26e7b0e3afa25b0381d9245b3bdbe4085e47d53d840",
+    "freeze": "26a87e679bbb6673b786c3611efa771329839eacfab651c97e0a173f610c88ac",
+    "heldout": "c59a3fa7d313e40f36128c78b79c4cc6904f66d062e9c345affeced7759492e9",
+    "manifest": "33ee302155e77dc3b6b4c4f9301eaa878937f6c58f5d43adf9bd3d67d19168f8",
+    "protocol": "8be600f1e3561e4b4c9df864cc0de03d17f68a049cb3d0d1dfcd3617082f8ead",
+    "qualification": "a5b97f9ad9d2d2c94b839f5503a381cb8b4b42a06ff02278515ece986aa01802",
+    "reveal": "38cc0f9299fefb8b7af357376e25e6086007921f873c2c267f30a7a75229ab0b",
+    "screen": "e2c90be272efe5a7c30fcca2a53ad8fada8bfcd556650e2a4adacff13e426a25"
+  },
+  "claim_boundary": "One engineering trajectory demonstrates the closed loop; it does not establish multi-agent superiority or production activation.",
+  "created_at_utc": "2026-09-09T15:40:57.217167+00:00",
+  "heldout": {
+    "all_profile_95_lower_bounds_above_one": false,
+    "child_minus_best_parent_fraction": 0.00028336710899345974,
+    "correct": true,
+    "geomean_speedup": 1.0063542867907198,
+    "parent_geomean_speedups": {
+      "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf": 1.0059205665120259,
+      "kir-policy:dbf79f91a1bc4f3ff6aaa114b1eee4afa45b40b2a213e8ffbe9bcdb8fe1a3bd7": 1.0060691998701052
+    },
+    "profiles": 8
+  },
+  "schema_version": 1,
+  "search": {
+    "proposal_slots": 8,
+    "qualification_receipts": 2,
+    "screen_receipts": 8,
+    "unique_policies": 4
+  },
+  "status": "pilot_completed_not_activation_certified",
+  "winner": {
+    "development_geomean_speedup": 1.0238245384428906,
+    "parent_policy_ids": [
+      "kir-policy:dbf79f91a1bc4f3ff6aaa114b1eee4afa45b40b2a213e8ffbe9bcdb8fe1a3bd7",
+      "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf"
+    ],
+    "policy_id": "kir-policy:ad2eaac3aa3ba8654fd5f9a3acf49267e7c4ff776ec956c5854c558b02e85f7c"
+  }
+}

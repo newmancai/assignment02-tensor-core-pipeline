@@ -1,0 +1,26 @@
+{
+  "schema_version": "source_binary_manifest_v1",
+  "captured_at": "2026-09-10",
+  "remote_checkout": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908",
+  "git_head": "986c1eb94cc2aa185befbd4bf59fb40a0a04eaa4",
+  "working_tree_note": "The checkout contains recorded Stage3 evolution modifications and untracked benchmark/runtime files; exact source hashes below, not git HEAD alone, identify the measured dispatch code.",
+  "source_sha256": {
+    "flashinfer/kda.py": "14fc580cc6048e38a07e346236cfda14a2b8e7a3eba6e0e43b79d2701cc5f767",
+    "flashinfer/jit/cake_kda.py": "b3f06888bcfd26e861ef1958ec5bf60680b5357b4ad2b9e87868f9e9ce31da91",
+    "flashinfer/jit/flash_kda.py": "808fc0f418a1ee036bb0d32b5c8efa2b16f31df659e960e0fbae56b742b146a3",
+    "flashinfer/kda_evolution.py": "f322934edcad37b4d08cad6c5047ee09f33d69a55d125904906d121bffb6369d"
+  },
+  "cached_sm103a_binary_sha256": {
+    "flashkda_bf16_bt16_chain_m64_c68ffebac9_9ecc78d74b": "c221b0563eaabe2478f69684f0b70a8e79b04e9d7c74534fd345da4c3fc115fe",
+    "flashkda_bf16_bt16_prepare_0d8e6c8011_34b98a52d0": "656ead4c3774ab7a66be05066601dcec4f007b6dfbc7392567926d7a89d9fad1",
+    "flashkda_bf16_fused_m128_13081cc606_c73c874145": "f389582d06e313f9f3295dbcc94e8fb582b8ca347e6ef1264c156e665aa73ec0",
+    "flashkda_bf16_fused_m128_6151e2988c_16863b1a21": "a6a025569f3d6d555a1b7300dddf0c81db6798a296cbdad82459a082036ba069",
+    "flashkda_bf16_fused_m128_a1dc60f331_2a40d486c0": "fd1eb4fca893964a591117e5efd57a9638271337a0253a455558acaa4166d74c",
+    "flashkda_bf16_fused_m128_a4d959590f_7ae666ec88": "57e60f0bbad694941b158d0f64ba598effe8962fc1d7ca8c39d60162ab4a1581",
+    "flashkda_bf16_fused_m128_d9151223cd_06d86c2719": "d4673e7c9ba386fba4b955db83d77a56acef3ffe43c66ab0fa53ca66c15b52e3"
+  },
+  "measurement_ref": "b300_stage12_cake_official_isolated_pair.json",
+  "measurement_artifact_sha256": "ae28a5b7cc2e93466639700031187df867ace95c0a7466e2bee35b830de4d6a6",
+  "job_log_sha256": "422b563cab7567129bb9a22463f819385f079d58cafef6b3e0b242ed6ac70345",
+  "limitation": "The timing artifact reports the Python dispatch path rather than a per-case loaded-binary hash. This manifest freezes every observed cached SM103a CAKE route binary present immediately after job 24380; route-to-case identities are corroborated by the isolated CAKE route artifact."
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "stage": "stage4-kimi-k3-tp8-h12-physical-evolution",
+  "status": "qualified",
+  "hardware": {
+    "name": "NVIDIA B300 SXM6 AC",
+    "compute_capability": [10, 3],
+    "cuda_arch": "sm103a",
+    "multiprocessor_count": 148
+  },
+  "workload_contract": {
+    "source": "Kimi-K3 TP8 recurrent-KDA profile",
+    "num_heads": 12,
+    "qk_head_dim": 128,
+    "value_head_dim": 128,
+    "activation_dtype": "bfloat16",
+    "parameter_dtype": "float32",
+    "qk_l2_norm": true,
+    "gate_in_kernel": true,
+    "beta_logit": true,
+    "gate_lower_bound": -5.0,
+    "case_count": 6
+  },
+  "qualified_change": {
+    "route": "bt16_prepare_chain_m64",
+    "condition": "num_heads == 12 and total_chunks > 128",
+    "parameter": "chunks_per_prepare_cta",
+    "baseline": 4,
+    "candidate": 9,
+    "unaffected_condition": "num_heads == 12 and total_chunks <= 128 retains 1"
+  },
+  "paired_qualification": {
+    "protocol": {
+      "scope": "public recurrent_kda with in-place state update",
+      "timing_backend": "CUPTI",
+      "cold_l2": true,
+      "state_rotations": 256,
+      "pair_order": "baseline/candidate/candidate/baseline",
+      "blocks_per_arm": 2,
+      "dry_runs_per_block": 20,
+      "measured_iterations_per_block": 100,
+      "bootstrap_draws": 10000
+    },
+    "all_correct": true,
+    "affected_results": [
+      {
+        "name": "h12_fixed_8192",
+        "baseline_us": 516.803,
+        "candidate_us": 498.433,
+        "speedup": 1.036854502,
+        "bootstrap_95": [1.0344320406539744, 1.0391217810419648],
+        "decision": "activate"
+      },
+      {
+        "name": "h12_packed_mixed",
+        "baseline_us": 256.081,
+        "candidate_us": 236.961,
+        "speedup": 1.080688554,
+        "bootstrap_95": [1.0788811651894155, 1.0830461517670114],
+        "decision": "activate"
+      }
+    ],
+    "affected_shape_geomean": 1.0585446575590192,
+    "guarded_six_shape_geomean": 1.019145977944274,
+    "activation_count": 2,
+    "retained_baseline_count": 4
+  },
+  "deployed_public_medians_us": {
+    "h12_packed_512x32": 179.2325,
+    "h12_packed_128x8": 26.464,
+    "h12_fixed_512": 49.728,
+    "h12_fixed_8192": 497.922,
+    "h12_packed_mixed": 237.264,
+    "h12_packed_1024x8": 106.0645
+  },
+  "validation": {
+    "typed_ir_tests": "21/21 PASS",
+    "flashinfer_policy_test": "1/1 PASS",
+    "remote_git_diff_check": "PASS",
+    "counterfactual_output_max_abs": 0.0,
+    "counterfactual_final_state_max_abs": 0.0,
+    "remote_commit": "986c1eb94cc2aa185befbd4bf59fb40a0a04eaa4"
+  },
+  "artifacts": {
+    "implementation_sha256": "42709dfe1770e12c20e8a2976e50c125ba5e6b2dccd3685e4ecc7dbf9c2c6c0d",
+    "implementation_test_sha256": "689f6aa57c1627798ae4c36cb167c78175b3857f43bcbda9ab0e2a1e5c1ee194",
+    "route_search_sha256": "b77962a488ea8e8d40a07796162cccfcf7bbfa497272638a7c0548f4e6b56c7e",
+    "coarse_search_sha256": "054e58d73dbebedffa7cb11ca1393a6575f8adb53ea0054a4ade54493089f262",
+    "refined_search_sha256": "1f8f394f322d54c19bbd024a8ab8e00d1f20bd25f855c9990692dcdb13806486",
+    "paired_qualification_sha256": "634ac550bb7189f2b1ee9365627b66b83e1a51cffabea3bdc8c8c13830213178",
+    "deployed_public_benchmark_sha256": "d0875664469c863c838d0cefdbeb274b58144346e8fcd491c6f80d6d94d29355",
+    "patch_sha256": "67ca0360039b5eafde8d063c5b8fe70c3b424940a21e192ad52114198c3079e4"
+  },
+  "accounting": {
+    "attempt_count": 10,
+    "allocated_gpu_seconds": 49.75490431766957,
+    "estimated_allocation_energy_joules": 11092.74,
+    "failed_attempts_included": true,
+    "attempt_ledger_glob": "evidence/attempts/*stage4*.json"
+  },
+  "claim_boundary": "This certificate establishes an incremental B300 improvement over the existing CAKE-generated H12 route. It is not a reproduction of CAKE's B200 versus official-FlashKDA result and is not an end-to-end Kimi-K3 claim."
+}

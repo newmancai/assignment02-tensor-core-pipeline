@@ -1,0 +1,30 @@
+{
+  "request_id": "multi_role_conclusions.t0.r0.capacity",
+  "request_digest": "80964655b7a6631a89a9dc7cf2c82f7cadd24ba5ab3cca9abbc38fc89957ee05",
+  "arm": "multi_role_conclusions",
+  "trajectory": 0,
+  "round": 0,
+  "seed": 91001,
+  "lane": "capacity",
+  "requested_proposals": 1,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "prompt_sha256": "012d59bd2f69ee42cba3d4a12a5787a8472e419533e4401fd03ce19afbe4f266",
+  "status": "ok",
+  "started_at_utc": "2026-09-09T14:55:31.967950+00:00",
+  "error": "",
+  "exit_status": 0,
+  "elapsed_s": 40.149686098098755,
+  "token_usage": {
+    "input_tokens": 15744,
+    "output_tokens": 542,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": null,
+    "total_tokens": 16286,
+    "measurement": "exact"
+  },
+  "tool_event_count": 0,
+  "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/capacity/proposal_output.json",
+  "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/capacity/events.jsonl",
+  "finished_at_utc": "2026-09-09T14:56:12.118286+00:00"
+}

@@ -1,0 +1,10 @@
+warning: jsonschema unavailable
+{
+  "correctness_passed": true,
+  "h12_geomean_speedup_vs_official": 0.9021017197854301,
+  "competitive_with_optimized_where_active": null,
+  "decision": "stop_full_path_regression",
+  "reasons": [
+    "H12 practical gate requires geomean >1.05x and no case below 0.98x"
+  ]
+}

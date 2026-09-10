@@ -1,0 +1,27 @@
+{
+  "schema_version": "stage11_gpu_attempts_v1",
+  "candidate": "cell_01_thin_n_v16_m128n16k16_grid96",
+  "knowledge_disposition": "attempt_journal",
+  "performance_observation": null,
+  "attempts": [
+    {
+      "job_id": 9900,
+      "allocated_device": "NVIDIA GeForce RTX 5090",
+      "allocated_compute_capability": "12.0",
+      "requested_binary_target": "sm_103a",
+      "result": "runtime_architecture_mismatch",
+      "detail": "SM103a guardrail build succeeded; execution returned cudaErrorNoKernelImageForDevice before correctness.",
+      "log_ref": "evidence/attempts/stage11_v16_tcgen_9900.log"
+    },
+    {
+      "job_id": 9901,
+      "allocated_device": "NVIDIA GeForce RTX 5090",
+      "allocated_compute_capability": "12.0",
+      "requested_binary_target": "sm_120a",
+      "result": "compile_unsupported_instruction_family",
+      "detail": "ptxas rejected tcgen05 alloc/mma/commit/ld/wait/dealloc for sm_120a; no correctness or timing ran.",
+      "log_ref": "evidence/attempts/stage11_v16_tcgen_9901.log"
+    }
+  ],
+  "interpretation": "Neither attempt is B300 performance evidence. The candidate remains pending on an SM100/SM103a data-center Blackwell node."
+}

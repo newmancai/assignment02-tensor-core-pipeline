@@ -1,0 +1,41 @@
+{
+  "accounting_scope": "single-node visible-GPU allocation; telemetry includes compilation, benchmark setup, synchronization, and idle gaps",
+  "allocated_gpu_seconds": 45.252337427809834,
+  "command": [
+    "<REMOTE_HOME>/FlashKDA/.venv/bin/python",
+    "benchmarks/bench_flash_kda_evolution.py",
+    "--suite",
+    "six",
+    "--dry-run-iters",
+    "10",
+    "--repeat-iters",
+    "30",
+    "--json",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_evolution6_results.json"
+  ],
+  "ended_at_utc": "2026-09-08T15:03:24.534580+00:00",
+  "exit_code": 0,
+  "experiment": "evolution-six-correctness-cupti",
+  "gpu_count": 1,
+  "hardware": [
+    {
+      "index": 0,
+      "memory_total_mib": 275040.0,
+      "name": "NVIDIA B300 SXM6 AC",
+      "power_limit_w": 1100.0,
+      "uuid": "GPU-689f6481-e310-b8ed-4641-37c4ac1c76b4"
+    }
+  ],
+  "schema_version": 1,
+  "started_at_utc": "2026-09-08T15:02:39.282228+00:00",
+  "telemetry": {
+    "average_gpu_utilization_percent": 0.4470588235294118,
+    "average_power_w": 241.87329411764705,
+    "estimated_allocation_energy_joules": 10279.615,
+    "peak_memory_used_mib": 4092.0,
+    "peak_power_w": 259.28,
+    "sample_count": 85,
+    "sample_interval_seconds": 0.5
+  },
+  "wall_seconds": 45.252337427809834
+}

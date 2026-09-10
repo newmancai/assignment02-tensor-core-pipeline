@@ -62,14 +62,15 @@ python profile/k2-vsplit-opt/integrated_validation.py \
 
 每个形状 10 次 warmup、50 次 CUDA Event 计时。比较对象是同一个扩展强制 V128 与自动 dispatcher，不跨 build 比较。NCU profiler duration 只用于诊断，不能代替正常 benchmark 延迟。
 
-## 5. 两次关键结果
+## 5. 三次关键结果
 
 | Run | BF16 高价值区间 | FP32 高价值区间 | Stateful trace |
 |---|---:|---:|---:|
 | Job 5195（2026-08-21） | 14.66%–23.30% | 9.13%–21.67% | 5.45% |
 | Job 14592（2026-09-01） | 14.99%–26.10% | 9.37%–21.97% | 5.68% |
+| Job 15466（2026-09-02） | 14.72%–25.33% | 9.20%–21.90% | 5.42% |
 
-第二次运行 GPU 时钟较低，绝对延迟整体变大，但 dispatcher 的边界、bitwise correctness 和相对收益稳定复现。
+三次运行的绝对延迟有变化，但原因没有被运行期时钟采样隔离；dispatcher 的边界、bitwise correctness 和同一 run 内的相对收益稳定复现。日志开头的 `clocks.current.sm` 是负载前的瞬时空闲读数，不是 warmup 后的稳态时钟；只在同进程、同作业内比较 CUDA Event A/B。trace 中只有 `T=4096` prefill 启用 ValueSlice，后续 `T=1` update 回退 V128；kernel 路径变化只发生在 prefill，整体 synthetic trace 收益主要来自 prefill，不能表述为单 token decode 加速。
 
 ## 6. Trace/profile 归档
 

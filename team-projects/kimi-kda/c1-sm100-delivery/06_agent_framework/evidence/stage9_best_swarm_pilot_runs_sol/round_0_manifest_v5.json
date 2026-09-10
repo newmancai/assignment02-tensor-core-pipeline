@@ -1,0 +1,495 @@
+{
+  "agent_receipts": [
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 40.149686098098755,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/capacity/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:12.118286+00:00",
+      "lane": "capacity",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/capacity/proposal_output.json",
+      "prompt_sha256": "012d59bd2f69ee42cba3d4a12a5787a8472e419533e4401fd03ce19afbe4f266",
+      "reasoning_effort": "high",
+      "request_digest": "80964655b7a6631a89a9dc7cf2c82f7cadd24ba5ab3cca9abbc38fc89957ee05",
+      "request_id": "multi_role_conclusions.t0.r0.capacity",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.967950+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15744,
+        "measurement": "exact",
+        "output_tokens": 542,
+        "total_tokens": 16286
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 35.266266107559204,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/tail_skew/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:07.235031+00:00",
+      "lane": "tail_skew",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/tail_skew/proposal_output.json",
+      "prompt_sha256": "d93a8606434049d4bb206f3149e551badb5733c61a6a7473088009fbc3f5bc28",
+      "reasoning_effort": "high",
+      "request_digest": "86c4c9aa12c6776bf5949630f5d1085ce2aa8bc72f34bfbd31e67615185bc24a",
+      "request_id": "multi_role_conclusions.t0.r0.tail_skew",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.968235+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15416,
+        "measurement": "exact",
+        "output_tokens": 527,
+        "total_tokens": 15943
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 39.41365098953247,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:11.382354+00:00",
+      "lane": "resource",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/proposal_output.json",
+      "prompt_sha256": "4f2da9901bd8c2615007e606cb580bbd7490af82e853d68b8b8603bd54c674a2",
+      "reasoning_effort": "high",
+      "request_digest": "b847f4b652e42d39af8db96135db4a8dc4b2feac8b7fae3897bb6bf2e7af9091",
+      "request_id": "multi_role_conclusions.t0.r0.resource",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.968148+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15433,
+        "measurement": "exact",
+        "output_tokens": 519,
+        "total_tokens": 15952
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 41.71241092681885,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/critic_synthesizer/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:13.681125+00:00",
+      "lane": "critic_synthesizer",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/critic_synthesizer/proposal_output.json",
+      "prompt_sha256": "fa47e809634a86b30cd609901628d42152429078f420eed6f3039e7cf834d480",
+      "reasoning_effort": "high",
+      "request_digest": "932ff84b74059b83a7d106e796773fc8f416a7ec69832d4899bbd4281bc283f7",
+      "request_id": "multi_role_conclusions.t0.r0.critic_synthesizer",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.968195+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15420,
+        "measurement": "exact",
+        "output_tokens": 478,
+        "total_tokens": 15898
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    }
+  ],
+  "amendment_protocol_digest": "199b2d2c77e6b91c9cf864ba432862d3aae30c2d9bd1326bb0473a2c19eb7812",
+  "amendment_sha256": "8be600f1e3561e4b4c9df864cc0de03d17f68a049cb3d0d1dfcd3617082f8ead",
+  "arm_prompt_digests": {
+    "multi_role_conclusions": "a1cb55cd9175a17b24f93dd150ec57fccd41e7aa46f0ec26a64d105cb7aad655"
+  },
+  "arm_protocol_digests": {
+    "multi_role_conclusions": "a1cb55cd9175a17b24f93dd150ec57fccd41e7aa46f0ec26a64d105cb7aad655"
+  },
+  "arms": [
+    "multi_role_conclusions"
+  ],
+  "candidate_space_digest": "cbcbfde7e85174dba54612d99e1047b966e0d623d7c5c25b65010540ccc9467a",
+  "common_prompt_digest": "219d63f0939056fa78f49be21289d74aa774c2583705160da256cbfd04a19c97",
+  "common_prompt_sha256": "219d63f0939056fa78f49be21289d74aa774c2583705160da256cbfd04a19c97",
+  "created_at_utc": "2026-09-09T15:34:30.458640+00:00",
+  "development_summary_sha256": "645d97e91a925629e0738f5cd599025a3b8615971219f5e35e7d0b12ef8e87ae",
+  "language": "typed_runtime_policy_v2",
+  "model": "gpt-5.6-sol",
+  "model_config_digest": "039d8dbba78bdb661044defdb46dca8d88b1c78d647aca1c8845aea30ec25152",
+  "model_digest": "f8f504ce3a794486c3e96151e0061aa2c8fcb8e4572a375ff46aa45d313c6636",
+  "profile_split_digest": "645d97e91a925629e0738f5cd599025a3b8615971219f5e35e7d0b12ef8e87ae",
+  "prompt_protocol_digest": "9e11589a24ef792bfd0ad3885059c6b2473a0d5db99e0fcd8668df7cb518f9df",
+  "proposal_manifest_sha256": "c25236bc544a734e31f9c8f6149619beedfb647f7cd83cd67294a338935791f6",
+  "proposal_slots_per_arm": 8,
+  "proposals": [
+    {
+      "arm": "multi_role_conclusions",
+      "error": "",
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "hypothesis": "Choose CPC in proportion to total work so the prepare grid remains near a stable fraction of the 740-CTA resident capacity: CPC 5 for small workloads, 9 for medium workloads, and 17 for large workloads.",
+      "lane": "capacity",
+      "lineage_delta_refs": [],
+      "origin_proposal_id": "multi_role_conclusions.t0.r0.capacity.p0",
+      "parent_policy_ids": [],
+      "policy": {
+        "else": {
+          "else": {
+            "chunks_per_cta": 17,
+            "kind": "leaf"
+          },
+          "kind": "node",
+          "predicate": {
+            "feature": "total_chunks",
+            "operator": "le",
+            "threshold": 768
+          },
+          "then": {
+            "chunks_per_cta": 9,
+            "kind": "leaf"
+          }
+        },
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 384
+        },
+        "then": {
+          "chunks_per_cta": 5,
+          "kind": "leaf"
+        }
+      },
+      "policy_id": "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf",
+      "proposal_slot": 0,
+      "round": 0,
+      "seed": 91001,
+      "status": "valid",
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "error": "",
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "hypothesis": "Preparation latency is minimized by keeping the CTA grid near 52-61 CTAs; therefore chunks_per_prepare_cta should scale with total_chunks, while observed sequence-count and tail-skew differences do not justify changing CPC at a fixed work scale.",
+      "lane": "tail_skew",
+      "lineage_delta_refs": [],
+      "origin_proposal_id": "multi_role_conclusions.t0.r0.tail_skew.p0",
+      "parent_policy_ids": [],
+      "policy": {
+        "else": {
+          "else": {
+            "chunks_per_cta": 17,
+            "kind": "leaf"
+          },
+          "kind": "node",
+          "predicate": {
+            "feature": "total_chunks",
+            "operator": "le",
+            "threshold": 768
+          },
+          "then": {
+            "chunks_per_cta": 9,
+            "kind": "leaf"
+          }
+        },
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 384
+        },
+        "then": {
+          "chunks_per_cta": 5,
+          "kind": "leaf"
+        }
+      },
+      "policy_id": "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf",
+      "proposal_slot": 1,
+      "round": 0,
+      "seed": 91001,
+      "status": "valid",
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "error": "",
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "hypothesis": "Scale chunks per CTA with total work to keep the prepare grid near roughly 55\u201360 CTAs, balancing per-CTA overhead against available parallelism: use CPC 5 for small grids, 9 for medium grids, and 17 for large grids.",
+      "lane": "resource",
+      "lineage_delta_refs": [],
+      "origin_proposal_id": "multi_role_conclusions.t0.r0.resource.p0",
+      "parent_policy_ids": [],
+      "policy": {
+        "else": {
+          "else": {
+            "chunks_per_cta": 17,
+            "kind": "leaf"
+          },
+          "kind": "node",
+          "predicate": {
+            "feature": "total_chunks",
+            "operator": "le",
+            "threshold": 768
+          },
+          "then": {
+            "chunks_per_cta": 9,
+            "kind": "leaf"
+          }
+        },
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 384
+        },
+        "then": {
+          "chunks_per_cta": 5,
+          "kind": "leaf"
+        }
+      },
+      "policy_id": "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf",
+      "proposal_slot": 2,
+      "round": 0,
+      "seed": 91001,
+      "status": "valid",
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "error": "",
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "hypothesis": "Optimal chunks per prepare CTA scales approximately linearly with total work relative to fixed resident grid capacity: cpc 5, 9, and 17 keep prepare-CTA counts near a similar occupancy regime at 256, 512, and 1024 total chunks.",
+      "lane": "critic_synthesizer",
+      "lineage_delta_refs": [],
+      "origin_proposal_id": "multi_role_conclusions.t0.r0.critic_synthesizer.p0",
+      "parent_policy_ids": [],
+      "policy": {
+        "else": {
+          "else": {
+            "chunks_per_cta": 17,
+            "kind": "leaf"
+          },
+          "kind": "node",
+          "predicate": {
+            "feature": "total_chunks",
+            "operator": "le",
+            "threshold": 768
+          },
+          "then": {
+            "chunks_per_cta": 9,
+            "kind": "leaf"
+          }
+        },
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 384
+        },
+        "then": {
+          "chunks_per_cta": 5,
+          "kind": "leaf"
+        }
+      },
+      "policy_id": "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf",
+      "proposal_slot": 3,
+      "round": 0,
+      "seed": 91001,
+      "status": "valid",
+      "trajectory": 0
+    }
+  ],
+  "protocol_digest": "199b2d2c77e6b91c9cf864ba432862d3aae30c2d9bd1326bb0473a2c19eb7812",
+  "reasoning_effort": "high",
+  "rebind_scope": "round1_adapter_and_synthesizer_order_only_round0_prompt_and_proposals_unchanged",
+  "receipts": [
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 40.149686098098755,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/capacity/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:12.118286+00:00",
+      "lane": "capacity",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/capacity/proposal_output.json",
+      "prompt_sha256": "012d59bd2f69ee42cba3d4a12a5787a8472e419533e4401fd03ce19afbe4f266",
+      "reasoning_effort": "high",
+      "request_digest": "80964655b7a6631a89a9dc7cf2c82f7cadd24ba5ab3cca9abbc38fc89957ee05",
+      "request_id": "multi_role_conclusions.t0.r0.capacity",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.967950+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15744,
+        "measurement": "exact",
+        "output_tokens": 542,
+        "total_tokens": 16286
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 35.266266107559204,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/tail_skew/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:07.235031+00:00",
+      "lane": "tail_skew",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/tail_skew/proposal_output.json",
+      "prompt_sha256": "d93a8606434049d4bb206f3149e551badb5733c61a6a7473088009fbc3f5bc28",
+      "reasoning_effort": "high",
+      "request_digest": "86c4c9aa12c6776bf5949630f5d1085ce2aa8bc72f34bfbd31e67615185bc24a",
+      "request_id": "multi_role_conclusions.t0.r0.tail_skew",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.968235+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15416,
+        "measurement": "exact",
+        "output_tokens": 527,
+        "total_tokens": 15943
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 39.41365098953247,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:11.382354+00:00",
+      "lane": "resource",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/proposal_output.json",
+      "prompt_sha256": "4f2da9901bd8c2615007e606cb580bbd7490af82e853d68b8b8603bd54c674a2",
+      "reasoning_effort": "high",
+      "request_digest": "b847f4b652e42d39af8db96135db4a8dc4b2feac8b7fae3897bb6bf2e7af9091",
+      "request_id": "multi_role_conclusions.t0.r0.resource",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.968148+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15433,
+        "measurement": "exact",
+        "output_tokens": 519,
+        "total_tokens": 15952
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    },
+    {
+      "arm": "multi_role_conclusions",
+      "elapsed_s": 41.71241092681885,
+      "error": "",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/critic_synthesizer/events.jsonl",
+      "exit_status": 0,
+      "finished_at_utc": "2026-09-09T14:56:13.681125+00:00",
+      "lane": "critic_synthesizer",
+      "model": "gpt-5.6-sol",
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/critic_synthesizer/proposal_output.json",
+      "prompt_sha256": "fa47e809634a86b30cd609901628d42152429078f420eed6f3039e7cf834d480",
+      "reasoning_effort": "high",
+      "request_digest": "932ff84b74059b83a7d106e796773fc8f416a7ec69832d4899bbd4281bc283f7",
+      "request_id": "multi_role_conclusions.t0.r0.critic_synthesizer",
+      "requested_proposals": 1,
+      "round": 0,
+      "seed": 91001,
+      "started_at_utc": "2026-09-09T14:55:31.968195+00:00",
+      "status": "ok",
+      "token_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "input_tokens": 15420,
+        "measurement": "exact",
+        "output_tokens": 478,
+        "total_tokens": 15898
+      },
+      "tool_event_count": 0,
+      "trajectory": 0
+    }
+  ],
+  "round": 0,
+  "schema_version": 2,
+  "status": "round_0_proposal_frozen",
+  "supersedes_manifest_sha256": "0ad97e9acb05056d4f5e9b3e8742613316e6bd88faf2d6530c8a34569c4a45e1",
+  "tool_manifest_digest": "c68bda73ccc369ea52e111c7550ace8958766bc188289584b4ced1eee913cca5",
+  "trajectory_seeds": [
+    91001
+  ]
+}

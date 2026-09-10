@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "experiment": "cooperative_split_consumer",
+  "scope": "single_pass_no_stage_reuse",
+  "hardware": "NVIDIA B300",
+  "date": "2026-09-08",
+  "schedule": {
+    "stages": 5,
+    "producer_warps": 4,
+    "wait_only_compute_warps": 4,
+    "release_owner_warps": 1,
+    "ready_arrival_threads": 128,
+    "free_arrival_threads": 32,
+    "completion_join": null,
+    "advance_on_wait": true,
+    "exact_frozen_baseline": false
+  },
+  "shared_memory_bytes": {
+    "payload": 5120,
+    "barriers": 80,
+    "total": 5200
+  },
+  "exhaustive_checker": {
+    "states_explored": 3071,
+    "complete_states": 1,
+    "deadlocks": 0,
+    "races": 0,
+    "pdl_order_violations": 0
+  },
+  "execution": {
+    "marker_values": [15],
+    "marker_count": 288,
+    "expected_stage_sum": 15,
+    "passed": true
+  },
+  "backend_capabilities": {
+    "preserves_frozen_types_in_staged_control_flow": true,
+    "statically_elides_unconditional_pipeline_gates": true
+  },
+  "required_backend_rules": ["KIR710", "KIR711"]
+}

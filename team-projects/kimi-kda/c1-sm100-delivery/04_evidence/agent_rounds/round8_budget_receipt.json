@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "round": 8,
+  "budget_model": "matched opportunity caps; implementation wall time and CPU-seconds are reported but not forced equal",
+  "frozen_caps_per_lane": {
+    "primary_structural_hypotheses": 1,
+    "same_mechanism_repairs": 1,
+    "material_patch_attempts_max": 2,
+    "compile_attempts_max": 3,
+    "correctness_opportunities_max": 2,
+    "screen_blocks": 2,
+    "qualification_blocks_reserved": 4,
+    "human_candidate_substitution_after_freeze": 0
+  },
+  "common_contract": {
+    "hardware_class": "NVIDIA B300 SXM6 AC / sm_103a",
+    "semantic_observables": ["output", "recurrent final state"],
+    "promotion_gate": 1.03,
+    "identity_required": ["source", "build", "binary", "target", "actual route"],
+    "cross_lane_latency_comparison_allowed": false,
+    "reason": "HMMA is an extension full-forward screen and tcgen05 is a preferred-layout mechanism probe."
+  },
+  "actual": {
+    "hmma": {
+      "primary": "V16 Phase-1 lookahead depth 2 to 3",
+      "material_source_patches": 1,
+      "runner_repairs": 1,
+      "compile_attempts": 1,
+      "gpu_jobs": [24948, 24954],
+      "valid_screen_blocks": 2,
+      "repair_reason": "official pybind does not accept the candidate-only k2_value_slice keyword; the repair reused the already-built L3 binary",
+      "source_or_mechanism_substitution": false
+    },
+    "tcgen05": {
+      "primary": "V16 preferred-layout contract bridge",
+      "material_source_patches": 1,
+      "runner_repairs": 0,
+      "compile_attempts": 2,
+      "compile_kinds": ["guardrail", "release"],
+      "gpu_jobs": [24947, 24953],
+      "valid_screen_blocks": 2,
+      "source_or_mechanism_substitution": false
+    }
+  },
+  "fairness_boundary": "The ledger supports equal present-round proposal and evaluation opportunity. It does not equate historical code maturity, LOC, wall time, or the evidence scope of a production extension and a standalone mechanism probe."
+}

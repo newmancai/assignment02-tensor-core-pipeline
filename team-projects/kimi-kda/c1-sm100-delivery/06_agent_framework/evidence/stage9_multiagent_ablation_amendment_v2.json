@@ -1,0 +1,194 @@
+{
+  "amendment_timing": "before_first_stage9_agent_call_and_before_first_stage9_GPU_run",
+  "amends": {
+    "file_sha256": "dedeee67221dddbed08a7eb5e2ebea4c30adfd1a4d59626913690c5738ccf705",
+    "path": "evidence/stage9_multiagent_ablation_preregistration.json",
+    "protocol_digest": "cbfcecd38249aef16d1c4641b8719c2b249a8ff4bef10874affa9f13df08541a"
+  },
+  "claim_boundary": "This amendment contains no Stage 9 performance result. No agent or GPU execution is authorized until all execution_preconditions pass.",
+  "created_at_utc": "2026-09-09T14:00:12.306403+00:00",
+  "execution_preconditions": [
+    "heldout.seal_sha256 is a valid external commitment",
+    "typed_runtime_policy_v2 parser canonicalizer verifier and composer pass tests",
+    "all five arm protocol prompt digests are recorded",
+    "agent sandboxes exclude historical heldout evidence and the new heldout mapping"
+  ],
+  "protocol": {
+    "arms": {
+      "multi_homogeneous": {
+        "backend_instances": 4,
+        "context": "four_private_contexts",
+        "cross_lane_memory": false,
+        "roles": [
+          "generalist",
+          "generalist",
+          "generalist",
+          "generalist"
+        ]
+      },
+      "multi_role_conclusions": {
+        "backend_instances": 4,
+        "context": "four_private_contexts",
+        "cross_lane_memory": "verified_conclusions_only_after_round_barrier",
+        "roles": [
+          "capacity",
+          "tail_skew",
+          "resource",
+          "critic_synthesizer"
+        ]
+      },
+      "multi_role_no_share": {
+        "backend_instances": 4,
+        "context": "four_private_contexts",
+        "cross_lane_memory": false,
+        "roles": [
+          "capacity",
+          "tail_skew",
+          "resource",
+          "critic_synthesizer"
+        ]
+      },
+      "single_generalist": {
+        "backend_instances": 1,
+        "context": "one_persistent_context",
+        "cross_lane_memory": false,
+        "roles": [
+          "generalist"
+        ]
+      },
+      "single_roleplay": {
+        "backend_instances": 1,
+        "context": "one_persistent_context_sequential_roleplay",
+        "cross_lane_memory": false,
+        "roles": [
+          "profile",
+          "explore",
+          "critic",
+          "review"
+        ]
+      }
+    },
+    "authority": "typed_policy_verifier_correctness_scope_paired_measurement_and_certificate",
+    "branching": "deterministic_receipt_ranked_with_candidate_id_tiebreak",
+    "budget": {
+      "contract": {
+        "gpu_balance_tolerance_fraction": 0.05,
+        "gpu_seconds_per_arm": 160.0,
+        "proposal_slots_per_arm": 64,
+        "proposal_tokens_per_arm": 500000,
+        "qualification_slots_per_arm": 16,
+        "screen_slots_per_arm": 64,
+        "trajectories": 8
+      },
+      "fairness": "equal_opportunity_caps_not_equal_actual_padding",
+      "gpu_charge": "every_compile_correctness_screen_qualification_failure_timeout_and_retry",
+      "no_winner": "score_as_baseline_log_speedup_zero_do_not_drop_trajectory",
+      "per_trajectory_caps": {
+        "gpu_seconds": 20.0,
+        "proposal_slots": 8,
+        "proposal_tokens": 62500,
+        "qualification_slots": 2,
+        "screen_slots": 8
+      },
+      "proposal_charge": "every_backend_call_including_parse_failure_invalid_and_duplicate",
+      "scope": "per_arm_aggregated_over_eight_paired_trajectories",
+      "screening": "only_verified_semantic_unique_candidates_reach_GPU"
+    },
+    "candidate_space": {
+      "canonicalization": "semantic_fields_only_full_sha256",
+      "cpc_values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        12,
+        16,
+        17,
+        18,
+        20,
+        24,
+        32
+      ],
+      "features": [
+        "total_chunks",
+        "max_chunks",
+        "num_sequences",
+        "resident_grid_capacity_ctas"
+      ],
+      "language": "typed_runtime_policy_v2",
+      "max_policy_depth": 2,
+      "mutations": [
+        "set_prepare_chunks_per_cta",
+        "piecewise_profile_predicate"
+      ],
+      "predicate_operators": [
+        "le",
+        "gt"
+      ],
+      "raw_cuda_edits": false
+    },
+    "gpu_executor": "single_B300_FIFO_round_robin_by_trajectory_round_arm",
+    "heldout": {
+      "custody": "external_to_all_agent_sandboxes",
+      "dataset": "new_unmeasured_stage9_v2_heldout",
+      "feedback_to_search": false,
+      "historical_stage5_or_stage10_evidence_reuse": false,
+      "opaque_profile_ids": [
+        "s9v2-heldout-01",
+        "s9v2-heldout-02",
+        "s9v2-heldout-03",
+        "s9v2-heldout-04",
+        "s9v2-heldout-05",
+        "s9v2-heldout-06",
+        "s9v2-heldout-07",
+        "s9v2-heldout-08"
+      ],
+      "profile_mapping_visible_to_agents": false,
+      "queries_per_trajectory_per_arm": 3,
+      "query_roles": [
+        "frozen_winner",
+        "frozen_lineage_control_1",
+        "frozen_lineage_control_2"
+      ],
+      "required_before": "first_agent_backend_call",
+      "seal_sha256": null,
+      "winner_freeze_before_unseal": true
+    },
+    "memory": "arm_scoped_append_only_hash_chain",
+    "proposal_opportunities_per_round": 4,
+    "rounds": 2,
+    "statistics": {
+      "bootstrap_iterations": 20000,
+      "bootstrap_seed": 9,
+      "compound_log_speedup_margin": 0.004987541511039074,
+      "compound_test": "child_minus_each_parent_simultaneous_lower_bound_above_margin",
+      "familywise_confidence": 0.95,
+      "interval": "paired_trajectory_bootstrap_mean_difference",
+      "kernel_repeats_and_shapes_are_not_independent_replicates": true,
+      "multiplicity": "Bonferroni_three_one_sided_contrasts",
+      "paired_unit": "trajectory_seed",
+      "primary_controls": [
+        "single_roleplay",
+        "multi_homogeneous",
+        "multi_role_no_share"
+      ],
+      "primary_metric": "uniform_shape_weighted_mean_log_speedup_per_trajectory",
+      "primary_treatment": "multi_role_conclusions",
+      "success": "all_three_simultaneous_lower_bounds_above_zero"
+    }
+  },
+  "protocol_digest": "d437d264141f1c14ea3ffff3234d4b7c8e87417c90bd6f99213e23d38078e257",
+  "reasons": [
+    "make paired trajectory inference executable",
+    "separate common prompt envelope from arm-specific protocols",
+    "treat budgets as opportunity caps and charge failed attempts",
+    "add a specialized no-sharing control to identify conclusions-only communication",
+    "replace historical held-out evidence with a new externally sealed unmeasured split"
+  ],
+  "schema_version": 2,
+  "status": "amended_waiting_for_new_heldout_seal"
+}

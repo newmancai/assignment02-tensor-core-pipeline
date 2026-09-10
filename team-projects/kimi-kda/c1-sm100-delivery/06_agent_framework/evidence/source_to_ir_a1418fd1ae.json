@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "analysis": "source_to_ir_qk_first_edge",
+  "variant_ids": [
+    "sm_100a:flashkda_bf16_fused_m128_a1418fd1ae",
+    "sm_103a:flashkda_bf16_fused_m128_a1418fd1ae"
+  ],
+  "kernel_name": "kernel_flashkda_bf16_fused_m128",
+  "resources": {
+    "threads": 1024,
+    "smem_bytes": 117376,
+    "tmem_columns": 240
+  },
+  "launch": {
+    "chunk_tokens": 16,
+    "value_rows": 128
+  },
+  "roles": [
+    {
+      "name": "compute",
+      "warps": [
+        0,
+        3
+      ]
+    },
+    {
+      "name": "epilogue",
+      "warps": [
+        4,
+        7
+      ]
+    },
+    {
+      "name": "beta_prefetch",
+      "warps": [
+        8,
+        8
+      ]
+    },
+    {
+      "name": "aux_mma",
+      "warps": [
+        10,
+        11
+      ]
+    },
+    {
+      "name": "mma",
+      "warps": [
+        9,
+        9
+      ]
+    },
+    {
+      "name": "prep",
+      "warps": [
+        12,
+        31
+      ]
+    }
+  ],
+  "pipelines": [
+    "checkpoint_pipe",
+    "chunk_pipe"
+  ],
+  "barrier_groups": 23,
+  "barriers": 97,
+  "metadata_diagnostics": {
+    "sm_100a:flashkda_bf16_fused_m128_a1418fd1ae": [],
+    "sm_103a:flashkda_bf16_fused_m128_a1418fd1ae": []
+  },
+  "qk_first_edge_diagnostics": [],
+  "qk_first_edge": {
+    "source_sha256": "88cd99e24b95baa973b33027760cffb940273e5669889959f9651e5f698c7cb5",
+    "stages": 5,
+    "producer": "aux_mma",
+    "consumers": [
+      "compute",
+      "mma"
+    ],
+    "ready": {
+      "mode": "elect_one",
+      "init_count": 1
+    },
+    "completion_arrivers": [
+      "compute"
+    ],
+    "reuse_waiter": "prep",
+    "free": {
+      "barrier": "smem_free",
+      "mode": "elect_one_per_warp",
+      "init_count": 4
+    },
+    "completion_dominance": [
+      {
+        "consumer": "compute",
+        "barrier_path": [
+          "qk_full",
+          "state_inp_left_ready",
+          "state_inp_ready",
+          "u_inp_ready",
+          "u2_acc_ready",
+          "u2_inp_ready",
+          "final_ready",
+          "smem_free"
+        ],
+        "source_lines": [
+          1085,
+          1124,
+          1134,
+          2207,
+          2290,
+          2293,
+          2294,
+          2299,
+          1264,
+          1266,
+          2397
+        ]
+      },
+      {
+        "consumer": "mma",
+        "barrier_path": [
+          "qk_full",
+          "out_empty",
+          "state_inp_left_ready",
+          "state_inp_ready",
+          "u_inp_ready",
+          "u2_acc_ready",
+          "u2_inp_ready",
+          "final_ready",
+          "smem_free"
+        ],
+        "source_lines": [
+          2170,
+          2172,
+          2176,
+          2207,
+          2290,
+          2293,
+          2294,
+          2299,
+          1264,
+          1266,
+          2397
+        ]
+      }
+    ],
+    "schedule_diagnostics": [],
+    "required_backend_primitives": [
+      "LeaderArrivalSplitConsumer",
+      "CompletionJoin"
+    ],
+    "role_ranges": {
+      "compute": {
+        "warp_idx": 0,
+        "num_warps": 4
+      },
+      "epilogue": {
+        "warp_idx": 4,
+        "num_warps": 4
+      },
+      "beta_prefetch": {
+        "warp_idx": 8,
+        "num_warps": 1
+      },
+      "aux_mma": {
+        "warp_idx": 10,
+        "num_warps": 2
+      },
+      "mma": {
+        "warp_idx": 9,
+        "num_warps": 1
+      },
+      "prep": {
+        "warp_idx": 12,
+        "num_warps": 20
+      }
+    }
+  }
+}

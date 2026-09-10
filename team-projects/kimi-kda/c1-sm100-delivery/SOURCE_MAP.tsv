@@ -1,0 +1,11 @@
+public_path	source_role
+00_task/	C1 目标与操作化定义
+01_slides/	最终公开 PPT 与嵌入字体 PDF
+02_paper/	论文 PDF、LaTeX 源文件与模板来源
+03_reports/	最终报告及阶段性复盘/交接记录
+04_evidence/	答辩主张对应的精选证据
+05_reproduction/	关键结果与答辩文件复现脚本
+06_agent_framework/	双层 IR、multi-agent 闭环实现、测试与完整运行记忆
+07_experiment_history/	双分支开放探索的实验树（排除大张量和缓存）
+08_patches/	关键实现补丁
+third_party/	PIKE 与 Atrex 的版本、许可证和 NOTICE

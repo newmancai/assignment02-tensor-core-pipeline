@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openai.local/kda/h3_b300_results.schema.json",
+  "title": "H3 matched-HMMA B300 K1/K2/full result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "question",
+    "experiment_id",
+    "status",
+    "provenance",
+    "hardware",
+    "timing_policy",
+    "cases",
+    "aggregate_decision"
+  ],
+  "properties": {
+    "schema_version": {"const": "sm100_open_h3_b300_v1"},
+    "question": {"const": "FlashKDA 官方 kernel 当前使用 SM80 MMA，分析迁移到 SM100 是否值得"},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": ["planned", "compile_failed", "correctness_failed", "measured", "inconclusive"]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["harness", "variants"],
+      "properties": {
+        "harness": {"$ref": "#/$defs/artifactIdentity"},
+        "variants": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/variantIdentity"}
+        }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device_name", "compute_capability", "cuda_arch", "sm_count", "torch_version", "cuda_version", "driver_version"],
+      "properties": {
+        "device_name": {"const": "NVIDIA B300 SXM6 AC"},
+        "compute_capability": {"const": [10, 3]},
+        "cuda_arch": {"const": "sm_103a"},
+        "sm_count": {"type": "integer", "minimum": 1},
+        "l2_bytes": {"type": ["integer", "null"], "minimum": 1},
+        "torch_version": {"type": "string"},
+        "cuda_version": {"type": "string"},
+        "driver_version": {"type": "string"}
+      }
+    },
+    "timing_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend", "cold_l2", "cuda_graph", "allocation_in_scope", "state_reset_in_scope", "same_initial_state_per_call", "headline_scope", "pair_order", "dry_run_iters", "repeat_iters", "blocks"],
+      "properties": {
+        "backend": {"enum": ["cupti", "cuda_event_cold_l2"]},
+        "cold_l2": {"const": true},
+        "cuda_graph": {"const": false},
+        "allocation_in_scope": {"const": false},
+        "state_reset_in_scope": {"const": false},
+        "same_initial_state_per_call": {"const": true},
+        "headline_scope": {"const": "public_full"},
+        "pair_order": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/variantId"}},
+        "dry_run_iters": {"type": "integer", "minimum": 1},
+        "repeat_iters": {"type": "integer", "minimum": 1},
+        "blocks": {"type": "integer", "minimum": 2},
+        "per_call_transforms_in_scope": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/caseResult"}
+    },
+    "aggregate_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["correctness_passed", "h12_geomean_speedup_vs_official", "competitive_with_optimized_where_active", "decision", "reasons"],
+      "properties": {
+        "correctness_passed": {"type": "boolean"},
+        "h12_geomean_speedup_vs_official": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "competitive_with_optimized_where_active": {"type": ["boolean", "null"]},
+        "decision": {"enum": ["advance_to_tcgen05", "stop_full_path_regression", "stop_correctness", "needs_more_data"]},
+        "reasons": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    }
+  },
+  "$defs": {
+    "variantId": {"enum": ["official_hmma", "h3_matched_hmma", "optimized_hmma"]},
+    "scopeId": {"enum": ["k1", "k2", "raw_full", "public_full"]},
+    "artifactIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "variantIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant_id", "source_dir", "source_commit", "tracked_dirty", "extension_name", "binary_sha256", "instruction_family", "semantic_compatibility", "build_command"],
+      "properties": {
+        "variant_id": {"$ref": "#/$defs/variantId"},
+        "source_dir": {"type": "string"},
+        "source_commit": {"type": ["string", "null"]},
+        "tracked_dirty": {"type": "boolean"},
+        "patch_sha256": {"type": "array", "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+        "extension_name": {"type": "string", "minLength": 1},
+        "binary_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "instruction_family": {"const": "sm80_mma_sync"},
+        "semantic_compatibility": {"enum": ["official_bitwise", "algorithm_equivalent_not_official_bitwise"]},
+        "build_command": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "route_guard": {"type": ["object", "null"]}
+      }
+    },
+    "errorMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_abs", "relative_l2", "normalized_linf", "passed"],
+      "properties": {
+        "max_abs": {"type": "number", "minimum": 0},
+        "relative_l2": {"type": "number", "minimum": 0},
+        "normalized_linf": {"type": "number", "minimum": 0},
+        "passed": {"type": "boolean"}
+      }
+    },
+    "workspaceArray": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "dtype", "logical_shape_per_tile", "bytes_per_tile", "tiles_touched", "k1_reads", "k1_writes", "k2_reads", "k2_writes", "touched_bytes"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "dtype": {"enum": ["bf16", "fp16", "fp32", "int32", "uint8"]},
+        "logical_shape_per_tile": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 1}},
+        "layout": {"type": "string"},
+        "bytes_per_tile": {"type": "integer", "minimum": 0},
+        "tiles_touched": {"type": "integer", "minimum": 0},
+        "k1_reads": {"type": "integer", "minimum": 0},
+        "k1_writes": {"type": "integer", "minimum": 0},
+        "k2_reads": {"type": "integer", "minimum": 0},
+        "k2_writes": {"type": "integer", "minimum": 0},
+        "touched_bytes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "workspaceLedger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allocated_bytes", "tiles_touched", "arrays", "k1_touched_bytes", "k2_touched_bytes", "full_touched_bytes", "ledger_matches_source"],
+      "properties": {
+        "allocated_bytes": {"type": "integer", "minimum": 0},
+        "tiles_touched": {"type": "integer", "minimum": 0},
+        "arrays": {"type": "array", "items": {"$ref": "#/$defs/workspaceArray"}},
+        "k1_touched_bytes": {"type": "integer", "minimum": 0},
+        "k2_touched_bytes": {"type": "integer", "minimum": 0},
+        "full_touched_bytes": {"type": "integer", "minimum": 0},
+        "non_workspace_device_bytes": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "ledger_matches_source": {"type": "boolean"},
+        "measured_counters": {
+          "type": "object",
+          "additionalProperties": {"type": ["number", "null"]}
+        }
+      }
+    },
+    "timingResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "median_ms", "samples_ms", "block_medians_ms"],
+      "properties": {
+        "scope": {"$ref": "#/$defs/scopeId"},
+        "median_ms": {"type": "number", "exclusiveMinimum": 0},
+        "samples_ms": {"type": "array", "minItems": 1, "items": {"type": "number", "exclusiveMinimum": 0}},
+        "block_medians_ms": {"type": "array", "minItems": 2, "items": {"type": "number", "exclusiveMinimum": 0}}
+      }
+    },
+    "variantCaseResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant_id", "resolved_route", "correctness", "workspace", "timings"],
+      "properties": {
+        "variant_id": {"$ref": "#/$defs/variantId"},
+        "resolved_route": {"type": "string", "minLength": 1},
+        "correctness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reference", "tolerance_frozen_before_timing", "output", "final_state"],
+          "properties": {
+            "reference": {"type": "string", "minLength": 1},
+            "tolerance_frozen_before_timing": {"const": true},
+            "output": {"$ref": "#/$defs/errorMetrics"},
+            "final_state": {"$ref": "#/$defs/errorMetrics"}
+          }
+        },
+        "workspace": {"$ref": "#/$defs/workspaceLedger"},
+        "timings": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {"$ref": "#/$defs/timingResult"}
+        }
+      }
+    },
+    "caseResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "num_heads", "seq_lens", "layout", "seed", "variants", "paired_comparisons"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "num_heads": {"enum": [12, 96]},
+        "seq_lens": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 1}},
+        "layout": {"enum": ["fixed", "packed"]},
+        "seed": {"type": "integer"},
+        "variants": {"type": "array", "minItems": 2, "maxItems": 3, "items": {"$ref": "#/$defs/variantCaseResult"}},
+        "paired_comparisons": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["numerator", "denominator", "scope", "speedup", "bootstrap_ci95"],
+            "properties": {
+              "numerator": {"$ref": "#/$defs/variantId"},
+              "denominator": {"$ref": "#/$defs/variantId"},
+              "scope": {"$ref": "#/$defs/scopeId"},
+              "speedup": {"type": "number", "exclusiveMinimum": 0},
+              "bootstrap_ci95": {
+                "type": "array",
+                "prefixItems": [{"type": "number", "exclusiveMinimum": 0}, {"type": "number", "exclusiveMinimum": 0}],
+                "items": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

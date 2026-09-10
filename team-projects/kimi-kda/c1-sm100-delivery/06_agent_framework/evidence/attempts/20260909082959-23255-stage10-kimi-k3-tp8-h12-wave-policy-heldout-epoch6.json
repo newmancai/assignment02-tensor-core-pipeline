@@ -1,0 +1,48 @@
+{
+  "accounting_scope": "single-node visible-GPU allocation; telemetry includes compilation, benchmark setup, synchronization, and idle gaps",
+  "allocated_gpu_seconds": 4.880880540236831,
+  "command": [
+    "<REMOTE_HOME>/FlashKDA/.venv/bin/python",
+    "bench_flash_kda_h12_wave_policy_heldout.py",
+    "--epoch-id",
+    "6",
+    "--state-rotations",
+    "256",
+    "--dry-run-iters",
+    "20",
+    "--repeat-iters",
+    "100",
+    "--json",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_stage10_h12_wave_policy_heldout_epoch6.json"
+  ],
+  "ended_at_utc": "2026-09-09T08:30:04.340163+00:00",
+  "exit_code": 0,
+  "experiment": "stage10-kimi-k3-tp8-h12-wave-policy-heldout-epoch6",
+  "gpu_count": 1,
+  "hardware": [
+    {
+      "index": 0,
+      "memory_total_mib": 275040.0,
+      "name": "NVIDIA B300 SXM6 AC",
+      "power_limit_w": 1100.0,
+      "uuid": "GPU-dadf9f3b-df58-d3fa-07b0-5fe223423db1"
+    }
+  ],
+  "scheduler": {
+    "slurm_job_id": "23255",
+    "slurm_job_name": "kda-stage10-h12-heldout",
+    "slurm_node_list": "dev-slurm"
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-09-09T08:29:59.459268+00:00",
+  "telemetry": {
+    "average_gpu_utilization_percent": 14.0,
+    "average_power_w": 286.8122222222222,
+    "estimated_allocation_energy_joules": 1290.655,
+    "peak_memory_used_mib": 1934.0,
+    "peak_power_w": 356.11,
+    "sample_count": 9,
+    "sample_interval_seconds": 0.5
+  },
+  "wall_seconds": 4.880880540236831
+}

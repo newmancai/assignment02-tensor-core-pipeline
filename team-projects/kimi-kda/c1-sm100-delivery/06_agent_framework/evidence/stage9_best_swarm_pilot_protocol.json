@@ -1,0 +1,130 @@
+{
+  "amendment_reason": "round1 receipt adapter corrected and synthesizer serialized after three typed-verified scouts",
+  "claim_boundary": "Pipeline feasibility only; no multi-agent superiority claim.",
+  "created_at_utc": "2026-09-09T15:34:30.430643+00:00",
+  "pilot": true,
+  "protocol": {
+    "arms": {
+      "multi_role_conclusions": {
+        "backend_instances": 4,
+        "roles": [
+          "capacity",
+          "tail_skew",
+          "resource",
+          "critic_synthesizer"
+        ],
+        "round0": "four_private_role_proposals",
+        "round1": "verified_receipt_ranked_conclusions_shared_after_barrier",
+        "selection": "B300_correctness_then_latency_top_k",
+        "variation": "critic_synthesizer_must_compose_two_distinct_parent_subtrees"
+      }
+    },
+    "branching": "receipt_ranked_top_k_then_lineage_checked_compound_mutation",
+    "budget": {
+      "contract": {
+        "gpu_balance_tolerance_fraction": 0.05,
+        "gpu_seconds_per_arm": 60.0,
+        "proposal_slots_per_arm": 8,
+        "proposal_tokens_per_arm": 200000,
+        "qualification_slots_per_arm": 2,
+        "screen_slots_per_arm": 8,
+        "trajectories": 1
+      },
+      "per_trajectory_caps": {
+        "gpu_seconds": 60.0,
+        "proposal_slots": 8,
+        "proposal_tokens": 200000,
+        "qualification_slots": 2,
+        "screen_slots": 8
+      },
+      "proposal_charge": "all_calls_failures_invalid_and_duplicates"
+    },
+    "candidate_space": {
+      "canonicalization": "semantic_fields_only_full_sha256",
+      "cpc_values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        12,
+        16,
+        17,
+        18,
+        20,
+        24,
+        32
+      ],
+      "features": [
+        "total_chunks",
+        "max_chunks",
+        "num_sequences",
+        "resident_grid_capacity_ctas"
+      ],
+      "language": "typed_runtime_policy_v2",
+      "max_policy_depth": 2,
+      "predicate_operators": [
+        "le",
+        "gt"
+      ],
+      "raw_cuda_edits": false
+    },
+    "gpu_executor": "single_B300_FIFO_with_round_barrier",
+    "heldout": {
+      "custody": "B300_host_only_never_agent_host",
+      "dataset": "stage9_best_swarm_pilot_remote_only_randomized_v2",
+      "opaque_profile_ids": [
+        "s9pilot-heldout-01",
+        "s9pilot-heldout-02",
+        "s9pilot-heldout-03",
+        "s9pilot-heldout-04",
+        "s9pilot-heldout-05",
+        "s9pilot-heldout-06",
+        "s9pilot-heldout-07",
+        "s9pilot-heldout-08"
+      ],
+      "seal_sha256": "125f2aa31ff034a393b461e9c47306a830b4c1049a035ebddca9b35df594d29a",
+      "sequence_count_choices": [
+        1,
+        2,
+        4
+      ],
+      "total_chunk_envelope": [
+        288,
+        336,
+        400,
+        464
+      ],
+      "winner_freeze_before_unseal": true
+    },
+    "memory": "arm_scoped_append_only_hash_chain_verified_conclusions_only",
+    "proposal_backend": {
+      "arm_protocol_digests": {
+        "multi_role_conclusions": "a1cb55cd9175a17b24f93dd150ec57fccd41e7aa46f0ec26a64d105cb7aad655"
+      },
+      "common_prompt_sha256": "219d63f0939056fa78f49be21289d74aa774c2583705160da256cbfd04a19c97",
+      "development_summary_sha256": "645d97e91a925629e0738f5cd599025a3b8615971219f5e35e7d0b12ef8e87ae",
+      "gpu_evaluator_sha256": "de3aec01bbe804fbb257b31387f3216ce4591961ac7b0060dc7b042192f6320b",
+      "isolation": "fresh_private_tmp_outside_repo_minimal_environment_no_heldout_secret",
+      "model": "gpt-5.6-sol",
+      "output_schema_sha256": "3746e43a10868f60426e955d84dbec3ad6085f8ce779bfb232345b187477b88b",
+      "reasoning_effort": "high",
+      "runner_sha256": "32ebe94c895b1142c2139380f53b9a357e725a2cf145dbdfe75fd39a26f9d35a",
+      "runtime": "codex-cli-0.144.6-ephemeral-repo-external-read-only-failclosed-on-tool-event",
+      "tool_policy": "any observed tool event rejects_the_complete_request"
+    },
+    "proposal_opportunities_per_round": 4,
+    "purpose": "engineering_pilot_not_a_statistical_multiagent_superiority_claim",
+    "rounds": 2,
+    "trajectory_seeds": [
+      91001
+    ]
+  },
+  "protocol_digest": "199b2d2c77e6b91c9cf864ba432862d3aae30c2d9bd1326bb0473a2c19eb7812",
+  "schema_version": 2,
+  "status": "amended_ready_for_execution",
+  "supersedes_protocol_digest": "0a7630265816920e41710261af5b1b4f45680e12ac0a0daebee119a14af1642d"
+}

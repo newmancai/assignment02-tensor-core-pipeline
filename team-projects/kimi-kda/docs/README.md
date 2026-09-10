@@ -1,15 +1,16 @@
 # Kimi KDA 文档索引
 
-## C1 最终交付
+## 2026-09-10 冻结交付
 
-最终报告、答辩和提交说明统一位于 [`c1-final/`](c1-final/)：
+最终答辩、论文、完整复盘、Agent 框架、复现代码和证据位于 [`../c1-sm100-delivery/`](../c1-sm100-delivery/)。
 
-- [`c1-final/README.md`](c1-final/README.md)：提交总入口；
-- [`c1-final/FINAL_REPORT.md`](c1-final/FINAL_REPORT.md)：完整报告；
-- [`c1-final/FlashKDA_SM100_decision_defense_20260906.pptx`](c1-final/FlashKDA_SM100_decision_defense_20260906.pptx)：新版 10 页正式答辩；
-- [`c1-final/DEFENSE_SCRIPT.md`](c1-final/DEFENSE_SCRIPT.md)：逐页讲稿；
-- [`c1-final/Q_AND_A.md`](c1-final/Q_AND_A.md)：答辩追问准备。
+- [`README.md`](../c1-sm100-delivery/README.md)：总入口；
+- [`01_slides/`](../c1-sm100-delivery/01_slides/)：公开脱敏 PPTX 与嵌入字体 PDF；
+- [`02_paper/`](../c1-sm100-delivery/02_paper/)：论文 PDF 与源文件；
+- [`EVIDENCE_INDEX.md`](../c1-sm100-delivery/EVIDENCE_INDEX.md)：结论到证据的索引；
+- [`REPRODUCTION.md`](../c1-sm100-delivery/REPRODUCTION.md)：复验指南；
+- [`OPEN_SOURCE_AUDIT.md`](../c1-sm100-delivery/OPEN_SOURCE_AUDIT.md)：开源来源、改造边界和脱敏说明。
 
-## 历史草稿
+## 阶段性材料
 
-本目录原有的 [`report-draft.md`](report-draft.md)、[`defense-outline.md`](defense-outline.md) 与未带日期的旧版 PPTX 是过程材料；C1 的结论、数据口径和补丁顺序以 `c1-final/README.md` 及带 `20260906` 后缀的 PPTX 为准。
+[`c1-final/`](c1-final/)、[`report-draft.md`](report-draft.md) 和 [`defense-outline.md`](defense-outline.md) 记录前期复现、挑战和框架演化。最终答辩口径以 2026-09-10 冻结交付为准。

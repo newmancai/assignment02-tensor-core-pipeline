@@ -1,0 +1,23 @@
+--- a/csrc/smxx/fwd_kernel2.cuh
++++ b/csrc/smxx/fwd_kernel2.cuh
+@@ -170,7 +170,8 @@ __global__ void __launch_bounds__(NumThreads) _flash_kda_fwd_recurrence(
+     using BF16 = cutlass::bfloat16_t;
+     using FP16 = cutlass::half_t;
+     static_assert(StatePrefetch >= 1 && StatePrefetch <= D / 16);
+-    static_assert(Phase1Prefetch == 1 || Phase1Prefetch == 2 || Phase1Prefetch == 4);
++    static_assert(Phase1Prefetch == 1 || Phase1Prefetch == 2 ||
++                  Phase1Prefetch == 3 || Phase1Prefetch == 4);
+     using Layouts = K2Layouts<D, CHUNK, V>;
+     using MMALayout = typename Layouts::MMALayout;
+     using TransposedMMALayout = typename Layouts::TransposedMMALayout;
+--- a/csrc/smxx/fwd_launch.cu
++++ b/csrc/smxx/fwd_launch.cu
+@@ -260,7 +260,7 @@ void launch_fwd(
+             if constexpr (D == 128 && !StateFP32) {
+                 if (N == 1 && H == 12 && T_total >= 2048 && T_total <= 8192) {
+ #if defined(FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH) && FLASH_KDA_ENABLE_V16_PHASE1_PREFETCH
+-                    constexpr int kPhase1Prefetch = HasStateIn ? 2 : 4;
++                    constexpr int kPhase1Prefetch = HasStateIn ? 3 : 4;
+ #else
+                     constexpr int kPhase1Prefetch = 1;
+ #endif

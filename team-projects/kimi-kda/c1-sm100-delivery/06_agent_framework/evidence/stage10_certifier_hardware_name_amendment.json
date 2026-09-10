@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "non_statistical_certifier_amendment",
+  "first_pass_certificate": {
+    "path": "evidence/b300_stage10_certificate_first_pass.json",
+    "sha256": "e8464a2f468bfd397fe7b33f6b09b8f0cbd7fdb7046abb9b65616db57cc38446"
+  },
+  "failed_first_pass_check": "same_single_b300",
+  "observed_device_name": "NVIDIA B300 SXM6 AC",
+  "observed_device_uuid_count": 1,
+  "reason": "The first-pass certifier compared the nvidia-smi product name to the shortened paper label NVIDIA B300. The exact product string NVIDIA B300 SXM6 AC was already present in Stage 8 accounting before Stage 10.",
+  "prior_evidence": {
+    "path": "evidence/b300_stage8_h12_workscale_pair_accounting.json",
+    "sha256": "ff055d5cb1c6a1a5f33f933a4b9e392b05e9c75bdb23904113bc89885861005d"
+  },
+  "change": "Replace the exact-name check NVIDIA B300 with NVIDIA B300 SXM6 AC.",
+  "certifier_sha256": {
+    "first_pass": "58a1f05bade9045fdccd0b3ba77ca2d4bbcf9bbc8b49669acc65f06fa8cccb0c",
+    "amended": "815410b65d2a41e55bc37f0e28e9e03f0c4b3c8660b0d487c750a6957649c41b"
+  },
+  "unchanged": [
+    "all benchmark inputs and hashes",
+    "all predictions and grids",
+    "all correctness and route gates",
+    "all epoch samples",
+    "all statistical estimators, confidence levels and thresholds",
+    "all deployment and claim boundaries"
+  ]
+}

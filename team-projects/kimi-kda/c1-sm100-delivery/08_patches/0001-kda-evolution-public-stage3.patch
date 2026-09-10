@@ -1,0 +1,952 @@
+diff --git a/benchmarks/bench_flash_kda_evolution.py b/benchmarks/bench_flash_kda_evolution.py
+index 2d0f63b..3562944 100644
+--- a/benchmarks/bench_flash_kda_evolution.py
++++ b/benchmarks/bench_flash_kda_evolution.py
+@@ -30,7 +30,10 @@ from bench_recurrent_kda_prefill import (
+ )
+ from flashinfer.jit.flash_kda_evolution import FLASH_KDA_EVOLUTION_VARIANTS
+ from flashinfer.kda import recurrent_kda
+-from flashinfer.kda_evolution import prepare_flash_kda_evolution
++from flashinfer.kda_evolution import (
++    _PUBLIC_EVOLUTION_ACTIVATION_SHAPES,
++    prepare_flash_kda_evolution,
++)
+ from flashinfer.testing import bench_gpu_time
+ 
+ 
+@@ -126,7 +129,7 @@ def _run_case(case, *, correctness_only: bool, dry_run_iters: int, repeat_iters:
+     assert expected_state is not None
+ 
+     actual_out = torch.empty_like(q)
+-    actual_state = torch.empty_like(initial_state)
++    actual_state = initial_state.clone()
+     prepared = prepare_flash_kda_evolution(
+         q,
+         k,
+@@ -142,8 +145,30 @@ def _run_case(case, *, correctness_only: bool, dry_run_iters: int, repeat_iters:
+         lower_bound=-5.0,
+         cu_seqlens=cu_seqlens,
+     )
+-    prepared.launch()
++    activation_key = (not case.packed, case.num_heads, tuple(case.seq_lens))
++    public_activated = activation_key in _PUBLIC_EVOLUTION_ACTIVATION_SHAPES
++    returned_out, returned_state = recurrent_kda(
++        q,
++        k,
++        v,
++        g,
++        beta,
++        A_log,
++        dt_bias,
++        initial_state=actual_state,
++        output=actual_out,
++        output_final_state=True,
++        use_qk_l2norm_in_kernel=True,
++        use_gate_in_kernel=True,
++        scale=scale,
++        lower_bound=-5.0,
++        cu_seqlens=cu_seqlens,
++        beta_is_logit=True,
++        backend="evolution",
++    )
+     torch.cuda.synchronize()
++    if returned_out is not actual_out or returned_state is not actual_state:
++        raise RuntimeError("public evolution backend broke output/state aliasing")
+     out_diagnostic = _diagnostic(actual_out, expected_out)
+     state_diagnostic = _diagnostic(actual_state, expected_state)
+     correct = out_diagnostic["correct"] and state_diagnostic["correct"]
+@@ -153,16 +178,38 @@ def _run_case(case, *, correctness_only: bool, dry_run_iters: int, repeat_iters:
+         "seq_lens": list(case.seq_lens),
+         "layout": "packed" if case.packed else "fixed",
+         "seed": case.seed,
+-        "variant": prepared.variant,
++        "variant": prepared.variant if public_activated else "cake_dispatcher",
+         "target": prepared.target,
+-        "grid_x": prepared.grid_x,
++        "grid_x": prepared.grid_x if public_activated else None,
++        "requested_backend": "evolution",
++        "resolved_backend": "evolution" if public_activated else "cake",
++        "activation_decision": "activate" if public_activated else "retain_cake",
++        "timing_scope": "public_recurrent_kda_with_inplace_state_update",
+         "correct": correct,
+         "out": out_diagnostic,
+         "final_state": state_diagnostic,
+     }
+     if correct and not correctness_only:
+         median_ms, samples_ms = _measure(
+-            prepared.launch,
++            lambda: recurrent_kda(
++                q,
++                k,
++                v,
++                g,
++                beta,
++                A_log,
++                dt_bias,
++                initial_state=actual_state,
++                output=actual_out,
++                output_final_state=False,
++                use_qk_l2norm_in_kernel=True,
++                use_gate_in_kernel=True,
++                scale=scale,
++                lower_bound=-5.0,
++                cu_seqlens=cu_seqlens,
++                beta_is_logit=True,
++                backend="evolution",
++            ),
+             dry_run_iters=dry_run_iters,
+             repeat_iters=repeat_iters,
+         )
+diff --git a/benchmarks/bench_flash_kda_stage3_public_pair.py b/benchmarks/bench_flash_kda_stage3_public_pair.py
+new file mode 100644
+index 0000000..9f51ff6
+--- /dev/null
++++ b/benchmarks/bench_flash_kda_stage3_public_pair.py
+@@ -0,0 +1,173 @@
++# Copyright (c) 2026 by FlashInfer team.
++"""Paired public-API CAKE/evolution qualification for the six legacy shapes."""
++
++import argparse
++import json
++from pathlib import Path
++
++import numpy as np
++import torch
++
++from bench_recurrent_kda_prefill import (
++    LEGACY_CASES,
++    _hardware_metadata,
++    _make_case,
++    _require_cupti,
++    _timing_iteration_budget,
++)
++from flashinfer.testing import bench_gpu_time
++
++
++def _measure(run, *, dry_run_iters: int, repeat_iters: int) -> list[float]:
++    return [
++        float(value)
++        for value in bench_gpu_time(
++            run,
++            enable_cupti=True,
++            cold_l2_cache=True,
++            use_cuda_graph=False,
++            dry_run_iters=dry_run_iters,
++            repeat_iters=repeat_iters,
++        )
++    ]
++
++
++def _bootstrap_speedup(
++    cake_samples: list[float],
++    evolution_samples: list[float],
++    *,
++    seed: int,
++    draws: int = 10_000,
++) -> tuple[float, float, float]:
++    cake = np.asarray(cake_samples)
++    evolution = np.asarray(evolution_samples)
++    rng = np.random.default_rng(seed)
++    cake_medians = np.median(
++        cake[rng.integers(0, cake.size, size=(draws, cake.size))], axis=1
++    )
++    evolution_medians = np.median(
++        evolution[
++            rng.integers(0, evolution.size, size=(draws, evolution.size))
++        ],
++        axis=1,
++    )
++    speedups = cake_medians / evolution_medians
++    return (
++        float(np.median(cake) / np.median(evolution)),
++        float(np.quantile(speedups, 0.025)),
++        float(np.quantile(speedups, 0.975)),
++    )
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--dry-run-iters", type=int, default=20)
++    parser.add_argument("--repeat-iters", type=int, default=100)
++    parser.add_argument("--state-rotations", type=int, default=256)
++    parser.add_argument("--json", type=Path, required=True)
++    args = parser.parse_args()
++    _require_cupti()
++    dry_run_iters, repeat_iters = _timing_iteration_budget(
++        state_rotation_capacity=args.state_rotations,
++        requested_dry_run_iters=args.dry_run_iters,
++        requested_repeat_iters=args.repeat_iters,
++    )
++    rows = []
++    for case in LEGACY_CASES:
++        cake = _make_case(
++            case,
++            state_rotations=args.state_rotations,
++            candidate_route="dispatcher",
++            candidate_backend="cake",
++        )
++        evolution = _make_case(
++            case,
++            state_rotations=args.state_rotations,
++            candidate_route="dispatcher",
++            candidate_backend="evolution",
++        )
++        cake.reset_state_pools()
++        evolution.reset_state_pools()
++        cake.candidate_run()
++        evolution.candidate_run()
++        torch.cuda.synchronize()
++        torch.testing.assert_close(
++            evolution.candidate_output, cake.candidate_output, atol=1e-2, rtol=1e-2
++        )
++        torch.testing.assert_close(
++            evolution.candidate_state_pool[0],
++            cake.candidate_state_pool[0],
++            atol=1e-2,
++            rtol=1e-2,
++        )
++
++        samples = {"cake": [], "evolution": []}
++        block_medians = {"cake": [], "evolution": []}
++        for name, prepared in (
++            ("cake", cake),
++            ("evolution", evolution),
++            ("evolution", evolution),
++            ("cake", cake),
++        ):
++            prepared.reset_state_pools()
++            block = _measure(
++                prepared.candidate_run,
++                dry_run_iters=dry_run_iters,
++                repeat_iters=repeat_iters,
++            )
++            samples[name].extend(block)
++            block_medians[name].append(float(np.median(block)))
++
++        speedup, lower, upper = _bootstrap_speedup(
++            samples["cake"], samples["evolution"], seed=case.seed
++        )
++        resolved_evolution = evolution.metadata["resolved_backend"] == "evolution"
++        decision = "activate" if resolved_evolution and lower > 1.0 else "retain_cake"
++        row = {
++            "name": case.name,
++            "num_heads": case.num_heads,
++            "seq_lens": list(case.seq_lens),
++            "layout": "packed" if case.packed else "fixed",
++            "correct": True,
++            "cake": {
++                **cake.metadata,
++                "median_ms": float(np.median(samples["cake"])),
++                "samples_ms": samples["cake"],
++                "block_medians_ms": block_medians["cake"],
++            },
++            "evolution": {
++                **evolution.metadata,
++                "median_ms": float(np.median(samples["evolution"])),
++                "samples_ms": samples["evolution"],
++                "block_medians_ms": block_medians["evolution"],
++            },
++            "speedup": speedup,
++            "bootstrap_95": [lower, upper],
++            "decision": decision,
++            "pair_order": "cake/evolution/evolution/cake",
++            "timing_scope": "public_recurrent_kda_with_inplace_state_update",
++            "timing_backend": "cupti",
++            "cold_l2": True,
++            "same_initial_state_per_timed_call": True,
++        }
++        rows.append(row)
++        print(
++            f"{case.name:<18} {speedup:.4f}x "
++            f"[{lower:.4f}, {upper:.4f}] {decision}"
++        )
++        del cake, evolution
++        torch.cuda.empty_cache()
++
++    report = {
++        "schema_version": 1,
++        "hardware": _hardware_metadata(torch.device("cuda")),
++        "all_correct": all(row["correct"] for row in rows),
++        "scope_identical": True,
++        "rows": rows,
++    }
++    args.json.parent.mkdir(parents=True, exist_ok=True)
++    args.json.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/benchmarks/bench_recurrent_kda_prefill.py b/benchmarks/bench_recurrent_kda_prefill.py
+index c07ab26..af2c1f2 100644
+--- a/benchmarks/bench_recurrent_kda_prefill.py
++++ b/benchmarks/bench_recurrent_kda_prefill.py
+@@ -25,7 +25,8 @@ The FlashInfer candidate is always invoked through the public
+ device/shape policy, while ``nonpersistent`` supplies the same explicit
+ workspace and packed sequence order used by the historical benchmark to keep
+ B200 on the direct schedule family. ``--backend`` selects one public API
+-backend per invocation; compare auto, CuTe DSL, and Cake with separate commands
++backend per invocation; compare auto, CuTe DSL, Cake, and the guarded evolution
++adapter with separate commands
+ over the same case set. The resolved backend, logical schedule, physical module
+ variants, and target are recorded during untimed warmup. With
+ ``--flash-kda-peer``, two commit-verified MoonshotAI/FlashKDA measurements are
+@@ -37,9 +38,10 @@ reported:
+ 
+ All paths use the same deterministic tensors and seeds. Preinitialized
+ rotating state buffers ensure every timed invocation sees the same initial
+-state. The FlashInfer path updates each state slot in place inside the kernel;
+-it has no state scratch or copy-back. Allocation, metadata, sequence ordering,
+-build/JIT, and state-pool reset are outside the measured region.
++state. Cake updates each state slot in place inside the kernel. The guarded
++evolution adapter uses its ABI's distinct final-state scratch plus a same-stream
++copy-back to preserve that public contract. Allocation, metadata, sequence
++ordering, build/JIT, and state-pool reset are outside the measured region.
+ """
+ 
+ import argparse
+@@ -575,10 +577,13 @@ def _make_case(
+     # harness while keeping route logging out of every timed call.
+     kda_prefill_module = import_module("flashinfer.kda_prefill")
+     kda_prefill_cute_module = import_module("flashinfer.kda_prefill_cute")
++    kda_evolution_module = import_module("flashinfer.kda_evolution")
+     original_get_module = kda_prefill_module._get_flash_kda_prefill_module
+     original_cute_run = kda_prefill_cute_module._run_cute_dsl_kda_prefill
++    original_evolution_load = kda_evolution_module.load_flash_kda_evolution_module
+     resolved_cake_routes = []
+     resolved_backends = []
++    resolved_evolution_routes = []
+ 
+     def recording_get_module(variant, target):
+         resolved_cake_routes.append((variant, target))
+@@ -588,16 +593,36 @@ def _make_case(
+         resolved_backends.append("cute-dsl")
+         return original_cute_run(**kwargs)
+ 
++    def recording_evolution_load(variant, target):
++        resolved_evolution_routes.append((variant, target))
++        return original_evolution_load(variant, target)
++
+     kda_prefill_module._get_flash_kda_prefill_module = recording_get_module
+     kda_prefill_cute_module._run_cute_dsl_kda_prefill = recording_cute_run
++    kda_evolution_module.load_flash_kda_evolution_module = recording_evolution_load
+     try:
+         candidate_run()
+         torch.cuda.synchronize()
+     finally:
+         kda_prefill_module._get_flash_kda_prefill_module = original_get_module
+         kda_prefill_cute_module._run_cute_dsl_kda_prefill = original_cute_run
++        kda_evolution_module.load_flash_kda_evolution_module = original_evolution_load
+         reset_state_pools()
+-    if resolved_backends:
++    if resolved_evolution_routes:
++        if (
++            len(resolved_evolution_routes) != 1
++            or resolved_backends
++            or resolved_cake_routes
++        ):
++            raise RuntimeError(
++                "expected exactly one evolution route during warmup, got "
++                f"evolution={resolved_evolution_routes}, "
++                f"backends={resolved_backends}, cake={resolved_cake_routes}"
++            )
++        resolved_backend = "evolution"
++        resolved_variant, resolved_target = resolved_evolution_routes[0]
++        resolved_physical_variants = [resolved_variant]
++    elif resolved_backends:
+         if resolved_backends != ["cute-dsl"] or resolved_cake_routes:
+             raise RuntimeError(
+                 "expected exactly one CuTe DSL route during warmup, got "
+@@ -619,6 +644,7 @@ def _make_case(
+     else:
+         raise RuntimeError(
+             "expected one recurrent-KDA prefill route during warmup, got "
++            f"evolution={resolved_evolution_routes}, "
+             f"backends={resolved_backends}, cake={resolved_cake_routes}"
+         )
+ 
+@@ -751,7 +777,7 @@ def main() -> None:
+     )
+     parser.add_argument(
+         "--backend",
+-        choices=("auto", "cute-dsl", "cake"),
++        choices=("auto", "cute-dsl", "cake", "evolution"),
+         default="auto",
+         help=(
+             "Select one backend for this invocation of the public recurrent_kda "
+diff --git a/flashinfer/kda.py b/flashinfer/kda.py
+index 15dbce8..423e6eb 100644
+--- a/flashinfer/kda.py
++++ b/flashinfer/kda.py
+@@ -30,6 +30,7 @@ from typing import Literal, Optional
+ import torch
+ 
+ from . import kda_decode as _kda_decode
++from . import kda_evolution as _kda_evolution
+ from . import kda_prefill as _kda_prefill
+ from . import kda_prefill_cute as _kda_prefill_cute
+ from .jit import flash_kda_indexed as _flash_kda_indexed
+@@ -83,7 +84,7 @@ def recurrent_kda(
+     disable_state_update: bool = False,
+     correction_cache: Optional[torch.Tensor] = None,
+     kg_cache: Optional[torch.Tensor] = None,
+-    backend: Literal["auto", "cute-dsl", "cake"] = "auto",
++    backend: Literal["auto", "cute-dsl", "cake", "evolution"] = "auto",
+ ) -> (
+     tuple[torch.Tensor, Optional[torch.Tensor]]
+     | tuple[torch.Tensor, Optional[torch.Tensor], torch.Tensor]
+@@ -102,7 +103,10 @@ def recurrent_kda(
+     selection. ``backend="auto"`` prefers CuTe DSL for supported plain prefill
+     contracts and keeps Cake as the feature-complete fallback; use
+     ``backend="cake"`` to select and benchmark the generated portfolio
+-    explicitly.
++    explicitly. ``backend="evolution"`` is an explicit proof-carrying adapter:
++    it activates only scope-qualified generated winners, preserves public
++    in-place state semantics with a same-stream copy-back, and falls back to
++    Cake for every unqualified shape. It never changes ``"auto"`` routing.
+     Compatible equal-head D128 unbounded-softplus T=1 decode calls use their
+     frozen Cake specialization automatically. The Cake path accepts any
+     positive runtime head count, so Kimi-Linear tensor parallelism maps global
+@@ -258,7 +262,7 @@ def recurrent_kda(
+             must be divisible by 32, except that the SM100-family exact-N16
+             frozen route also accepts multiples of 16. SGLang normally uses
+             64 or a larger cache-page-aligned multiple.
+-        backend (Literal["auto", "cute-dsl", "cake"]):
++        backend (Literal["auto", "cute-dsl", "cake", "evolution"]):
+             Implementation backend. ``"auto"`` selects the architecture-
+             appropriate CuTe DSL kernel for supported ordinary multi-token
+             prefill, including the SM120 backend and SM100-family state
+@@ -267,6 +271,10 @@ def recurrent_kda(
+             ``"cake"`` and ``"cute-dsl"`` select those backends strictly. The
+             Cake prefill path chooses among direct, persistent, small-BH, and
+             two-stage BT16 schedules from the input shape and physical device.
++            ``"evolution"`` accepts the narrow fused Blackwell prefill contract
++            used by the proof certificate. It activates only qualified exact
++            shapes and otherwise runs the same Cake fallback under the public
++            output and in-place state-update contract.
+             The SM100-family kernel additionally needs
+             ``nvidia-cutlass-dsl>=4.7``; below that ``"auto"`` uses Cake there
+             and ``"cute-dsl"`` raises :class:`ImportError`.
+@@ -282,9 +290,10 @@ def recurrent_kda(
+         prefill_workspace, _kda_prefill.RecurrentKDAPrefillWorkspace
+     ):
+         raise TypeError("prefill_workspace must be a RecurrentKDAPrefillWorkspace")
+-    if backend not in ("auto", "cute-dsl", "cake"):
++    if backend not in ("auto", "cute-dsl", "cake", "evolution"):
+         raise ValueError(
+-            f"backend must be 'auto', 'cute-dsl', or 'cake', got {backend!r}"
++            "backend must be 'auto', 'cute-dsl', 'cake', or 'evolution', "
++            f"got {backend!r}"
+         )
+ 
+     # SM120 is an architecture-specific CuTe DSL implementation. Try it before
+@@ -364,9 +373,9 @@ def recurrent_kda(
+         # gated_delta_rule_mtp flag): outputs only, no state writes,
+         # optional slot-indexed correction/kg caches. Handled ahead of the
+         # prefill routing — none of the prefill-only features apply.
+-        if backend == "cake":
++        if backend in ("cake", "evolution"):
+             raise ValueError(
+-                "backend='cake' has no frozen-state kernels; "
++                f"backend={backend!r} has no frozen-state kernels; "
+                 "disable_state_update=True requires the CuTe-DSL backends"
+             )
+         if output_final_state:
+@@ -416,6 +425,57 @@ def recurrent_kda(
+     is_plain_prefill = _kda_prefill._is_plain_multi_token_prefill(
+         q, cu_seqlens, num_spec_tokens
+     )
++    if backend == "evolution":
++        rejection = _kda_evolution.public_flash_kda_evolution_rejection_reason(
++            q=q,
++            k=k,
++            v=v,
++            g=g,
++            beta=beta,
++            A_log=A_log,
++            dt_bias=dt_bias,
++            scale=scale,
++            initial_state=initial_state,
++            use_qk_l2norm_in_kernel=use_qk_l2norm_in_kernel,
++            use_gate_in_kernel=use_gate_in_kernel,
++            lower_bound=lower_bound,
++            cu_seqlens=cu_seqlens,
++            ssm_state_indices=ssm_state_indices,
++            num_spec_tokens=num_spec_tokens,
++            num_accepted_tokens=num_accepted_tokens,
++            output=output,
++            initial_state_source=initial_state_source,
++            initial_state_indices=initial_state_indices,
++            beta_is_logit=beta_is_logit,
++            seq_order=seq_order,
++            prefill_workspace=prefill_workspace,
++            state_checkpoints=state_checkpoints,
++            checkpoint_cu_starts=checkpoint_cu_starts,
++            checkpoint_every_n_tokens=checkpoint_every_n_tokens,
++        )
++        if rejection is not None:
++            raise ValueError(
++                "backend='evolution' does not support this recurrent_kda "
++                f"contract: {rejection}"
++            )
++        assert A_log is not None
++        assert dt_bias is not None
++        assert initial_state is not None
++        return _kda_evolution.run_public_flash_kda_evolution(
++            q=q,
++            k=k,
++            v=v,
++            g=g,
++            beta=beta,
++            A_log=A_log,
++            dt_bias=dt_bias,
++            scale=scale,
++            initial_state=initial_state,
++            output_final_state=output_final_state,
++            lower_bound=lower_bound,
++            cu_seqlens=cu_seqlens,
++            output=output,
++        )
+     use_generated_indexed_prefill = (
+         backend == "cake"
+         and is_plain_prefill
+diff --git a/flashinfer/kda_evolution.py b/flashinfer/kda_evolution.py
+index b2d99b5..d1ca359 100644
+--- a/flashinfer/kda_evolution.py
++++ b/flashinfer/kda_evolution.py
+@@ -18,6 +18,7 @@ from __future__ import annotations
+ 
+ import heapq
+ import itertools
++import math
+ from dataclasses import dataclass
+ from typing import cast
+ 
+@@ -31,6 +32,8 @@ from .jit.flash_kda_evolution import (
+ from .kda_prefill import (
+     _FLASH_KDA_ROUTE_BT16_M64,
+     _FLASH_KDA_ROUTE_DIRECT_M128_N16,
++    _check_output_does_not_overlap_inputs,
++    _get_stream_workspace,
+     _run_flash_kda_prefill,
+     _select_flash_kda_bf16_route,
+     _select_flash_kda_prefill_target,
+@@ -64,6 +67,20 @@ _EVOLUTION_WINNER_SHAPES = frozenset(
+     }
+ )
+ 
++# Stage-3 production activation is intentionally narrower than the frozen
++# exploration corpus. These are the five legacy shapes whose Stage-2 bootstrap
++# 95% speedup lower bound exceeded one. H96 mixed remains on Cake; all other
++# shapes also fall back until they receive scope-identical public evidence.
++_PUBLIC_EVOLUTION_ACTIVATION_SHAPES = frozenset(
++    {
++        (True, 96, (8192,)),
++        (False, 96, (1024,) * 8),
++        (True, 64, (8192,)),
++        (False, 64, (1300, 547, 2048, 963, 271, 3063)),
++        (False, 64, (1024,) * 8),
++    }
++)
++
+ 
+ def _use_evolution_route(
+     sequence_lengths: tuple[int, ...],
+@@ -510,6 +527,29 @@ class PreparedFlashKDAEvolution:
+         )
+         self._prepare_descriptors = False
+ 
++    def rebind_state(
++        self, initial_state: torch.Tensor, final_state: torch.Tensor
++    ) -> None:
++        """Rebind dynamic state pointers while retaining the prepared route."""
++
++        if self.route != "evolution":
++            raise RuntimeError("only a generated evolution route can rebind state")
++        expected_initial = self._args[12]
++        expected_final = self._args[14]
++        if (
++            initial_state.shape != expected_initial.shape
++            or final_state.shape != expected_final.shape
++            or initial_state.dtype != expected_initial.dtype
++            or final_state.dtype != expected_final.dtype
++            or initial_state.device != self._device
++            or final_state.device != self._device
++        ):
++            raise ValueError("rebound state tensors must match the prepared state ABI")
++        args = list(self._args)
++        args[12] = initial_state
++        args[14] = final_state
++        self._args = tuple(args)
++
+ 
+ def prepare_flash_kda_evolution(
+     q: torch.Tensor,
+@@ -545,4 +585,271 @@ def prepare_flash_kda_evolution(
+     )
+ 
+ 
+-__all__ = ["PreparedFlashKDAEvolution", "prepare_flash_kda_evolution"]
++def public_flash_kda_evolution_rejection_reason(
++    *,
++    q: torch.Tensor,
++    k: torch.Tensor,
++    v: torch.Tensor,
++    g: torch.Tensor,
++    beta: torch.Tensor,
++    A_log: torch.Tensor | None,
++    dt_bias: torch.Tensor | None,
++    scale: float | None,
++    initial_state: torch.Tensor | None,
++    use_qk_l2norm_in_kernel: bool,
++    use_gate_in_kernel: bool,
++    lower_bound: float | None,
++    cu_seqlens: torch.Tensor | None,
++    ssm_state_indices: torch.Tensor | None,
++    num_spec_tokens: int | None,
++    num_accepted_tokens: torch.Tensor | None,
++    output: torch.Tensor | None,
++    initial_state_source: torch.Tensor | None,
++    initial_state_indices: torch.Tensor | None,
++    beta_is_logit: bool,
++    seq_order: torch.Tensor | None,
++    prefill_workspace: object | None,
++    state_checkpoints: torch.Tensor | None,
++    checkpoint_cu_starts: torch.Tensor | None,
++    checkpoint_every_n_tokens: int,
++) -> str | None:
++    """Return why the proof-carrying public adapter cannot accept a call."""
++
++    if not q.is_cuda or torch.cuda.get_device_capability(q.device) not in (
++        (10, 0),
++        (10, 3),
++    ):
++        return "requires an SM100-family or SM103 GPU"
++    if q.ndim != 4 or q.shape[-1] != _HEAD_DIM or q.shape[1] <= 1:
++        return "requires ordinary multi-token [B, T, H, 128] prefill"
++    if q.shape != k.shape or q.shape != v.shape or q.shape != g.shape:
++        return "q, k, v, and g must have identical shapes"
++    if any(tensor.dtype != torch.bfloat16 for tensor in (q, k, v, g, beta)):
++        return "q, k, v, g, and beta must use torch.bfloat16"
++    if any(tensor.device != q.device for tensor in (k, v, g, beta)):
++        return "q, k, v, g, and beta must be on the same CUDA device"
++    if any(not tensor.is_contiguous() for tensor in (q, k, v, g, beta)):
++        return "q, k, v, g, and beta must be contiguous"
++    batch, tokens_per_batch, num_heads, _ = q.shape
++    total_tokens = batch * tokens_per_batch
++    if beta.shape != (batch, tokens_per_batch, num_heads):
++        return "beta must have shape [B, T, H]"
++    if A_log is None or A_log.dtype != torch.float32 or A_log.shape != (num_heads,):
++        return "A_log must be float32 with shape [H]"
++    if (
++        dt_bias is None
++        or dt_bias.dtype != torch.float32
++        or dt_bias.shape not in ((num_heads, _HEAD_DIM), (num_heads * _HEAD_DIM,))
++    ):
++        return "dt_bias must be float32 with shape [H, 128] or [H*128]"
++    if (
++        A_log.device != q.device
++        or dt_bias.device != q.device
++        or not A_log.is_contiguous()
++        or not dt_bias.is_contiguous()
++    ):
++        return "A_log and dt_bias must be contiguous on the input CUDA device"
++    if initial_state is None:
++        return "requires an explicit initial_state for in-place state update"
++    num_sequences = batch if cu_seqlens is None else cu_seqlens.numel() - 1
++    if initial_state.dtype != torch.bfloat16 or initial_state.shape != (
++        num_sequences,
++        num_heads,
++        _HEAD_DIM,
++        _HEAD_DIM,
++    ):
++        return "initial_state must be bfloat16 with shape [N, H, 128, 128]"
++    if not initial_state.is_contiguous():
++        return "initial_state must be contiguous"
++    if initial_state.device != q.device:
++        return "initial_state must be on the input CUDA device"
++    if output is not None and (
++        output.shape != q.shape
++        or output.dtype != q.dtype
++        or output.device != q.device
++        or not output.is_contiguous()
++    ):
++        return "output must be contiguous and match q shape, dtype, and device"
++    if not use_qk_l2norm_in_kernel or not use_gate_in_kernel or not beta_is_logit:
++        return "requires fused QK L2 norm, gate, and beta sigmoid"
++    if lower_bound is None or not math.isfinite(lower_bound) or lower_bound >= 0:
++        return "lower_bound must be a finite negative float"
++    if scale is not None and (not math.isfinite(scale) or scale <= 0):
++        return "scale must be a finite positive float"
++    if cu_seqlens is not None and (
++        cu_seqlens.dtype != torch.int64
++        or not cu_seqlens.is_cuda
++        or cu_seqlens.device != q.device
++        or not cu_seqlens.is_contiguous()
++    ):
++        return "cu_seqlens must be contiguous CUDA int64"
++    if cu_seqlens is not None and (
++        q.shape[0] != 1 or cu_seqlens.ndim != 1 or cu_seqlens.numel() < 2
++    ):
++        return "packed prefill requires q batch 1 and cu_seqlens shape [N+1]"
++    unsupported = {
++        "ssm_state_indices": ssm_state_indices,
++        "num_spec_tokens": num_spec_tokens,
++        "num_accepted_tokens": num_accepted_tokens,
++        "initial_state_source": initial_state_source,
++        "initial_state_indices": initial_state_indices,
++        "seq_order": seq_order,
++        "prefill_workspace": prefill_workspace,
++        "state_checkpoints": state_checkpoints,
++        "checkpoint_cu_starts": checkpoint_cu_starts,
++    }
++    present = [name for name, value in unsupported.items() if value is not None]
++    if checkpoint_every_n_tokens != 0:
++        present.append("checkpoint_every_n_tokens")
++    if present:
++        return "unsupported arguments: " + ", ".join(present)
++    if torch.cuda.is_current_stream_capturing():
++        return "CUDA graph capture requires a future explicit evolution workspace"
++    if cu_seqlens is None and total_tokens == 0:
++        return "empty prefill is unsupported"
++    return None
++
++
++def run_public_flash_kda_evolution(
++    *,
++    q: torch.Tensor,
++    k: torch.Tensor,
++    v: torch.Tensor,
++    g: torch.Tensor,
++    beta: torch.Tensor,
++    A_log: torch.Tensor,
++    dt_bias: torch.Tensor,
++    scale: float | None,
++    initial_state: torch.Tensor,
++    output_final_state: bool,
++    lower_bound: float | None,
++    cu_seqlens: torch.Tensor | None,
++    output: torch.Tensor | None,
++) -> tuple[torch.Tensor, torch.Tensor | None]:
++    """Run the guarded evolution route with public in-place state semantics."""
++
++    batch, tokens_per_batch, num_heads, _ = q.shape
++    workspace = _get_stream_workspace(q.device)
++    if cu_seqlens is None:
++        sequence_lengths = (tokens_per_batch,) * batch
++        fixed_layout = True
++    else:
++        metadata_key = (
++            cu_seqlens.data_ptr(),
++            cu_seqlens._version,
++            cu_seqlens.numel(),
++            q.shape[1],
++        )
++        metadata_cache = getattr(workspace, "_evolution_sequence_lengths", {})
++        sequence_lengths = metadata_cache.get(metadata_key)
++        if sequence_lengths is None:
++            offsets = tuple(int(value) for value in cu_seqlens.tolist())
++            if (
++                offsets[0] != 0
++                or offsets[-1] != q.shape[1]
++                or any(end <= start for start, end in itertools.pairwise(offsets))
++            ):
++                raise ValueError(
++                    "cu_seqlens must describe positive sequences covering all tokens"
++                )
++            sequence_lengths = tuple(
++                end - start for start, end in itertools.pairwise(offsets)
++            )
++            metadata_cache = {metadata_key: sequence_lengths}
++            setattr(workspace, "_evolution_sequence_lengths", metadata_cache)
++        fixed_layout = False
++    out = torch.empty_like(q) if output is None else output
++    _check_output_does_not_overlap_inputs(
++        out,
++        q=q,
++        k=k,
++        v=v,
++        g=g,
++        beta=beta,
++        initial_state=initial_state,
++    )
++    scale_value = _HEAD_DIM**-0.5 if scale is None else float(scale)
++    lower_bound_value = cast(float, lower_bound)
++    shape_key = (fixed_layout, num_heads, sequence_lengths)
++    if shape_key not in _PUBLIC_EVOLUTION_ACTIVATION_SHAPES:
++        return _run_flash_kda_prefill(
++            q=q,
++            k=k,
++            v=v,
++            g=g,
++            beta=beta,
++            A_log=A_log,
++            dt_bias=dt_bias,
++            scale=scale_value,
++            initial_state=initial_state,
++            output_final_state=output_final_state,
++            lower_bound=lower_bound_value,
++            cu_seqlens=cu_seqlens,
++            output=out,
++            seq_order=None,
++            prefill_workspace=None,
++            state_indices=None,
++            state_checkpoints=None,
++            checkpoint_cu_starts=None,
++            checkpoint_every_n_tokens=0,
++            backend="cake",
++        )
++    # The generated ABI has distinct initial/final state pointers. Preserve
++    # public in-place semantics with a same-stream copy-back; aliasing those
++    # pointers is outside the winner's proof and can serialize its schedule.
++    final_storage = getattr(workspace, "_evolution_final_state", None)
++    if (
++        final_storage is None
++        or final_storage.dtype != initial_state.dtype
++        or final_storage.numel() < initial_state.numel()
++    ):
++        final_storage = torch.empty_like(initial_state).reshape(-1)
++        setattr(workspace, "_evolution_final_state", final_storage)
++    final_state = final_storage[: initial_state.numel()].view_as(initial_state)
++    prepared_key = (
++        *(tensor.data_ptr() for tensor in (q, k, v, g, beta, A_log, dt_bias, out)),
++        None if cu_seqlens is None else cu_seqlens.data_ptr(),
++        scale_value,
++        lower_bound_value,
++        shape_key,
++    )
++    prepared_cache = getattr(workspace, "_evolution_prepared_routes", {})
++    prepared = prepared_cache.get(prepared_key)
++    if prepared is None:
++        prepared = prepare_flash_kda_evolution(
++            q,
++            k,
++            v,
++            g,
++            beta,
++            A_log,
++            dt_bias,
++            initial_state,
++            out,
++            final_state,
++            scale=scale_value,
++            lower_bound=lower_bound_value,
++            cu_seqlens=cu_seqlens,
++        )
++        if len(prepared_cache) >= 32:
++            prepared_cache.pop(next(iter(prepared_cache)))
++        prepared_cache[prepared_key] = prepared
++        setattr(workspace, "_evolution_prepared_routes", prepared_cache)
++    else:
++        prepared.rebind_state(initial_state, final_state)
++    if prepared.route != "evolution":
++        raise RuntimeError(
++            "public evolution activation unexpectedly resolved to Cake for "
++            f"shape {shape_key}"
++        )
++    prepared.launch()
++    initial_state.copy_(final_state)
++    return out, initial_state if output_final_state else None
++
++
++__all__ = [
++    "PreparedFlashKDAEvolution",
++    "prepare_flash_kda_evolution",
++    "public_flash_kda_evolution_rejection_reason",
++    "run_public_flash_kda_evolution",
++]
+diff --git a/tests/kda/test_flashkda_blackwell_evolution.py b/tests/kda/test_flashkda_blackwell_evolution.py
+index 89b8da6..6b80179 100644
+--- a/tests/kda/test_flashkda_blackwell_evolution.py
++++ b/tests/kda/test_flashkda_blackwell_evolution.py
+@@ -20,6 +20,7 @@ from types import SimpleNamespace
+ import pytest
+ import torch
+ 
++import flashinfer.kda_evolution as kda_evolution
+ from flashinfer.jit import core as jit_core
+ from flashinfer.jit.flash_kda_evolution import (
+     FLASH_KDA_EVOLUTION_VARIANTS,
+@@ -29,10 +30,12 @@ from flashinfer.jit.flash_kda_evolution import (
+ from flashinfer.kda_evolution import (
+     PreparedFlashKDAEvolution,
+     _EVOLUTION_WINNER_SHAPES,
++    _PUBLIC_EVOLUTION_ACTIVATION_SHAPES,
+     _route,
+     _use_evolution_route,
+     _uses_production_general,
+     prepare_flash_kda_evolution,
++    run_public_flash_kda_evolution,
+ )
+ 
+ 
+@@ -192,6 +195,70 @@ def test_flashkda_evolution_profile_is_frozen():
+     assert metadata.kernel_symbol.endswith("vtile_f1_t8192_h96_p1_s96")
+ 
+ 
++def test_public_evolution_activation_is_the_five_confident_legacy_shapes():
++    assert _PUBLIC_EVOLUTION_ACTIVATION_SHAPES == {
++        (True, 96, (8192,)),
++        (False, 96, (1024,) * 8),
++        (True, 64, (8192,)),
++        (False, 64, (1300, 547, 2048, 963, 271, 3063)),
++        (False, 64, (1024,) * 8),
++    }
++    assert (False, 96, (1300, 547, 2048, 963, 271, 3063)) not in (
++        _PUBLIC_EVOLUTION_ACTIVATION_SHAPES
++    )
++
++
++def test_public_evolution_adapter_keeps_initial_and_final_state_distinct(monkeypatch):
++    q = torch.empty((1, 2, 1, 128), dtype=torch.bfloat16)
++    initial_state = torch.ones((1, 1, 128, 128), dtype=torch.bfloat16)
++    output = torch.empty_like(q)
++    workspace = SimpleNamespace()
++    observed = {}
++
++    class FakePrepared:
++        route = "evolution"
++
++        def launch(self):
++            observed["final_state"].copy_(2)
++
++    def fake_prepare(*args, **_kwargs):
++        observed["initial_state"] = args[7]
++        observed["output"] = args[8]
++        observed["final_state"] = args[9]
++        return FakePrepared()
++
++    monkeypatch.setattr(
++        kda_evolution,
++        "_PUBLIC_EVOLUTION_ACTIVATION_SHAPES",
++        frozenset({(True, 1, (2,))}),
++    )
++    monkeypatch.setattr(kda_evolution, "_get_stream_workspace", lambda _device: workspace)
++    monkeypatch.setattr(kda_evolution, "prepare_flash_kda_evolution", fake_prepare)
++
++    returned_output, returned_state = run_public_flash_kda_evolution(
++        q=q,
++        k=q,
++        v=q,
++        g=q,
++        beta=torch.empty((1, 2, 1), dtype=torch.bfloat16),
++        A_log=torch.empty((1,), dtype=torch.float32),
++        dt_bias=torch.empty((1, 128), dtype=torch.float32),
++        scale=None,
++        initial_state=initial_state,
++        output_final_state=True,
++        lower_bound=-5.0,
++        cu_seqlens=None,
++        output=output,
++    )
++
++    assert observed["initial_state"] is initial_state
++    assert observed["output"] is output
++    assert observed["final_state"] is not initial_state
++    assert returned_output is output
++    assert returned_state is initial_state
++    torch.testing.assert_close(initial_state, torch.full_like(initial_state, 2))
++
++
+ def test_prepared_flashkda_evolution_rejects_cross_stream_launch(monkeypatch):
+     class FakeModule:
+         def __init__(self):

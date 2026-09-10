@@ -1,0 +1,295 @@
+{
+  "claim_boundary": "No GPU result or tcgen05 performance conclusion is contained here.",
+  "created_at_utc": "2026-09-09T18:04:48.063045+00:00",
+  "protocol": {
+    "candidates": [
+      {
+        "attribution_sources": [
+          "candidate_matched_sass",
+          "candidate_matched_resource_receipt",
+          "candidate_matched_correctness_receipt",
+          "candidate_matched_paired_timing"
+        ],
+        "available_after": [],
+        "candidate_key": "cell_00_direct_swap",
+        "changed_subtrees": [
+          "instructions.k2_phase6_sm80_to_tcgen05"
+        ],
+        "held_fixed": [
+          "chunk_tokens_16",
+          "token_recurrence_order",
+          "archived_bf16_fp16_rounding_dag",
+          "public_operator_abi_and_final_state_semantics",
+          "sm_103a_target_and_frozen_toolchain",
+          "full_n128_work_geometry",
+          "per_site_tcgen05_allocation_lifecycle"
+        ],
+        "lifecycle": "baseline",
+        "screen": {
+          "comparators": [
+            "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed"
+          ],
+          "continue_rule": "all_correct_and_any_preregistered_profile_has_positive_paired_screen_direction",
+          "ordered_gates": [
+            "static_verifier",
+            "compile_sass_and_resource_receipt",
+            "site_correctness",
+            "public_output_and_final_state_correctness",
+            "paired_low_budget_screen"
+          ],
+          "profiles": [
+            "h12_t8192_fixed",
+            "h64_t8192_fixed",
+            "h96_t8192_packed_skew"
+          ]
+        },
+        "stop_rules": [
+          "stop_on_static_compile_scope_or_correctness_failure",
+          "stop_when_the_declared_mechanism_is_absent_from_sass_or_resource_receipts",
+          "stop_qualification_when_no_screen_profile_has_positive_paired_direction"
+        ],
+        "strongest_baseline": "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed",
+        "thin_n": "baseline"
+      },
+      {
+        "attribution_sources": [
+          "candidate_matched_sass",
+          "candidate_matched_resource_receipt",
+          "candidate_matched_correctness_receipt",
+          "candidate_matched_paired_timing"
+        ],
+        "available_after": [],
+        "candidate_key": "cell_10_lifecycle",
+        "changed_subtrees": [
+          "protocols.tcgen05_residency_group",
+          "buffers.cross_phase_tmem_lifetime"
+        ],
+        "held_fixed": [
+          "chunk_tokens_16",
+          "token_recurrence_order",
+          "archived_bf16_fp16_rounding_dag",
+          "public_operator_abi_and_final_state_semantics",
+          "sm_103a_target_and_frozen_toolchain",
+          "full_n128_work_geometry"
+        ],
+        "lifecycle": "mutated",
+        "screen": {
+          "comparators": [
+            "cell_00_direct_swap",
+            "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed"
+          ],
+          "continue_rule": "all_correct_and_any_preregistered_profile_has_positive_paired_screen_direction",
+          "ordered_gates": [
+            "static_verifier",
+            "compile_sass_and_resource_receipt",
+            "site_correctness",
+            "public_output_and_final_state_correctness",
+            "paired_low_budget_screen"
+          ],
+          "profiles": [
+            "h12_t8192_fixed",
+            "h64_t8192_fixed",
+            "h96_t8192_packed_skew"
+          ]
+        },
+        "stop_rules": [
+          "stop_on_static_compile_scope_or_correctness_failure",
+          "stop_when_the_declared_mechanism_is_absent_from_sass_or_resource_receipts",
+          "stop_qualification_when_no_screen_profile_has_positive_paired_direction",
+          "stop_if_exact_rounding_preservation_eliminates_transfer_savings"
+        ],
+        "strongest_baseline": "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed",
+        "thin_n": "baseline"
+      },
+      {
+        "attribution_sources": [
+          "candidate_matched_sass",
+          "candidate_matched_resource_receipt",
+          "candidate_matched_correctness_receipt",
+          "candidate_matched_paired_timing"
+        ],
+        "available_after": [],
+        "candidate_key": "cell_01_thin_n",
+        "changed_subtrees": [
+          "tiles.phase6.physical_mnk_m128n16k16",
+          "launch.value_columns_v16_eight_slices",
+          "launch.grid_h12_x_8_equals_96"
+        ],
+        "held_fixed": [
+          "chunk_tokens_16",
+          "token_recurrence_order",
+          "archived_bf16_fp16_rounding_dag",
+          "public_operator_abi_and_final_state_semantics",
+          "sm_103a_target_and_frozen_toolchain",
+          "per_site_tcgen05_allocation_lifecycle"
+        ],
+        "lifecycle": "baseline",
+        "screen": {
+          "comparators": [
+            "cell_00_direct_swap",
+            "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed"
+          ],
+          "continue_rule": "all_correct_and_any_preregistered_profile_has_positive_paired_screen_direction",
+          "ordered_gates": [
+            "static_verifier",
+            "compile_sass_and_resource_receipt",
+            "site_correctness",
+            "public_output_and_final_state_correctness",
+            "paired_low_budget_screen"
+          ],
+          "profiles": [
+            "h12_t8192_fixed",
+            "h64_t8192_fixed",
+            "h96_t8192_packed_skew"
+          ]
+        },
+        "stop_rules": [
+          "stop_on_static_compile_scope_or_correctness_failure",
+          "stop_when_the_declared_mechanism_is_absent_from_sass_or_resource_receipts",
+          "stop_qualification_when_no_screen_profile_has_positive_paired_direction",
+          "stop_if_v16_grid96_does_not_increase_useful_parallel_work"
+        ],
+        "strongest_baseline": "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed",
+        "thin_n": "mutated"
+      },
+      {
+        "attribution_sources": [
+          "candidate_matched_sass",
+          "candidate_matched_resource_receipt",
+          "candidate_matched_correctness_receipt",
+          "candidate_matched_paired_timing"
+        ],
+        "available_after": [
+          "cell_10_lifecycle",
+          "cell_01_thin_n"
+        ],
+        "candidate_key": "cell_11_lifecycle_thin_n",
+        "changed_subtrees": [
+          "protocols.tcgen05_residency_group",
+          "buffers.cross_phase_tmem_lifetime",
+          "tiles.phase6.physical_mnk_m128n16k16",
+          "launch.value_columns_v16_eight_slices",
+          "launch.grid_h12_x_8_equals_96"
+        ],
+        "held_fixed": [
+          "chunk_tokens_16",
+          "token_recurrence_order",
+          "archived_bf16_fp16_rounding_dag",
+          "public_operator_abi_and_final_state_semantics",
+          "sm_103a_target_and_frozen_toolchain"
+        ],
+        "lifecycle": "mutated",
+        "screen": {
+          "comparators": [
+            "cell_00_direct_swap",
+            "cell_10_lifecycle",
+            "cell_01_thin_n",
+            "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed"
+          ],
+          "continue_rule": "all_correct_and_any_preregistered_profile_has_positive_paired_screen_direction",
+          "ordered_gates": [
+            "static_verifier",
+            "compile_sass_and_resource_receipt",
+            "site_correctness",
+            "public_output_and_final_state_correctness",
+            "paired_low_budget_screen"
+          ],
+          "profiles": [
+            "h12_t8192_fixed",
+            "h64_t8192_fixed",
+            "h96_t8192_packed_skew"
+          ]
+        },
+        "stop_rules": [
+          "stop_on_static_compile_scope_or_correctness_failure",
+          "stop_when_the_declared_mechanism_is_absent_from_sass_or_resource_receipts",
+          "stop_qualification_when_no_screen_profile_has_positive_paired_direction",
+          "stop_if_interaction_cannot_be_estimated_from_all_four_cells"
+        ],
+        "strongest_baseline": "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed",
+        "thin_n": "mutated"
+      }
+    ],
+    "causal_attribution_rule": "CAKE full-stack results may motivate a path but cannot estimate a tcgen05 main effect or interaction; only matched receipts from these four cells count.",
+    "contains_gpu_results": false,
+    "cross_agent_protocol": [
+      "A_and_B_use_independent_agent_contexts",
+      "no_raw_trajectory_exchange_before_path_freeze",
+      "interaction_authored_only_after_A_and_B_freeze",
+      "only_verified_conclusions_cross_the_path_barrier"
+    ],
+    "experiment_id": "stage11_tcgen05_lifecycle_x_thin_n",
+    "forbidden_attribution_sources": [
+      "cake_full_stack_result",
+      "cake_vs_flashkda_end_to_end_speedup",
+      "unmatched_historical_kernel_timing"
+    ],
+    "interaction_contrast": "paired_log_speedup interaction = (AB-A)-(B-control)",
+    "knowledge_maturity_order": [
+      "attempt",
+      "single_path_observation",
+      "multi_path_corroborated",
+      "causal_mechanism",
+      "transfer_validated"
+    ],
+    "knowledge_policy": [
+      "single_path_decision_grade_negative_is_reopenable_scoped_prior",
+      "unresolved_or_noise_band_result_is_attempt_journal_only",
+      "A_or_B_negative_does_not_cancel_AB",
+      "reusable_negative_requires_two_resolved_independent_paths_and_AB",
+      "target_toolchain_profile_or_held_fixed_change_invalidates_reuse",
+      "compile_or_correctness_failure_is_not_a_performance_negative"
+    ],
+    "paths": [
+      {
+        "changed_subtrees": [
+          "protocols.tcgen05_residency_group",
+          "buffers.cross_phase_tmem_lifetime"
+        ],
+        "factor": "lifecycle",
+        "falsifier": "exact_rounding_or_operand_legality_erases_the_expected_transfer_reduction",
+        "held_fixed": [
+          "chunk_tokens_16",
+          "token_recurrence_order",
+          "archived_bf16_fp16_rounding_dag",
+          "public_operator_abi_and_final_state_semantics",
+          "sm_103a_target_and_frozen_toolchain",
+          "full_n128_work_geometry"
+        ],
+        "independent_agent_role": "lifecycle_agent",
+        "path_id": "A_lifecycle"
+      },
+      {
+        "changed_subtrees": [
+          "tiles.phase6.physical_mnk_m128n16k16",
+          "launch.value_columns_v16_eight_slices",
+          "launch.grid_h12_x_8_equals_96"
+        ],
+        "factor": "thin_n",
+        "falsifier": "v16_m128n16k16_grid96_does_not_improve_active_work_or_protocol_amortization",
+        "held_fixed": [
+          "chunk_tokens_16",
+          "token_recurrence_order",
+          "archived_bf16_fp16_rounding_dag",
+          "public_operator_abi_and_final_state_semantics",
+          "sm_103a_target_and_frozen_toolchain",
+          "per_site_tcgen05_allocation_lifecycle"
+        ],
+        "independent_agent_role": "thin_n_agent",
+        "path_id": "B_thin_n"
+      }
+    ],
+    "required_held_fixed": [
+      "chunk_tokens_16",
+      "token_recurrence_order",
+      "archived_bf16_fp16_rounding_dag",
+      "public_operator_abi_and_final_state_semantics",
+      "sm_103a_target_and_frozen_toolchain"
+    ],
+    "schema_version": "stage11_tcgen05_causal_ladder_v1",
+    "strongest_baseline": "sha256:f8c8471d660821234c0a16c1cc62e5c4472c03efab00792318d1b3741efa4eed"
+  },
+  "protocol_digest": "85832a1f2ed3704c6d835a1892004bf16e6dd9c04a06be7aa98b5fc16f124305",
+  "schema_version": 1,
+  "status": "preregistered_not_executed"
+}

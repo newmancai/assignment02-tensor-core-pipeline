@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "round": 6,
+  "hardware": {
+    "name": "NVIDIA B300 SXM6 AC",
+    "gpu_uuid": "GPU-3924bd78-8b2f-8e85-3f20-8b0687d0bb0a",
+    "physical_sm_count": 148
+  },
+  "budget": {
+    "hmma": {"new_proposals": 1, "compile_attempts": 0, "gpu_blocks": 6},
+    "tcgen05": {"new_proposals": 1, "compile_attempts": 0, "gpu_blocks": 2}
+  },
+  "results": [
+    {
+      "lane": "hmma",
+      "profile": "H12 packed balanced3, total=8192, fresh seed 42005",
+      "incumbent": "hmma_v64",
+      "challenger": "hmma_v32",
+      "median_speedup": 1.0763932242,
+      "bootstrap_95": [1.0756234686, 1.0770890502],
+      "correctness": "bitwise output and final state in all four blocks",
+      "route_identity": "clean HMMA phase1 module; value_slice 64 versus 32",
+      "evidence_status": "qualified_exact_profile",
+      "permitted_use": "dispatch_rule_and_exact_profile_winner",
+      "claim": "V32 is qualified over V64 for the balanced three-sequence H12 profile under the frozen B300 contract."
+    },
+    {
+      "lane": "hmma",
+      "profile": "H12 packed balanced4, total=8192",
+      "incumbent": "hmma_v64",
+      "challenger": "hmma_v32",
+      "median_speedup": 0.9618389603,
+      "bootstrap_95": [0.9610325835, 0.9630272157],
+      "correctness": "bitwise output and final state",
+      "evidence_status": "scoped_negative",
+      "permitted_use": "dispatch_boundary",
+      "claim": "The V32 advantage ends before balanced nseq=4; V64 remains the practical HMMA choice there."
+    },
+    {
+      "lane": "tcgen05",
+      "profile": "H96 packed mixed6, total=8192",
+      "incumbent": "grid148/s173 default scheduler",
+      "challenger": "MINIMAX172-S173",
+      "median_speedup": 0.9757033771,
+      "bootstrap_95": [0.9744205915, 0.9768087593],
+      "correctness": "passed frozen official-peer contract",
+      "route_identity": "both arms used m128_h96_p1_s173 on sm103a",
+      "program_receipt": {
+        "grid_ctas": 148,
+        "carrier_stride": 173,
+        "tasks": 576,
+        "chunks": 24864,
+        "max_load": 172,
+        "recipe": "minimax172_recipe_v1"
+      },
+      "evidence_status": "scoped_negative",
+      "permitted_use": "reject_exact_recipe_and_single_metric_objective",
+      "claim": "Lowering maximum assigned load from 173 to 172 regresses latency by 2.43%; load balance alone does not predict the tcgen05 schedule frontier."
+    }
+  ],
+  "diagnostics": [
+    {
+      "profile": "H12 packed balanced3, fresh seed 42005",
+      "route": "Cake",
+      "status": "correctness_failed_not_timed",
+      "scope": "The fresh-seed Cake comparison is excluded; it does not affect the bitwise HMMA V32/V64 qualification."
+    }
+  ],
+  "remote_jobs": [24913, 24914],
+  "raw_evidence": [
+    "results/round6-hmma-qual-job-24913",
+    "results/round6-frontier-job-24914"
+  ],
+  "saturation_status": "continue",
+  "reason": "The HMMA V32 crossover is now bounded at balanced nseq 3 to 4. A skewed holdout and the tcgen05 constructive max-load lower-bound schedule remain high-value falsification probes."
+}

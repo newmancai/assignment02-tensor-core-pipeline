@@ -1,0 +1,112 @@
+{
+  "schema_version": "open_kda_migration_path_v1",
+  "path_id": "h3-precomputed-pw-c16",
+  "parent_ids": ["official-sm80-mma"],
+  "semantic_contract": {
+    "problem": "same KDA recurrence, output and final state",
+    "compatibility": "algorithm_equivalent_not_official_bitwise",
+    "token_order_preserved": true,
+    "chunk": 16,
+    "logical_dimensions": {"C": 16, "D": 128, "V": 128},
+    "real_identity": "R*(V-Kd*S) = P-W*S, where R=INV*diag(beta), P=R*V, W=R*Kd"
+  },
+  "stage_dag": [
+    {
+      "stage_id": "k1_prepare_p",
+      "operation": "P = INV @ (beta[:,None] * V)",
+      "logical_mnk": [16, 128, 16],
+      "state_dependent": false,
+      "output": {"name": "P", "dtype": "bf16", "shape": [16, 128], "storage": "workspace_gmem"}
+    },
+    {
+      "stage_id": "k1_prepare_w",
+      "operation": "W = INV @ (beta[:,None] * Kd)",
+      "logical_mnk": [16, 128, 16],
+      "state_dependent": false,
+      "output": {"name": "W", "dtype": "bf16", "shape": [16, 128], "storage": "workspace_gmem"}
+    },
+    {
+      "stage_id": "k2_recurrence_u",
+      "operation": "U = BF16(P - W @ S)",
+      "logical_mnk": [16, 128, 128],
+      "state_dependent": true,
+      "input_state": {"dtype": "bf16", "shape": [128, 128]},
+      "output": {"name": "U", "dtype": "bf16", "shape": [16, 128], "storage": "prototype_host_array_cuda_unselected"}
+    },
+    {
+      "stage_id": "k2_output",
+      "operation": "BF16(Qd@S) + BF16(Mqk@U)",
+      "rounding": "BF16 add after independently rounded contractions"
+    },
+    {
+      "stage_id": "k2_state_update",
+      "operation": "BF16(FP32(S)*gate + FP32(Kr^T@U))",
+      "rounding": "BF16 after FP32 gate/FMA expression"
+    }
+  ],
+  "rounding_delta": {
+    "official": ["BF16(Kd@S)", "BF16((V-KdS)*beta)", "BF16(INV@residual)"],
+    "candidate": ["BF16(INV@(beta*V))", "BF16(INV@(beta*Kd))", "BF16(P-W@S)"],
+    "preserves_official_rounding_dag": false
+  },
+  "workspace_model": {
+    "candidate_arrays": ["P_bf16_CxV", "W_bf16_CxD"],
+    "bytes_per_chunk_head": 8192,
+    "replacement_opportunity": "W may replace Kd; P is an added 4096-byte array",
+    "full_cost_status": "implemented_17408_bytes_per_chunk_head_and_pilot_measured"
+  },
+  "physical_implementation": {
+    "current": "isolated flash_kda_h3_C CUDA extension",
+    "matched_hmma": "compiled_sm103a_and_b300_correctness_passed",
+    "sm100_tcgen05": "stopped_by_matched_hmma_full_path_gate",
+    "layout": "official layouts plus transposed SM75_U16x8_LDSM_T B load for P/W",
+    "synchronization": "official K1/K2 boundary retained",
+    "resource_receipt": "K1 small 4/8-byte spills in some variants; K2 63-74 registers and no reported spill"
+  },
+  "evidence": [
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_rounding_probe.json",
+      "status": "single_chunk_entry_gate_passed",
+      "scope": "80 generated cases; U/output/final_state; common FP64 reference"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_recurrence_probe.json",
+      "status": "recurrence_entry_gate_passed",
+      "scope": "32 scenarios; 2/4/16/64 chunks, tails, nonzero state, weak/strong decay, cancellation and state handoff"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_input_oracle.json",
+      "status": "input_level_cpu_entry_gate_passed",
+      "scope": "18 fixed/tail/packed cases from common q/k/v/g/beta plus continuous-call handoff; exact CUDA approximate instructions not modeled"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_gpu_correctness.json",
+      "status": "b300_gpu_correctness_passed",
+      "scope": "8 cases; fixed C16, tail17, multichunk37 FP32 state, packed 4/17/33; output and final state"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_b300_pilot.json",
+      "status": "h12_t8192_pilot_advance_gate_passed",
+      "scope": "historical same-process pilot; 1.0202x; superseded for formal comparison by isolated-process CUPTI"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_b300_full_matrix.json",
+      "status": "full_path_stop_rule_triggered",
+      "scope": "historical same-process CUDA-event matrix; all correct; superseded for formal comparison because common extension symbols made absolute timing load-order sensitive"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_b300_isolated_process_cupti.json",
+      "status": "formal_terminal_measurement",
+      "scope": "six H12 plus three H96 public-full cases; cold-L2 CUPTI; four balanced blocks; one extension per worker process; H12 geomean 0.9055x, H96 geomean 0.7581x"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/h3_source_manifest.json",
+      "status": "source_and_binary_identity",
+      "scope": "SHA-256 identities for the isolated H3 source delta and B300 extension"
+    }
+  ],
+  "remaining_gates": [
+    "none for H3: predeclared full-path stop rule forbids tcgen05 continuation",
+    "optional K1/K2 diagnostics only if a future postmortem needs causal attribution"
+  ]
+}

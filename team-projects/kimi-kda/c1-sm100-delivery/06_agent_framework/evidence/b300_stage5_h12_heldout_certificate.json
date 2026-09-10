@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "stage": "stage5-kimi-k3-tp8-h12-heldout-generalization",
+  "status": "all_preregistered_affected_shapes_support_policy",
+  "parent_certificate": "evidence/b300_stage4_h12_activation_certificate.json",
+  "policy": {
+    "route": "bt16_prepare_chain_m64",
+    "condition": "num_heads == 12 and total_chunks > 128",
+    "baseline_chunks_per_prepare_cta": 4,
+    "candidate_chunks_per_prepare_cta": 9
+  },
+  "protocol": {
+    "preregistered_before_first_gpu_run": true,
+    "development_shape_overlap": 0,
+    "heldout_shape_count": 6,
+    "scope": "public recurrent_kda with in-place state update",
+    "same_prepared_object_per_pair": true,
+    "timing_backend": "CUPTI",
+    "cold_l2": true,
+    "state_rotations": 256,
+    "pair_order": "baseline/candidate/candidate/baseline",
+    "blocks_per_arm": 2,
+    "dry_runs_per_block": 20,
+    "measured_iterations_per_block": 100,
+    "bootstrap_draws": 10000
+  },
+  "boundary_controls": [
+    {
+      "name": "h12_holdout_fixed_1024",
+      "total_chunks": 64,
+      "speedup": 0.999428537,
+      "bootstrap_95": [0.9969290717716148, 1.0027092585441204],
+      "policy_applies": false
+    },
+    {
+      "name": "h12_holdout_fixed_2048_boundary",
+      "total_chunks": 128,
+      "speedup": 0.998797954,
+      "bootstrap_95": [0.9969460892930186, 1.0006547314578005],
+      "policy_applies": false
+    }
+  ],
+  "affected_results": [
+    {
+      "name": "h12_holdout_fixed_4096",
+      "total_chunks": 256,
+      "baseline_us": 274.0965,
+      "candidate_us": 273.0105,
+      "speedup": 1.003977869,
+      "bootstrap_95": [1.0026324985061645, 1.005797054717052]
+    },
+    {
+      "name": "h12_holdout_fixed_16384",
+      "total_chunks": 1024,
+      "baseline_us": 997.205,
+      "candidate_us": 985.141,
+      "speedup": 1.012245963,
+      "bootstrap_95": [1.0112805170537116, 1.0137832528230788]
+    },
+    {
+      "name": "h12_holdout_packed_skew",
+      "total_chunks": 512,
+      "baseline_us": 507.7465,
+      "candidate_us": 489.57,
+      "speedup": 1.037127479,
+      "bootstrap_95": [1.0346793505963912, 1.0396621193217845]
+    },
+    {
+      "name": "h12_holdout_packed_irregular",
+      "total_chunks": 418,
+      "baseline_us": 282.786,
+      "candidate_us": 276.176,
+      "speedup": 1.023934013,
+      "bootstrap_95": [1.0205155527874061, 1.026822946715972]
+    }
+  ],
+  "all_correct": true,
+  "affected_shape_support_count": 4,
+  "affected_shape_reject_count": 0,
+  "affected_shape_geomean": 1.0192449678540159,
+  "guarded_six_shape_geomean": 1.0127891745672717,
+  "artifacts": {
+    "benchmark_sha256": "660c36b6d10d919563c7df715eb45bf0a9c5a24ae20986d0237a568b16656d67",
+    "result_sha256": "984a08329c9306eb7717c70c5ea8f92a376999770c432ad371692788e19eb519",
+    "accounting_sha256": "8b9bac0ffce2ec65807e7db3a39abfc4ef7ff1e6b3f8d5982b18f82ecec4e092"
+  },
+  "accounting": {
+    "slurm_job_id": "23142",
+    "exit_code": 0,
+    "allocated_gpu_seconds": 5.133527946192771,
+    "estimated_allocation_energy_joules": 1141.105
+  },
+  "claim_boundary": "This is initial held-out support on one B300. It does not establish cross-device, cross-architecture, or end-to-end Kimi-K3 generalization."
+}

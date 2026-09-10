@@ -1,0 +1,30 @@
+{
+  "request_id": "multi_role_conclusions.t0.r0.critic_synthesizer",
+  "request_digest": "c3be04d94389479b19a7682a8dd36f2874e6f6ac1f047125aaea59af2fa1b3b6",
+  "arm": "multi_role_conclusions",
+  "trajectory": 0,
+  "round": 0,
+  "seed": 91001,
+  "lane": "critic_synthesizer",
+  "requested_proposals": 1,
+  "model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "prompt_sha256": "fa47e809634a86b30cd609901628d42152429078f420eed6f3039e7cf834d480",
+  "status": "agent_failed",
+  "started_at_utc": "2026-09-09T14:52:28.271535+00:00",
+  "error": "Reading additional input from stdin...\n2026-09-09T14:52:28.448867Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 132 column 5\n",
+  "exit_status": 1,
+  "elapsed_s": 13.646657943725586,
+  "token_usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "cache_write_tokens": null,
+    "total_tokens": null,
+    "measurement": "unavailable"
+  },
+  "tool_event_count": 1,
+  "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/critic_synthesizer/proposal_output.json",
+  "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/critic_synthesizer/events.jsonl",
+  "finished_at_utc": "2026-09-09T14:52:41.918838+00:00"
+}

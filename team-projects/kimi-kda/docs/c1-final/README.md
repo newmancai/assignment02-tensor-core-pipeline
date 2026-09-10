@@ -1,6 +1,6 @@
 # C1 最终提交入口
 
-> **本文件是本题唯一的最终提交入口。** 仓库中较早的 `README`、`report-draft.md`、`defense-outline.md` 和 `report_outline.md` 只保留为过程记录；结论、五补丁顺序和数据口径一律以本目录的最终文件为准。首轮证据完成于 2026-09-03，Phase-6/Phase-1 主线增量复核至 2026-09-05。
+> 本目录保留 2026-09-03 至 2026-09-09 的阶段性交付。2026-09-10 冻结的最终 PPT、论文、报告、Agent 代码和证据统一见 [`../../c1-sm100-delivery/README.md`](../../c1-sm100-delivery/README.md)。本页以下内容作为过程记录保留。
 
 ## 题目
 
@@ -12,15 +12,15 @@
 
 任务按题目要求分为三阶段：
 
-1. 复现与测量：在 B300 上复现官方 benchmark，并以 SASS/NCU 确认计算路径和瓶颈；
-2. 分析：逐项回答 CHUNK、`tcgen05`、recurrence 并行度、compute/memory 边界、BF16 state 和专版发布决策；
-3. 挑战：先实现 ValueSlice 的 CTA 间并行度重构，再在不改变 MMA、chunk 和状态数值契约的前提下优化 CTA 内 Phase-6/Phase-1 流水；以题目指定参考实现和逐位回归验证正确性，并与分层基线比较性能。
+1. 复现与测量：在 B300 上复现官方 benchmark，由 Agent 把 SASS、grid、NCU 和 `tcgen05` probe 组成同 workload 的 measurement receipt；
+2. 分析：Agent 先从 receipt 回答“整体迁移是否值得”并列出证据，再把 MMA 工作排序为 `KEEP / MEASURE / STOP`；然后逐项回答 CHUNK、recurrence、compute/memory、BF16 state 和发布决策；
+3. 挑战：验证 Agent 根据瓶颈选出的两条优先路线——ValueSlice CTA 间并行度与 CTA 内 Phase-6/Phase-1 流水；以题目指定参考实现和逐位回归验证正确性，并与分层基线比较性能。
 
 ## 一句话结论
 
-**不值得把 FlashKDA 整体机械改写为 `tcgen05`；值得保留 V128 fallback 与 guarded ValueSlice，并把 Phase-6/Phase-1 分阶段预取作为默认关闭、低并发单请求 latency 导向的 B300/SM103 候选。**
+**Kernel is cheap，可信的 profile-to-policy 决策才昂贵：不值得把 FlashKDA 整体机械改写为 `tcgen05`；应由 Runtime Profile Agent 根据 workload、物理资源、正确性与统计证据选择候选，并用上一轮实测结论自优化下一轮 proposal。**
 
-六条决定性证据：
+七条决定性证据：
 
 - 官方 FlashKDA 在 B300 上已经是强基线，相对 FLA `chunk_kda` 为 **1.79–3.42×**；
 - K2 静态 SASS 中有 **3,640 条 `HMMA.16816.F32.BF16`**，`TCGEN/UTCMMA=0`；
@@ -28,15 +28,24 @@
 - 对最自然的 Phase-6 `[128,16]@[16,128]`，`tcgen05+TMEM` 在 L0、inner=64 的乐观摊销口径下仍只有 `mma.sync` 的 **0.920×**，即候选慢约 **8.7%**；
 - Phase-6 `StatePrefetch=4` 相对旧 V16 / `StatePrefetch=1`，在已测 eager 场景中无初态新增约 **7.4%–9.1%**、有初态新增约 **16.8%–19.6%**；
 - Phase-1 按初态选择 L4/L2 后，Job 19934 的 34 个准入域形状在四种中位计时口径上全部获益；`T8192,H12` 同作业相对 V128 累计降低 **37.23%（首段无初态）/45.52%（有初态续段）**，但无初态双 stream joined-pair **回归 1.52%**。
+- Runtime Profile Agent 在独立 H12 BT16 route 上，禁止候选筛选地前瞻预测 W384/W768 的 cpc7/cpc13；四个 profile 为 **1.0133×–1.1354×**，最弱单侧 98.75% 下界 **1.0129×**，CUPTI 将 **97.98%–101.16%** 的 full-span 节省归到 prepare。
 
 因此最终产品决策是：保留 V128 `mma.sync` fallback；在已标定域使用 guarded ValueSlice；0004/0005 两级预取保持 build-time 默认关闭，由调用方明确选择低并发 latency 模式。当前 guard 不感知设备上的其它 stream/request，真实并发矩阵、完整 Kimi K3 和多卡集成优先于继续扩大启用域；CTA Cluster + TMA multicast 保留为其后的候选。
+
+Profile 工具当前只生成 resource/evidence-bound shadow recommendation，不把 cpc、V16 或任何单点 winner 写死。补充 capacity 结果来自另一条物理 route，不能与 ValueSlice/P4/Phase-1 收益合并。
+
+Agent 的自优化边界也必须说清：`conclusions-only memory → 下一轮 typed proposal → verifier/screen/qualification → incumbent 或停止` 已实现并由 CPU 测试覆盖；它不是生产 dispatcher 的在线自改，也没有用 Agent 投票替代硬件证据。
+
+Agent 在这个项目中的起点不是挑战：可重放的
+[`c1_b300_h12_mma_assessment.json`](../../experiments/runtime_profile_evolution/c1_b300_h12_mma_assessment.json)
+已将主线测量压成 7 条物理 finding，新增 tile 几何与 compiled residency，并在看到挑战结果前输出“不全面换 `tcgen05`，先优化当前 `mma.sync` 的并行分解与 issue overlap”。挑战是对这个判断的验证，而不是 Agent 首次出现的地方。
 
 ## 最终交付物
 
 | 交付物 | 入口 | 用途 |
 |---|---|---|
 | 最终报告 | [`FINAL_REPORT.md`](FINAL_REPORT.md) | 完整三阶段论证、六个讨论点、挑战结果和系统边界 |
-| 10 页答辩 | [`FlashKDA_SM100_decision_defense_20260906.pptx`](FlashKDA_SM100_decision_defense_20260906.pptx) | 已同步 9 月 5 日主线结果的 10 分钟正式主讲材料 |
+| 10 页答辩 | [`FlashKDA_SM100_academic_defense_20260909_v2.pptx`](FlashKDA_SM100_academic_defense_20260909_v2.pptx) | 学术风格；复现与测量→Agent 先给结论与证据→挑战验证→回写下一轮 |
 | 逐页讲稿 | [`DEFENSE_SCRIPT.md`](DEFENSE_SCRIPT.md) | 每页时间预算、口播重点和转场 |
 | 追问准备 | [`Q_AND_A.md`](Q_AND_A.md) | 15 分钟提问环节的高概率问题与边界回答 |
 | 核心补丁 1 | [`0001-k2-value-slice-and-dispatch.patch`](../../patches/0001-k2-value-slice-and-dispatch.patch) | V16/V32/V64/V128 K2 ValueSlice 与资源感知 dispatcher |
@@ -52,6 +61,9 @@
 | NCU 证据清单 | [`artifacts/ncu/`](../../experiments/final_campaign/artifacts/ncu/) | Job 17965 的公开说明与 SHA-256；`.ncu-rep` 仅本地归档 |
 | 汇总数据与图 | [`data/summary_metrics.csv`](../../experiments/final_campaign/data/summary_metrics.csv)、[`figures/`](../../experiments/final_campaign/figures/) | 从原始数据确定性生成的答辩图表 |
 | 交付审计 | [`SUBMISSION_AUDIT.md`](SUBMISSION_AUDIT.md) | 补丁可应用性、脚本语法、数字和措辞审计 |
+| Runtime Profile Agent | [`../../tools/runtime-profile-agent/`](../../tools/runtime-profile-agent/) | workload/物理 receipt、typed proposal、测量、置信门槛与 fallback 的闭环工具 |
+| C1 MMA 主线判断 | [`../../experiments/runtime_profile_evolution/c1_b300_h12_mma_assessment.json`](../../experiments/runtime_profile_evolution/c1_b300_h12_mma_assessment.json) | SASS/NCU/tcgen05 receipt 到迁移结论和候选优先级的确定性重放 |
+| Profile 前瞻证据 | [`../../experiments/runtime_profile_evolution/`](../../experiments/runtime_profile_evolution/) | W384/W768 容量规则资格证书和 CUPTI prepare/chain 机制证书 |
 
 ## 基线、环境与计时口径
 

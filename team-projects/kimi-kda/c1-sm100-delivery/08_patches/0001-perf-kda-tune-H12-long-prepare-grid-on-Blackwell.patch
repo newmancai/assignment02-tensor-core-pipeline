@@ -1,0 +1,39 @@
+From 986c1eb94cc2aa185befbd4bf59fb40a0a04eaa4 Mon Sep 17 00:00:00 2001
+From: Codex <codex@openai.com>
+Date: Wed, 9 Sep 2026 03:15:37 +0000
+Subject: [PATCH] perf(kda): tune H12 long prepare grid on Blackwell
+
+---
+ flashinfer/kda_prefill.py               | 2 +-
+ tests/kda/test_recurrent_kda_prefill.py | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/flashinfer/kda_prefill.py b/flashinfer/kda_prefill.py
+index f4cdd9a..81e1de4 100644
+--- a/flashinfer/kda_prefill.py
++++ b/flashinfer/kda_prefill.py
+@@ -75,7 +75,7 @@ _FLASH_KDA_BT16_VALUE_SPLITS = 2
+ _FLASH_KDA_BT16_GENERAL_LOW_WORK_CHUNKS_PER_PREP_CTA = 6
+ _FLASH_KDA_BT16_GENERAL_HIGH_WORK_CHUNKS_PER_PREP_CTA = 8
+ _FLASH_KDA_BT16_GENERAL_HIGH_WORK_MIN_CHUNK_HEADS = 16_384
+-_FLASH_KDA_BT16_H12_CHUNKS_PER_PREP_CTA = 4
++_FLASH_KDA_BT16_H12_CHUNKS_PER_PREP_CTA = 9
+ _FLASH_KDA_BT16_H12_CPC1_MAX_TOTAL_CHUNKS = 128
+ _FLASH_KDA_BT16_PREP_WAVE_QUANT_MIN_WAVES = 8
+ _FLASH_KDA_BT16_PREP_WAVE_QUANT_MIN_RETAINED_PERCENT = 98
+diff --git a/tests/kda/test_recurrent_kda_prefill.py b/tests/kda/test_recurrent_kda_prefill.py
+index 7495dd8..4d20285 100644
+--- a/tests/kda/test_recurrent_kda_prefill.py
++++ b/tests/kda/test_recurrent_kda_prefill.py
+@@ -2838,7 +2838,7 @@ def test_bt16_prepare_walk_and_physical_variants_match_production_policy():
+     )
+     assert (
+         kda_prefill_api._bt16_chunks_per_prepare_cta(num_heads=12, total_chunks=129)
+-        == 4
++        == 9
+     )
+     assert (
+         kda_prefill_api._bt16_chunks_per_prepare_cta(num_heads=64, total_chunks=255)
+-- 
+2.43.0
+

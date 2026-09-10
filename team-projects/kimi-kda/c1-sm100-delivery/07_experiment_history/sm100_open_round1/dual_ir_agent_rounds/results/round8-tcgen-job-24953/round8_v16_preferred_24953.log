@@ -1,0 +1,259 @@
+campaign=round8_v16_preferred_layout_bridge
+semantic_shape=D128_CHUNK16_V16_grid96
+started_utc=2026-09-10T10:09:05Z
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Wed_Aug_20_01:58:59_PM_PDT_2025
+Cuda compilation tools, release 13.0, V13.0.88
+Build cuda_13.0.r13.0/compiler.36424714_0
+name, uuid, driver_version, clocks.current.sm [MHz], memory.total [MiB]
+NVIDIA B300 SXM6 AC, GPU-dadf9f3b-df58-d3fa-07b0-5fe223423db1, 580.126.09, 120 MHz, 275040 MiB
+rm -f round8_v16_preferred round8_v16_preferred.sass
+/usr/local/cuda-13.0/bin/nvcc -O3 -std=c++17 --expt-relaxed-constexpr -lineinfo -gencode arch=compute_103a,code=sm_103a -Xptxas=-v,--warn-on-spills -Xptxas=-g-tmem-access-check -o round8_v16_preferred round8_v16_preferred.cu
+ptxas warning : Registers are spilled to local memory in function '_Z14phase6_tcgen05ILi32ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i', 8 bytes spill stores, 4 bytes spill loads
+ptxas warning : Registers are spilled to local memory in function '_Z14phase6_tcgen05ILi16ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i', 16 bytes spill stores, 12 bytes spill loads
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi128ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi128ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 90 registers, used 1 barriers, 41484 bytes smem
+ptxas info    : Compile time = 86.845 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi128ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi128ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 111 registers, used 1 barriers, 45580 bytes smem
+ptxas info    : Compile time = 86.929 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi128ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi128ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 38 registers, used 1 barriers, 41472 bytes smem
+ptxas info    : Compile time = 36.275 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi128ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi128ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 88 registers, used 1 barriers, 8204 bytes smem
+ptxas info    : Compile time = 63.617 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi128ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi128ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 1 barriers, 8192 bytes smem
+ptxas info    : Compile time = 13.967 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi64ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi64ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 50 registers, used 1 barriers, 23052 bytes smem
+ptxas info    : Compile time = 48.287 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi64ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi64ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 58 registers, used 1 barriers, 25100 bytes smem
+ptxas info    : Compile time = 50.431 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi64ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi64ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 38 registers, used 1 barriers, 23040 bytes smem
+ptxas info    : Compile time = 20.811 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi64ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi64ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 56 registers, used 1 barriers, 6156 bytes smem
+ptxas info    : Compile time = 36.021 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi64ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi64ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 1 barriers, 6144 bytes smem
+ptxas info    : Compile time = 10.401 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi32ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi32ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 38 registers, used 1 barriers, 13836 bytes smem
+ptxas info    : Compile time = 35.021 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi32ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi32ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    8 bytes stack frame, 8 bytes spill stores, 4 bytes spill loads
+ptxas info    : Used 48 registers, used 1 barriers, 8 bytes cumulative stack size, 14860 bytes smem
+ptxas info    : Compile time = 38.416 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi32ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi32ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 13824 bytes smem
+ptxas info    : Compile time = 16.467 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi32ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi32ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 1 barriers, 5132 bytes smem
+ptxas info    : Compile time = 26.622 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi32ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi32ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 1 barriers, 5120 bytes smem
+ptxas info    : Compile time = 8.771 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi16ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi16ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 1 barriers, 9228 bytes smem
+ptxas info    : Compile time = 29.621 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi16ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi16ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    16 bytes stack frame, 16 bytes spill stores, 12 bytes spill loads
+ptxas info    : Used 40 registers, used 1 barriers, 16 bytes cumulative stack size, 9740 bytes smem
+ptxas info    : Compile time = 31.111 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi16ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi16ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 9216 bytes smem
+ptxas info    : Compile time = 16.295 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi16ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi16ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 4620 bytes smem
+ptxas info    : Compile time = 21.582 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi16ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi16ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 4608 bytes smem
+ptxas info    : Compile time = 9.039 ms
+ROUND8,profile=kimi_k3_tp8_h12_v16,chunk=16,D=128,V=16,grid=96,arms=hmma_resident|tcgen_scalar|tcgen_preferred,candidate=tcgen05_m128n16k16_preferred_layout_contract,producer_conversion_outside_inner=1,full_flashkda=0
+META,device=NVIDIA B300 SXM6 AC,cc=10.3,sm_count=148,driver=13000,runtime=13000,D=128,K=16,threads=128
+META,L1_arms=hmma_resident_vs_tcgen_scalar_reformat_vs_tcgen_preferred_layout_contract,preferred_conversion_outside_inner=1,not_full_K2=1
+VALIDATE,level=L0,path=mma_sync,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L0,path=tcgen05,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=mma_sync,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_scalar,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_preferred,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=mma_sync,V=16,grid=96,inner=2,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_scalar,V=16,grid=96,inner=2,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_preferred,V=16,grid=96,inner=2,PASS,bad=0
+VALIDATE,level=L1,path=mma_sync,V=16,grid=96,inner=4,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_scalar,V=16,grid=96,inner=4,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_preferred,V=16,grid=96,inner=4,PASS,bad=0
+SUMMARY,PASS
+rm -f round8_v16_preferred round8_v16_preferred.sass
+/usr/local/cuda-13.0/bin/nvcc -O3 -std=c++17 --expt-relaxed-constexpr -lineinfo -gencode arch=compute_103a,code=sm_103a -Xptxas=-v,--warn-on-spills -o round8_v16_preferred round8_v16_preferred.cu
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi128ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi128ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 1 barriers, 41484 bytes smem
+ptxas info    : Compile time = 36.834 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi128ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi128ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 39 registers, used 1 barriers, 45580 bytes smem
+ptxas info    : Compile time = 35.739 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi128ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi128ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 38 registers, used 1 barriers, 41472 bytes smem
+ptxas info    : Compile time = 35.134 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi128ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi128ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 8204 bytes smem
+ptxas info    : Compile time = 16.099 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi128ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi128ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 1 barriers, 8192 bytes smem
+ptxas info    : Compile time = 13.403 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi64ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi64ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 40 registers, used 1 barriers, 23052 bytes smem
+ptxas info    : Compile time = 24.031 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi64ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi64ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 39 registers, used 1 barriers, 25100 bytes smem
+ptxas info    : Compile time = 25.223 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi64ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi64ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 38 registers, used 1 barriers, 23040 bytes smem
+ptxas info    : Compile time = 20.747 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi64ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi64ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 6156 bytes smem
+ptxas info    : Compile time = 13.542 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi64ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi64ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 1 barriers, 6144 bytes smem
+ptxas info    : Compile time = 10.220 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi32ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi32ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 13836 bytes smem
+ptxas info    : Compile time = 19.910 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi32ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi32ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 39 registers, used 1 barriers, 14860 bytes smem
+ptxas info    : Compile time = 20.474 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi32ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi32ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 13824 bytes smem
+ptxas info    : Compile time = 15.906 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi32ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi32ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 5132 bytes smem
+ptxas info    : Compile time = 12.154 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi32ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi32ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 34 registers, used 1 barriers, 5120 bytes smem
+ptxas info    : Compile time = 8.459 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi16ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi16ELb1ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 9228 bytes smem
+ptxas info    : Compile time = 18.384 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi16ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi16ELb1ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 39 registers, used 1 barriers, 9740 bytes smem
+ptxas info    : Compile time = 18.839 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi16ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi16ELb1EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 9216 bytes smem
+ptxas info    : Compile time = 15.944 ms
+ptxas info    : Compiling entry function '_Z14phase6_tcgen05ILi16ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z14phase6_tcgen05ILi16ELb0ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 4620 bytes smem
+ptxas info    : Compile time = 11.423 ms
+ptxas info    : Compiling entry function '_Z15phase6_mma_syncILi16ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i' for 'sm_103a'
+ptxas info    : Function properties for _Z15phase6_mma_syncILi16ELb0EEvPK13__nv_bfloat16S2_S2_PKfPfPS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 4608 bytes smem
+ptxas info    : Compile time = 8.872 ms
+/usr/local/cuda-13.0/bin/cuobjdump --dump-sass round8_v16_preferred > round8_v16_preferred.sass
+ROUND8,profile=kimi_k3_tp8_h12_v16,chunk=16,D=128,V=16,grid=96,arms=hmma_resident|tcgen_scalar|tcgen_preferred,candidate=tcgen05_m128n16k16_preferred_layout_contract,producer_conversion_outside_inner=1,full_flashkda=0
+META,device=NVIDIA B300 SXM6 AC,cc=10.3,sm_count=148,driver=13000,runtime=13000,D=128,K=16,threads=128
+META,L1_arms=hmma_resident_vs_tcgen_scalar_reformat_vs_tcgen_preferred_layout_contract,preferred_conversion_outside_inner=1,not_full_K2=1
+VALIDATE,level=L0,path=mma_sync,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L0,path=tcgen05,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=mma_sync,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_scalar,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_preferred,V=16,grid=96,inner=1,PASS,bad=0
+VALIDATE,level=L1,path=mma_sync,V=16,grid=96,inner=2,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_scalar,V=16,grid=96,inner=2,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_preferred,V=16,grid=96,inner=2,PASS,bad=0
+VALIDATE,level=L1,path=mma_sync,V=16,grid=96,inner=4,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_scalar,V=16,grid=96,inner=4,PASS,bad=0
+VALIDATE,level=L1,path=tcgen05_preferred,V=16,grid=96,inner=4,PASS,bad=0
+SUMMARY,PASS
+ROUND8,profile=kimi_k3_tp8_h12_v16,chunk=16,D=128,V=16,grid=96,arms=hmma_resident|tcgen_scalar|tcgen_preferred,candidate=tcgen05_m128n16k16_preferred_layout_contract,producer_conversion_outside_inner=1,full_flashkda=0
+META,device=NVIDIA B300 SXM6 AC,cc=10.3,sm_count=148,driver=13000,runtime=13000,D=128,K=16,threads=128
+META,L1_arms=hmma_resident_vs_tcgen_scalar_reformat_vs_tcgen_preferred_layout_contract,preferred_conversion_outside_inner=1,not_full_K2=1
+CSV_HEADER,level,V,grid,inner,warmup,iters,repeats,mma_median_kernel_us,mma_min_kernel_us,tcgen_scalar_median_kernel_us,tcgen_scalar_min_kernel_us,tcgen_preferred_median_kernel_us,tcgen_preferred_min_kernel_us,mma_median_phase_us,tcgen_scalar_median_phase_us,tcgen_preferred_median_phase_us,scalar_speedup_median,preferred_speedup_median,preferred_over_scalar_median,mma_regs,tcgen_scalar_regs,tcgen_preferred_regs,mma_static_smem_B,tcgen_scalar_static_smem_B,tcgen_preferred_static_smem_B,mma_active_blocks_per_sm,tcgen_scalar_active_blocks_per_sm,tcgen_preferred_active_blocks_per_sm,scope
+RESULT,L1,16,96,1,30,200,5,6.160000,6.155360,6.160000,6.155360,6.155520,6.155040,6.160000,6.160000,6.155520,1.000000,1.000728,1.000728,32,39,32,9216,9740,9228,16,1,1,phase6_state_gate_preferred_layout_contract_probe
+RESULT,L1,16,96,64,30,200,5,43.018560,43.007841,55.281281,55.276322,45.045600,45.041118,0.672165,0.863770,0.703837,0.778176,0.955000,1.227229,32,39,32,9216,9740,9228,16,1,1,phase6_state_gate_preferred_layout_contract_probe
+SUMMARY,PASS
+name, uuid, clocks.current.sm [MHz], temperature.gpu, power.draw [W]
+NVIDIA B300 SXM6 AC, GPU-dadf9f3b-df58-d3fa-07b0-5fe223423db1, 2032 MHz, 35, 251.27 W
+finished_utc=2026-09-10T10:09:16Z

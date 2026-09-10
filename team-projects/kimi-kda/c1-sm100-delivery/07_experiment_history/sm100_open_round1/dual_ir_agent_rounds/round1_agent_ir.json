@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "campaign": "dual-ir-agent-two-round-loop",
+  "round": 1,
+  "status": "screen_submitted",
+  "agent_architecture": {
+    "roles": [
+      "hmma_proposer",
+      "tcgen05_proposer",
+      "evidence_critic",
+      "deterministic_executor"
+    ],
+    "loop": [
+      "retrieve scoped experience",
+      "propose physical changes",
+      "deterministic legality and identity checks",
+      "isolated B300 correctness and timing",
+      "write implementation IR and experience IR",
+      "use the result to seed the next round"
+    ],
+    "budget": {
+      "new_gpu_challengers_per_lane": 1,
+      "blocks_per_variant": 2,
+      "dry_runs_per_block": 8,
+      "samples_per_block": 20,
+      "qualification_or_deployment_claim": false
+    }
+  },
+  "common_contract": {
+    "operation": "public recurrent-KDA prefill with in-place state update",
+    "dtype": "BF16 activation and state",
+    "initial_state": "nonzero BF16",
+    "correctness": "finite and torch.isclose(atol=0.01, rtol=0.01) against the same frozen official peer for output and final state",
+    "timing": "one implementation per process, CUPTI cold-L2, no CUDA graph, per-call transforms and state copy included",
+    "hardware": "B300 sm_103a"
+  },
+  "program_physical_ir": [
+    {
+      "proposal_id": "HMMA-R1-RAGGED-V64-GUARD",
+      "lane": "hmma",
+      "profile": "H12 packed (1300,547,2048,963,271,3063)",
+      "incumbent": "optimized HMMA ValueSlice=128",
+      "challenger": "the same optimized HMMA carrier with ValueSlice=64",
+      "changed_subtrees": [
+        "value-dimension work partition",
+        "CTA grid"
+      ],
+      "unchanged": [
+        "HMMA instruction family",
+        "arithmetic and rounding order",
+        "kernel source and binary",
+        "public call boundary"
+      ],
+      "representation_status": "executable_existing",
+      "selection_reason": "zero-build route-local policy test with a scoped historical prior"
+    },
+    {
+      "proposal_id": "T-R1-SCHED114",
+      "lane": "tcgen05",
+      "profile": "H64 packed (1300,547,2048,963,271,3063)",
+      "incumbent": "evolution persistent scalar schedule, physical B300 SM count, expected 148 CTA and stride 126",
+      "challenger": "virtual 152-CTA minimax schedule, expected stride 114, reusing generated m128_h64_p1_s114",
+      "changed_subtrees": [
+        "persistent CTA count",
+        "host-prepared task bins",
+        "maximum schedule stride"
+      ],
+      "unchanged": [
+        "tcgen05/TMEM kernel family",
+        "per-task token order",
+        "public call boundary",
+        "mathematical contract"
+      ],
+      "representation_status": "benchmark_patch_existing_kernel",
+      "deterministic_checks": [
+        "sum(schedule_counts) equals all sequence-head chunks",
+        "max(schedule_counts) equals compiled stride",
+        "observed loaded variant and target are recorded"
+      ],
+      "selection_reason": "tests whether a physical-load-balance experience can produce a full-path gain without a CUDA rebuild"
+    }
+  ],
+  "deferred_program_ir": [
+    {
+      "proposal_id": "HMMA-R1-P1-L3",
+      "status": "patch_required",
+      "reason": "requires a new HMMA template build and a separate no-initial-state plus two-stream contract"
+    },
+    {
+      "proposal_id": "HMMA-R1-V16-CLUSTER-MCAST",
+      "status": "ir_extension",
+      "reason": "requires cluster/multicast ownership and synchronization fields plus a mechanism probe"
+    },
+    {
+      "proposal_id": "T-R1-V16-PREFERRED-LAYOUT-BRIDGE",
+      "status": "patch_required",
+      "reason": "requires a new end-to-end producer-layout carrier"
+    },
+    {
+      "proposal_id": "T-R1-P34-SHARED-TMEM-LIFECYCLE",
+      "status": "patch_required",
+      "reason": "requires a new two-site CUDA carrier and explicit BF16 rounding-boundary verification"
+    }
+  ],
+  "experience_ir_before_measurement": [
+    {
+      "claim_id": "prior-hmma-ragged-v64",
+      "kind": "ranking_prior",
+      "source_scope": "older binary/protocol on one H12 ragged profile",
+      "target_scope": "current optimized HMMA binary on the exact ragged profile",
+      "matched_preconditions": [
+        "shape",
+        "HMMA ValueSlice family"
+      ],
+      "mismatched_or_unknown": [
+        "binary",
+        "prefetch implementation",
+        "measurement epoch"
+      ],
+      "permitted_use": "retest priority only"
+    },
+    {
+      "claim_id": "prior-tcgen-schedule-balance",
+      "kind": "transfer_hypothesis",
+      "source_scope": "source-derived scheduler and generated 148/152-SM variants",
+      "target_scope": "running 152 logical CTAs on a physical B300 profile",
+      "matched_preconditions": [
+        "exact profile",
+        "same persistent scalar kernel ABI",
+        "existing compiled stride-114 variant"
+      ],
+      "mismatched_or_unknown": [
+        "logical CTA count differs from physical SM count",
+        "effect of the partial second wave",
+        "whether lower maximum bin load dominates launch/residency cost"
+      ],
+      "permitted_use": "single-profile GPU falsification only"
+    }
+  ],
+  "submitted_job": {
+    "slurm_job_id": 24669,
+    "script": "round1.sbatch"
+  }
+}

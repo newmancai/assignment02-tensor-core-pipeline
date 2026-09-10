@@ -1,0 +1,10 @@
+warning: jsonschema unavailable
+{
+  "correctness_passed": true,
+  "h12_geomean_speedup_vs_official": null,
+  "competitive_with_optimized_where_active": null,
+  "decision": "needs_more_data",
+  "reasons": [
+    "pilot only; K1/K2 and full case matrix remain"
+  ]
+}

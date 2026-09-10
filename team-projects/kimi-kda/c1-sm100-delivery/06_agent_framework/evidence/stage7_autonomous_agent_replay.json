@@ -1,0 +1,393 @@
+{
+  "all_profiles_activated_cpc9": true,
+  "analysis": "stage7-autonomous-runtime-profile-agent-evidence-replay",
+  "authority_boundary": "Agents propose; typed verification, B300 receipts, confidence gates, fallback, memory, and stopping are deterministic.",
+  "memory": "evidence/stage7_conclusions_memory.json",
+  "runs": [
+    {
+      "activated_cpc": 9,
+      "incumbent_candidate_id": "kir:5dbfa3222a3aa9e8",
+      "profile_id": "h12_profile_fixed_8192",
+      "rounds": [
+        {
+          "activated_candidate_id": "kir:5dbfa3222a3aa9e8",
+          "candidate_count": 6,
+          "qualified": [
+            {
+              "bootstrap_95": [
+                1.0334948318039119,
+                1.036140216590992
+              ],
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_pair.json"
+              ],
+              "fallback_defined": true,
+              "output_and_state_correct": true,
+              "scope_identical": true,
+              "speedup": 1.0349800374814613
+            }
+          ],
+          "rejected_count": 0,
+          "round_index": 1,
+          "screened": [
+            {
+              "candidate_id": "kir:f22a68f4d1319113",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 514.435,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:e01b83ba223bbd39",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 519.218,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:b969c1f9ace88f5f",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 520.5470000000001,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 501.34600000000006,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:8df063e29cf85924",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 503.2995,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:bce22bd57f4550a6",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 508.27500000000003,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            }
+          ],
+          "stopped_reason": "continue"
+        },
+        {
+          "activated_candidate_id": null,
+          "candidate_count": 0,
+          "qualified": [],
+          "rejected_count": 0,
+          "round_index": 2,
+          "screened": [],
+          "stopped_reason": "screen_budget_exhausted"
+        }
+      ],
+      "stopped_reason": "screen_budget_exhausted"
+    },
+    {
+      "activated_cpc": 9,
+      "incumbent_candidate_id": "kir:5dbfa3222a3aa9e8",
+      "profile_id": "h12_profile_balanced_2",
+      "rounds": [
+        {
+          "activated_candidate_id": "kir:5dbfa3222a3aa9e8",
+          "candidate_count": 6,
+          "qualified": [
+            {
+              "bootstrap_95": [
+                1.056388762873335,
+                1.0598292628307355
+              ],
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_pair.json"
+              ],
+              "fallback_defined": true,
+              "output_and_state_correct": true,
+              "scope_identical": true,
+              "speedup": 1.0583191499460918
+            }
+          ],
+          "rejected_count": 0,
+          "round_index": 1,
+          "screened": [
+            {
+              "candidate_id": "kir:f22a68f4d1319113",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 308.39950000000005,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:e01b83ba223bbd39",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 313.25,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:b969c1f9ace88f5f",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 314.755,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 294.59400000000005,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:8df063e29cf85924",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 297.42600000000004,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:bce22bd57f4550a6",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 302.6725,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            }
+          ],
+          "stopped_reason": "continue"
+        },
+        {
+          "activated_candidate_id": null,
+          "candidate_count": 0,
+          "qualified": [],
+          "rejected_count": 0,
+          "round_index": 2,
+          "screened": [],
+          "stopped_reason": "screen_budget_exhausted"
+        }
+      ],
+      "stopped_reason": "screen_budget_exhausted"
+    },
+    {
+      "activated_cpc": 9,
+      "incumbent_candidate_id": "kir:5dbfa3222a3aa9e8",
+      "profile_id": "h12_profile_balanced_4",
+      "rounds": [
+        {
+          "activated_candidate_id": "kir:5dbfa3222a3aa9e8",
+          "candidate_count": 6,
+          "qualified": [
+            {
+              "bootstrap_95": [
+                1.091347771236333,
+                1.097216477190394
+              ],
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_pair.json"
+              ],
+              "fallback_defined": true,
+              "output_and_state_correct": true,
+              "scope_identical": true,
+              "speedup": 1.0942023643400647
+            }
+          ],
+          "rejected_count": 0,
+          "round_index": 1,
+          "screened": [
+            {
+              "candidate_id": "kir:f22a68f4d1319113",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 203.5865,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:e01b83ba223bbd39",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 208.673,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:b969c1f9ace88f5f",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 210.30499999999998,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 188.89650000000003,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:8df063e29cf85924",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 191.6975,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:bce22bd57f4550a6",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 197.05800000000002,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            }
+          ],
+          "stopped_reason": "continue"
+        },
+        {
+          "activated_candidate_id": null,
+          "candidate_count": 0,
+          "qualified": [],
+          "rejected_count": 0,
+          "round_index": 2,
+          "screened": [],
+          "stopped_reason": "screen_budget_exhausted"
+        }
+      ],
+      "stopped_reason": "screen_budget_exhausted"
+    },
+    {
+      "activated_cpc": 9,
+      "incumbent_candidate_id": "kir:5dbfa3222a3aa9e8",
+      "profile_id": "h12_profile_skew",
+      "rounds": [
+        {
+          "activated_candidate_id": "kir:5dbfa3222a3aa9e8",
+          "candidate_count": 6,
+          "qualified": [
+            {
+              "bootstrap_95": [
+                1.033363706598337,
+                1.038035838017651
+              ],
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_pair.json"
+              ],
+              "fallback_defined": true,
+              "output_and_state_correct": true,
+              "scope_identical": true,
+              "speedup": 1.036027427713657
+            }
+          ],
+          "rejected_count": 0,
+          "round_index": 1,
+          "screened": [
+            {
+              "candidate_id": "kir:f22a68f4d1319113",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 502.8035,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:e01b83ba223bbd39",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 508.14650000000006,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:b969c1f9ace88f5f",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 510.194,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:5dbfa3222a3aa9e8",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 489.61949999999996,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:8df063e29cf85924",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 492.339,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            },
+            {
+              "candidate_id": "kir:bce22bd57f4550a6",
+              "evidence_refs": [
+                "evidence/b300_stage6_h12_profile_matrix.json"
+              ],
+              "latency_us": 497.074,
+              "output_and_state_correct": true,
+              "scope_identical": true
+            }
+          ],
+          "stopped_reason": "continue"
+        },
+        {
+          "activated_candidate_id": null,
+          "candidate_count": 0,
+          "qualified": [],
+          "rejected_count": 0,
+          "round_index": 2,
+          "screened": [],
+          "stopped_reason": "screen_budget_exhausted"
+        }
+      ],
+      "stopped_reason": "screen_budget_exhausted"
+    }
+  ],
+  "schema_version": 1
+}

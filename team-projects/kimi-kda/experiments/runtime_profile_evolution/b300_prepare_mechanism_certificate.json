@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "evidence/b300_stage10_certificate.json": "57fb69afcf492d532e2c449f2601f5b4b7e3074a79cb4c3f21f275b798b960fb",
+    "evidence/b300_stage10_h12_capacity_phase.json": "311f84094516d7fbcaaa890033e18d48097cf1ababaaf0eaf0471fcac83956c8",
+    "evidence/b300_stage10_h12_capacity_phase_accounting.json": "62d93d6caf4b04958264f9311243b111b5e8d50cb6dd4ede8956fdad6ed0f8e1"
+  },
+  "checks": {
+    "accounting_exit_zero": true,
+    "all_chain_effects_inside_frozen_one_percent_equivalence_band": true,
+    "all_correct_and_scope_identical": true,
+    "all_full_span_savings_positive_95": true,
+    "all_prepare_savings_positive_95": true,
+    "all_routes_match": true,
+    "four_frozen_profiles": true,
+    "prepare_explains_at_least_90_percent_everywhere": true,
+    "qualification_passed_before_diagnostic": true
+  },
+  "claim_boundary": "Post-qualification CUPTI attribution for the four Stage10 profiles on one B300. It supports the prepare-grid mechanism but is not an independent performance qualification or a universal causal proof.",
+  "schema_version": 1,
+  "status": "prepare_capacity_mechanism_confirmed_on_stage10_profiles",
+  "summary": {
+    "allocated_gpu_seconds": 7.759440942667425,
+    "estimated_energy_joules": 1637.695,
+    "full_span_saving_range_us": [
+      3.968500000000006,
+      31.71300000000008
+    ],
+    "largest_absolute_chain_95_bound_us": 0.30299999999999727,
+    "prepare_fraction_range": [
+      0.9798412498425084,
+      1.011550151975682
+    ],
+    "prepare_saving_range_us": [
+      3.8885000000000005,
+      31.56750000000001
+    ]
+  }
+}

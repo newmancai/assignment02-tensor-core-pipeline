@@ -1,0 +1,102 @@
+{
+  "commitment_sha256": "e896d10511545dd6353ab26e7b0e3afa25b0381d9245b3bdbe4085e47d53d840",
+  "heldout_digest": "125f2aa31ff034a393b461e9c47306a830b4c1049a035ebddca9b35df594d29a",
+  "profiles": [
+    {
+      "label": "randomized_0",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-01",
+      "packed": true,
+      "seed": 30811854,
+      "seq_lens": [
+        1123,
+        2547,
+        307,
+        589
+      ]
+    },
+    {
+      "label": "randomized_1",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-02",
+      "packed": true,
+      "seed": 511005973,
+      "seq_lens": [
+        636,
+        4721
+      ]
+    },
+    {
+      "label": "randomized_2",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-03",
+      "packed": true,
+      "seed": 444842600,
+      "seq_lens": [
+        3875,
+        2272,
+        73,
+        153
+      ]
+    },
+    {
+      "label": "randomized_3",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-04",
+      "packed": true,
+      "seed": 732470589,
+      "seq_lens": [
+        1904,
+        5507
+      ]
+    },
+    {
+      "label": "randomized_4",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-05",
+      "packed": false,
+      "seed": 276701991,
+      "seq_lens": [
+        4608
+      ]
+    },
+    {
+      "label": "randomized_5",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-06",
+      "packed": true,
+      "seed": 203772398,
+      "seq_lens": [
+        3391,
+        1982
+      ]
+    },
+    {
+      "label": "randomized_6",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-07",
+      "packed": true,
+      "seed": 492542558,
+      "seq_lens": [
+        67,
+        115,
+        63,
+        6128
+      ]
+    },
+    {
+      "label": "randomized_7",
+      "num_heads": 12,
+      "opaque_id": "s9pilot-heldout-08",
+      "packed": false,
+      "seed": 59492973,
+      "seq_lens": [
+        7411
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "seal_nonce": "8f5c0f3b12799ae9fe5a4437454a9fb424e300f4dbf7d5eb6c40d4cd7cc84e3c",
+  "status": "revealed_after_policy_freeze",
+  "winner_set_digest": "4127e7d2490054ca949427c853c77fdfae3a1c6990183d77184769a670997e39"
+}

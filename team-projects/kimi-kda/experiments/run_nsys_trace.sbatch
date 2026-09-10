@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-repo="${FLASH_KDA_REPO:-/home/lcpu/61681696/FlashKDA}"
+repo="${FLASH_KDA_REPO:-/home/lcpu/<USER_ID>/FlashKDA}"
 out="${FLASH_KDA_TRACE_OUT:-$repo/results/20260901_profile_archive}"
 python="$repo/.venv/bin/python"
 mkdir -p "$out"

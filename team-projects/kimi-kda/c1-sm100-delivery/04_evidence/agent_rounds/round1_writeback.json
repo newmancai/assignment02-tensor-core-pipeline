@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "round": 1,
+  "status": "screen_complete",
+  "hardware": {
+    "name": "NVIDIA B300 SXM6 AC",
+    "uuid": "GPU-0c223cf1-4325-822f-1e38-43ae57897edd",
+    "sm_count": 148,
+    "observed_sm_clock_mhz_at_job_start": 1095,
+    "slurm_job_id": 24669
+  },
+  "protocol": {
+    "blocks": 2,
+    "samples_per_block": 20,
+    "warmups_per_block": 8,
+    "worker_isolation": "one implementation per process",
+    "timing": "CUPTI cold-L2, no CUDA graph",
+    "correctness": "official-peer torch.isclose(atol=0.01, rtol=0.01), output and final state"
+  },
+  "implementation_ir_receipts": [
+    {
+      "implementation_id": "hmma-optimized-v128-current",
+      "profile": "h12_packed_mixed",
+      "instruction_family": "HMMA",
+      "value_slice": 128,
+      "block_medians_ms": [0.5922065, 0.591856],
+      "campaign_median_ms": 0.59203125,
+      "correctness": "bitwise equal to official output and state"
+    },
+    {
+      "implementation_id": "hmma-optimized-v64-current",
+      "profile": "h12_packed_mixed",
+      "instruction_family": "HMMA",
+      "value_slice": 64,
+      "block_medians_ms": [0.487286, 0.485524],
+      "campaign_median_ms": 0.486405,
+      "correctness": "bitwise equal to official output and state"
+    },
+    {
+      "implementation_id": "tcgen-evolution-h64-mixed-148cta-s126",
+      "profile": "h64_packed_mixed",
+      "instruction_family": "tcgen05/TMEM",
+      "actual_route": "m128_h64_p1_s126",
+      "grid_x": 148,
+      "block_medians_ms": [0.387377, 0.3867665],
+      "campaign_median_ms": 0.38707175,
+      "correctness": {
+        "historical_peer_passed": true,
+        "max_relative_l2": 0.006534499116241932,
+        "max_normalized_linf": 0.009569377638399601,
+        "max_abs": 0.0078125
+      }
+    },
+    {
+      "implementation_id": "tcgen-evolution-h64-mixed-virtual152cta-s114",
+      "profile": "h64_packed_mixed",
+      "instruction_family": "tcgen05/TMEM",
+      "actual_route": "m128_h64_p1_s114",
+      "grid_x": 152,
+      "physical_sm_count": 148,
+      "schedule_stride": 114,
+      "schedule_work_items": 16576,
+      "schedule_validation": "count-conserving and compiled-stride matched",
+      "block_medians_ms": [0.654531, 0.6557],
+      "campaign_median_ms": 0.6551155,
+      "correctness": {
+        "historical_peer_passed": true,
+        "max_relative_l2": 0.006534499116241932,
+        "max_normalized_linf": 0.009569377638399601,
+        "max_abs": 0.0078125
+      }
+    }
+  ],
+  "experience_ir_writeback": [
+    {
+      "observation_id": "r1-hmma-ragged-v64",
+      "status": "valid_screen_observation",
+      "proposition": "On the exact current H12 packed-mixed profile and binary, ValueSlice=64 is faster than ValueSlice=128.",
+      "effect": {
+        "incumbent_over_challenger": 1.2171569987972986,
+        "latency_reduction_fraction": 0.17841161677693305
+      },
+      "mechanism_status": "controlled work-partition intervention; mechanism localization not proven",
+      "matched_preconditions": [
+        "H12",
+        "six ragged sequences",
+        "total tokens 8192",
+        "current optimized HMMA carrier",
+        "nonzero initial state",
+        "B300 with 148 SM"
+      ],
+      "unknown_transfer_preconditions": [
+        "other sequence-count or length distributions",
+        "fixed layout",
+        "H96",
+        "concurrent streams"
+      ],
+      "permitted_use": "Round 2 profile-boundary proposal and ranking prior",
+      "forbidden_upgrade": "global V64 dispatch rule or deployment evidence"
+    },
+    {
+      "observation_id": "r1-tcgen-virtual152-wave-tail",
+      "status": "valid_screen_observation",
+      "proposition": "On physical 148-SM B300 for exact H64 packed-mixed, the legal 152-CTA/s114 schedule is much slower than the natural 148-CTA/s126 schedule.",
+      "effect": {
+        "incumbent_over_challenger": 0.590845049460744,
+        "challenger_latency_increase_fraction": 0.6925017520988894
+      },
+      "mechanism_status": "controlled schedule intervention; second-wave tail is a leading explanation, not directly localized",
+      "competing_mechanisms": [
+        "partial second wave from grid_x greater than physical SM count",
+        "the s114 kernel was generated for a different physical-SM regime",
+        "task-bin order or cache behavior differs despite lower maximum load"
+      ],
+      "matched_preconditions": [
+        "same exact profile",
+        "same tcgen05/TMEM m128 family",
+        "same public API and state-copy scope",
+        "same numerical result within the common peer contract"
+      ],
+      "mismatched_preconditions": [
+        "logical CTA count 152 versus physical SM count 148"
+      ],
+      "permitted_use": "reject this exact virtual-152 candidate and prioritize a cross-head boundary test",
+      "forbidden_upgrade": "claim that stride 114, load balancing, persistent schedules, or the s114 kernel family are generally bad",
+      "reopen_condition": "run on a physical 152-SM device or a different head-count/profile where work reduction can outweigh the partial second wave"
+    }
+  ],
+  "cross_lane_context_only": [
+    {
+      "profile": "h12_packed_mixed",
+      "official_ms": 0.59583425,
+      "qualified_hmma_screen_winner_ms": 0.486405,
+      "cake_ms": 0.240242,
+      "cake_over_hmma": 2.024626826282039,
+      "claim_boundary": "contextual full-stack comparison on one profile; the two lanes did not receive equal historical engineering budget"
+    },
+    {
+      "profile": "h64_packed_mixed",
+      "official_ms": 1.1356345,
+      "cake_ms": 0.40054225,
+      "evolution_incumbent_ms": 0.38707175,
+      "official_over_evolution": 2.93391280168767,
+      "claim_boundary": "contextual deployment comparison; not a pure tcgen05 instruction effect"
+    }
+  ],
+  "raw_remote_artifact": "<REMOTE_HOME>/kda-dual-ir-agent-rounds-20260910/round1-job-24669/summary.json"
+}

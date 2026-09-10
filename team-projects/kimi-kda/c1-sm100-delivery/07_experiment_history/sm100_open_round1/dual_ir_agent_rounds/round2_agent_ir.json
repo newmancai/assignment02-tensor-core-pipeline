@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "round": 2,
+  "status": "screen_submitted",
+  "retrieved_round1_observations": [
+    "r1-hmma-ragged-v64",
+    "r1-tcgen-virtual152-wave-tail"
+  ],
+  "proposal_and_critique": {
+    "hmma_proposer": "Hold H12, total tokens, sequence count, binary and state contract fixed; replace mixed6 by balanced6 and compare V64 with V128.",
+    "critic_alternative": "Use the already-known packed 8x1024 sentinel.",
+    "executor_arbitration": "Selected balanced6 because it changes only the length distribution while preserving six sequences; 8x1024 also changes sequence count and already has a recent smoke result.",
+    "tcgen05_consensus": "Repeat the 148-versus-virtual152 schedule intervention on H96 packed-mixed, using the existing s173 and s166 variants."
+  },
+  "budget": {
+    "new_gpu_challengers_per_lane": 1,
+    "blocks_per_variant": 2,
+    "dry_runs_per_block": 8,
+    "samples_per_block": 20,
+    "new_builds": 0,
+    "qualification_or_deployment_claim": false
+  },
+  "common_contract": {
+    "inherits": "round1 common contract without changes",
+    "new_process_epoch": true,
+    "new_seed_per_profile": true,
+    "decision_metric": "challenger_speedup = incumbent median / challenger median",
+    "practical_positive_threshold": 1.03
+  },
+  "program_physical_ir": [
+    {
+      "proposal_id": "HMMA-R2-BALANCED6-V64-BOUNDARY",
+      "lane": "hmma",
+      "profile": "H12 packed balanced6=(1366,1366,1365,1365,1365,1365)",
+      "incumbent": "optimized HMMA ValueSlice=128",
+      "challenger": "optimized HMMA ValueSlice=64",
+      "controlled_change_from_round1": "sequence length distribution only",
+      "inherited": [
+        "same head count 12",
+        "same total tokens 8192",
+        "same six sequences",
+        "same binary and ValueSlice carriers",
+        "same nonzero-state public contract"
+      ],
+      "not_inherited": [
+        "Round 1 speedup magnitude",
+        "V64 winner status",
+        "a causal attribution to skew"
+      ],
+      "question": "Must the future dispatch key include length skew/max chunks, or can sequence count and total work explain the V64 region?"
+    },
+    {
+      "proposal_id": "T-R2-H96-SECOND-WAVE-BOUNDARY",
+      "lane": "tcgen05",
+      "profile": "H96 packed mixed=(1300,547,2048,963,271,3063)",
+      "incumbent": "physical148 CTA / m128_h96_p1_s173",
+      "challenger": "virtual152 CTA / m128_h96_p1_s166",
+      "controlled_change_from_round1": "head count and resulting compiled stride; the 148-to-152 CTA intervention and length distribution are retained",
+      "inherited": [
+        "same mixed sequence lengths",
+        "same m128 persistent tcgen05/TMEM family",
+        "same physical 148-SM device class",
+        "same schedule conservation checks"
+      ],
+      "not_inherited": [
+        "H64 regression magnitude",
+        "proof that the partial second wave is causal",
+        "a global rejection of 152-CTA schedules"
+      ],
+      "question": "Does the large virtual-152 regression persist across head/stride domains?"
+    }
+  ],
+  "prespecified_interpretation": [
+    "HMMA practical positive authorizes at most a two-profile H12 multi-sequence scoped prior; it does not authorize all packed shapes.",
+    "HMMA non-positive narrows the Round 1 observation toward a skew/max-chunks-conditioned prior.",
+    "A second tcgen05 negative rejects the two exact virtual-152 mixed schedulers; the second-wave explanation remains a hypothesis because CTA count and stride change together.",
+    "A tcgen05 reversal records a head/stride interaction and blocks transfer of the H64 negative prior.",
+    "Neither result identifies the pure causal effect of the HMMA or tcgen05 opcode family."
+  ],
+  "submitted_job": {
+    "slurm_job_id": 24694,
+    "script": "round2.sbatch"
+  }
+}

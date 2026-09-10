@@ -1,0 +1,131 @@
+{
+  "schema_version": "sm100_migration_path_index_v1",
+  "question": "FlashKDA 官方 kernel 当前使用 SM80 MMA，分析迁移到 SM100 是否值得",
+  "paths": [
+    {
+      "path_id": "official-sm80-mma",
+      "parent_ids": [],
+      "implementation_ref": "../FlashKDA/csrc/smxx/fwd_kernel2.cuh",
+      "ir_ref": "evidence/stage11_mma_migration_memory.json#candidate.math_sites",
+      "representation_status": "historical_baseline_partially_typed",
+      "evidence_refs": ["assignment02-github/team-projects/kimi-kda/experiments/final_campaign"],
+      "correctness_status": "historically_reproduced",
+      "measurement_scope": "official full forward plus archived SASS/NCU",
+      "outcome": "baseline"
+    },
+    {
+      "path_id": "optimized-hmma-valueslice-prefetch",
+      "parent_ids": ["official-sm80-mma"],
+      "implementation_ref": "<REMOTE_HOME>/kda-zero-state-20260905/clean_build/lib/flash_kda_phase1_C.cpython-312-x86_64-linux-gnu.so (historical remote path; recheck before use)",
+      "ir_ref": "assignment02-github/team-projects/kimi-kda/experiments/mainline_20260905/data/BUILD_MANIFEST.json",
+      "representation_status": "source_and_build_manifest_recorded_not_fully_reconstructed_in_open_path_ir",
+      "evidence_refs": [
+        "assignment02-github/team-projects/kimi-kda/experiments/mainline_20260905/data/BUILD_MANIFEST.json",
+        "experiments/sm100_open_round1/evidence/b300_ir_knowledge_smoke_summary.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round1_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round2_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round6_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round7_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round8_writeback.json"
+      ],
+      "correctness_status": "bitwise_equal_to_official_across_recorded_hmma_screens_and_qualifications",
+      "measurement_scope": "B300 isolated-process public-extension screens and qualifications over fixed8192 plus balanced, mixed and skewed packed H12 profiles",
+      "outcome": "V32 is qualified 1.0764x over V64 at balanced nseq3 and holds on skew3; it regresses at nseq4. V64 is strong at nseq6 and below the 3% gate at nseq7/8. Phase1 L3 is neutral versus L2 at 0.99998x."
+    },
+    {
+      "path_id": "phase6-v128-direct-tcgen05",
+      "parent_ids": ["official-sm80-mma"],
+      "implementation_ref": "assignment02-github/team-projects/kimi-kda/experiments/final_campaign/tcgen05_probe/phase6_probe.cu",
+      "ir_ref": "evidence/stage11_mma_migration_memory.json#candidate",
+      "representation_status": "typed_mma_migration_v2_complete_for_probe",
+      "evidence_refs": ["evidence/stage11_mma_migration_memory.json#failure_cards/0"],
+      "correctness_status": "probe_passed",
+      "measurement_scope": "B300 Phase-6 microbenchmark, V128/grid12/inner64/L0",
+      "outcome": "measured_regression_0.919742x"
+    },
+    {
+      "path_id": "phase6-v16-thin-n",
+      "parent_ids": ["phase6-v128-direct-tcgen05"],
+      "implementation_ref": "assignment02-github/team-projects/kimi-kda/experiments/stage11_v16_tcgen_probe",
+      "ir_ref": "evidence/stage11_mma_migration_memory.json#v16_screen_summary",
+      "representation_status": "measurement_identity_recorded_ir_incomplete_for_production",
+      "evidence_refs": [
+        "evidence/stage11_v16_b300/stage11_v16_tcgen_probe_24111.csv",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round8_writeback.json"
+      ],
+      "correctness_status": "output_and_state_probe_passed",
+      "measurement_scope": "B300 V16/grid96 mechanism probes; L0 preferred layout, L1 scalar reformat, and Round8 one-time preferred staging",
+      "outcome": "Round8 preferred staging is 1.227x over scalar tcgen05 but 0.955x versus resident HMMA; mechanism recovered, practical screen below gate"
+    },
+    {
+      "path_id": "p34-cross-phase-tmem",
+      "parent_ids": ["official-sm80-mma", "phase6-v16-thin-n"],
+      "implementation_ref": null,
+      "ir_ref": "kda_ir/mma_migration_fixtures.py:p34_shared_lifecycle_candidate",
+      "representation_status": "typed_design_complete_cuda_missing",
+      "evidence_refs": [],
+      "correctness_status": "unimplemented",
+      "measurement_scope": "unmeasured",
+      "outcome": "needs_compiled_lane_verified_end_to_end_carrier; generic tcgen05 st/ld precedents exist but do not provide the P3/P4 lane-and-rounding oracle"
+    },
+    {
+      "path_id": "cake-sm100-full-stack",
+      "parent_ids": ["official-sm80-mma"],
+      "implementation_ref": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908 (historical remote path; recheck before use)",
+      "ir_ref": "experiments/sm100_open_round1/ir/cake_sm100_full_stack.json",
+      "representation_status": "partial_source_grounded_ir_with_actual_route_identities",
+      "evidence_refs": [
+        "evidence/b300_stage11_cake_vs_official_h12.json",
+        "experiments/sm100_open_round1/evidence/b300_stage12_cake_vs_official_legacy.json",
+        "experiments/sm100_open_round1/evidence/b300_stage12_cake_vs_official_isolated_pair.json",
+        "experiments/sm100_open_round1/evidence/cake_source_binary_manifest.json"
+      ],
+      "correctness_status": "h12_h96_h64_peer_checks_passed",
+      "measurement_scope": "B300 complete public path; four balanced isolated-process CUPTI blocks for six H12 and three H96 profiles",
+      "outcome": "measured_gain_h12_geomean_2.482x_h96_geomean_2.253x_all_nine_positive_not_tcgen_causal"
+    },
+    {
+      "path_id": "cake-evolution-persistent-schedule",
+      "parent_ids": [
+        "cake-sm100-full-stack"
+      ],
+      "implementation_ref": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda_evolution.py (historical remote path; recheck before use)",
+      "ir_ref": "experiments/sm100_open_round1/dual_ir_agent_rounds/round8_writeback.json",
+      "representation_status": "source_grounded_schedule_receipts_with_actual_route_identity",
+      "evidence_refs": [
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round1_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round2_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round3_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round4_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round5_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round6_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/round7_writeback.json",
+        "experiments/sm100_open_round1/dual_ir_agent_rounds/DEFAULT_KNOWLEDGE_SATURATION_REVIEW_20260910.md"
+      ],
+      "correctness_status": "official_peer_atol_rtol_1e2_passed_for_output_and_state",
+      "measurement_scope": "B300 148-SM public-full screens and H96 four-block qualification; exact route and schedule receipts",
+      "outcome": "H96 physical148_s173 qualifies at 1.0330x over Cake. virtual152, TAIL4, MINIMAX172 and theoretical load-minimax MAX169 fail; load-minimax schedule subspace is evidence-saturated."
+    },
+    {
+      "path_id": "h3-precomputed-pw-c16",
+      "parent_ids": ["official-sm80-mma"],
+      "implementation_ref": "../FlashKDA-h3-pw/csrc/smxx/fwd_kernel1.cuh",
+      "ir_ref": "experiments/sm100_open_round1/ir/h3_precomputed_pw_c16.json",
+      "representation_status": "open_path_ir_v1_with_compiled_matched_hmma_cuda_parent",
+      "evidence_refs": [
+        "experiments/sm100_open_round1/evidence/h3_rounding_probe.json",
+        "experiments/sm100_open_round1/evidence/h3_recurrence_probe.json",
+        "experiments/sm100_open_round1/evidence/h3_input_oracle.json",
+        "experiments/sm100_open_round1/evidence/h3_build_attempt2.log",
+        "experiments/sm100_open_round1/evidence/h3_gpu_correctness.json",
+        "experiments/sm100_open_round1/evidence/h3_b300_pilot.json",
+        "experiments/sm100_open_round1/evidence/h3_b300_full_matrix.json",
+        "experiments/sm100_open_round1/evidence/h3_b300_isolated_process_cupti.json",
+        "experiments/sm100_open_round1/evidence/h3_source_manifest.json"
+      ],
+      "correctness_status": "b300_gpu_gate_passed_algorithm_equivalent_not_bitwise",
+      "measurement_scope": "B300 public-full, cold-L2 CUPTI, four balanced blocks, one extension per worker process; six H12 plus three H96 cases",
+      "outcome": "stop_full_path_regression_h12_geomean_0.9055x_h96_geomean_0.7581x"
+    }
+  ]
+}

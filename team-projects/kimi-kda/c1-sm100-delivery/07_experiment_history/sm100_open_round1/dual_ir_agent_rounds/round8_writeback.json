@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "round": 8,
+  "budget_receipt": "round8_budget_receipt.json",
+  "results": [
+    {
+      "lane": "hmma",
+      "profile": "H12 fixed8192, nonzero BF16 state, V16",
+      "incumbent": "Phase-1 lookahead L2",
+      "challenger": "Phase-1 lookahead L3",
+      "block_medians_ms": {
+        "l2": [0.438595, 0.438596],
+        "l3": [0.438662, 0.438548]
+      },
+      "median_speedup": 0.9999783404,
+      "correctness": "output and updated state bitwise equal to the same official peer in both blocks",
+      "identity": {
+        "device": "NVIDIA B300 SXM6 AC",
+        "physical_sm_count": 148,
+        "l2_binary_sha256": "f6f80fa402cc1dc00b09a8082b10806bbe17c0e533d067e931dd774d270b9270",
+        "l3_binary_sha256": "608fab5075f98eb65268b2cea20d613b1debb69b05104e0574b744b2d8e6a4a8",
+        "l3_patch_sha256": "1c06aeab79205843b45056dc643ece41502b3decf3fdc8ea678976fbd4683170"
+      },
+      "evidence_status": "exact_structural_screen_below_gate",
+      "claim": "Depth 3 is performance-neutral relative to depth 2 for this exact public-extension forward scope and does not justify qualification."
+    },
+    {
+      "lane": "tcgen05",
+      "profile": "D128/K16/V16, grid96, inner64 preferred-layout contract probe",
+      "incumbents": ["tcgen05 scalar-rematerialization", "resident HMMA"],
+      "challenger": "tcgen05 one-time preferred-layout staging",
+      "block_medians_us": {
+        "hmma": [43.014398, 43.018560],
+        "tcgen05_scalar": [55.276480, 55.281281],
+        "tcgen05_preferred": [45.051680, 45.045600]
+      },
+      "preferred_over_scalar": [1.226957, 1.227229],
+      "hmma_over_preferred": [0.954779, 0.955000],
+      "correctness": "guardrail and release output/state bitwise for inner 1, 2, and 4 in both jobs",
+      "resources": {
+        "hmma_registers": 32,
+        "scalar_registers": 39,
+        "preferred_registers": 32,
+        "hmma_static_shared_bytes": 9216,
+        "scalar_static_shared_bytes": 9740,
+        "preferred_static_shared_bytes": 9228
+      },
+      "evidence_status": "mechanism_recovered_but_practical_screen_below_gate",
+      "claim": "Moving rematerialization outside the repeated lifecycle recovers 22.7% over the scalar tcgen05 control, but the preferred-layout probe remains about 4.7% slower than HMMA. This is not a full K2 or cross-phase TMEM result."
+    }
+  ],
+  "remote_jobs": [24947, 24948, 24953, 24954],
+  "raw_evidence": [
+    "results/round8-hmma-jobs-24948-24954",
+    "results/round8-tcgen-job-24947",
+    "results/round8-tcgen-job-24953"
+  ],
+  "saturation_status": "default-knowledge_high-VOI_proposal_saturation_under_frozen_B300_existing-carrier_envelope",
+  "open_research": [
+    "production P3/P4 preferred-layout carrier with a lane-verified end-to-end oracle",
+    "cross-phase direct TMEM residency and rounding boundary",
+    "common-profile four-block H1/T1/T2 qualification"
+  ]
+}

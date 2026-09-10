@@ -1,0 +1,24 @@
+{
+  "schema_version": "h3_source_manifest_v1",
+  "official_commit": "1ce47ea3bb22c84eb9cc665028399cf35e8ffb0b",
+  "official_source_root": "../FlashKDA",
+  "h3_source_root": "../FlashKDA-h3-pw",
+  "semantic_compatibility": "algorithm_equivalent_not_official_bitwise",
+  "modified_files": [
+    {"path": "csrc/smxx/utils.cuh", "official_sha256": "211cc28d910758e2658a53f5bcda779f1076df281ff75c09ce9bd1638a54151a", "h3_sha256": "1f014bc5391cf42b178b46c795665c95bce4ba4271c7c1d5ac962900b0f9e061"},
+    {"path": "csrc/smxx/fwd_kernel1.cuh", "official_sha256": "e0f369b51753d5e1a62b8435f0b692fdc856d87e52eb27d012c22b6575a0370f", "h3_sha256": "a983305f95af2f9a0ad424b576b606d7b0185ee30d9df847262e31c7083e6a4c"},
+    {"path": "csrc/smxx/fwd_kernel2.cuh", "official_sha256": "f8a634154ca26a18855adbd3db17d6208a874b16f173d0eb9814bfefff03b9b9", "h3_sha256": "035ff39596a53b48598484236729bfba0b04498a538706429a253cf2d5e778fb"},
+    {"path": "csrc/smxx/fwd_launch.cu", "official_sha256": "dbaf9ba867fc8c799cf147b7e17bd2aba4a08b1b63c5f7df0cca1173a0df5562", "h3_sha256": "9e0c81cdea1626190fbd4ee54844b4fdd79adef5291621f1655e72d1e9c7f8de"},
+    {"path": "csrc/flash_kda.cpp", "official_sha256": "f736ab87c7c2e47fe416f8d04d62502a257a6ff32a0b23452c07e1bc65c87c04", "h3_sha256": "da445f4a17cac19181a3e740ce514df01bf8349421e77cb12fc100edc15d6c38"},
+    {"path": "csrc/fwd.h", "official_sha256": "462afefb5c1bfe89428166cd81fc70954606049a41a4b67376025a2b2f91d7cc", "h3_sha256": "d647d0cd840fce60071f16694ed8ad27722f1a5cc2c569a40f7abe08387b1f8c"},
+    {"path": "setup.py", "official_sha256": "c6810c772afda979e91e0337feca8ad63eac7c575f6eb2466681d96a18adb016", "h3_sha256": "f39049a040c95b56eec819b74b6fcd712936c7afe5c93b0a655bea3a0cc5f95e"},
+    {"path": "flash_kda/__init__.py", "official_sha256": "9cb9bd39186f6993f0067a8ff720cd233ef4b474444f1fd0fcd2bf06cab5fb84", "h3_sha256": "e5fd0bf1e05da1951f8af910a3b303e649576ce97ec220055850c490a36dbb76"}
+  ],
+  "remote_build": {
+    "target": "sm_103a",
+    "extension": "flash_kda_h3_C.cpython-312-x86_64-linux-gnu.so",
+    "binary_sha256": "aa7a8606139d3a3b542bc5fc2dca8eec996ff4f0ca96ac011fd09f4bd79052ed",
+    "build_log": "h3_build_attempt2.log",
+    "build_log_sha256": "6a52faa83c184104856aac6518feb7c068ca174e690cb0886c2f5b9cbf906b31"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "case": "h12_packed_balanced3_qual",
+  "variant": "cake",
+  "block": 0,
+  "decision": {
+    "device_sm_count": 148,
+    "seed": 42005,
+    "observed_modules": [],
+    "route_identity_passed": true,
+    "execution_identity": {
+      "status": "recorded",
+      "path": "<REMOTE_HOME>/kda-dual-ir-agent-rounds-20260910/round6-hmma-qual-job-24913/h12_packed_balanced3_qual_cake_0_execution_identity.json",
+      "canonical_sha256": "a20b962599b64762bc0e23e3a3a67f7bdad26a48efc2494776e43bcb8e4ceb4f",
+      "python_executable": "/usr/bin/python3.12",
+      "module_files": {
+        "torch": "<REMOTE_HOME>/FlashKDA/.venv/lib/python3.12/site-packages/torch/__init__.py",
+        "flashinfer.kda": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda.py",
+        "flashinfer.kda_prefill": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda_prefill.py",
+        "flashinfer.kda_evolution": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda_evolution.py"
+      },
+      "native_extension_count": 31
+    }
+  },
+  "module_path": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda.py",
+  "correctness": {
+    "output": {
+      "finite": true,
+      "bitwise": false,
+      "relative_l2": 0.00804652739316225,
+      "normalized_linf": 0.02678571455180645,
+      "max_abs": 0.002105712890625,
+      "historical_atol_rtol_1e2_passed": true,
+      "passed": true
+    },
+    "state": {
+      "finite": true,
+      "bitwise": false,
+      "relative_l2": 0.005504185799509287,
+      "normalized_linf": 0.015463917516171932,
+      "max_abs": 0.01171875,
+      "historical_atol_rtol_1e2_passed": false,
+      "passed": false
+    }
+  },
+  "samples_ms": [],
+  "median_ms": null,
+  "status": "correctness_failed_not_timed"
+}

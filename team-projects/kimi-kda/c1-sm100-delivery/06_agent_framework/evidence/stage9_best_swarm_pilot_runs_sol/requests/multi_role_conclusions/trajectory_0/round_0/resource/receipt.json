@@ -1,0 +1,30 @@
+{
+  "request_id": "multi_role_conclusions.t0.r0.resource",
+  "request_digest": "b847f4b652e42d39af8db96135db4a8dc4b2feac8b7fae3897bb6bf2e7af9091",
+  "arm": "multi_role_conclusions",
+  "trajectory": 0,
+  "round": 0,
+  "seed": 91001,
+  "lane": "resource",
+  "requested_proposals": 1,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "prompt_sha256": "4f2da9901bd8c2615007e606cb580bbd7490af82e853d68b8b8603bd54c674a2",
+  "status": "ok",
+  "started_at_utc": "2026-09-09T14:55:31.968148+00:00",
+  "error": "",
+  "exit_status": 0,
+  "elapsed_s": 39.41365098953247,
+  "token_usage": {
+    "input_tokens": 15433,
+    "output_tokens": 519,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": null,
+    "total_tokens": 15952,
+    "measurement": "exact"
+  },
+  "tool_event_count": 0,
+  "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/proposal_output.json",
+  "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/events.jsonl",
+  "finished_at_utc": "2026-09-09T14:56:11.382354+00:00"
+}

@@ -1,0 +1,1 @@
+2026-09-10 09:20:53,188 - INFO - flash_kda.py:776 - flashinfer.jit: Generated FlashKDA physical module sm_103a:flashkda_bf16_fused_m128_6151e2988c JIT spec: flash_kda_generated_sm103a_flashkda_bf16_fused_m128_6151e2988c_16863b1a21_direct_nvrtc_v1

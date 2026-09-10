@@ -1,0 +1,46 @@
+{
+  "accounting_scope": "single-node visible-GPU allocation; telemetry includes compilation, benchmark setup, synchronization, and idle gaps",
+  "allocated_gpu_seconds": 3.0758717777207494,
+  "command": [
+    "<REMOTE_HOME>/FlashKDA/.venv/bin/python",
+    "bench_flash_kda_h12_physical_search.py",
+    "--state-rotations",
+    "256",
+    "--dry-run-iters",
+    "20",
+    "--repeat-iters",
+    "100",
+    "--json",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_stage4_h12_physical_search.json"
+  ],
+  "ended_at_utc": "2026-09-09T02:57:09.263361+00:00",
+  "exit_code": 1,
+  "experiment": "stage4-kimi-k3-tp8-h12-physical-search",
+  "gpu_count": 1,
+  "hardware": [
+    {
+      "index": 0,
+      "memory_total_mib": 275040.0,
+      "name": "NVIDIA B300 SXM6 AC",
+      "power_limit_w": 1100.0,
+      "uuid": "GPU-778768b4-6c9e-e483-890e-0812760948ae"
+    }
+  ],
+  "scheduler": {
+    "slurm_job_id": "23136",
+    "slurm_job_name": "kda-stage4-h12-physical",
+    "slurm_node_list": "dev-slurm"
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-09-09T02:57:06.187476+00:00",
+  "telemetry": {
+    "average_gpu_utilization_percent": 11.0,
+    "average_power_w": 200.502,
+    "estimated_allocation_energy_joules": 501.255,
+    "peak_memory_used_mib": 7456.0,
+    "peak_power_w": 210.6,
+    "sample_count": 5,
+    "sample_interval_seconds": 0.5
+  },
+  "wall_seconds": 3.0758717777207494
+}

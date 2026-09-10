@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "round": 3,
+  "architecture": "dual-lane proposer -> critic -> isolated executor -> scoped writeback",
+  "budget": {
+    "hmma": {"new_proposals": 1, "compile_attempts": 0, "gpu_blocks": 2},
+    "tcgen05": {
+      "new_proposals": 0,
+      "qualification_candidates": 1,
+      "compile_attempts": 0,
+      "gpu_blocks": 4,
+      "note": "qualification pool is accounted separately from proposal slots"
+    }
+  },
+  "proposals": [
+    {
+      "id": "r3-hmma-h12-balanced8-v64",
+      "lane": "hmma",
+      "representation_status": "executable_existing",
+      "hypothesis": "The V64 advantage observed at nseq=6 transfers to balanced nseq=8 at the same total tokens.",
+      "falsification_value": "Tests the nearest unseen nseq boundary while holding H12 and total=8192 fixed.",
+      "incumbent": "hmma_v128",
+      "challenger": "hmma_v64"
+    },
+    {
+      "id": "r3-tcgen-h96-s173-qualification",
+      "lane": "tcgen05",
+      "representation_status": "executable_existing",
+      "hypothesis": "The two-block H96 s173 screen remains faster than Cake under four-block qualification.",
+      "incumbent": "cake",
+      "challenger": "m128_h96_p1_s173"
+    }
+  ],
+  "critic_requirements": [
+    "actual route and sm103a target must be observed",
+    "output and final state must pass the frozen official-peer contract",
+    "all implementations run in isolated processes",
+    "raw samples and Python/native execution receipts are retained"
+  ]
+}

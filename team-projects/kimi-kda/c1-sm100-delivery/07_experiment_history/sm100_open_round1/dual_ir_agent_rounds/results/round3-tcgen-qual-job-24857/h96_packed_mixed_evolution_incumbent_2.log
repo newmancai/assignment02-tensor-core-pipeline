@@ -1,0 +1,2 @@
+2026-09-10 09:22:53,818 - INFO - flash_kda_evolution.py:244 - flashinfer.jit: Generated FlashKDA evolution m128_h96_p1_s173 sm103a JIT spec: flash_kda_evolution_m128_h96_p1_s173_7ad59e28e7_sm103a
+2026-09-10 09:22:53,823 - INFO - flash_kda_evolution.py:255 - flashinfer.jit: Loaded FlashKDA evolution m128_h96_p1_s173 sm103a module

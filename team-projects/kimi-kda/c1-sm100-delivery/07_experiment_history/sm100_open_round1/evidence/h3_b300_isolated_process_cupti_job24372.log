@@ -1,0 +1,14 @@
+h12_packed_512x32 official=0.369290 ms h3=0.486724 ms speedup=0.7587x
+h12_packed_128x8 official=0.071561 ms h3=0.080329 ms speedup=0.8908x
+h12_fixed_512 official=0.119833 ms h3=0.119497 ms speedup=1.0028x
+h12_fixed_8192 official=1.356612 ms h3=1.327491 ms speedup=1.0219x
+h12_packed_mixed official=0.583854 ms h3=0.610015 ms speedup=0.9571x
+h12_packed_1024x8 official=0.263131 ms h3=0.316419 ms speedup=0.8316x
+h96_fixed_8192 official=1.759913 ms h3=2.199556 ms speedup=0.8001x
+h96_mixed official=1.495166 ms h3=1.961195 ms speedup=0.7624x
+h96_uniform_1024x8 official=1.201091 ms h3=1.681616 ms speedup=0.7142x
+{
+  "h12_geomean_speedup": 0.9055261235465943,
+  "h96_geomean_speedup": 0.7580967719388635,
+  "decision": "stop_h3"
+}

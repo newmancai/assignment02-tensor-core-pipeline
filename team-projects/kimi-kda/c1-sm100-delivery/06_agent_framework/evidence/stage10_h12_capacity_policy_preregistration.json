@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_first_stage10_gpu_run",
+  "analysis": "stage10-h12-resident-grid-capacity-prospective-interpolation",
+  "prior_evidence": "evidence/b300_stage8_certificate.json",
+  "claim_boundary": "Prospective interpolation on the same B300, H12 BT16 route, compiler/kernel and five-resident-CTA-per-SM resource footprint; not cross-head, cross-kernel, cross-device or end-to-end Kimi-K3 transfer.",
+  "physical_hypothesis": {
+    "formula": "ceil(total_chunks / floor((sm_count * resident_ctas_per_sm) / num_heads))",
+    "selection_rule": "Choose the smallest positive integer cpc whose rectangular H-way prepare grid does not exceed the measured resident CTA capacity.",
+    "sm_count": 148,
+    "resident_ctas_per_sm": 5,
+    "resident_grid_capacity_ctas": 740,
+    "num_heads": 12,
+    "chunk_groups_per_capacity_fill": 61,
+    "resource_basis": {
+      "threads_per_cta": 128,
+      "registers_per_thread_reported": 77,
+      "registers_per_thread_allocated": 80,
+      "shared_memory_bytes_per_cta": 45056,
+      "clustered": false,
+      "limiting_resource": "shared memory",
+      "source": "evidence/b300_stage7_h12_prepare_ncu_summary.json"
+    },
+    "expected_target": "sm_103a",
+    "expected_logical_route": "bt16_prepare_chain_m64",
+    "expected_physical_variants": [
+      "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+      "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+    ]
+  },
+  "profiles": [
+    {"name": "h12_w384_fixed_6144", "seq_lens": [6144], "layout": "fixed", "total_chunks": 384, "baseline_cpc": 9, "predicted_cpc": 7, "baseline_grid_ctas": 516, "predicted_grid_ctas": 660, "cpc_minus_one_grid_ctas": 768},
+    {"name": "h12_w384_balanced_4", "seq_lens": [1488, 1520, 1552, 1584], "layout": "packed", "total_chunks": 384, "baseline_cpc": 9, "predicted_cpc": 7, "baseline_grid_ctas": 516, "predicted_grid_ctas": 660, "cpc_minus_one_grid_ctas": 768},
+    {"name": "h12_w768_fixed_12288", "seq_lens": [12288], "layout": "fixed", "total_chunks": 768, "baseline_cpc": 9, "predicted_cpc": 13, "baseline_grid_ctas": 1032, "predicted_grid_ctas": 720, "cpc_minus_one_grid_ctas": 768},
+    {"name": "h12_w768_balanced_4", "seq_lens": [2976, 3040, 3104, 3168], "layout": "packed", "total_chunks": 768, "baseline_cpc": 9, "predicted_cpc": 13, "baseline_grid_ctas": 1032, "predicted_grid_ctas": 720, "cpc_minus_one_grid_ctas": 768}
+  ],
+  "protocol": {
+    "epochs": 8,
+    "process_isolation": "one fresh Python process and Slurm array task per epoch, serialized with array concurrency one",
+    "pair_order": "even epochs ABBA; odd epochs BAAB",
+    "blocks_per_arm_per_epoch": 2,
+    "dry_run_iterations_per_block": 20,
+    "measured_iterations_per_block": 100,
+    "state_rotations": 256,
+    "timing_backend": "CUPTI",
+    "cache_state": "cold L2",
+    "cuda_graph": false,
+    "correctness": "public recurrent_kda output and final recurrent state, atol=1e-2 and rtol=1e-2",
+    "route_validity": "bt16_prepare_chain_m64 must be observed; an unexpected route invalidates the frozen profile and cannot be replaced in Stage10",
+    "scope": "same prepared public object; only H12 long-BT16 chunks-per-prepare-CTA changes"
+  },
+  "statistics": {
+    "primary_unit": "process epoch",
+    "per_epoch_effect": "log(median baseline samples / median candidate samples)",
+    "profile_estimator": "exp(median epoch log effects)",
+    "bootstrap_draws": 50000,
+    "familywise_alpha": 0.05,
+    "comparisons": 4,
+    "per_comparison_one_sided_alpha": 0.0125,
+    "mechanism_gate": "all four Bonferroni one-sided 98.75% lower confidence bounds exceed 1.0",
+    "deployment_gate": "all four Bonferroni lower bounds are at least 1.005",
+    "correctness_gate": "all output and final-state checks pass in all epochs",
+    "route_gate": "all epochs use the frozen logical and physical route",
+    "no_geomean_substitution": "a positive aggregate geometric mean cannot override any failed per-profile conjunctive gate"
+  },
+  "failure_and_rerun_rules": {
+    "performance_failure": "retain current cpc9 and report the exact capacity rule as falsified or inconclusive for the failing profile",
+    "route_failure": "mark the frozen profile invalid; do not replace sequence vectors after observing timing",
+    "correctness_failure": "reject immediately without a performance claim",
+    "infrastructure_failure": "preserve the failed attempt; rerun only the identical frozen epoch and label it as a rerun",
+    "neighbor_search": "no cpc neighbor is measured in Stage10; any later search is a separately labeled post-falsification experiment"
+  }
+}

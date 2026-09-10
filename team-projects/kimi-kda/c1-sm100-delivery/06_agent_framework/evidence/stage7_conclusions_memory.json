@@ -1,0 +1,285 @@
+{
+  "entries": [
+    {
+      "candidate_id": "kir:f22a68f4d1319113",
+      "conclusion": "screen latency 514.435000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_fixed_8192",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:e01b83ba223bbd39",
+      "conclusion": "screen latency 519.218000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_fixed_8192",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:b969c1f9ace88f5f",
+      "conclusion": "screen latency 520.547000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_fixed_8192",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "screen latency 501.346000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_fixed_8192",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:8df063e29cf85924",
+      "conclusion": "screen latency 503.299500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_fixed_8192",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:bce22bd57f4550a6",
+      "conclusion": "screen latency 508.275000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_fixed_8192",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "paired speedup 1.034980x; 95% CI [1.033495, 1.036140]",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_pair.json"
+      ],
+      "profile_id": "h12_profile_fixed_8192",
+      "round_index": 1,
+      "state": "activate"
+    },
+    {
+      "candidate_id": "kir:f22a68f4d1319113",
+      "conclusion": "screen latency 308.399500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_2",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:e01b83ba223bbd39",
+      "conclusion": "screen latency 313.250000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_2",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:b969c1f9ace88f5f",
+      "conclusion": "screen latency 314.755000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_2",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "screen latency 294.594000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_2",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:8df063e29cf85924",
+      "conclusion": "screen latency 297.426000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_2",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:bce22bd57f4550a6",
+      "conclusion": "screen latency 302.672500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_2",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "paired speedup 1.058319x; 95% CI [1.056389, 1.059829]",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_pair.json"
+      ],
+      "profile_id": "h12_profile_balanced_2",
+      "round_index": 1,
+      "state": "activate"
+    },
+    {
+      "candidate_id": "kir:f22a68f4d1319113",
+      "conclusion": "screen latency 203.586500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_4",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:e01b83ba223bbd39",
+      "conclusion": "screen latency 208.673000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_4",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:b969c1f9ace88f5f",
+      "conclusion": "screen latency 210.305000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_4",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "screen latency 188.896500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_4",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:8df063e29cf85924",
+      "conclusion": "screen latency 191.697500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_4",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:bce22bd57f4550a6",
+      "conclusion": "screen latency 197.058000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_balanced_4",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "paired speedup 1.094202x; 95% CI [1.091348, 1.097216]",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_pair.json"
+      ],
+      "profile_id": "h12_profile_balanced_4",
+      "round_index": 1,
+      "state": "activate"
+    },
+    {
+      "candidate_id": "kir:f22a68f4d1319113",
+      "conclusion": "screen latency 502.803500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_skew",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:e01b83ba223bbd39",
+      "conclusion": "screen latency 508.146500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_skew",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:b969c1f9ace88f5f",
+      "conclusion": "screen latency 510.194000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_skew",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "screen latency 489.619500 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_skew",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:8df063e29cf85924",
+      "conclusion": "screen latency 492.339000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_skew",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:bce22bd57f4550a6",
+      "conclusion": "screen latency 497.074000 us",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_matrix.json"
+      ],
+      "profile_id": "h12_profile_skew",
+      "round_index": 1,
+      "state": "screened"
+    },
+    {
+      "candidate_id": "kir:5dbfa3222a3aa9e8",
+      "conclusion": "paired speedup 1.036027x; 95% CI [1.033364, 1.038036]",
+      "evidence_refs": [
+        "evidence/b300_stage6_h12_profile_pair.json"
+      ],
+      "profile_id": "h12_profile_skew",
+      "round_index": 1,
+      "state": "activate"
+    }
+  ],
+  "schema_version": 1
+}

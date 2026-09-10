@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "sealed_before_first_stage10_gpu_run",
+  "artifacts": {
+    "evidence/stage10_h12_capacity_policy_preregistration.json": "15c48e28c262c7f5982847507db24f71584403064e12e331d3a099e22421ccc2",
+    "stage3_remote/benchmarks/bench_flash_kda_h12_wave_policy_heldout.py": "02a92be28bfa5192a94ffb2da2f6f67c932ea9b4cb3c0ff6857aaf8ffa185b54",
+    "stage10_b300_h12_wave_policy_heldout.sbatch": "f699e667d7199a88ff01e1738b97459f89e8935cd0af8588d1003eda26f93e7d"
+  },
+  "note": "The three inputs were frozen and hashed locally before upload, submission, or any Stage10 GPU observation."
+}

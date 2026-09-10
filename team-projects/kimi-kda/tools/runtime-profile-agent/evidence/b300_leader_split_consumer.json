@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment": "leader_arrival_split_consumer",
+  "hardware": "NVIDIA B300",
+  "date": "2026-09-08",
+  "scope": "split_consumer_protocol_only",
+  "schedule": {
+    "stages": 5,
+    "iterations": 10,
+    "producer_warps": 4,
+    "wait_only_compute_warps": 4,
+    "release_owner_warps": 1,
+    "ready_arrival_mode": "elect_one",
+    "free_arrival_mode": "elect_one",
+    "ready_arrival_threads": 1,
+    "free_arrival_threads": 1,
+    "completion_join": {
+      "participants": ["compute", "recycler"],
+      "waiter": "recycler",
+      "arrival_mode": "cooperative",
+      "arrival_count": 160,
+      "implementation": "NamedBarrier"
+    },
+    "exact_frozen_arrival_protocol": true
+  },
+  "shared_memory_bytes": {
+    "stage_payload": 2560,
+    "observation_probe": 5120,
+    "mbarriers": 80,
+    "total": 7760
+  },
+  "execution": {
+    "marker_values": [55],
+    "marker_count": 288,
+    "expected_iteration_sum": 55,
+    "stage_wraps_exercised": 1,
+    "passed": true
+  },
+  "backend": {
+    "surface": "public CUTLASS PipelineAsync and NamedBarrier primitives",
+    "task_scheduling_integration": "pending"
+  }
+}

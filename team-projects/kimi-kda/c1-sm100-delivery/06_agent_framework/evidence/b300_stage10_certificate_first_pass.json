@@ -1,0 +1,242 @@
+{
+  "artifacts": {
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch0.json": "41eea49d1a4cf0002eeb88076da77ee54820fb72ce61a20f301428541549cafb",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch0_accounting.json": "1fda5e3bc111cccd9f279ab1f1096e328e4333bed884d41442a89ef5ab586e7b",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch1.json": "2d8be4954ba9ee2949db677f673278f32f93141263f2e0409f556d053c507c45",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch1_accounting.json": "c6b4daf38a6776f5ac43977e1ef5db673d4cf22f25e454f077e300956d90ca0a",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch2.json": "bea41c08ed0dfd7d33dcf4b48e53d75dc7566a826a7e809131f83e7693d3afeb",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch2_accounting.json": "341b42a30d6ce8100795714d23df5a632e8f99114d030b89f71643ba0663dd49",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch3.json": "aaa98c63fa5b5405394b3740f2e0e099cf8626a3609f9754a203279ee0d38e48",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch3_accounting.json": "93a3dec8418d07f08749399c4e7a4f327447abae2cc0d4156835173445ff7322",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch4.json": "e03741d2d6665e7dbc10f651d5ee0091304e6632f9ddf6b5a8ce8797f93182f8",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch4_accounting.json": "726a3b1d55131b67ad0df5a659c735327a62f102bf872e87c1f7dd843e6ccf6b",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch5.json": "f3c9bc7e045f0f9a498e0ee22d051161a3efeeb1f2aa3cefc4b39e34ddd184fb",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch5_accounting.json": "888b59a354f7c6921506adbd07fc72ce62781940da53b03168bbf4f63cedbd99",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch6.json": "6e973e166e2fc1b56242dbd1891e62f0646bcd5c9d3c467fa41dbfee363e75ae",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch6_accounting.json": "3cc6141da6742f9c3555cf55dd7ad5a4801baa512461a36191e7f0763b59585a",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch7.json": "46aedfc723ba14f97ab675e53440cc69a42d19c01c6c9aa0e7ab7d1c430f6d11",
+    "evidence/b300_stage10_h12_wave_policy_heldout_epoch7_accounting.json": "f1369750bac5abc2a901a4cffcf838587d2cb8192db230181ec06146563f7abf",
+    "evidence/stage10_h12_capacity_policy_preregistration.json": "15c48e28c262c7f5982847507db24f71584403064e12e331d3a099e22421ccc2",
+    "stage10_b300_h12_wave_policy_heldout.sbatch": "f699e667d7199a88ff01e1738b97459f89e8935cd0af8588d1003eda26f93e7d",
+    "stage3_remote/benchmarks/bench_flash_kda_h12_wave_policy_heldout.py": "02a92be28bfa5192a94ffb2da2f6f67c932ea9b4cb3c0ff6857aaf8ffa185b54"
+  },
+  "checks": {
+    "all_accounting_exit_zero": true,
+    "all_correct": true,
+    "all_four_familywise_mechanism_gates": true,
+    "all_four_half_percent_deployment_gates": true,
+    "all_routes_and_physical_variants_match": true,
+    "all_scope_identical": true,
+    "direction_reversal_present": true,
+    "eight_fresh_process_epochs": true,
+    "pair_orders_alternate": true,
+    "predictions_and_grids_match_preregistration": true,
+    "preregistration_sealed": true,
+    "profile_sets_match": true,
+    "same_single_b300": false
+  },
+  "claim_boundary": "Prospective interpolation on one physical B300 for the unchanged H12 BT16 prepare resource receipt. This qualifies shadow activation only; production activation, other work levels, heads, kernels and devices remain out of scope.",
+  "physical_policy": {
+    "chunk_groups_per_capacity_fill": 61,
+    "expected_logical_route": "bt16_prepare_chain_m64",
+    "expected_physical_variants": [
+      "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+      "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+    ],
+    "expected_target": "sm_103a",
+    "formula": "ceil(total_chunks / floor((sm_count * resident_ctas_per_sm) / num_heads))",
+    "num_heads": 12,
+    "resident_ctas_per_sm": 5,
+    "resident_grid_capacity_ctas": 740,
+    "resource_basis": {
+      "clustered": false,
+      "limiting_resource": "shared memory",
+      "registers_per_thread_allocated": 80,
+      "registers_per_thread_reported": 77,
+      "shared_memory_bytes_per_cta": 45056,
+      "source": "evidence/b300_stage7_h12_prepare_ncu_summary.json",
+      "threads_per_cta": 128
+    },
+    "selection_rule": "Choose the smallest positive integer cpc whose rectangular H-way prepare grid does not exceed the measured resident CTA capacity.",
+    "sm_count": 148
+  },
+  "schema_version": 1,
+  "statistics": {
+    "bootstrap_draws": 50000,
+    "comparisons": 4,
+    "familywise_alpha": 0.05,
+    "one_sided_alpha_per_comparison": 0.0125,
+    "primary_unit": "fresh process epoch",
+    "profiles": [
+      {
+        "baseline_epoch_medians_ms": [
+          0.088288,
+          0.088097,
+          0.088193,
+          0.088177,
+          0.088191,
+          0.088256,
+          0.0880175,
+          0.088288
+        ],
+        "bonferroni_one_sided_98_75_lower": 1.0321557520466742,
+        "bootstrap_98_75_upper": 1.0350475096279537,
+        "candidate_epoch_medians_ms": [
+          0.08524799999999999,
+          0.085345,
+          0.085409,
+          0.085281,
+          0.0854435,
+          0.085585,
+          0.08514949999999999,
+          0.0852985
+        ],
+        "deployment_gate_0_5_percent": true,
+        "epoch_speedups": [
+          1.0356606606606609,
+          1.0322455914230475,
+          1.0325960964301186,
+          1.0339583260046201,
+          1.0321557520466742,
+          1.0312087398492726,
+          1.0336819358892302,
+          1.0350475096279537
+        ],
+        "mechanism_gate": true,
+        "name": "h12_w384_balanced_4",
+        "speedup": 1.0331388735061455,
+        "total_chunks": 384
+      },
+      {
+        "baseline_epoch_medians_ms": [
+          0.221746,
+          0.22189,
+          0.22184199999999998,
+          0.22168300000000002,
+          0.221698,
+          0.22179349999999998,
+          0.221699,
+          0.22182649999999998
+        ],
+        "bonferroni_one_sided_98_75_lower": 1.012948621296233,
+        "bootstrap_98_75_upper": 1.01352030329329,
+        "candidate_epoch_medians_ms": [
+          0.2188175,
+          0.21893,
+          0.2188975,
+          0.21877200000000002,
+          0.2191855,
+          0.218902,
+          0.21886499999999998,
+          0.218755
+        ],
+        "deployment_gate_0_5_percent": true,
+        "epoch_speedups": [
+          1.013383298867778,
+          1.01352030329329,
+          1.013451501273427,
+          1.0133060903589124,
+          1.0114628933027048,
+          1.013209107271747,
+          1.012948621296233,
+          1.0140408219240702
+        ],
+        "mechanism_gate": true,
+        "name": "h12_w384_fixed_6144",
+        "speedup": 1.0133446938780137,
+        "total_chunks": 384
+      },
+      {
+        "baseline_epoch_medians_ms": [
+          0.174641,
+          0.174658,
+          0.17452,
+          0.174722,
+          0.174434,
+          0.1745295,
+          0.174657,
+          0.174434
+        ],
+        "bonferroni_one_sided_98_75_lower": 1.1352444886781283,
+        "bootstrap_98_75_upper": 1.1360156997520066,
+        "candidate_epoch_medians_ms": [
+          0.153826,
+          0.1537455,
+          0.153729,
+          0.153889,
+          0.153634,
+          0.153633,
+          0.153826,
+          0.153698
+        ],
+        "deployment_gate_0_5_percent": true,
+        "epoch_speedups": [
+          1.1353152262946447,
+          1.136020241242833,
+          1.1352444886781283,
+          1.135376797561879,
+          1.1353866982568963,
+          1.1360156997520066,
+          1.1354192399204297,
+          1.134913922106989
+        ],
+        "mechanism_gate": true,
+        "name": "h12_w768_balanced_4",
+        "speedup": 1.1353817478985957,
+        "total_chunks": 768
+      },
+      {
+        "baseline_epoch_medians_ms": [
+          0.4418445,
+          0.441732,
+          0.441829,
+          0.442179,
+          0.441637,
+          0.4419265,
+          0.44165449999999995,
+          0.442067
+        ],
+        "bonferroni_one_sided_98_75_lower": 1.0487788084627494,
+        "bootstrap_98_75_upper": 1.049653927888782,
+        "candidate_epoch_medians_ms": [
+          0.4210285,
+          0.421187,
+          0.421028,
+          0.421252,
+          0.4210605,
+          0.421156,
+          0.421188,
+          0.421155
+        ],
+        "deployment_gate_0_5_percent": true,
+        "epoch_speedups": [
+          1.0494408335777743,
+          1.0487788084627494,
+          1.0494052652080148,
+          1.0496781024185047,
+          1.0488682742741244,
+          1.0493178299727417,
+          1.0485923150707046,
+          1.049653927888782
+        ],
+        "mechanism_gate": true,
+        "name": "h12_w768_fixed_12288",
+        "speedup": 1.049361546679715,
+        "total_chunks": 768
+      }
+    ]
+  },
+  "status": "prospective_capacity_rule_not_qualified",
+  "summary": {
+    "allocated_gpu_seconds": 38.00943331466988,
+    "device_uuid_count": 1,
+    "epochs_per_profile": 8,
+    "estimated_energy_joules": 9735.025,
+    "minimum_familywise_lower": 1.012948621296233,
+    "profile_count": 4,
+    "speedup_range": [
+      1.0133446938780137,
+      1.1353817478985957
+    ]
+  }
+}

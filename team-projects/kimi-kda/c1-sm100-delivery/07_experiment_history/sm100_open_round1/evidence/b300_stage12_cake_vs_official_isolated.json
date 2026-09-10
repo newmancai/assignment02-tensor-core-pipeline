@@ -1,0 +1,261 @@
+{
+  "aggregate": {
+    "h12_geomean_speedup": 2.4593361204704074,
+    "h12_range": [
+      2.063709519684819,
+      2.721667612935325
+    ],
+    "h96_geomean_speedup": 2.234342615034147,
+    "h96_range": [
+      1.8743094763255712,
+      2.610848309118007
+    ]
+  },
+  "comparison_scope": "same seeds/shapes and CUPTI cold-L2 public state semantics; extensions never coexist in one process",
+  "correctness_evidence": [
+    "evidence/b300_stage11_cake_vs_official_h12.json",
+    "experiments/sm100_open_round1/evidence/b300_stage12_cake_vs_official_legacy.json",
+    "evidence/b300_stage3_public_paired.json"
+  ],
+  "limitation": "CAKE has one isolated timing block per case; use this as corrected magnitude evidence, not a paired confidence interval",
+  "reason": "same-process extension loading changed absolute timing and CAKE route selection",
+  "rows": [
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.17894500000000002,
+      "cake_physical_variants": [
+        "sm_103a:flashkda_bf16_fused_m128_6151e2988c"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "direct_m128",
+      "layout": "packed",
+      "name": "h12_packed_512x32",
+      "num_heads": 12,
+      "official_blocks": 4,
+      "official_median_ms": 0.36929049999999997,
+      "seed": 12000,
+      "seq_lens": [
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "speedup_official_over_cake": 2.063709519684819
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.026528,
+      "cake_physical_variants": [
+        "sm_103a:flashkda_bf16_fused_m128_13081cc606"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "direct_m128",
+      "layout": "packed",
+      "name": "h12_packed_128x8",
+      "num_heads": 12,
+      "official_blocks": 4,
+      "official_median_ms": 0.07156075,
+      "seed": 12001,
+      "seq_lens": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "speedup_official_over_cake": 2.697555413148372
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.0501445,
+      "cake_physical_variants": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "bt16_prepare_chain_m64",
+      "layout": "fixed",
+      "name": "h12_fixed_512",
+      "num_heads": 12,
+      "official_blocks": 4,
+      "official_median_ms": 0.11983250000000001,
+      "seed": 12002,
+      "seq_lens": [
+        512
+      ],
+      "speedup_official_over_cake": 2.389743640877863
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.49844900000000003,
+      "cake_physical_variants": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "bt16_prepare_chain_m64",
+      "layout": "fixed",
+      "name": "h12_fixed_8192",
+      "num_heads": 12,
+      "official_blocks": 4,
+      "official_median_ms": 1.3566125,
+      "seed": 12003,
+      "seq_lens": [
+        8192
+      ],
+      "speedup_official_over_cake": 2.721667612935325
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.2371365,
+      "cake_physical_variants": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "bt16_prepare_chain_m64",
+      "layout": "packed",
+      "name": "h12_packed_mixed",
+      "num_heads": 12,
+      "official_blocks": 4,
+      "official_median_ms": 0.5838535,
+      "seed": 12004,
+      "seq_lens": [
+        1300,
+        547,
+        2048,
+        963,
+        271,
+        3063
+      ],
+      "speedup_official_over_cake": 2.4620988333723406
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.106017,
+      "cake_physical_variants": [
+        "sm_103a:flashkda_bf16_fused_m128_6151e2988c"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "direct_m128",
+      "layout": "packed",
+      "name": "h12_packed_1024x8",
+      "num_heads": 12,
+      "official_blocks": 4,
+      "official_median_ms": 0.263131,
+      "seed": 12005,
+      "seq_lens": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ],
+      "speedup_official_over_cake": 2.481969872756256
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.7720845000000001,
+      "cake_physical_variants": [
+        "m128"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "m128",
+      "layout": "fixed",
+      "name": "h96_fixed_8192",
+      "num_heads": 96,
+      "official_blocks": 4,
+      "official_median_ms": 1.759913,
+      "seed": 10000,
+      "seq_lens": [
+        8192
+      ],
+      "speedup_official_over_cake": 2.279430554557176
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.5726745,
+      "cake_physical_variants": [
+        "m128"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "m128",
+      "layout": "packed",
+      "name": "h96_mixed",
+      "num_heads": 96,
+      "official_blocks": 4,
+      "official_median_ms": 1.49516625,
+      "seed": 10001,
+      "seq_lens": [
+        1300,
+        547,
+        2048,
+        963,
+        271,
+        3063
+      ],
+      "speedup_official_over_cake": 2.610848309118007
+    },
+    {
+      "cake_blocks": 1,
+      "cake_median_ms": 0.640818,
+      "cake_physical_variants": [
+        "m128"
+      ],
+      "cake_resolved_backend": "cake",
+      "cake_variant": "m128",
+      "layout": "packed",
+      "name": "h96_uniform_1024x8",
+      "num_heads": 96,
+      "official_blocks": 4,
+      "official_median_ms": 1.20109125,
+      "seed": 10002,
+      "seq_lens": [
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024,
+        1024
+      ],
+      "speedup_official_over_cake": 1.8743094763255712
+    }
+  ],
+  "schema_version": "cake_vs_official_isolated_process_v1"
+}

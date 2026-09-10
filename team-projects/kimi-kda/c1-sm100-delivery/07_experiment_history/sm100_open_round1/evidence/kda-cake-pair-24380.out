@@ -1,0 +1,14 @@
+h12_packed_512x32 official=0.369491 ms cake=0.177858 ms speedup=2.0775x
+h12_packed_128x8 official=0.071952 ms cake=0.026208 ms speedup=2.7454x
+h12_fixed_512 official=0.119848 ms cake=0.049617 ms speedup=2.4155x
+h12_fixed_8192 official=1.356461 ms cake=0.495757 ms speedup=2.7361x
+h12_packed_mixed official=0.583502 ms cake=0.235315 ms speedup=2.4797x
+h12_packed_1024x8 official=0.263106 ms cake=0.105128 ms speedup=2.5027x
+h96_fixed_8192 official=1.759794 ms cake=0.759168 ms speedup=2.3181x
+h96_mixed official=1.495655 ms cake=0.570381 ms speedup=2.6222x
+h96_uniform_1024x8 official=1.200997 ms cake=0.638173 ms speedup=1.8819x
+{
+  "h12_geomean_speedup": 2.4822622063081563,
+  "h96_geomean_speedup": 2.253189910394412,
+  "decision": "measured_gain"
+}

@@ -1,0 +1,166 @@
+{
+  "accounting": {
+    "allocated_gpu_seconds": 9.024826381821185,
+    "estimated_allocation_energy_joules": 2222.875,
+    "slurm_job_ids": [
+      "23168",
+      "23169"
+    ]
+  },
+  "all_correct": true,
+  "artifacts": {
+    "pair_accounting_sha256": "9eab2889b1b2ab5fab118ffd4c554d77f487e90449471593544f96c0d6cb9ad8",
+    "pair_benchmark_sha256": "e5a314f2ded4c2db3c8859460da15deb7db9e6bc69738ea6529c2c47af16b444",
+    "pair_result_sha256": "f8bcf8ad7fce8c5641cdf643a03b383281199e323d161d4c1dbb7529183bf822",
+    "screen_accounting_sha256": "dd66b37e068887334af9956b2273f4c4a1d36037013c1e35e1d3389175b6c9bb",
+    "screen_benchmark_sha256": "3dbca99d789dd4ab3f37744f3e43e4de20398f5b06a11bc538db8ab07eb0ef61",
+    "screen_result_sha256": "72348fdc2d3363c1fd4a1c4db4cc2e3653e6438444b33d2c1046973085998613"
+  },
+  "claim_boundary": "This is a preregistered matched-profile mechanism study and paired confirmation on one B300. The same profiles selected cpc=9 and then confirmed it, so this is not a new untouched held-out deployment qualification, a prepare/chain causal attribution, or a multi-agent versus single-agent comparison.",
+  "interpretation": "The nearly constant absolute saving and increasing relative speedup as the recurrent critical path shortens support a prepare/chain mixture hypothesis. Kernel-level prepare/chain attribution is still required for causal confirmation.",
+  "matched_contract": {
+    "num_heads": 12,
+    "profile_count": 4,
+    "screened_cpc": [
+      3,
+      4,
+      6,
+      9,
+      11,
+      12
+    ],
+    "total_chunks": 512,
+    "total_tokens": 8192
+  },
+  "paired_support_count": 4,
+  "parent_certificate": "evidence/b300_stage5_h12_heldout_certificate.json",
+  "protocol": {
+    "blocks_per_arm": 2,
+    "bootstrap_draws": 10000,
+    "cold_l2": true,
+    "dry_run_iters_per_block": 20,
+    "measured_iterations_per_block": 100,
+    "same_initial_state_per_timed_call": true,
+    "same_prepared_object_per_pair": true,
+    "state_rotations": 256,
+    "timing_backend": "cupti"
+  },
+  "question": "At fixed total prepare work, does cpc=9 remain optimal while the recurrent critical path changes?",
+  "results": [
+    {
+      "absolute_savings_us": 17.535999999999994,
+      "baseline_us": 518.8505,
+      "bootstrap_95": [
+        1.0334948318039119,
+        1.036140216590992
+      ],
+      "candidate_us": 501.3145,
+      "effective_sequence_parallelism": 1.0,
+      "max_chunks": 512,
+      "name": "h12_profile_fixed_8192",
+      "physical_variants": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "route": "bt16_prepare_chain_m64",
+      "screen_winner_cpc": 9,
+      "seq_lens": [
+        8192
+      ],
+      "speedup": 1.0349800374814613,
+      "total_chunks": 512
+    },
+    {
+      "absolute_savings_us": 17.200999999999965,
+      "baseline_us": 312.147,
+      "bootstrap_95": [
+        1.056388762873335,
+        1.0598292628307355
+      ],
+      "candidate_us": 294.946,
+      "effective_sequence_parallelism": 1.9541984732824427,
+      "max_chunks": 262,
+      "name": "h12_profile_balanced_2",
+      "physical_variants": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "route": "bt16_prepare_chain_m64",
+      "screen_winner_cpc": 9,
+      "seq_lens": [
+        4000,
+        4192
+      ],
+      "speedup": 1.0583191499460918,
+      "total_chunks": 512
+    },
+    {
+      "absolute_savings_us": 17.8895,
+      "baseline_us": 207.7945,
+      "bootstrap_95": [
+        1.091347771236333,
+        1.097216477190394
+      ],
+      "candidate_us": 189.905,
+      "effective_sequence_parallelism": 3.8208955223880596,
+      "max_chunks": 134,
+      "name": "h12_profile_balanced_4",
+      "physical_variants": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "route": "bt16_prepare_chain_m64",
+      "screen_winner_cpc": 9,
+      "seq_lens": [
+        1952,
+        2016,
+        2080,
+        2144
+      ],
+      "speedup": 1.0942023643400647,
+      "total_chunks": 512
+    },
+    {
+      "absolute_savings_us": 17.664499999999972,
+      "baseline_us": 507.9715,
+      "bootstrap_95": [
+        1.033363706598337,
+        1.038035838017651
+      ],
+      "candidate_us": 490.3070000000001,
+      "effective_sequence_parallelism": 1.024,
+      "max_chunks": 500,
+      "name": "h12_profile_skew",
+      "physical_variants": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "route": "bt16_prepare_chain_m64",
+      "screen_winner_cpc": 9,
+      "seq_lens": [
+        64,
+        64,
+        64,
+        8000
+      ],
+      "speedup": 1.036027427713657,
+      "total_chunks": 512
+    }
+  ],
+  "schema_version": 1,
+  "scope_identical": true,
+  "screen_winner_count": 4,
+  "stage": "stage6-kimi-k3-tp8-h12-matched-profile-mechanism",
+  "status": "cpc9_wins_screen_and_paired_confirmation_on_all_profiles",
+  "summary": {
+    "absolute_savings_cv": 0.01417804102165186,
+    "absolute_savings_mean_us": 17.572749999999985,
+    "absolute_savings_range_us": [
+      17.200999999999965,
+      17.8895
+    ],
+    "effective_parallelism_log_speedup_pearson": 0.9979575816675273,
+    "minimum_bootstrap_95_lower": 1.033363706598337,
+    "profile_geomean_speedup": 1.0556121553037703
+  }
+}

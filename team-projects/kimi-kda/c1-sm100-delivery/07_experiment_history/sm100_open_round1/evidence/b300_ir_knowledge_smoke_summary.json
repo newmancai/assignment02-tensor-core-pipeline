@@ -1,0 +1,109 @@
+{
+  "schema_version": "ir_knowledge_smoke_summary_v1",
+  "date": "2026-09-10",
+  "purpose": "Exploratory check of whether archived HMMA advice transfers across selected profiles; not an equal-budget search.",
+  "hardware": "NVIDIA B300 SXM6 AC / sm_103a",
+  "jobs": {
+    "strict_normalized_1pct": 24589,
+    "historical_peer_atol_rtol_1e2": 24595
+  },
+  "measurement": {
+    "scope": "public-full with preallocated buffers; per-call transforms and state copy included",
+    "backend": "cold-L2 CUPTI",
+    "blocks": 4,
+    "warmups_per_block": 10,
+    "samples_per_block": 40,
+    "isolation": "one implementation per worker process",
+    "order": "balanced cyclic order"
+  },
+  "historical_peer_contract_results": [
+    {
+      "case": "h12_fixed8192",
+      "route_decision": "HMMA auto selects V16 and the compiled phase-prefetch path",
+      "block_medians_ms": {
+        "official": [0.8037335, 0.8118515, 0.804353, 0.803174],
+        "optimized_hmma_auto": [0.438897, 0.438283, 0.4384665, 0.4396055],
+        "optimized_hmma_force16": [0.4387225, 0.440529, 0.439681, 0.4400025],
+        "cake": [0.287442, 0.28725, 0.283994, 0.286171]
+      },
+      "official_over_optimized_hmma": 1.832862319893636,
+      "official_over_optimized_hmma_bootstrap_ci95": [1.827033556222568, 1.8523454023998194],
+      "optimized_hmma_over_cake": 1.530051218912457,
+      "optimized_hmma_over_cake_bootstrap_ci95": [1.5257893820713664, 1.543928744973485]
+    },
+    {
+      "case": "h12_packed8x1024",
+      "route_decision": "HMMA auto falls back to V128; forced V16 is outside its calibrated domain",
+      "block_medians_ms": {
+        "official": [0.1670125, 0.166404, 0.16624, 0.1649455],
+        "optimized_hmma_auto": [0.167519, 0.166608, 0.166784, 0.165072],
+        "optimized_hmma_force16": [0.324068, 0.3239875, 0.3242935, 0.3224635],
+        "cake": [0.062161, 0.06224, 0.061058, 0.062131]
+      },
+      "official_over_optimized_hmma": 0.9977563948745022,
+      "official_over_optimized_hmma_bootstrap_ci95": [0.9967382962394475, 0.999233667732868],
+      "optimized_hmma_over_cake": 2.682328709812377,
+      "optimized_hmma_over_cake_bootstrap_ci95": [2.6568379713830454, 2.731566707065413],
+      "optimized_hmma_auto_over_force16": 0.5144497654907643
+    },
+    {
+      "case": "h96_fixed8192",
+      "route_decision": "HMMA auto falls back to V128; forced V16 is outside its calibrated domain",
+      "block_medians_ms": {
+        "official": [1.045173, 1.045864, 1.044825, 1.0447915],
+        "optimized_hmma_auto": [1.035433, 1.034886, 1.035402, 1.034918],
+        "optimized_hmma_force16": [2.293628, 2.2933275, 2.2983555, 2.2937275],
+        "cake": [0.4326425, 0.4328015, 0.433026, 0.4330585]
+      },
+      "official_over_optimized_hmma": 1.0095048108504967,
+      "official_over_optimized_hmma_bootstrap_ci95": [1.0091008130175525, 1.010607931694892],
+      "optimized_hmma_over_cake": 2.391146042369871,
+      "optimized_hmma_over_cake_bootstrap_ci95": [2.389787984764183, 2.393276203794125],
+      "optimized_hmma_auto_over_force16": 0.451310128460722
+    }
+  ],
+  "correctness": {
+    "optimized_hmma": "bitwise-equal output and final state to official in all tested cases",
+    "cake_historical_peer": "all three cases pass torch.testing.assert_close(atol=1e-2, rtol=1e-2)",
+    "cake_strict_normalized_1pct": {
+      "h12_fixed8192": {
+        "status": "failed_output_normalized_linf_only",
+        "output_relative_l2": 0.007795051671564579,
+        "output_normalized_linf": 0.019463511183857918,
+        "state_relative_l2": 0.004970245994627476,
+        "state_normalized_linf": 0.008230452425777912
+      },
+      "h12_packed8x1024": {
+        "status": "failed_output_and_state_normalized_linf",
+        "output_relative_l2": 0.006535589694976807,
+        "output_normalized_linf": 0.01104972418397665,
+        "state_relative_l2": 0.005402138456702232,
+        "state_normalized_linf": 0.011450381949543953
+      },
+      "h96_fixed8192": {
+        "status": "passed",
+        "output_relative_l2": 0.006527078803628683,
+        "output_normalized_linf": 0.009708737954497337,
+        "state_relative_l2": 0.00543607771396637,
+        "state_normalized_linf": 0.008196720853447914
+      }
+    }
+  },
+  "interpretation": [
+    "The optimized HMMA baseline is material: on H12 fixed8192 it closes a large part of the official-to-CAKE gap, while CAKE remains 1.53x faster under the historical peer contract.",
+    "The V16 recommendation is profile-scoped: forcing it on packed8x1024 or H96 fixed8192 is roughly 1.94x and 2.22x slower than auto respectively.",
+    "Numerical contract identity changes candidate admissibility; the historical peer contract and the newly introduced strict normalized-1pct contract must not be conflated.",
+    "The experiment supports scoped-memory organization but does not measure whether that organization improves agent search, nor does it provide equal-budget HMMA-vs-tcgen05 optimization."
+  ],
+  "limitations": [
+    "Only three previously known profiles were tested.",
+    "Only nonzero BF16 initial state was tested.",
+    "Correctness is a peer comparison against official, not a new FP64 oracle.",
+    "The two contracts ran in separate allocations and absolute times must not be pooled across jobs.",
+    "Bootstrap intervals resample four paired block medians and quantify execution variability only."
+  ],
+  "remote_artifacts": {
+    "strict": "<REMOTE_HOME>/kda-ir-knowledge-smoke-20260910/job-24589",
+    "historical_peer": "<REMOTE_HOME>/kda-ir-knowledge-smoke-20260910-historical/job-24595"
+  }
+}

@@ -1,5 +1,19 @@
 # C1 交付审计（正式交付 2026-09-06）
 
+## 2026-09-09 Runtime Profile Agent 主线接入复核
+
+本轮没有新增或重跑 ValueSlice、P4、Phase-1 GPU 数据，而是把论文阶段已经完成的 profile 工具与前瞻 B300 证据纳入作业。中心表述统一为：**Kernel is cheap；稀缺的是可信的 profile-to-policy 决策。** “cheap” 仅指候选生成相对容易，不降低 correctness、GPU measurement 或部署验证的重要性。
+
+根据答辩主线复核，Agent 已从“挑战阶段的自优化补充”前移到前两阶段。新增 `MmaMigrationProfile`、原始证据 parser 与 `assess_mma_migration`，将已归档 SASS、H12 NCU、grid、tile 几何、compiled residency 及 `tcgen05` probe 组成同一 measurement receipt，确定性生成 `MMA001–MMA007` 物理 finding、主线迁移结论与 `KEEP / MEASURE / STOP` 候选序列。可重放输出为 [`c1_b300_h12_mma_assessment.json`](../../experiments/runtime_profile_evolution/c1_b300_h12_mma_assessment.json)。
+
+当前总数为 44 项 CPU 单元测试；除先结论后候选、V16 core-only `tcgen05` 信号仅重开跨 phase residency、SASS 路径不成立时拒绝分析和缺少并行度正证时不过度宣称外，新增原始 CSV 取数、tile 几何不匹配与 residency 证据缺失的 gate 覆盖。
+
+10 页正式答辩稿更新为 [`FlashKDA_SM100_academic_defense_20260909_v2.pptx`](FlashKDA_SM100_academic_defense_20260909_v2.pptx)：白底、低饱和色、原生图表的学术风格；第 3–5 页依次展示复现、Agent measurement receipt 和挑战前的迁移结论，第 6–8 页再呈现挑战与反例，第 9 页总结测量到下一轮 MMA proposal 的闭环。
+
+补充交付包括 `tools/runtime-profile-agent/` 的可运行源码和 44 项 CPU 测试，以及 `experiments/runtime_profile_evolution/` 的主线 MMA assessment、前瞻资格/机制证书。正式报告把容量策略作为另一条 H12 BT16 CAKE-generated route 的补充实验：W384/W768 在禁止 screen 的条件下预测 cpc7/cpc13，四个 profile 全部通过，最弱 Bonferroni 单侧 98.75% 下界为 1.0129×；资格后 CUPTI 将 97.98%–101.16% 的 full-span 节省归到 prepare。
+
+边界已显式保留：该结果不是官方 FlashKDA ValueSlice/P4/Phase-1 的叠加收益，不进入现有 dispatcher，只产生 resource/evidence-bound shadow recommendation；跨 kernel、跨 GPU 和完整 Kimi K3 仍未验证。
+
 ## 2026-09-05 主线增量封包复核
 
 9 月 3 日的中心判断没有被推翻：全面 `mma.sync→tcgen05` 仍是 NO-GO，guarded ValueSlice 仍是正确方向。9 月 5 日新增的是 ValueSlice 之后的两级 CTA 内调度：Phase-6 `StatePrefetch=4`，以及按 HasStateIn 选择 L4/L2 的 Phase-1 lookahead。它们提高了最终基线，也暴露了无初态双 stream 回归，因此交付状态必须写成**默认关闭的单请求 latency 候选**，不能写成普遍 serving 吞吐优化。

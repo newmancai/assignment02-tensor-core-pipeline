@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "round": 2,
+  "status": "screen_complete",
+  "hardware": {
+    "name": "NVIDIA B300 SXM6 AC",
+    "uuid": "GPU-3924bd78-8b2f-8e85-3f20-8b0687d0bb0a",
+    "sm_count": 148,
+    "observed_sm_clock_mhz_at_job_start": 1095,
+    "hmma_job_id": 24694,
+    "tcgen05_valid_job_id": 24706
+  },
+  "protocol": {
+    "inherits_round1_contract": true,
+    "blocks": 2,
+    "samples_per_block": 20,
+    "warmups_per_block": 8,
+    "worker_isolation": "one implementation per process",
+    "timing": "CUPTI cold-L2, no CUDA graph"
+  },
+  "implementation_ir_receipts": [
+    {
+      "implementation_id": "hmma-optimized-v128-current",
+      "profile": "h12_packed_balanced6",
+      "value_slice": 128,
+      "block_medians_ms": [0.320752, 0.321247],
+      "campaign_median_ms": 0.3209995,
+      "correctness": "bitwise equal to official output and state"
+    },
+    {
+      "implementation_id": "hmma-optimized-v64-current",
+      "profile": "h12_packed_balanced6",
+      "value_slice": 64,
+      "block_medians_ms": [0.273938, 0.2736995],
+      "campaign_median_ms": 0.27381875,
+      "correctness": "bitwise equal to official output and state"
+    },
+    {
+      "implementation_id": "tcgen-evolution-h96-mixed-148cta-s173",
+      "profile": "h96_packed_mixed",
+      "actual_route": "m128_h96_p1_s173",
+      "grid_x": 148,
+      "activation": "search-only exact-shape opening through the public adapter",
+      "block_medians_ms": [0.552744, 0.549242],
+      "campaign_median_ms": 0.550993,
+      "correctness": {
+        "historical_peer_passed": true,
+        "max_relative_l2": 0.006509804166853428,
+        "max_normalized_linf": 0.016597511246800423
+      }
+    },
+    {
+      "implementation_id": "tcgen-evolution-h96-mixed-virtual152cta-s166",
+      "profile": "h96_packed_mixed",
+      "actual_route": "m128_h96_p1_s166",
+      "grid_x": 152,
+      "physical_sm_count": 148,
+      "schedule_stride": 166,
+      "schedule_work_items": 24864,
+      "schedule_validation": "count-conserving and compiled-stride matched",
+      "block_medians_ms": [0.94537, 0.9449595],
+      "campaign_median_ms": 0.94516475,
+      "correctness": {
+        "historical_peer_passed": true,
+        "max_relative_l2": 0.006509804166853428,
+        "max_normalized_linf": 0.016597511246800423
+      }
+    }
+  ],
+  "rejected_measurement_identity": {
+    "job_id": 24694,
+    "profile": "h96_packed_mixed",
+    "declared_arms": [
+      "evolution_incumbent",
+      "evolution_virtual152"
+    ],
+    "observed_route_for_both": "Cake m128 fallback",
+    "status": "diagnostic_only_superseded",
+    "reason": "the candidate route did not execute; its near-equal timing cannot rank the evolution schedules",
+    "repair": "job 24706 opened only the exact search shape and required observed evolution module identity before timing"
+  },
+  "experience_ir_writeback": [
+    {
+      "observation_id": "r2-hmma-balanced6-v64",
+      "status": "valid_screen_observation",
+      "proposition": "On current H12 packed balanced6 with total tokens 8192, ValueSlice=64 is faster than ValueSlice=128.",
+      "effect": {
+        "challenger_speedup": 1.1723064983679898,
+        "block_speedups": [1.170892683745957, 1.1737215449790739]
+      },
+      "mechanism_status": "controlled sequence-distribution intervention; V64 benefit is not limited to the Round 1 ragged skew",
+      "permitted_use": "a two-profile H12 six-sequence ranking prior and a reason to search a conservative dispatch boundary",
+      "forbidden_upgrade": "all packed profiles should select V64",
+      "next_boundary_features": [
+        "num_sequences",
+        "total_chunks",
+        "maximum_chunks_per_sequence",
+        "length coefficient of variation",
+        "resulting CTA waves"
+      ]
+    },
+    {
+      "observation_id": "r2-tcgen-virtual152-wave-tail-h96",
+      "status": "valid_screen_observation",
+      "proposition": "On physical 148-SM B300 for exact H96 packed-mixed, virtual152/s166 is much slower than physical148/s173.",
+      "effect": {
+        "challenger_speedup": 0.5829597432616906,
+        "block_speedups": [0.5846853612871151, 0.5812333756102775]
+      },
+      "mechanism_status": "cross-head replication of the schedule regression; partial-second-wave remains the leading but not isolated mechanism",
+      "permitted_use": "reject the exact H64 and H96 mixed virtual-152 schedules on 148-SM B300 and constrain the next schedule search to grid_x<=148",
+      "forbidden_upgrade": "reject persistent scheduling, smaller stride, the s114/s166 kernels on their intended hardware, or tcgen05",
+      "reopen_conditions": [
+        "physical 152-SM device",
+        "a controlled carrier varying CTA count while holding compiled kernel and stride constant",
+        "a <=148-CTA schedule that improves bin balance"
+      ]
+    },
+    {
+      "observation_id": "r2-tcgen-h96-s173-reopen",
+      "status": "screen_positive_requires_qualification",
+      "proposition": "The search-only 148-CTA/s173 evolution route is 1.03659x faster than Cake on this H96 mixed epoch.",
+      "effect": {
+        "cake_over_evolution": 1.0365903015101827,
+        "cake_ms": 0.571154,
+        "evolution_ms": 0.550993
+      },
+      "reason_not_deployment_evidence": "two-block screen on an already-known profile; the production activation set currently falls back to Cake",
+      "permitted_use": "reopen a formal four-block qualification with independent process order and confidence interval"
+    }
+  ],
+  "cross_lane_context_only": {
+    "profile": "h12_packed_balanced6",
+    "official_ms": 0.3215365,
+    "hmma_v64_ms": 0.27381875,
+    "cake_ms": 0.14935325,
+    "official_over_cake": 2.1528590773886744,
+    "cake_over_stronger_hmma": 1.8333631842628133,
+    "claim_boundary": "same-profile current-implementation comparison after a small equal local search budget; not equal historical engineering effort or a pure ISA effect"
+  },
+  "raw_remote_artifacts": [
+    "<REMOTE_HOME>/kda-dual-ir-agent-rounds-20260910/round2-job-24694/summary.json",
+    "<REMOTE_HOME>/kda-dual-ir-agent-rounds-20260910/round2-tcgen-retry-job-24706/summary.json"
+  ]
+}

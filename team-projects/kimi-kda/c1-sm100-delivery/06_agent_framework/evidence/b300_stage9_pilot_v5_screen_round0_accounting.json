@@ -1,0 +1,58 @@
+{
+  "accounting_scope": "single-node visible-GPU allocation; telemetry includes compilation, benchmark setup, synchronization, and idle gaps",
+  "allocated_gpu_seconds": 2.8670666748657823,
+  "command": [
+    "<REMOTE_HOME>/FlashKDA/.venv/bin/python",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/stage3_remote/benchmarks/bench_flash_kda_stage9_ablation.py",
+    "--mode",
+    "screen-round",
+    "--round-index",
+    "0",
+    "--amendment",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/stage9_best_swarm_pilot_protocol.json",
+    "--manifest",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/round_0_manifest_v5.json",
+    "--heldout-commitment",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/stage9_best_swarm_pilot_commitment_v5.json",
+    "--screen-jsonl",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_stage9_pilot_v5_screen.jsonl",
+    "--summary-json",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_stage9_pilot_v5_screen_round0_summary.json",
+    "--state-rotations",
+    "256",
+    "--screen-dry-run-iters",
+    "5",
+    "--screen-repeat-iters",
+    "25"
+  ],
+  "ended_at_utc": "2026-09-09T15:35:32.109102+00:00",
+  "exit_code": 0,
+  "experiment": "stage9-five-arm-fifo-screen-round0",
+  "gpu_count": 1,
+  "hardware": [
+    {
+      "index": 0,
+      "memory_total_mib": 275040.0,
+      "name": "NVIDIA B300 SXM6 AC",
+      "power_limit_w": 1100.0,
+      "uuid": "GPU-dadf9f3b-df58-d3fa-07b0-5fe223423db1"
+    }
+  ],
+  "scheduler": {
+    "slurm_job_id": "23734",
+    "slurm_job_name": "kda-stage9-fifo",
+    "slurm_node_list": "dev-slurm"
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-09-09T15:35:29.242021+00:00",
+  "telemetry": {
+    "average_gpu_utilization_percent": 8.166666666666666,
+    "average_power_w": 220.3133333333333,
+    "estimated_allocation_energy_joules": 660.9399999999999,
+    "peak_memory_used_mib": 1884.0,
+    "peak_power_w": 298.3,
+    "sample_count": 6,
+    "sample_interval_seconds": 0.5
+  },
+  "wall_seconds": 2.8670666748657823
+}

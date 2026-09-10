@@ -1,0 +1,10 @@
+{
+  "manifest_sha256": "adc9ea8ec8aaa5a7f04eb6c82d76393be0ac7ff6ea22c750e5120f926a0c11df",
+  "new_receipts": 4,
+  "phase": "screen-round",
+  "protocol_digest": "01a62cb972e12ecdb99d5fc11af1af7b8d735311f76bb1caf0fa6ffff8d03fe5",
+  "round_index": 0,
+  "schema_version": 2,
+  "screen_jsonl_sha256": "fe735f35cf8cf42e9aedc5a0bba6ca2cba26b21ba00dd7ca16a50d6ad072d0e0",
+  "total_receipts": 4
+}

@@ -59,8 +59,8 @@ H12 从 V128 到 V16 的 NCU duration 降低 28.1%；H74 从 V128 到 V64 降低
 更合理的顺序是：
 
 1. 保留已经验证的 ValueSlice/dispatcher，先修复整卡并行度；
-2. 用 CTA Cluster + TMA multicast 减少不同 ValueSlice 重复读取 K-only workspace；
-3. 只对 `M=128` state-update 阶段做隔离的 `tcgen05` microbenchmark；
+2. 用 CTA Cluster + TMA multicast 减少不同 ValueSlice 重复读取 slice-independent inputs；
+3. 先对 `M=128` state-update 做隔离的 `tcgen05` microbenchmark，再决定是否评估 V64/V128 phase 的转置重排；
 4. 若新路径在完整调用链上有净收益，再并入受保护的 SM100/SM103 专用分支。
 
 ## 6. 可复现与归档

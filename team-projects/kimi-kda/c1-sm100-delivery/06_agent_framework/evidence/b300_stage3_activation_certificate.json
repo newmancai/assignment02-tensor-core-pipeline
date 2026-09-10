@@ -1,0 +1,358 @@
+{
+  "activation_rows": [
+    {
+      "bootstrap_95": [
+        1.2066171927615867,
+        1.2113820533667434
+      ],
+      "cake_median_us": 763.767,
+      "correct": true,
+      "decision": "activate",
+      "deployment_median_us": 631.717,
+      "name": "h96_fixed8192",
+      "resolved_backend": "evolution",
+      "shape": {
+        "layout": "fixed",
+        "num_heads": 96,
+        "seq_lens": [
+          8192
+        ]
+      },
+      "speedup": 1.2090334754328285,
+      "typed_semantic_delta": {
+        "full_chunks": true,
+        "grid_stride": 96,
+        "has_explicit_tile_schedule": false,
+        "num_heads": 96,
+        "persistent_tasks": 1,
+        "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_vtile_f1_t8192_h96_p1_s96.cu",
+        "token_extent": 8192,
+        "topology": "value_tile",
+        "value_rows": 128,
+        "variant": "vtile_f1_t8192_h96_p1_s96"
+      },
+      "variant": "vtile_f1_t8192_h96_p1_s96"
+    },
+    {
+      "bootstrap_95": [
+        0.9992992328351463,
+        1.0007618917359733
+      ],
+      "cake_median_us": 570.6135,
+      "correct": true,
+      "decision": "retain_cake",
+      "deployment_median_us": 570.5310000000001,
+      "name": "h96_mixed",
+      "resolved_backend": "cake",
+      "shape": {
+        "layout": "packed",
+        "num_heads": 96,
+        "seq_lens": [
+          1300,
+          547,
+          2048,
+          963,
+          271,
+          3063
+        ]
+      },
+      "speedup": 1.0001446021338016,
+      "typed_semantic_delta": null,
+      "variant": null
+    },
+    {
+      "bootstrap_95": [
+        1.1971261393614958,
+        1.2027280097650674
+      ],
+      "cake_median_us": 638.7230000000001,
+      "correct": true,
+      "decision": "activate",
+      "deployment_median_us": 532.1475,
+      "name": "h96_uniform",
+      "resolved_backend": "evolution",
+      "shape": {
+        "layout": "packed",
+        "num_heads": 96,
+        "seq_lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      "speedup": 1.2002743600223622,
+      "typed_semantic_delta": {
+        "full_chunks": true,
+        "grid_stride": 128,
+        "has_explicit_tile_schedule": false,
+        "num_heads": 96,
+        "persistent_tasks": 6,
+        "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_vtile_f1_t1024_h96_p6_s128.cu",
+        "token_extent": 1024,
+        "topology": "value_tile",
+        "value_rows": 128,
+        "variant": "vtile_f1_t1024_h96_p6_s128"
+      },
+      "variant": "vtile_f1_t1024_h96_p6_s128"
+    },
+    {
+      "bootstrap_95": [
+        1.2583540914589852,
+        1.264166252225334
+      ],
+      "cake_median_us": 747.9884999999999,
+      "correct": true,
+      "decision": "activate",
+      "deployment_median_us": 592.9625000000001,
+      "name": "h64_fixed8192",
+      "resolved_backend": "evolution",
+      "shape": {
+        "layout": "fixed",
+        "num_heads": 64,
+        "seq_lens": [
+          8192
+        ]
+      },
+      "speedup": 1.2614431772666903,
+      "typed_semantic_delta": {
+        "full_chunks": true,
+        "grid_stride": 128,
+        "has_explicit_tile_schedule": false,
+        "num_heads": 64,
+        "persistent_tasks": 0,
+        "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_m64_f1_t8192_h64.cu",
+        "token_extent": 8192,
+        "topology": "value64_split",
+        "value_rows": 64,
+        "variant": "m64_f1_t8192_h64"
+      },
+      "variant": "m64_f1_t8192_h64"
+    },
+    {
+      "bootstrap_95": [
+        1.0312109312181936,
+        1.0328221093862586
+      ],
+      "cake_median_us": 397.6825,
+      "correct": true,
+      "decision": "activate",
+      "deployment_median_us": 385.379,
+      "name": "h64_mixed",
+      "resolved_backend": "evolution",
+      "shape": {
+        "layout": "packed",
+        "num_heads": 64,
+        "seq_lens": [
+          1300,
+          547,
+          2048,
+          963,
+          271,
+          3063
+        ]
+      },
+      "speedup": 1.0319257146860623,
+      "typed_semantic_delta": {
+        "full_chunks": null,
+        "grid_stride": 126,
+        "has_explicit_tile_schedule": true,
+        "num_heads": 64,
+        "persistent_tasks": 1,
+        "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_m128_h64_p1_s126.cu",
+        "token_extent": null,
+        "topology": "scalar_tile",
+        "value_rows": 128,
+        "variant": "m128_h64_p1_s126"
+      },
+      "variant": "m128_h64_p1_s126"
+    },
+    {
+      "bootstrap_95": [
+        1.170255308222535,
+        1.1772776815177568
+      ],
+      "cake_median_us": 430.36999999999995,
+      "correct": true,
+      "decision": "activate",
+      "deployment_median_us": 366.43399999999997,
+      "name": "h64_uniform",
+      "resolved_backend": "evolution",
+      "shape": {
+        "layout": "packed",
+        "num_heads": 64,
+        "seq_lens": [
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024,
+          1024
+        ]
+      },
+      "speedup": 1.1744816256133437,
+      "typed_semantic_delta": {
+        "full_chunks": true,
+        "grid_stride": 128,
+        "has_explicit_tile_schedule": false,
+        "num_heads": 64,
+        "persistent_tasks": 4,
+        "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_vtile_f1_t1024_h64_p4_s128.cu",
+        "token_extent": 1024,
+        "topology": "value_tile",
+        "value_rows": 128,
+        "variant": "vtile_f1_t1024_h64_p4_s128"
+      },
+      "variant": "vtile_f1_t1024_h64_p4_s128"
+    }
+  ],
+  "attempt_ledger": [
+    {
+      "allocated_gpu_seconds": 2.093652273993939,
+      "estimated_allocation_energy_joules": 498.925,
+      "exit_code": 1,
+      "experiment": "stage3-public-evolution-correctness-six",
+      "file": "evidence/attempts/20260909015143-23100-stage3-public-evolution-correctness-six.json",
+      "job_id": "23100",
+      "sha256": "45cb49d726fe89aef85bf07cda668c8646ccb46e5a378ee5ebff80983745cef3"
+    },
+    {
+      "allocated_gpu_seconds": 2.2913500941358507,
+      "estimated_allocation_energy_joules": 505.85499999999996,
+      "exit_code": 0,
+      "experiment": "stage3-public-evolution-correctness-six",
+      "file": "evidence/attempts/20260909015305-23101-stage3-public-evolution-correctness-six.json",
+      "job_id": "23101",
+      "sha256": "5e576d4a3eb9335882632114e23aa32664b78be294464f22d2b8e069a4f6ba2d"
+    },
+    {
+      "allocated_gpu_seconds": 3.2362927589565516,
+      "estimated_allocation_energy_joules": 926.02,
+      "exit_code": 0,
+      "experiment": "stage3-public-cake-six",
+      "file": "evidence/attempts/20260909015307-23101-stage3-public-cake-six.json",
+      "job_id": "23101",
+      "sha256": "d8b74bcabe53769ee906e03fca46decbd2d2ac9341effee0607f043c56d38610"
+    },
+    {
+      "allocated_gpu_seconds": 3.7592485193163157,
+      "estimated_allocation_energy_joules": 1061.88,
+      "exit_code": 0,
+      "experiment": "stage3-public-evolution-six",
+      "file": "evidence/attempts/20260909015310-23101-stage3-public-evolution-six.json",
+      "job_id": "23101",
+      "sha256": "0b445d2f9f930cd591aab45781536e8dbd720762783352c7c141a39656503d7b"
+    },
+    {
+      "allocated_gpu_seconds": 2.476449490059167,
+      "estimated_allocation_energy_joules": 503.0,
+      "exit_code": 1,
+      "experiment": "stage3-public-cake-evolution-paired-six",
+      "file": "evidence/attempts/20260909015814-23102-stage3-public-cake-evolution-paired-six.json",
+      "job_id": "23102",
+      "sha256": "e226f826e59fc5cca5876dc6fca82ca73620dc61249057786a7f5ee4346791df"
+    },
+    {
+      "allocated_gpu_seconds": 6.397761129774153,
+      "estimated_allocation_energy_joules": 1942.42,
+      "exit_code": 0,
+      "experiment": "stage3-public-cake-evolution-paired-six",
+      "file": "evidence/attempts/20260909020122-23103-stage3-public-cake-evolution-paired-six.json",
+      "job_id": "23103",
+      "sha256": "b8c86d8abfdd49092db49000225c34e3ecaa8a42b4eaa5972983abe5f44a57cc"
+    },
+    {
+      "allocated_gpu_seconds": 5.526742235291749,
+      "estimated_allocation_energy_joules": 1741.055,
+      "exit_code": 0,
+      "experiment": "stage3-public-cake-evolution-paired-six",
+      "file": "evidence/attempts/20260909020419-23104-stage3-public-cake-evolution-paired-six.json",
+      "job_id": "23104",
+      "sha256": "b7ec061471b5c0c59c54013c8083bb238ed33e8724257cb57da9bec507fbac2f"
+    },
+    {
+      "allocated_gpu_seconds": 4.227855411823839,
+      "estimated_allocation_energy_joules": 899.76,
+      "exit_code": 1,
+      "experiment": "stage3-evolution-gpu-pytest",
+      "file": "evidence/attempts/20260909021922-23113-stage3-evolution-gpu-pytest.json",
+      "job_id": "23113",
+      "sha256": "e323e7dab2cfc2d5dfe3fc7d7718e784cc3b52b3e457f9e89c77e0061b1a6fa2"
+    },
+    {
+      "allocated_gpu_seconds": 3.3068497190251946,
+      "estimated_allocation_energy_joules": 701.385,
+      "exit_code": 1,
+      "experiment": "stage3-evolution-gpu-pytest",
+      "file": "evidence/attempts/20260909022320-23117-stage3-evolution-gpu-pytest.json",
+      "job_id": "23117",
+      "sha256": "d663275d08a316bc8f39a63a43feb0e593f8c76b125935aea721e7b4d27c8382"
+    },
+    {
+      "allocated_gpu_seconds": 78.43555320473388,
+      "estimated_allocation_energy_joules": 15119.355,
+      "exit_code": 0,
+      "experiment": "stage3-evolution-gpu-pytest",
+      "file": "evidence/attempts/20260909022416-23118-stage3-evolution-gpu-pytest.json",
+      "job_id": "23118",
+      "sha256": "b82b6fdf50f2b08d14922d0e791514f49c0078b7d31ae189e9e764e0b188c993"
+    }
+  ],
+  "auto_backend_changed": false,
+  "fallback_backend": "cake",
+  "implementation": [
+    {
+      "file": "stage3_remote/flashinfer/kda.py",
+      "sha256": "14fc580cc6048e38a07e346236cfda14a2b8e7a3eba6e0e43b79d2701cc5f767"
+    },
+    {
+      "file": "stage3_remote/flashinfer/kda_evolution.py",
+      "sha256": "f322934edcad37b4d08cad6c5047ee09f33d69a55d125904906d121bffb6369d"
+    },
+    {
+      "file": "stage3_remote/benchmarks/bench_flash_kda_stage3_public_pair.py",
+      "sha256": "4d64dfe59d460f4cf34adeab475e441e009fab7bf7633d6f8eb80e522b78ead3"
+    }
+  ],
+  "proof_chain": {
+    "public_paired_benchmark": {
+      "all_correct": true,
+      "file": "evidence/b300_stage3_public_paired.json",
+      "protocol": "paired CAKE/evolution, cold-L2 CUPTI, 20+100 x 2 blocks",
+      "scope_identical": true,
+      "sha256": "abf4a6cf3d82f4992a5fb06863f3035e3ad1e2f71d18a2190178ba931c46fc0f"
+    },
+    "source_to_ir": {
+      "file": "evidence/source_to_ir_a1418fd1ae.json",
+      "kernel_name": "kernel_flashkda_bf16_fused_m128",
+      "qk_first_edge_verified": true,
+      "sha256": "ae9a6176b7d12097ddcb7ad0dffa404e88716036ceb42510f7e7070cdc0b72b7"
+    },
+    "typed_corpus": {
+      "candidate_count": 29,
+      "file": "evidence/evolution_typed_corpus.json",
+      "semantic_fingerprint_count": 29,
+      "sha256": "6149bd8c4b7ef260713f5ece5f69fcddbc426d29244ab246088d6408332b03c9",
+      "verifier_diagnostics": []
+    }
+  },
+  "public_backend": "evolution",
+  "schema_version": 1,
+  "stage": 3,
+  "status": "dispatchable",
+  "summary": {
+    "activation_count": 5,
+    "deployment_geomean_speedup": 1.1420370706500678,
+    "minimum_activated_speedup_lower_bound": 1.0312109312181936,
+    "retain_cake_count": 1,
+    "shape_count": 6,
+    "stage3_attempt_energy_joules": 23899.655,
+    "stage3_attempt_gpu_seconds": 111.75175483711064
+  }
+}

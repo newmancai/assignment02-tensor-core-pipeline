@@ -1,0 +1,18 @@
+{
+  "schema_version": "tcgen05_capabilities_v1",
+  "targets": ["sm_100a", "sm_103a"],
+  "dense_bf16_f32": {
+    "k": 16,
+    "cta_group_1": {"m": [64, 128], "n_min": 8, "n_max": 256, "n_step": 8},
+    "cta_group_2": {"m": [128, 256], "n_min": 16, "n_max": 256, "n_step": 16},
+    "a_sources": ["smem", "tmem"],
+    "b_source": "smem",
+    "accumulator_space": "tmem",
+    "issue_granularity": "single_thread"
+  },
+  "primary_sources": [
+    "https://docs.nvidia.com/cuda/parallel-thread-execution/#tcgen05-mma-instructions-mma",
+    "https://github.com/NVIDIA/cutlass/blob/main/python/CuTeDSL/cutlass/cute/nvgpu/tcgen05/mma.py",
+    "https://github.com/NVIDIA/cutlass/blob/main/examples/cute/tutorial/blackwell/01_mma_sm100.cu"
+  ]
+}

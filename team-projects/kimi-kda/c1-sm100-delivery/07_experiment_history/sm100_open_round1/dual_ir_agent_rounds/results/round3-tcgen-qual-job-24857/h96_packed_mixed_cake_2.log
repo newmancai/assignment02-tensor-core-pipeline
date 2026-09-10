@@ -1,0 +1,2 @@
+2026-09-10 09:23:31,564 - INFO - flash_kda.py:865 - flashinfer.jit: Generated FlashKDA m128 sm103a JIT spec: flash_kda_bf16_m128_8c34a95f28_sm103a
+2026-09-10 09:23:31,569 - INFO - flash_kda.py:980 - flashinfer.jit: Loaded FlashKDA m128 sm103a module

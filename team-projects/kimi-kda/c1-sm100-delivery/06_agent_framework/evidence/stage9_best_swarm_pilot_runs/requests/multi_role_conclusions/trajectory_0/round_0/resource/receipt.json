@@ -1,0 +1,30 @@
+{
+  "request_id": "multi_role_conclusions.t0.r0.resource",
+  "request_digest": "dd98fbc4f480c1cde75bea6dacbc1c36edf7f2ac70b2a36ae8785a29000450b2",
+  "arm": "multi_role_conclusions",
+  "trajectory": 0,
+  "round": 0,
+  "seed": 91001,
+  "lane": "resource",
+  "requested_proposals": 1,
+  "model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "prompt_sha256": "4f2da9901bd8c2615007e606cb580bbd7490af82e853d68b8b8603bd54c674a2",
+  "status": "agent_failed",
+  "started_at_utc": "2026-09-09T14:52:28.271578+00:00",
+  "error": "Reading additional input from stdin...\n2026-09-09T14:52:28.448866Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 132 column 5\n2026-09-09T14:52:33.450561Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit\n",
+  "exit_status": 1,
+  "elapsed_s": 15.278631210327148,
+  "token_usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cache_read_tokens": null,
+    "cache_write_tokens": null,
+    "total_tokens": null,
+    "measurement": "unavailable"
+  },
+  "tool_event_count": 1,
+  "output_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/proposal_output.json",
+  "events_path": "requests/multi_role_conclusions/trajectory_0/round_0/resource/events.jsonl",
+  "finished_at_utc": "2026-09-09T14:52:43.550680+00:00"
+}

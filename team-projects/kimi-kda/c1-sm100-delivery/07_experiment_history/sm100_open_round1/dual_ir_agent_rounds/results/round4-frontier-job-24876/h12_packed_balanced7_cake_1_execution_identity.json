@@ -1,0 +1,367 @@
+{
+  "canonical_sha256": "3f24470fc5e13e13122d6f5daab6b8f84c37660359ab246555610557178e16fb",
+  "dependency_files": [
+    {
+      "exists": true,
+      "kind": "python_source",
+      "path": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda.py",
+      "sha256": "14fc580cc6048e38a07e346236cfda14a2b8e7a3eba6e0e43b79d2701cc5f767"
+    },
+    {
+      "exists": true,
+      "kind": "python_source",
+      "path": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda_prefill.py",
+      "sha256": "42709dfe1770e12c20e8a2976e50c125ba5e6b2dccd3685e4ecc7dbf9c2c6c0d"
+    },
+    {
+      "exists": true,
+      "kind": "python_source",
+      "path": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda_evolution.py",
+      "sha256": "f322934edcad37b4d08cad6c5047ee09f33d69a55d125904906d121bffb6369d"
+    }
+  ],
+  "environment": {
+    "CUDA_HOME": "/usr/local/cuda",
+    "LD_LIBRARY_PATH": "/usr/local/cuda/lib64:<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/nvidia/cu13/lib:",
+    "PATH": "/usr/local/cuda/bin:<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "PYTHONPATH": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps:<REMOTE_HOME>/flashinfer-cake-sm103-20260908"
+  },
+  "extension_suffix": ".cpython-312-x86_64-linux-gnu.so",
+  "loaded_native_extensions": [
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_asyncio.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_asyncio",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_asyncio",
+      "sha256": "24ca95621549ed790c68807b4ba48bd40b93a16f3e72bc425c3c3b5865effd1d"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_bz2.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_bz2",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_bz2",
+      "sha256": "c9e6b91f9ebcdf863a9fd9d1591f93090fbcd7fc4beed35e9be8354e0c9267c3"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_codecs_cn.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_codecs_cn",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_codecs_cn",
+      "sha256": "ee5aa0ed393c81f726e2ba1d36b9e7e40541a05cf56e6c70bb59af48490689fc"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_codecs_hk.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_codecs_hk",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_codecs_hk",
+      "sha256": "8c0e9eb3b400311b8ff7c59233b3ad463f5e3368d693cd2afad87d75ba5b698b"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_codecs_iso2022.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_codecs_iso2022",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_codecs_iso2022",
+      "sha256": "8b98e248cbaf58dd0cc83ecfe085a72f2cec3c22c94fcdea89dd39f44d0a99b0"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_codecs_jp.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_codecs_jp",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_codecs_jp",
+      "sha256": "177c5dd618b058dad73f39ae715ed5bc9ecd0124135489f500a8695c1ec8e0e5"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_codecs_kr.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_codecs_kr",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_codecs_kr",
+      "sha256": "281243462ea4b511214efb74a539f6f1aaebc88da80a1d28a6b836562709419c"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_codecs_tw.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_codecs_tw",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_codecs_tw",
+      "sha256": "30ec7db6f3ec455b795c486ed93d8bba0b405101d319463c2741bca04db8f375"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_contextvars.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_contextvars",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_contextvars",
+      "sha256": "014d5f1b46a77da005a25d2ed8a2174b4f38f6b2661b8fe280ca7ab052641cdb"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_ctypes",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_ctypes",
+      "sha256": "99d7998349b1a868fbbfd23b782015205a27ea841595d784ca478873d30ccb8a"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_decimal.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "decimal",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_decimal",
+      "sha256": "4f901f6b532da1b54abb19470f29868dd9169b9c6e47ac65df3bc6fc66afcdf9"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_hashlib.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_hashlib",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_hashlib",
+      "sha256": "4f8e3e7100ba83dfb202f24fc3e5c32805ed32f9285b34a3803e8886d94a5c22"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_json.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_json",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_json",
+      "sha256": "86adefd58de5d9c739951d839431c239c4ef050c1865f77c4b4a6ac2f9f85e39"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_lzma.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_lzma",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_lzma",
+      "sha256": "7f9a27cc8eb4e6ed6a6596553aafebc5bdb5ae62400036e47daf24034d529722"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_multibytecodec.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_multibytecodec",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_multibytecodec",
+      "sha256": "f870611500a253cdda8a6d42a62465a004667980a462673caa9704b6451943a0"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_multiprocessing.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_multiprocessing",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_multiprocessing",
+      "sha256": "c0982408317733e91a3eff9cdab22ce13a375ea8c57f1a748bcf7edf1c2cad50"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_posixshmem.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_posixshmem",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_posixshmem",
+      "sha256": "87078f7de87f1b6a56b1a2128b19d6ffba24ce328c026cc7eac1592aeae5fa40"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_queue.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_queue",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_queue",
+      "sha256": "935a110d6a710cab665a7515bd5d74f842fac1d26e94b595f1bf279a87ed3849"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_sqlite3.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_sqlite3",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_sqlite3",
+      "sha256": "50b9d62097fe6967f32ed19fd4b61b68a3283071c9c2b72554548a27ac26d901"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/_ssl.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "_ssl",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_ssl",
+      "sha256": "6309c9c8f07ce37228a219b31c8dc2ed1ad62ac085fe4d3bdabd9acf2e0fc050"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/charset_normalizer/cd.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "charset_normalizer.cd",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "3.5.1",
+      "requested_name": "charset_normalizer.cd",
+      "sha256": "b16e644c978a0f7661a6c7b8640556f645bc5840c752b2d8e80c67fdb1f1857d"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/charset_normalizer/md.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "charset_normalizer.md",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "3.5.1",
+      "requested_name": "charset_normalizer.md",
+      "sha256": "8efd70bb6f5b91f780b0aaf9eaaaed9e2098321c015853c569ef52bb6534df1b"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/cuda/bindings/_bindings/cydriver.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "cuda.bindings._bindings.cydriver",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "1.8.1",
+      "requested_name": "cuda.bindings._bindings.cydriver",
+      "sha256": "e1fcae816fa40bbf94ecbd783b58e5ac6987094b9b022aa0aeb5db1c740343a2"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/cuda/bindings/cydriver.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "cuda.bindings.cydriver",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "1.8.1",
+      "requested_name": "cuda.bindings.cydriver",
+      "sha256": "2999fc786f5fa8629c79a9eb1754b2260dfa89c801c62af58dc474e49efa6437"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/cuda/bindings/driver.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "cuda.bindings.driver",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "1.8.1",
+      "requested_name": "cuda.bindings.driver",
+      "sha256": "e897623cc50aa4762c8be3011b5c2baba816892dd70b908f3a7c5cfd0200f871"
+    },
+    {
+      "file": "<REMOTE_HOME>/FlashKDA/.venv/lib/python3.12/site-packages/markupsafe/_speedups.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "markupsafe._speedups",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "3.0.3",
+      "requested_name": "markupsafe._speedups",
+      "sha256": "f4a31de071c565959002db29bf36c6f8d35ae7929f64700adeeba46fa4f90daf"
+    },
+    {
+      "file": "/usr/lib/python3.12/lib-dynload/mmap.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "mmap",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "mmap",
+      "sha256": "534daaaed686b8eac54229b13fb66c97ea39979045f840a4c8fa92159320d026"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/numpy/_core/_multiarray_umath.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "numpy._core._multiarray_umath",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "2.5.3",
+      "requested_name": "numpy._core._multiarray_umath",
+      "sha256": "ceec5ba13ab88318632307fdd2df74f317fa293ce77be559c4298ddd1f4306b0"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/numpy/linalg/_umath_linalg.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "numpy.linalg._umath_linalg",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "2.5.3",
+      "requested_name": "numpy.linalg._umath_linalg",
+      "sha256": "19d024507f73b42889baeb00f9da0004e33a42ed7a78fd77662fd6236e930d78"
+    },
+    {
+      "file": "<REMOTE_HOME>/FlashKDA/.venv/lib/python3.12/site-packages/torch/_C.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "torch._C",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "2.10.0+cu130",
+      "requested_name": "torch._C",
+      "sha256": "c6619fb758377a9fc4d0b8a6a31fa237633aeebe1c01e25e38926b816bfd8026"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps/tvm_ffi/core.cpython-312-x86_64-linux-gnu.so",
+      "imported_name": "tvm_ffi.core",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": "0.1.13.post3",
+      "requested_name": "tvm_ffi.core",
+      "sha256": "8346cfef0a90ff04729c4f154b5e96bb19c51300e431f441112471b2f4f354be"
+    }
+  ],
+  "modules": [
+    {
+      "file": "<REMOTE_HOME>/FlashKDA/.venv/lib/python3.12/site-packages/torch/__init__.py",
+      "imported_name": "torch",
+      "loader": "SourceFileLoader",
+      "native_extension": false,
+      "package_version": "2.10.0+cu130",
+      "requested_name": "torch",
+      "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda.py",
+      "imported_name": "flashinfer.kda",
+      "loader": "SourceFileLoader",
+      "native_extension": false,
+      "package_version": null,
+      "requested_name": "flashinfer.kda",
+      "sha256": "14fc580cc6048e38a07e346236cfda14a2b8e7a3eba6e0e43b79d2701cc5f767"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda_prefill.py",
+      "imported_name": "flashinfer.kda_prefill",
+      "loader": "SourceFileLoader",
+      "native_extension": false,
+      "package_version": null,
+      "requested_name": "flashinfer.kda_prefill",
+      "sha256": "42709dfe1770e12c20e8a2976e50c125ba5e6b2dccd3685e4ecc7dbf9c2c6c0d"
+    },
+    {
+      "file": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/flashinfer/kda_evolution.py",
+      "imported_name": "flashinfer.kda_evolution",
+      "loader": "SourceFileLoader",
+      "native_extension": false,
+      "package_version": null,
+      "requested_name": "flashinfer.kda_evolution",
+      "sha256": "f322934edcad37b4d08cad6c5047ee09f33d69a55d125904906d121bffb6369d"
+    }
+  ],
+  "python_executable": "/usr/bin/python3.12",
+  "python_implementation": "CPython",
+  "python_include_dirs": [
+    "/usr/include/python3.12"
+  ],
+  "python_prefix": "<REMOTE_HOME>/FlashKDA/.venv",
+  "python_version": "3.12.3 (main, Jan 22 2026, 20:57:42) [GCC 13.3.0]",
+  "soabi": "cpython-312-x86_64-linux-gnu",
+  "sys_path": [
+    "<REMOTE_HOME>/kda-dual-ir-agent-rounds-20260910",
+    "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/.runtime-deps",
+    "<REMOTE_HOME>/flashinfer-cake-sm103-20260908",
+    "/usr/lib/python312.zip",
+    "/usr/lib/python3.12",
+    "/usr/lib/python3.12/lib-dynload",
+    "<REMOTE_HOME>/FlashKDA/.venv/lib/python3.12/site-packages",
+    "<REMOTE_HOME>/FlashKDA/.venv/lib/python3.12/site-packages/setuptools/_vendor"
+  ]
+}

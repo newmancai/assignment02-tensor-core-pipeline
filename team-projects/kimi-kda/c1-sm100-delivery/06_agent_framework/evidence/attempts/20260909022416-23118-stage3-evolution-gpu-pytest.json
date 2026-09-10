@@ -1,0 +1,43 @@
+{
+  "accounting_scope": "single-node visible-GPU allocation; telemetry includes compilation, benchmark setup, synchronization, and idle gaps",
+  "allocated_gpu_seconds": 78.43555320473388,
+  "command": [
+    "<REMOTE_HOME>/FlashKDA/.venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/kda/test_flashkda_blackwell_evolution.py",
+    "-q",
+    "-m",
+    "gpu"
+  ],
+  "ended_at_utc": "2026-09-09T02:25:34.631124+00:00",
+  "exit_code": 0,
+  "experiment": "stage3-evolution-gpu-pytest",
+  "gpu_count": 1,
+  "hardware": [
+    {
+      "index": 0,
+      "memory_total_mib": 275040.0,
+      "name": "NVIDIA B300 SXM6 AC",
+      "power_limit_w": 1100.0,
+      "uuid": "GPU-778768b4-6c9e-e483-890e-0812760948ae"
+    }
+  ],
+  "scheduler": {
+    "slurm_job_id": "23118",
+    "slurm_job_name": "kda-stage3-gpu-tests",
+    "slurm_node_list": "dev-slurm"
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-09-09T02:24:16.195553+00:00",
+  "telemetry": {
+    "average_gpu_utilization_percent": 0.019736842105263157,
+    "average_power_w": 198.93888157894736,
+    "estimated_allocation_energy_joules": 15119.355,
+    "peak_memory_used_mib": 2936.0,
+    "peak_power_w": 201.99,
+    "sample_count": 152,
+    "sample_interval_seconds": 0.5
+  },
+  "wall_seconds": 78.43555320473388
+}

@@ -1,0 +1,28 @@
+{
+  "amendment_protocol_digest": "199b2d2c77e6b91c9cf864ba432862d3aae30c2d9bd1326bb0473a2c19eb7812",
+  "artifacts": {
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_stage9_pilot_v5_qualification.jsonl": "a5b97f9ad9d2d2c94b839f5503a381cb8b4b42a06ff02278515ece986aa01802",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_stage9_pilot_v5_screen.jsonl": "e2c90be272efe5a7c30fcca2a53ad8fada8bfcd556650e2a4adacff13e426a25",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/proposal_manifest_v5.json": "33ee302155e77dc3b6b4c4f9301eaa878937f6c58f5d43adf9bd3d67d19168f8",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/stage9_pilot_v5_winner_freeze.json": "26a87e679bbb6673b786c3611efa771329839eacfab651c97e0a173f610c88ac"
+  },
+  "hardware": {
+    "compute_capability": [
+      10,
+      3
+    ],
+    "cuda_arch": "sm103a",
+    "device_index": 0,
+    "device_name": "NVIDIA B300 SXM6 AC",
+    "multiprocessor_count": 148,
+    "torch_cuda_version": "13.0",
+    "torch_version": "2.10.0+cu130",
+    "total_memory_bytes": 287428640768
+  },
+  "phase": "qualification",
+  "qualification_slots": 2,
+  "schema_version": 1,
+  "screen_round_barrier_passed": true,
+  "screen_slots": 8,
+  "single_writer_fifo": true
+}

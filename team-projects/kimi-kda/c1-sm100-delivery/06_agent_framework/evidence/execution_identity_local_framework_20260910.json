@@ -1,0 +1,271 @@
+{
+  "canonical_sha256": "412e9456e2598ff73b27b3dfccb9c923a0776dc57e409855c365fcdec9aa713c",
+  "dependency_files": [
+    {
+      "exists": true,
+      "kind": "python_source",
+      "path": "<LOCAL_HOME>/Documents/\u5317\u5927/assignment02-work/team/c1_flashkda/kda_typed_ir/kda_ir/research_memory.py",
+      "sha256": "14f713db2c1c8b3e4815ba2d82d83ae7cfef41daddf0bb7b684c1eec902638bd"
+    },
+    {
+      "exists": true,
+      "kind": "python_source",
+      "path": "<LOCAL_HOME>/Documents/\u5317\u5927/assignment02-work/team/c1_flashkda/kda_typed_ir/kda_ir/execution_identity.py",
+      "sha256": "fb453b38189aded09ba3a5f982903c8cfdfb8ba91a1b9d275b653da506b8b3d3"
+    },
+    {
+      "exists": true,
+      "kind": "python_source",
+      "path": "<LOCAL_HOME>/Documents/\u5317\u5927/assignment02-work/team/c1_flashkda/kda_typed_ir/record_execution_identity.py",
+      "sha256": "05623b2228cf7924c29a650e2cd77621b463f9dec7aaee1d6de8268ffc353310"
+    },
+    {
+      "exists": true,
+      "kind": "other",
+      "path": "<LOCAL_HOME>/Documents/\u5317\u5927/assignment02-work/team/c1_flashkda/kda_typed_ir/paper/runtime_profile_evolution/main.tex",
+      "sha256": "a02c8cfbc0c193f0f6598ab4052ed672db05f40b5c8e43bddb5758a543a34cde"
+    }
+  ],
+  "environment": {
+    "CUDA_HOME": null,
+    "LD_LIBRARY_PATH": null,
+    "PATH": "/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:<LOCAL_HOME>/.codex/tmp/arg0/codex-arg0HmKcIc:<LOCAL_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:<LOCAL_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources",
+    "PYTHONPATH": null
+  },
+  "extension_suffix": ".cpython-39-darwin.so",
+  "loaded_native_extensions": [
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_bisect.cpython-39-darwin.so",
+      "imported_name": "_bisect",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_bisect",
+      "sha256": "94f808d63ed02de29622d339138adb922e328be50bda4cf554f46149534a58f1"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_blake2.cpython-39-darwin.so",
+      "imported_name": "_blake2",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_blake2",
+      "sha256": "ace7a5d932bbaa749474c1dadcde5c2de4f3bd1ab3b4eca7e97bbec9ab3a6f96"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_bz2.cpython-39-darwin.so",
+      "imported_name": "_bz2",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_bz2",
+      "sha256": "bf0c0f25e8721ee2684829b6cff1a7261d441392fc84d8f2a8def9d3f8d58217"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_csv.cpython-39-darwin.so",
+      "imported_name": "_csv",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_csv",
+      "sha256": "e2b9aaebd4db30ff61724d57dc23c4a13ab6799bdf6f70e8ac0050b6f2372f49"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_datetime.cpython-39-darwin.so",
+      "imported_name": "_datetime",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_datetime",
+      "sha256": "892aa474d0699fd4d17e2028fa1e0f9894e16f7b4859e04d38e37935ae0e6bea"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_decimal.cpython-39-darwin.so",
+      "imported_name": "decimal",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_decimal",
+      "sha256": "de0cb5ff503790abb46af8d168a54dae59b1c630cc4c79aff3964d906637f7b8"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_hashlib.cpython-39-darwin.so",
+      "imported_name": "_hashlib",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_hashlib",
+      "sha256": "da802e76e50f627108a9a8a4a77d703af94bfb56dc4fc4c9560c297c5313bb44"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_heapq.cpython-39-darwin.so",
+      "imported_name": "_heapq",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_heapq",
+      "sha256": "9613d8b26ff63aee06ae46e69a44eea726a97fded23ff721fd97e4bd6a58a1a7"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_json.cpython-39-darwin.so",
+      "imported_name": "_json",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_json",
+      "sha256": "abc9b5ea12a96d7552ec34298fbbba6784427fd6304cbe2757a4bbc35194ba13"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_lzma.cpython-39-darwin.so",
+      "imported_name": "_lzma",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_lzma",
+      "sha256": "928be7907b453d723def994592169b6179610091edbe809e07045b108a69a495"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_opcode.cpython-39-darwin.so",
+      "imported_name": "_opcode",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_opcode",
+      "sha256": "555a6a629124de05815383f47dac6925c0558f05d61021cb2a822ccc8da3f76a"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_posixsubprocess.cpython-39-darwin.so",
+      "imported_name": "_posixsubprocess",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_posixsubprocess",
+      "sha256": "f23b2e40e280e5a66bfc4c545d038ce4b6f541a17f1c84697d3ef9e02688c952"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_random.cpython-39-darwin.so",
+      "imported_name": "_random",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_random",
+      "sha256": "43855012adae33e49bc8008b03ba0a27f47f9600612b8ba3fe84f70554ff45ba"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_sha3.cpython-39-darwin.so",
+      "imported_name": "_sha3",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_sha3",
+      "sha256": "0fa9ff6e0c522355b660d8ec0017c85831282ea6c4bb010a5a93ca7e9e939162"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_sha512.cpython-39-darwin.so",
+      "imported_name": "_sha512",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_sha512",
+      "sha256": "521c7e610ba05d1562e90d43370d09a07575dbd90922dc89119dae3bdf4a4713"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_statistics.cpython-39-darwin.so",
+      "imported_name": "_statistics",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_statistics",
+      "sha256": "005f9854f0c09df9a0ba75641a04ca15363f62724906a9fc1c1b494a5d67c7e3"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_struct.cpython-39-darwin.so",
+      "imported_name": "_struct",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "_struct",
+      "sha256": "20dbbcea553b43fec32dc2a740f1cb82f04c0bfc56a87f76f777b7c0f1d6ffc5"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/binascii.cpython-39-darwin.so",
+      "imported_name": "binascii",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "binascii",
+      "sha256": "89b39e24b8caa32965ec0d8ae803395cba7a21a6002ca310c3e70ac37ef1fe10"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/grp.cpython-39-darwin.so",
+      "imported_name": "grp",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "grp",
+      "sha256": "0ca46024557a5d1ae45a76609d7355dce3f6444195c15b15dd8ff2c45f1b7a44"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/math.cpython-39-darwin.so",
+      "imported_name": "math",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "math",
+      "sha256": "481a699baee3ebeee9f6c0d5976a6b7b41036d6d6f8ebb8eecd30c1da97a51b1"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/select.cpython-39-darwin.so",
+      "imported_name": "select",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "select",
+      "sha256": "f1ba7ae457f69c2f9c28f40a518e8ec3b3ee55c93e53b26838b1a7ca40446a7f"
+    },
+    {
+      "file": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/zlib.cpython-39-darwin.so",
+      "imported_name": "zlib",
+      "loader": "ExtensionFileLoader",
+      "native_extension": true,
+      "package_version": null,
+      "requested_name": "zlib",
+      "sha256": "7ea07df71547078514c569e682f97f9fb6657efbd8b9d161973567bc2aa49474"
+    }
+  ],
+  "modules": [
+    {
+      "file": "<LOCAL_HOME>/Documents/\u5317\u5927/assignment02-work/team/c1_flashkda/kda_typed_ir/kda_ir/research_memory.py",
+      "imported_name": "kda_ir.research_memory",
+      "loader": "SourceFileLoader",
+      "native_extension": false,
+      "package_version": null,
+      "requested_name": "kda_ir.research_memory",
+      "sha256": "14f713db2c1c8b3e4815ba2d82d83ae7cfef41daddf0bb7b684c1eec902638bd"
+    },
+    {
+      "file": "<LOCAL_HOME>/Documents/\u5317\u5927/assignment02-work/team/c1_flashkda/kda_typed_ir/kda_ir/execution_identity.py",
+      "imported_name": "kda_ir.execution_identity",
+      "loader": "SourceFileLoader",
+      "native_extension": false,
+      "package_version": null,
+      "requested_name": "kda_ir.execution_identity",
+      "sha256": "fb453b38189aded09ba3a5f982903c8cfdfb8ba91a1b9d275b653da506b8b3d3"
+    }
+  ],
+  "python_executable": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+  "python_implementation": "CPython",
+  "python_include_dirs": [
+    "/Library/Python/3.9/include"
+  ],
+  "python_prefix": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9",
+  "python_version": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "soabi": "cpython-39-darwin",
+  "sys_path": [
+    "<LOCAL_HOME>/Documents/\u5317\u5927/assignment02-work/team/c1_flashkda/kda_typed_ir",
+    "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python39.zip",
+    "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9",
+    "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload",
+    "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages"
+  ]
+}

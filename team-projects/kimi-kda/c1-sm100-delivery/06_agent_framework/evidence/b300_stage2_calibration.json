@@ -1,0 +1,246 @@
+{
+  "analysis": "b300-typed-delta-calibration-and-deployment-tactic",
+  "calibration": {
+    "activation_eligible_case_count": 5,
+    "all_candidates_correct": true,
+    "case_count": 6,
+    "cases": [
+      {
+        "activation_tactic": "activate_after_public-adapter validation",
+        "baseline_median_us": 432.8375,
+        "candidate_median_us": 360.85299999999995,
+        "correct": true,
+        "current_public_auto_backend": "cake",
+        "current_public_auto_variant": "m128",
+        "name": "h96_fixed8192",
+        "speedup": 1.199484277531294,
+        "speedup_bootstrap_95pct": [
+          1.1987974508174009,
+          1.2000887102363298
+        ],
+        "typed_delta": {
+          "full_chunks": true,
+          "grid_stride": 96,
+          "has_explicit_tile_schedule": false,
+          "num_heads": 96,
+          "persistent_tasks": 1,
+          "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_vtile_f1_t8192_h96_p1_s96.cu",
+          "token_extent": 8192,
+          "topology": "value_tile",
+          "value_rows": 128,
+          "variant": "vtile_f1_t8192_h96_p1_s96"
+        }
+      },
+      {
+        "activation_tactic": "retain-baseline",
+        "baseline_median_us": 331.63399999999996,
+        "candidate_median_us": 330.99699999999996,
+        "correct": true,
+        "current_public_auto_backend": "cake",
+        "current_public_auto_variant": "m128",
+        "name": "h96_mixed",
+        "speedup": 1.00192448874159,
+        "speedup_bootstrap_95pct": [
+          0.9997980206018987,
+          1.0042063758846564
+        ],
+        "typed_delta": {
+          "full_chunks": null,
+          "grid_stride": 173,
+          "has_explicit_tile_schedule": true,
+          "num_heads": 96,
+          "persistent_tasks": 1,
+          "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_m128_h96_p1_s173.cu",
+          "token_extent": null,
+          "topology": "scalar_tile",
+          "value_rows": 128,
+          "variant": "m128_h96_p1_s173"
+        }
+      },
+      {
+        "activation_tactic": "activate_after_public-adapter validation",
+        "baseline_median_us": 372.884,
+        "candidate_median_us": 301.66900000000004,
+        "correct": true,
+        "current_public_auto_backend": "cake",
+        "current_public_auto_variant": "m128",
+        "name": "h96_uniform",
+        "speedup": 1.23606999724864,
+        "speedup_bootstrap_95pct": [
+          1.2352099426284897,
+          1.23668593934411
+        ],
+        "typed_delta": {
+          "full_chunks": true,
+          "grid_stride": 128,
+          "has_explicit_tile_schedule": false,
+          "num_heads": 96,
+          "persistent_tasks": 6,
+          "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_vtile_f1_t1024_h96_p6_s128.cu",
+          "token_extent": 1024,
+          "topology": "value_tile",
+          "value_rows": 128,
+          "variant": "vtile_f1_t1024_h96_p6_s128"
+        }
+      },
+      {
+        "activation_tactic": "activate_after_public-adapter validation",
+        "baseline_median_us": 431.254,
+        "candidate_median_us": 334.372,
+        "correct": true,
+        "current_public_auto_backend": "cake",
+        "current_public_auto_variant": "m64",
+        "name": "h64_fixed8192",
+        "speedup": 1.2897431603124665,
+        "speedup_bootstrap_95pct": [
+          1.2891689495531922,
+          1.2904447509101735
+        ],
+        "typed_delta": {
+          "full_chunks": true,
+          "grid_stride": 128,
+          "has_explicit_tile_schedule": false,
+          "num_heads": 64,
+          "persistent_tasks": 0,
+          "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_m64_f1_t8192_h64.cu",
+          "token_extent": 8192,
+          "topology": "value64_split",
+          "value_rows": 64,
+          "variant": "m64_f1_t8192_h64"
+        }
+      },
+      {
+        "activation_tactic": "activate_after_public-adapter validation",
+        "baseline_median_us": 231.37999999999997,
+        "candidate_median_us": 229.36299999999997,
+        "correct": true,
+        "current_public_auto_backend": "cake",
+        "current_public_auto_variant": "m128",
+        "name": "h64_mixed",
+        "speedup": 1.0087939205538818,
+        "speedup_bootstrap_95pct": [
+          1.0074643450069938,
+          1.0102703327928277
+        ],
+        "typed_delta": {
+          "full_chunks": null,
+          "grid_stride": 126,
+          "has_explicit_tile_schedule": true,
+          "num_heads": 64,
+          "persistent_tasks": 1,
+          "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_m128_h64_p1_s126.cu",
+          "token_extent": null,
+          "topology": "scalar_tile",
+          "value_rows": 128,
+          "variant": "m128_h64_p1_s126"
+        }
+      },
+      {
+        "activation_tactic": "activate_after_public-adapter validation",
+        "baseline_median_us": 250.963,
+        "candidate_median_us": 206.8345,
+        "correct": true,
+        "current_public_auto_backend": "cake",
+        "current_public_auto_variant": "m128",
+        "name": "h64_uniform",
+        "speedup": 1.213351737742011,
+        "speedup_bootstrap_95pct": [
+          1.2123336312471316,
+          1.2138956736233708
+        ],
+        "typed_delta": {
+          "full_chunks": true,
+          "grid_stride": 128,
+          "has_explicit_tile_schedule": false,
+          "num_heads": 64,
+          "persistent_tasks": 4,
+          "source": "<REMOTE_HOME>/flashinfer-cake-sm103-20260908/csrc/kda/cake_flashkda_blackwell_evolution_vtile_f1_t1024_h64_p4_s128.cu",
+          "token_extent": 1024,
+          "topology": "value_tile",
+          "value_rows": 128,
+          "variant": "vtile_f1_t1024_h64_p4_s128"
+        }
+      }
+    ],
+    "comparison_scope": "CUPTI cold-L2 GPU timing; CAKE through public recurrent_kda, candidate through prepared evolution launch",
+    "geomean_directional_speedup_vs_cake_public": 1.1526412835968947,
+    "interpretation_limit": "directional kernel evidence, not a production API speedup claim, until the public adapter is activated and remeasured",
+    "maximum_speedup": 1.2897431603124665,
+    "minimum_speedup": 1.00192448874159
+  },
+  "candidate_corpus": {
+    "candidate_count": 29,
+    "semantic_fingerprint_count": 29,
+    "topology_counts": {
+      "scalar_tile": 7,
+      "value64_split": 1,
+      "value_tile": 21
+    },
+    "verifier_diagnostics": []
+  },
+  "compute_accounting": {
+    "accounts": [
+      {
+        "allocated_gpu_seconds": 45.252337427809834,
+        "estimated_allocation_energy_joules": 10279.615,
+        "exit_code": 0,
+        "experiment": "evolution-six-correctness-cupti",
+        "file": "b300_evolution6_accounting.json",
+        "peak_memory_used_mib": 4092.0,
+        "wall_seconds": 45.252337427809834
+      },
+      {
+        "allocated_gpu_seconds": 3.2993668098933995,
+        "estimated_allocation_energy_joules": 786.785,
+        "exit_code": 0,
+        "experiment": "evolution-six-cupti-20x100",
+        "file": "b300_evolution6_stable_accounting.json",
+        "peak_memory_used_mib": 4102.0,
+        "wall_seconds": 3.2993668098933995
+      },
+      {
+        "allocated_gpu_seconds": 3.357579791918397,
+        "estimated_allocation_energy_joules": 831.27,
+        "exit_code": 0,
+        "experiment": "legacy-six-public-auto-evolution",
+        "file": "b300_legacy_auto_accounting.json",
+        "peak_memory_used_mib": 3810.0,
+        "wall_seconds": 3.357579791918397
+      },
+      {
+        "allocated_gpu_seconds": 3.4136445452459157,
+        "estimated_allocation_energy_joules": 827.4200000000001,
+        "exit_code": 0,
+        "experiment": "legacy-six-public-cake",
+        "file": "b300_legacy_cake_accounting.json",
+        "peak_memory_used_mib": 3810.0,
+        "wall_seconds": 3.4136445452459157
+      }
+    ],
+    "allocated_gpu_minutes": 0.9220488095811258,
+    "allocated_gpu_seconds": 55.32292857486755,
+    "coverage_note": "lower bound: retained successful manifests only; early pre-kernel environment failures were overwritten before append-only attempts were added to the runner",
+    "cupti_timed_sample_count": 1980,
+    "estimated_allocation_energy_joules": 12725.09,
+    "retained_successful_run_count": 4,
+    "sum_of_cupti_sample_duration_seconds": 0.6395891150000002
+  },
+  "deployment_gap": {
+    "public_auto_still_resolves_to_cake_for_all_cases": true,
+    "required_tactic": "make verified evolution schedules an explicit public backend/route, then rerun the identical rotating-state public benchmark"
+  },
+  "hardware": {
+    "compute_capability": [
+      10,
+      3
+    ],
+    "cuda_arch": "sm103a",
+    "device_index": 0,
+    "device_name": "NVIDIA B300 SXM6 AC",
+    "multiprocessor_count": 148,
+    "torch_cuda_version": "13.0",
+    "torch_version": "2.10.0+cu130",
+    "total_memory_bytes": 287428640768
+  },
+  "schema_version": 1
+}

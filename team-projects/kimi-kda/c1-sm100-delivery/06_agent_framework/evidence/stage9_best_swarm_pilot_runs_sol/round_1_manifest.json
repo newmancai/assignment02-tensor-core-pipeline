@@ -1,0 +1,512 @@
+{
+  "schema_version": 2,
+  "language": "typed_runtime_policy_v2",
+  "status": "round_1_proposal_frozen",
+  "round": 1,
+  "created_at_utc": "2026-09-09T15:18:35.673668+00:00",
+  "amendment_sha256": "c1bc79161be81ee2aa48e2d8ef48b3a8644f2324e3b7043f999a8af5ccfe3d07",
+  "amendment_protocol_digest": "a65e32ac1ebfdc6edf50ca351bdb165b952c0207f803f9ef326b273a1d257832",
+  "protocol_digest": "a65e32ac1ebfdc6edf50ca351bdb165b952c0207f803f9ef326b273a1d257832",
+  "candidate_space_digest": "cbcbfde7e85174dba54612d99e1047b966e0d623d7c5c25b65010540ccc9467a",
+  "arms": [
+    "multi_role_conclusions"
+  ],
+  "trajectory_seeds": [
+    91001
+  ],
+  "proposal_slots_per_arm": 8,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "common_prompt_digest": "219d63f0939056fa78f49be21289d74aa774c2583705160da256cbfd04a19c97",
+  "common_prompt_sha256": "219d63f0939056fa78f49be21289d74aa774c2583705160da256cbfd04a19c97",
+  "arm_prompt_digests": {
+    "multi_role_conclusions": "a1cb55cd9175a17b24f93dd150ec57fccd41e7aa46f0ec26a64d105cb7aad655"
+  },
+  "arm_protocol_digests": {
+    "multi_role_conclusions": "a1cb55cd9175a17b24f93dd150ec57fccd41e7aa46f0ec26a64d105cb7aad655"
+  },
+  "model_digest": "f8f504ce3a794486c3e96151e0061aa2c8fcb8e4572a375ff46aa45d313c6636",
+  "model_config_digest": "039d8dbba78bdb661044defdb46dca8d88b1c78d647aca1c8845aea30ec25152",
+  "tool_manifest_digest": "c68bda73ccc369ea52e111c7550ace8958766bc188289584b4ced1eee913cca5",
+  "prompt_protocol_digest": "9e11589a24ef792bfd0ad3885059c6b2473a0d5db99e0fcd8668df7cb518f9df",
+  "development_summary_sha256": "645d97e91a925629e0738f5cd599025a3b8615971219f5e35e7d0b12ef8e87ae",
+  "profile_split_digest": "645d97e91a925629e0738f5cd599025a3b8615971219f5e35e7d0b12ef8e87ae",
+  "agent_receipts": [
+    {
+      "request_id": "multi_role_conclusions.t0.r1.capacity",
+      "request_digest": "c7fc4855e0434113ed549fd3be549dde04ea80ffd40256c0eb4de87e840d32a2",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "capacity",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "244c9823ae9d35bb8f9f34dd38e62b17b89fdf2196f178db6ea67a76946c9a15",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:12:58.457232+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 46.68144702911377,
+      "token_usage": {
+        "input_tokens": 17103,
+        "output_tokens": 908,
+        "cache_read_tokens": 10240,
+        "cache_write_tokens": null,
+        "total_tokens": 18011,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/capacity/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/capacity/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:13:45.139207+00:00"
+    },
+    {
+      "request_id": "multi_role_conclusions.t0.r1.tail_skew",
+      "request_digest": "be1137015e2a0c1f7a1ee86c853df3479d1805d029133fd2c1e87f9e93192bb3",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "tail_skew",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "7aed69e52a54cd2a091ce80a31d90a0879b793854cea46c78bd27fa271f8eff5",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:12:58.457077+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 35.39494585990906,
+      "token_usage": {
+        "input_tokens": 17107,
+        "output_tokens": 611,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "total_tokens": 17718,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/tail_skew/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/tail_skew/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:13:33.852639+00:00"
+    },
+    {
+      "request_id": "multi_role_conclusions.t0.r1.resource",
+      "request_digest": "79765aeb2749acec398fc2210a723ce3d617e006a6d9571b49ddf9259ee3a782",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "resource",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "b622e92d90cf6ba5f6ba157b1d3da4ce51d7a67ea050f1ba601ecd57154f50a5",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:12:58.457309+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 40.41070890426636,
+      "token_usage": {
+        "input_tokens": 17110,
+        "output_tokens": 679,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "total_tokens": 17789,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/resource/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/resource/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:13:38.868463+00:00"
+    },
+    {
+      "request_id": "multi_role_conclusions.t0.r1.critic_synthesizer_repair1",
+      "request_digest": "6b39d56de036c8bb081285237d1ae864876051211411c49fc0bb99f026498491",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "critic_synthesizer_repair1",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "b3e7206418ad44ba07217f7f9293683dcdf6313acb18540a06fc7f160563f138",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:17:15.165514+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 80.50634407997131,
+      "token_usage": {
+        "input_tokens": 17612,
+        "output_tokens": 2108,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "total_tokens": 19720,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/critic_synthesizer_repair1/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/critic_synthesizer_repair1/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:18:35.672398+00:00"
+    }
+  ],
+  "receipts": [
+    {
+      "request_id": "multi_role_conclusions.t0.r1.capacity",
+      "request_digest": "c7fc4855e0434113ed549fd3be549dde04ea80ffd40256c0eb4de87e840d32a2",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "capacity",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "244c9823ae9d35bb8f9f34dd38e62b17b89fdf2196f178db6ea67a76946c9a15",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:12:58.457232+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 46.68144702911377,
+      "token_usage": {
+        "input_tokens": 17103,
+        "output_tokens": 908,
+        "cache_read_tokens": 10240,
+        "cache_write_tokens": null,
+        "total_tokens": 18011,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/capacity/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/capacity/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:13:45.139207+00:00"
+    },
+    {
+      "request_id": "multi_role_conclusions.t0.r1.tail_skew",
+      "request_digest": "be1137015e2a0c1f7a1ee86c853df3479d1805d029133fd2c1e87f9e93192bb3",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "tail_skew",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "7aed69e52a54cd2a091ce80a31d90a0879b793854cea46c78bd27fa271f8eff5",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:12:58.457077+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 35.39494585990906,
+      "token_usage": {
+        "input_tokens": 17107,
+        "output_tokens": 611,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "total_tokens": 17718,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/tail_skew/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/tail_skew/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:13:33.852639+00:00"
+    },
+    {
+      "request_id": "multi_role_conclusions.t0.r1.resource",
+      "request_digest": "79765aeb2749acec398fc2210a723ce3d617e006a6d9571b49ddf9259ee3a782",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "resource",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "b622e92d90cf6ba5f6ba157b1d3da4ce51d7a67ea050f1ba601ecd57154f50a5",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:12:58.457309+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 40.41070890426636,
+      "token_usage": {
+        "input_tokens": 17110,
+        "output_tokens": 679,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "total_tokens": 17789,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/resource/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/resource/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:13:38.868463+00:00"
+    },
+    {
+      "request_id": "multi_role_conclusions.t0.r1.critic_synthesizer_repair1",
+      "request_digest": "6b39d56de036c8bb081285237d1ae864876051211411c49fc0bb99f026498491",
+      "arm": "multi_role_conclusions",
+      "trajectory": 0,
+      "round": 1,
+      "seed": 91001,
+      "lane": "critic_synthesizer_repair1",
+      "requested_proposals": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "prompt_sha256": "b3e7206418ad44ba07217f7f9293683dcdf6313acb18540a06fc7f160563f138",
+      "status": "ok",
+      "started_at_utc": "2026-09-09T15:17:15.165514+00:00",
+      "error": "",
+      "exit_status": 0,
+      "elapsed_s": 80.50634407997131,
+      "token_usage": {
+        "input_tokens": 17612,
+        "output_tokens": 2108,
+        "cache_read_tokens": 0,
+        "cache_write_tokens": null,
+        "total_tokens": 19720,
+        "measurement": "exact"
+      },
+      "tool_event_count": 0,
+      "output_path": "requests/multi_role_conclusions/trajectory_0/round_1/critic_synthesizer_repair1/proposal_output.json",
+      "events_path": "requests/multi_role_conclusions/trajectory_0/round_1/critic_synthesizer_repair1/events.jsonl",
+      "finished_at_utc": "2026-09-09T15:18:35.672398+00:00"
+    }
+  ],
+  "proposals": [
+    {
+      "origin_proposal_id": "multi_role_conclusions.t0.r1.capacity.p0",
+      "lane": "capacity",
+      "status": "valid",
+      "error": "",
+      "policy_id": "kir-policy:dbf79f91a1bc4f3ff6aaa114b1eee4afa45b40b2a213e8ffbe9bcdb8fe1a3bd7",
+      "policy": {
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 370
+        },
+        "then": {
+          "kind": "leaf",
+          "chunks_per_cta": 5
+        },
+        "else": {
+          "kind": "node",
+          "predicate": {
+            "feature": "total_chunks",
+            "operator": "le",
+            "threshold": 740
+          },
+          "then": {
+            "kind": "leaf",
+            "chunks_per_cta": 9
+          },
+          "else": {
+            "kind": "leaf",
+            "chunks_per_cta": 17
+          }
+        }
+      },
+      "hypothesis": "Scaling chunks_per_prepare_cta at half and full resident-grid capacity keeps prepare-grid pressure bounded as total work crosses receipt-derived occupancy regimes; thresholds 370 and 740 are falsifiable capacity anchors rather than workload-fitted midpoints.",
+      "parent_policy_ids": [
+        "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf"
+      ],
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "lineage_delta_refs": [
+        "replace incumbent fitted thresholds 384/768 with receipt-capacity anchors resident_grid_capacity_ctas/2=370 and resident_grid_capacity_ctas=740"
+      ],
+      "proposal_slot": 4,
+      "round": 1,
+      "trajectory": 0,
+      "seed": 91001,
+      "arm": "multi_role_conclusions"
+    },
+    {
+      "origin_proposal_id": "multi_role_conclusions.t0.r1.tail_skew.p0",
+      "lane": "tail_skew",
+      "status": "valid",
+      "error": "",
+      "policy_id": "kir-policy:faa865901f5f68d33a887f7607caa3c9ffd6ce76664c966161b9dbbae6f8acb1",
+      "policy": {
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 384
+        },
+        "then": {
+          "kind": "leaf",
+          "chunks_per_cta": 5
+        },
+        "else": {
+          "kind": "node",
+          "predicate": {
+            "feature": "max_chunks",
+            "operator": "le",
+            "threshold": 512
+          },
+          "then": {
+            "kind": "leaf",
+            "chunks_per_cta": 9
+          },
+          "else": {
+            "kind": "leaf",
+            "chunks_per_cta": 17
+          }
+        }
+      },
+      "hypothesis": "Above the small-work regime, maximum per-sequence tail length rather than aggregate chunk count determines whether deeper CTA chunking amortizes scheduling overhead; use cpc=17 only when max_chunks exceeds 512.",
+      "parent_policy_ids": [
+        "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf"
+      ],
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "lineage_delta_refs": [
+        "replace parent total_chunks<=768 branch with max_chunks<=512 tail-length branch"
+      ],
+      "proposal_slot": 5,
+      "round": 1,
+      "trajectory": 0,
+      "seed": 91001,
+      "arm": "multi_role_conclusions"
+    },
+    {
+      "origin_proposal_id": "multi_role_conclusions.t0.r1.resource.p0",
+      "lane": "resource",
+      "status": "valid",
+      "error": "",
+      "policy_id": "kir-policy:dbf79f91a1bc4f3ff6aaa114b1eee4afa45b40b2a213e8ffbe9bcdb8fe1a3bd7",
+      "policy": {
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 370
+        },
+        "then": {
+          "kind": "leaf",
+          "chunks_per_cta": 5
+        },
+        "else": {
+          "kind": "node",
+          "predicate": {
+            "feature": "total_chunks",
+            "operator": "le",
+            "threshold": 740
+          },
+          "then": {
+            "kind": "leaf",
+            "chunks_per_cta": 9
+          },
+          "else": {
+            "kind": "leaf",
+            "chunks_per_cta": 17
+          }
+        }
+      },
+      "hypothesis": "Work-scale transitions occur near one-half and one full resident-grid capacity: use CPC 5 below half-capacity, CPC 9 through one-capacity, and CPC 17 above capacity to reduce repeated scheduling waves.",
+      "parent_policy_ids": [
+        "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf"
+      ],
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "lineage_delta_refs": [
+        "replace empirical midpoint thresholds 384 and 768 with resource-derived half-capacity and full-capacity thresholds 370 and 740"
+      ],
+      "proposal_slot": 6,
+      "round": 1,
+      "trajectory": 0,
+      "seed": 91001,
+      "arm": "multi_role_conclusions"
+    },
+    {
+      "origin_proposal_id": "multi_role_conclusions.t0.r1.critic_synthesizer_repair1.p0",
+      "lane": "critic_synthesizer_repair1",
+      "status": "valid",
+      "error": "",
+      "policy_id": "kir-policy:ad2eaac3aa3ba8654fd5f9a3acf49267e7c4ff776ec956c5854c558b02e85f7c",
+      "policy": {
+        "kind": "node",
+        "predicate": {
+          "feature": "total_chunks",
+          "operator": "le",
+          "threshold": 370
+        },
+        "then": {
+          "kind": "leaf",
+          "chunks_per_cta": 5
+        },
+        "else": {
+          "kind": "node",
+          "predicate": {
+            "feature": "total_chunks",
+            "operator": "le",
+            "threshold": 768
+          },
+          "then": {
+            "kind": "leaf",
+            "chunks_per_cta": 9
+          },
+          "else": {
+            "kind": "leaf",
+            "chunks_per_cta": 17
+          }
+        }
+      },
+      "hypothesis": "The cpc=5 regime ends near half of the 740-CTA resident capacity, while cpc=9 remains preferable through a small over-capacity tail before cpc=17 amortizes multi-wave preparation; therefore combine the capacity parent's 370 cutoff with the incumbent parent's exact 768-to-9/17 subtree.",
+      "parent_policy_ids": [
+        "kir-policy:dbf79f91a1bc4f3ff6aaa114b1eee4afa45b40b2a213e8ffbe9bcdb8fe1a3bd7",
+        "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf"
+      ],
+      "evidence_refs": [
+        "h12_w256_fixed_4096",
+        "h12_w256_balanced_4",
+        "h12_profile_fixed_8192",
+        "h12_profile_balanced_2",
+        "h12_profile_balanced_4",
+        "h12_profile_skew",
+        "h12_w1024_fixed_16384",
+        "h12_w1024_balanced_4"
+      ],
+      "lineage_delta_refs": [
+        "capacity_parent:retain_total_chunks_le_370_lower_boundary",
+        "incumbent_parent:graft_exact_total_chunks_le_768_cpc_9_else_cpc_17_subtree",
+        "counterfactual:replace_capacity_parent_upper_threshold_740_with_768"
+      ],
+      "proposal_slot": 7,
+      "round": 1,
+      "trajectory": 0,
+      "seed": 91001,
+      "arm": "multi_role_conclusions"
+    }
+  ],
+  "proposal_manifest_sha256": "8f600915c2c49617d451c3a0977d18774b03a22b7f85822cd0760582e55edac9"
+}

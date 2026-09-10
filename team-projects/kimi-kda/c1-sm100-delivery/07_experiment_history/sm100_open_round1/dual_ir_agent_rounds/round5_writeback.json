@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "round": 5,
+  "hardware": {
+    "name": "NVIDIA B300 SXM6 AC",
+    "gpu_uuid": "GPU-3924bd78-8b2f-8e85-3f20-8b0687d0bb0a",
+    "physical_sm_count": 148
+  },
+  "budget": {
+    "hmma": {"new_proposals": 1, "compile_attempts": 0, "gpu_blocks": 2},
+    "tcgen05": {"new_proposals": 1, "compile_attempts": 0, "gpu_blocks": 2}
+  },
+  "results": [
+    {
+      "lane": "hmma",
+      "profile": "H12 packed balanced3, total=8192",
+      "incumbent": "hmma_v128",
+      "challenger": "hmma_v32",
+      "medians_ms": {
+        "official": 0.53310075,
+        "hmma_v128": 0.5301185,
+        "hmma_v32": 0.40649975,
+        "cake": 0.21793
+      },
+      "challenger_speedup": 1.3041070243,
+      "bootstrap_95": [1.3032365293, 1.3051541583],
+      "correctness": "bitwise output and state",
+      "evidence_status": "screen_passed_pending_qualification",
+      "permitted_use": "qualification_candidate",
+      "claim": "V32 creates a new HMMA frontier at balanced nseq=3 and supports CTA-wave-aware ValueSlice dispatch."
+    },
+    {
+      "lane": "tcgen05",
+      "profile": "H96 packed mixed6, total=8192",
+      "incumbent": "grid148/s173 default scheduler",
+      "challenger": "TAIL4-S173",
+      "medians_ms": {
+        "incumbent": 0.548205,
+        "tail4": 0.569631
+      },
+      "challenger_speedup": 0.9623871145,
+      "bootstrap_95": [0.9608467269, 0.9634474003],
+      "correctness": "passed frozen official-peer contract",
+      "route_identity": "both arms used m128_h96_p1_s173 on sm103a",
+      "program_receipt": {
+        "grid_ctas": 148,
+        "carrier_stride": 173,
+        "tasks": 576,
+        "chunks": 24864,
+        "critical_cta_task_count": 4,
+        "recipe": "tail4_recipe_v1"
+      },
+      "evidence_status": "scoped_negative",
+      "permitted_use": "reject_exact_recipe_and_lower_ordering_priority",
+      "claim": "Reducing task switches on the critical 173-chunk CTAs causes a 3.8% regression; max-load and task-count objectives cannot be optimized independently."
+    }
+  ],
+  "remote_job": 24903,
+  "raw_evidence": "results/round5-hmma-frontier-job-24903",
+  "saturation_status": "continue",
+  "reason": "HMMA produced a new positive screen; tcgen05 MINIMAX172 remains the final zero-build counterfactual for this exact schedule subspace."
+}

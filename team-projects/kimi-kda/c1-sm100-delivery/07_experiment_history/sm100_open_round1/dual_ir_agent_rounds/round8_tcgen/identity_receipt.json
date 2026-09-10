@@ -1,0 +1,35 @@
+{
+  "schema_version": "round8_tcgen_preferred_identity_v1",
+  "candidate": "v16_phase6_l1_preferred_layout_contract",
+  "semantic_shape": {
+    "D": 128,
+    "K": 16,
+    "V": 16,
+    "grid_ctas": 96,
+    "threads_per_cta": 128,
+    "target_arch": "sm_103a"
+  },
+  "vendored_from": {
+    "phase6_probe": {
+      "path": "assignment02-github/team-projects/kimi-kda/experiments/final_campaign/tcgen05_probe/phase6_probe.cu",
+      "sha256": "4b6cb812cbe8b317f00e2a2c871bf7c7fe5db973dab60e947f681d88c9f2905f"
+    },
+    "fixed_shape_wrapper": {
+      "path": "assignment02-github/team-projects/kimi-kda/experiments/stage11_v16_tcgen_probe/stage11_v16_tcgen_probe.cu",
+      "sha256": "6aa7ac2986ad6dd9c53bf7720ded13317c2c8f2ff427b349dd7c8679ca1d53b7"
+    }
+  },
+  "mutation_budget": {
+    "structural_candidates": 1,
+    "changed_mechanism": "move logical-B to preferred physical descriptor staging outside the repeated L1 lifecycle",
+    "unchanged_protocol": "tcgen05 alloc/mma/commit/parity-wait/ld/dealloc and BF16 state/gate epilogue",
+    "full_flashkda": false,
+    "producer_conversion_timed": false
+  },
+  "historical_anchor": {
+    "job_id": 24111,
+    "scalar_l1_inner64_hmma_us_per_phase": 1.152415,
+    "scalar_l1_inner64_tcgen_us_per_phase": 1.480258,
+    "required_recovery_us_per_phase": 0.328
+  }
+}

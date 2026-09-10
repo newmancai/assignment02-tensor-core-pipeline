@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "authority": "FRAMEWORK_SCOPE_CORRECTION_20260910.md",
+  "objective": {
+    "objective_id": "flashkda-sm80-hmma-to-sm100-v1",
+    "primary_question": "FlashKDA 官方 kernel 当前使用 SM80 MMA，分析迁移到 SM100 是否值得",
+    "challenge_ladder": {
+      "H0": "official HMMA",
+      "H1": "strongest HMMA after an explicit comparable search budget",
+      "T0": "structurally matched tcgen05 plus necessary protocol",
+      "T1": "strongest tcgen05 after an explicit comparable search budget",
+      "T2": "strongest guarded SM100 deployment path"
+    },
+    "case_study_only": [
+      "Stage9 depth-2 cpc policy grammar",
+      "resident-grid-capacity rule on one B300 resource receipt"
+    ],
+    "must_not_replace_mainline": [
+      "cpc tuning",
+      "multi-agent superiority",
+      "concurrency",
+      "framework construction",
+      "end-to-end serving"
+    ]
+  },
+  "proposal_plane": {
+    "representation_statuses": [
+      "executable_existing",
+      "patch_required",
+      "needs_ir_extension",
+      "prototype_first"
+    ],
+    "deterministic_rejection_only_for": [
+      "semantic violation",
+      "requested/observed identity mismatch for ranking",
+      "correctness failure",
+      "illegal compilation or execution"
+    ],
+    "not_rejection": [
+      "current IR cannot express the idea",
+      "compile failure",
+      "neighboring profile failure",
+      "conflicting mechanism hypothesis"
+    ]
+  },
+  "current_scoped_experience": [
+    {
+      "claim_id": "hmma-h12-six-sequence-v64",
+      "proposition": "Current optimized HMMA V64 beats V128 by 1.2172x on packed mixed6 and 1.1723x on packed balanced6, total tokens 8192.",
+      "correctness": "bitwise output and state against official",
+      "permitted_use": "ranking_prior",
+      "unknown_transfer": [
+        "other sequence counts",
+        "other total work",
+        "H96",
+        "concurrent streams"
+      ]
+    },
+    {
+      "claim_id": "cake-vs-stronger-hmma-h12",
+      "proposition": "CAKE is 2.0246x and 1.8334x faster than the stronger HMMA winners on the same two H12 profiles.",
+      "causal_label": "SM100 full-stack treatment",
+      "forbidden_label": "isolated tcgen05 opcode effect",
+      "permitted_use": "requires_retest"
+    },
+    {
+      "claim_id": "virtual152-on-physical148",
+      "proposition": "Virtual152 persistent schedules regress on exact H64/H96 mixed profiles on a physical 148-SM B300.",
+      "mechanism_status": "controlled bundled intervention; partial second wave is leading but not isolated",
+      "permitted_use": "ranking_prior that constrains the next search to grid_x<=148",
+      "reopen_conditions": [
+        "physical 152-SM device",
+        "fixed-kernel controlled CTA-count experiment"
+      ]
+    },
+    {
+      "claim_id": "h96-s173-reopen",
+      "proposition": "Search-only H96 mixed s173 was 1.0366x faster than Cake in a two-block screen.",
+      "permitted_use": "qualification_candidate",
+      "forbidden_upgrade": "deployment activation"
+    }
+  ],
+  "execution_identity": {
+    "required_before_ranking": [
+      "python executable/version/prefix/includes/SOABI",
+      "ordered sys.path and allowlisted path environment",
+      "critical module requested name, actual __file__, loader, version and hash",
+      "loaded native extension paths and hashes",
+      "critical Python/CUDA/header dependency paths and hashes",
+      "requested backend/route and observed module/route/fallback"
+    ],
+    "fallback_policy": "requested candidate that actually runs fallback is diagnostic_only and cannot be ranked",
+    "receipts": [
+      "evidence/execution_identity_local_framework_20260910.json",
+      "evidence/execution_identity_b300_framework_20260910.json"
+    ]
+  },
+  "next_search": [
+    "HMMA V64/V128 frontier over controlled nseq, total_chunks, max_chunks and skew",
+    "tcgen05 persistent scheduling with grid_x<=physical_sm_count",
+    "four-block qualification of H96 mixed s173 versus Cake",
+    "equal build slots for HMMA L3 lookahead and tcgen05 preferred-layout bridge"
+  ]
+}

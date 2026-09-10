@@ -1,0 +1,102 @@
+{
+  "schema_version": "open_kda_migration_path_v1",
+  "path_id": "cake-sm100-full-stack",
+  "parent_ids": ["official-sm80-mma"],
+  "semantic_contract": {
+    "problem": "same recurrent KDA prefill output and final state",
+    "compatibility": "algorithm_equivalent_with_bf16_tolerance",
+    "chunk": 16,
+    "head_dim_qk": 128,
+    "head_dim_vo": 128,
+    "gate_beta_and_qk_norm_in_kernel": true,
+    "packed_sequence_boundaries_preserved": true
+  },
+  "physical_contract": {
+    "target": "sm_103a",
+    "instruction_family": "tcgen05_with_tmem",
+    "not_an_instruction_only_migration": true,
+    "changed_dimensions": [
+      "kernel fusion and split",
+      "work partition",
+      "warp roles",
+      "TMEM residency",
+      "barrier topology",
+      "pipeline schedule",
+      "shape-dependent dispatch"
+    ]
+  },
+  "observed_routes": [
+    {
+      "route_id": "h12-direct-m128",
+      "profiles": ["h12_packed_512x32", "h12_packed_128x8", "h12_packed_1024x8"],
+      "physical_module_examples": [
+        "sm_103a:flashkda_bf16_fused_m128_6151e2988c",
+        "sm_103a:flashkda_bf16_fused_m128_13081cc606"
+      ],
+      "kernel_boundary": "fused recurrent prefill",
+      "value_rows": 128
+    },
+    {
+      "route_id": "h12-bt16-prepare-chain-m64",
+      "profiles": ["h12_fixed_512", "h12_fixed_8192", "h12_packed_mixed"],
+      "physical_module_examples": [
+        "sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011",
+        "sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9"
+      ],
+      "kernel_boundary": "separate prepare and recurrent chain",
+      "value_rows": 64
+    },
+    {
+      "route_id": "h96-fused-m128",
+      "profiles": ["h96_fixed_8192", "h96_mixed", "h96_uniform_1024x8"],
+      "physical_module_examples": ["m128"],
+      "kernel_boundary": "fused recurrent prefill",
+      "value_rows": 128
+    }
+  ],
+  "source_to_ir_receipt": {
+    "ref": "evidence/source_to_ir_a1418fd1ae.json",
+    "kernel_name": "kernel_flashkda_bf16_fused_m128",
+    "resources": {"threads": 1024, "smem_bytes": 117376, "tmem_columns": 240},
+    "role_warps": {
+      "compute": [0, 3],
+      "epilogue": [4, 7],
+      "beta_prefetch": [8, 8],
+      "mma": [9, 9],
+      "aux_mma": [10, 11],
+      "prep": [12, 31]
+    },
+    "pipelines": ["checkpoint_pipe", "chunk_pipe"],
+    "barrier_groups": 23,
+    "barriers": 97,
+    "verified_edge": "qk producer aux_mma to compute/mma consumers, with completion dominance before SMEM reuse"
+  },
+  "representation_status": {
+    "level": "partial_source_grounded_reconstruction",
+    "covered": ["semantic contract", "actual route identities", "instruction/storage family", "fused-m128 roles/resources/pipelines"],
+    "missing": ["complete per-math-site logical/physical MNK list", "all route-specific descriptor layouts", "full barrier graph for prepare-chain-m64", "per-route SASS opcode counts"]
+  },
+  "evidence": [
+    {
+      "ref": "evidence/b300_stage11_cake_vs_official_h12.json",
+      "status": "historical_same_process_peer_result_superseded_for_magnitude",
+      "scope": "six H12; correctness remains corroborating, absolute peer timing is load-order sensitive"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/b300_stage12_cake_vs_official_legacy.json",
+      "status": "h96_h64_correctness_passed",
+      "scope": "three H96 and three H64 cases"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/b300_stage12_cake_official_isolated_pair.json",
+      "status": "isolated_process_paired_measurement_passed",
+      "scope": "six H12 and three H96; four balanced blocks, same seeds/shapes, cold-L2 CUPTI, one implementation per worker process; H12 geomean 2.482x and H96 geomean 2.253x"
+    },
+    {
+      "ref": "experiments/sm100_open_round1/evidence/cake_source_binary_manifest.json",
+      "status": "source_and_cached_binary_identity",
+      "scope": "exact dispatch/JIT source hashes, git context, seven observed SM103a route binary hashes, and measurement/log hashes"
+    }
+  ],
+  "causal_limit": "The complete-path speedup establishes value of the co-designed SM100 path but does not identify tcgen05 as the sole or dominant cause."
+}

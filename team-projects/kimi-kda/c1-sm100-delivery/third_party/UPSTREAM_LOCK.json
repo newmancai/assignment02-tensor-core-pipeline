@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "imported_at": "2026-09-09",
+  "import_method": "git archive of an audited shallow clone; upstream submodules excluded",
+  "packages": [
+    {
+      "name": "atrex-kernel-agent",
+      "upstream": "https://github.com/alibaba/atrex-kernel-agent",
+      "revision": "d643fb5bc004ed021d1a60aa99bf9513204d3025",
+      "license": "Apache-2.0",
+      "local_path": "third_party/atrex-kernel-agent",
+      "role": "profile, isolated GPU execution, resumable Git episodes, canonical memory, ABBA verification"
+    },
+    {
+      "name": "pike",
+      "upstream": "https://github.com/pike-project/pike",
+      "revision": "fd5721e930f9a8620cfd3998d2df5bf95e30c010",
+      "license": "MIT",
+      "local_path": "third_party/pike",
+      "role": "parallel branching, candidate selection, error-repair agents, equal-budget experiment tooling"
+    }
+  ]
+}

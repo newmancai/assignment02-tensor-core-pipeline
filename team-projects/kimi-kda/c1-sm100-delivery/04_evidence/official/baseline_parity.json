@@ -1,0 +1,72 @@
+[
+  {
+    "case": "fixed_h12_t8192",
+    "tensor": "out",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "fixed_h12_t8192",
+    "tensor": "final_state",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "fixed_t513_bf16",
+    "tensor": "out",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "fixed_t513_bf16",
+    "tensor": "final_state",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "fixed_t513_fp32",
+    "tensor": "out",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "fixed_t513_fp32",
+    "tensor": "final_state",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "packed_h12_t8192",
+    "tensor": "out",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "packed_h12_t8192",
+    "tensor": "final_state",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "ragged_small_bf16",
+    "tensor": "out",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  },
+  {
+    "case": "ragged_small_bf16",
+    "tensor": "final_state",
+    "equal": true,
+    "max_abs": 0.0,
+    "rmse": 0.0
+  }
+]

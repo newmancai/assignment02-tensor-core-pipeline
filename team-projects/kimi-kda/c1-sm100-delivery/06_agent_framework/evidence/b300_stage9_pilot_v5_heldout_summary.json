@@ -1,0 +1,77 @@
+{
+  "arm_metrics": {
+    "multi_role_conclusions": {
+      "geomean_speedup": 1.0063542867907198,
+      "trajectory_log_speedups": [
+        0.006334183427159266
+      ],
+      "uniform_log_speedup": 0.006334183427159266
+    }
+  },
+  "artifacts": {
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/b300_stage9_pilot_v5_heldout.jsonl": "c59a3fa7d313e40f36128c78b79c4cc6904f66d062e9c345affeced7759492e9",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/stage9_best_swarm_pilot_commitment_v5.json": "e896d10511545dd6353ab26e7b0e3afa25b0381d9245b3bdbe4085e47d53d840",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/stage9_pilot_v5_heldout_reveal.json": "38cc0f9299fefb8b7af357376e25e6086007921f873c2c267f30a7a75229ab0b",
+    "<REMOTE_HOME>/kda-typed-ir-20260908/evidence/stage9_pilot_v5_winner_freeze.json": "26a87e679bbb6673b786c3611efa771329839eacfab651c97e0a173f610c88ac"
+  },
+  "compound_lineage_tests": [
+    {
+      "arm": "multi_role_conclusions",
+      "child_minus_parent_log_speedup": [
+        {
+          "method": "min_profile_log_child_lower_minus_log_parent_upper",
+          "parent_policy_id": "kir-policy:dbf79f91a1bc4f3ff6aaa114b1eee4afa45b40b2a213e8ffbe9bcdb8fe1a3bd7",
+          "per_profile_conservative_lowers": [
+            -0.002427564402269905,
+            0.00031670997117431293,
+            -0.00350927109390934,
+            -0.0014595495453002367,
+            -0.0026482146085663565,
+            -0.001351634728376433,
+            -0.0014375013582126942,
+            -0.001022581228586603
+          ],
+          "simultaneous_lower": -0.00350927109390934
+        },
+        {
+          "method": "min_profile_log_child_lower_minus_log_parent_upper",
+          "parent_policy_id": "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf",
+          "per_profile_conservative_lowers": [
+            -0.0051783921470446165,
+            0.00015190913159296958,
+            -0.002259526827974246,
+            -0.0013177630284205758,
+            -0.0025307152503318588,
+            -0.0011510176206929144,
+            -0.001077046748422303,
+            -0.0011473544403271707
+          ],
+          "simultaneous_lower": -0.0051783921470446165
+        }
+      ],
+      "child_policy_id": "kir-policy:ad2eaac3aa3ba8654fd5f9a3acf49267e7c4ff776ec956c5854c558b02e85f7c",
+      "parent_policy_ids": [
+        "kir-policy:dbf79f91a1bc4f3ff6aaa114b1eee4afa45b40b2a213e8ffbe9bcdb8fe1a3bd7",
+        "kir-policy:1d88562efb3473aba0e8cb07215a04ccdceee4d211d1c01aa358d18b6a7c6ebf"
+      ],
+      "trajectory_id": 0
+    }
+  ],
+  "hardware": {
+    "compute_capability": [
+      10,
+      3
+    ],
+    "cuda_arch": "sm103a",
+    "device_index": 0,
+    "device_name": "NVIDIA B300 SXM6 AC",
+    "multiprocessor_count": 148,
+    "torch_cuda_version": "13.0",
+    "torch_version": "2.10.0+cu130",
+    "total_memory_bytes": 287428640768
+  },
+  "heldout_was_sealed_until_freeze": true,
+  "phase": "heldout",
+  "schema_version": 1,
+  "single_writer_fifo": true
+}

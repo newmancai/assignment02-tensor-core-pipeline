@@ -1,0 +1,11 @@
+2026-09-10 04:46:23,940 - INFO - flash_kda.py:865 - flashinfer.jit: Generated FlashKDA m128 sm103a JIT spec: flash_kda_bf16_m128_8c34a95f28_sm103a
+Hardware: NVIDIA B300 SXM6 AC cc 10.3 (sm103a)
+2026-09-10 04:46:23,945 - INFO - flash_kda.py:980 - flashinfer.jit: Loaded FlashKDA m128 sm103a module
+2026-09-10 04:46:28,774 - INFO - flash_kda.py:865 - flashinfer.jit: Generated FlashKDA m64 sm103a JIT spec: flash_kda_bf16_m64_f7f6a7e1f4_sm103a
+h96_fixed8192      m128 PR    758.845 us  raw   1755.562 us 2.3135x  adapted   1756.219 us 2.3143x
+h96_mixed          m128 PR    569.620 us  raw   1479.635 us 2.5976x  adapted   1491.259 us 2.6180x
+h96_uniform        m128 PR    637.388 us  raw   1186.732 us 1.8619x  adapted   1200.322 us 1.8832x
+2026-09-10 04:46:28,779 - INFO - flash_kda.py:980 - flashinfer.jit: Loaded FlashKDA m64 sm103a module
+h64_fixed8192      m64  PR    740.388 us  raw   1599.557 us 2.1604x  adapted   1606.795 us 2.1702x
+h64_mixed          m128 PR    397.058 us  raw   1113.777 us 2.8051x  adapted   1123.578 us 2.8298x
+h64_uniform        m128 PR    428.163 us  raw    804.753 us 1.8795x  adapted    815.630 us 1.9050x

@@ -1,0 +1,6 @@
+2026-09-09 08:29:46,263 - INFO - flash_kda.py:776 - flashinfer.jit: Generated FlashKDA physical module sm_103a:flashkda_bf16_bt16_prepare_0d8e6c8011 JIT spec: flash_kda_generated_sm103a_flashkda_bf16_bt16_prepare_0d8e6c8011_34b98a52d0
+2026-09-09 08:29:46,268 - INFO - flash_kda.py:776 - flashinfer.jit: Generated FlashKDA physical module sm_103a:flashkda_bf16_bt16_chain_m64_c68ffebac9 JIT spec: flash_kda_generated_sm103a_flashkda_bf16_bt16_chain_m64_c68ffebac9_9ecc78d74b
+h12_w384_fixed_6144          predicted_cpc=7  1.0133x [1.0121, 1.0142] positive
+h12_w384_balanced_4          predicted_cpc=7  1.0340x [1.0300, 1.0363] positive
+h12_w768_fixed_12288         predicted_cpc=13 1.0497x [1.0491, 1.0501] positive
+h12_w768_balanced_4          predicted_cpc=13 1.1354x [1.1337, 1.1363] positive
