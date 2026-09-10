@@ -1,5 +1,7 @@
 # FlashKDA 官方 kernel 当前使用 SM80 MMA，分析迁移到 SM100 是否值得
 
+团队：奶龙必胜；成员：蔡雨洋、李奥、赵骋
+
 > **唯一主线问题：FlashKDA 官方 kernel 当前使用 SM80 MMA，分析迁移到 SM100 是否值得**
 >
 > 原始任务文件标题“C1: FlashKDA——官方 kernel 停在 SM80 MMA”仅是背景标题，

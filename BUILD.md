@@ -21,7 +21,7 @@ nvcc -std=c++17 -O3 \
 不要把 `sm_120a` 生成物拿到 B300 上运行；它可以编译成功，但运行时没有
 兼容的 kernel image。
 
-## A 部分常用判测
+## 个人作业常用判测
 
 每条命令都从仓库根目录执行：
 
@@ -52,4 +52,3 @@ uv run python M6-tilelang/6.1-lowering/m6_tilelang_lowering.py
 ```
 
 生成结果归档在 `M6-tilelang/6.1-lowering/generated/`。
-

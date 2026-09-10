@@ -22,7 +22,7 @@
 #include <cstdio>
 #include <cstdint>
 
-// TODO (a):实现位域编码。
+// 已完成 (a)：按 SM100 位域编码 descriptor。
 static uint64_t make_desc(uint32_t saddr, uint32_t lbo, uint32_t sbo,
                           uint32_t layout) {
     constexpr uint64_t kField14Mask = (1ull << 14) - 1;
@@ -37,7 +37,7 @@ static uint64_t make_desc(uint32_t saddr, uint32_t lbo, uint32_t sbo,
     return desc;
 }
 
-// TODO (b):三个场景的 {LBO 字节, SBO 字节, layout 编码}。
+// 已完成 (b)：三个场景的 {LBO 字节, SBO 字节, layout 编码}。
 static const uint32_t SCEN[3][3] = {
     {128, 1024, 0},  // 场景 1: K-major, no swizzle.
     {0, 1024, 2},    // 场景 2: K-major, 128B swizzle.

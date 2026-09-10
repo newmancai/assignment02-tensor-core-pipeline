@@ -3,7 +3,7 @@
 | 字段 | 记录 |
 |---|---|
 | 环境 | NVIDIA B300 SXM6 AC；CUDA/NVCC 13.0.88；`compute_100f/sm_100f`；Slurm Job 14793 |
-| Commit | 本次 B 部分提交（父提交 `6574c37afe144e99d50418dd38c83a8cdef8d2a7`；最终 hash 见仓库历史） |
+| Commit | 归档提交（父提交 `6574c37afe144e99d50418dd38c83a8cdef8d2a7`；最终 hash 见仓库历史） |
 | 运行命令 | [README 中的复现命令](README.md) |
 | 正确性 | 修复版 rounds=1/2/4、seeds=42/7 全部 PASS |
 | 性能数据 | barrier debug 题，不要求吞吐性能；错误版采用 20 s timeout |

@@ -1,6 +1,6 @@
 # M4 · 完整 GEMM
 
-负责人：B（4.1–4.3）与 C（4.5）。全部必做项已完成并通过 B300 回归。
+状态：全部必做项已完成并通过 B300 回归。
 
 | 小题 | 内容 | 状态 |
 |---|---|---|
@@ -12,4 +12,3 @@
 
 性能阶梯、两种形状的 stage sweep 和原始输出见各小题 README 及
 [`docs/evidence/b300-results.md`](../docs/evidence/b300-results.md)。
-

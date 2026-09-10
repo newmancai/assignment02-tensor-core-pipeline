@@ -1,7 +1,7 @@
-# Assignment 02 B 部分交接说明
+# Assignment 02 · M3 与 M4.1–M4.3 复现记录
 
-更新时间：2026-09-01
-负责范围：3.1–3.4、4.1–4.3
+更新时间：2026-09-11
+覆盖范围：3.1–3.4、4.1–4.3
 目标硬件：NVIDIA B300，CUDA 13.0，`compute_100f/sm_100f`
 
 ## 一、结论
@@ -13,8 +13,9 @@
 
 原理、代码入口、B300 数据与结论已经分别写入 3.1–4.3 的小题 README，
 汇总结果同步进 `docs/full-report.md`。最终回归为 Slurm Job 14793；完整文本
-记录在 `docs/evidence/b300-results.md`。当前环境没有可用浏览器运行时，因此
-没有生成 PNG 截图；交接以可复制、可搜索的原始终端输出为证据。
+记录在 `docs/evidence/b300-results.md`。原始终端输出保留为可复制、可搜索的
+证据；3.3 barrier 代际与 4.3 TMA/MMA 流水另配有 SVG 矢量图和高清 PNG，
+用于把状态机与资源重叠关系直观呈现出来。
 
 ## 二、逐题状态
 
@@ -39,7 +40,7 @@
 - `M4-gemm/4.3-pipeline/judge_ladder.sh`
 - `M4-gemm/4.3-pipeline/sweep_stages.sh`
 
-上述改动已随本次 B 部分 commit 归档。原有用户改动没有执行 reset、checkout
+上述改动已随归档 commit 保存。原有用户改动没有执行 reset、checkout
 或覆盖式回退。
 
 ## 四、关键实现与修复
@@ -203,7 +204,7 @@ commit round 2 completes -> phase 0 complete -> reset to phase 1
 
 1. 在有浏览器或终端截图能力的环境中，将原始日志渲染为 PNG，若课程明确要求
    截图再补入报告。
-2. 提交前填写成员姓名、日期等个人信息，并确认课程对公开代码的要求。
+2. 提交前再次确认课程对个人作业元数据与公开代码的要求；正文不设置成员署名。
 3. 若需重新测性能，保持同一节点、空闲 GPU 和相同编译参数；绝对 TFLOPS 会
    随时钟与负载波动，应同时保留 cuBLAS 达成率。
 

@@ -1,6 +1,6 @@
 # M5 · 低精度与 block scaling
 
-负责人：C。必做题 5.1–5.5 已全部完成；Host 判测与 NVIDIA B300 Slurm
+状态：必做题 5.1–5.5 已全部完成；Host 判测与 NVIDIA B300 Slurm
 回归均通过。5.3(d) 按题面为选做，本次未纳入必做交付。
 
 | 小题 | 内容 | 状态 |
@@ -32,4 +32,3 @@ sbatch M5-low-precision/run_b300.sbatch
 
 最终环境、判测、逐形状中位数与 NCU 摘要见
 [`evidence/b300-final-regression.md`](evidence/b300-final-regression.md)。
-

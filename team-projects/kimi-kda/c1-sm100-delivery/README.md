@@ -1,7 +1,9 @@
 # C1：FlashKDA 迁移到 SM100 是否值得？
 
-团队：**奶龙必胜**  
-冻结日期：2026-09-10  
+团队：**奶龙必胜**；成员：**蔡雨洋、李奥、赵骋**
+
+冻结日期：2026-09-10；署名与版式复核：2026-09-11
+
 研究设备：NVIDIA B300 SXM6 AC（SM103a）
 
 ## 结论
@@ -14,8 +16,8 @@
 
 1. [`03_reports/SM100_MAINLINE_DELIVERY.md`](03_reports/SM100_MAINLINE_DELIVERY.md)：C1 正式技术报告，完整回答题目主线与六个讨论点。
 2. [`02_paper/main.pdf`](02_paper/main.pdf)：8 页论文；LaTeX 源码与一键构建入口在同目录。
-3. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pdf`](01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pdf)：15 页答辩固定版。
-4. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pptx`](01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pptx)：可编辑答辩稿。
+3. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260910.pdf`](01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260910.pdf)：15 页课程提交答辩固定版。
+4. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260910.pptx`](01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260910.pptx)：可编辑课程提交答辩稿。
 5. [`DEFENSE_BRIEF.md`](DEFENSE_BRIEF.md)：答辩主线、必记数字和追问边界。
 6. [`RETROSPECTIVE.md`](RETROSPECTIVE.md)：完整研究复盘与后续指导。
 7. [`EVIDENCE_INDEX.md`](EVIDENCE_INDEX.md)：结论到证据的索引。
@@ -26,7 +28,7 @@
 | 目录 | 内容 |
 |---|---|
 | `00_task/` | C1 目标与研究问题 |
-| `01_slides/` | 公开脱敏 PPTX、嵌入字体 PDF及字体审计 |
+| `01_slides/` | 课程署名版与公开脱敏版 PPTX/PDF、字体与版式审计 |
 | `02_paper/` | 论文 PDF、LaTeX、参考文献和模板来源 |
 | `03_reports/` | 最终报告、方法复盘、IR 审查和阶段性交接 |
 | `04_evidence/` | 答辩核心数字对应的精选证据 |

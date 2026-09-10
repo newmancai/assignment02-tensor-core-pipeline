@@ -6,33 +6,32 @@
 |---|---|
 | 课程 | Weiming HPC Training Camp × LCPU AI Infra Seminars |
 | 作业 | Assignment 02 |
-| 成员 A | 待对应成员填写 |
-| 成员 B | 待对应成员填写 |
-| 成员 C | 李奥 |
-| 归档复核日期 | 2026-09-10 |
+| 提交口径 | M0–M6 个人作业，不设置团队署名 |
+| 归档复核日期 | 2026-09-11 |
 | 代码目录 | `assignment02-tensor-core-pipeline/` |
 
-> 注意：M0–M6 在题面中属于非团队作业。如果课程要求独立提交，本模板只用于进度协调和互审，最终代码与报告应按课程要求独立完成。
+> 注意：M0–M6 在题面中属于非团队作业。本报告按个人完成口径组织；复现记录
+> 只说明技术判断与证据，不表示多人分工。
 
-## 分工与进度
+## 完成情况
 
-| 范围 | 负责人 | 代码 | 判测 | 报告 | 实验数据 |
-|---|---|---|---|---|---|
-| M0 环境与峰值 | A | ☑ | ☑ | ☑ | ☑ |
-| M1 fragment 与 `mma.sync` | A | ☑ | ☑ | ☑ | ☑ |
-| M2 descriptor 与 swizzle | A | ☑ | ☑ | ☑ | 不适用（Host 判测） |
-| M3 `tcgen05` | B | ☑ | ☑ | ☑ | ☑ |
-| M4.1–M4.3 完整 GEMM | B | ☑ | ☑ | ☑ | ☑ |
-| M4.5 thin GEMM | C | ☑ | ☑ | ☑ | ☑ |
-| M5 低精度与 block scaling | C | ☑ | ☑ | ☑ | ☑ |
-| M6 TileLang 对照 | A | ☑ | ☑ | ☑ | ☑ |
+| 范围 | 代码 | 判测 | 报告 | 实验数据 |
+|---|---|---|---|---|
+| M0 环境与峰值 | ☑ | ☑ | ☑ | ☑ |
+| M1 fragment 与 `mma.sync` | ☑ | ☑ | ☑ | ☑ |
+| M2 descriptor 与 swizzle | ☑ | ☑ | ☑ | 不适用（Host 判测） |
+| M3 `tcgen05` | ☑ | ☑ | ☑ | ☑ |
+| M4.1–M4.3 完整 GEMM | ☑ | ☑ | ☑ | ☑ |
+| M4.5 thin GEMM | ☑ | ☑ | ☑ | ☑ |
+| M5 低精度与 block scaling | ☑ | ☑ | ☑ | ☑ |
+| M6 TileLang 对照 | ☑ | ☑ | ☑ | ☑ |
 
 ## 公共实验环境
 
 | 项目 | 配置 |
 |---|---|
 | GPU 1 | NVIDIA B300 SXM6 AC，275040 MiB（约 270 GiB 可用） |
-| GPU 2 | 本次 C 部分未使用第二块 GPU |
+| GPU 2 | 本次作业未使用第二块 GPU |
 | CUDA | 13.0 |
 | Driver | 580.126.09 |
 | NVCC | 13.0.88（`/usr/local/cuda-13.0/bin/nvcc`） |
@@ -47,9 +46,10 @@
 nvidia-smi --query-compute-apps=pid,name --format=csv
 ```
 
-## 公共参数与交接信息
+## 公共参数与跨模块复现信息
 
-该表由 A 填写，B、C 直接读取。
+下表固定后续模块共同使用的峰值口径、机器平衡点与前置判测结果，避免不同章节
+各自换算而产生口径漂移。
 
 | 参数 | 数值 | 口径/来源 |
 |---|---:|---|
@@ -62,7 +62,7 @@ nvidia-smi --query-compute-apps=pid,name --format=csv
 | 2.2 descriptor 判测 | PASS | 3/3 场景通过 |
 | 2.3 swizzle 判测 | PASS | 128B / 64B / 32B 通过 |
 
-### M2 → M3 交接
+### M2 描述符与 swizzle 结论
 
 ```text
 场景 1 LBO/SBO/layout：128 / 1024 / 0
@@ -72,7 +72,7 @@ descriptor 编码规则：(saddr>>4) | ((LBO>>4)<<16) | ((SBO>>4)<<32) | (1<<46)
 128B swizzle 地址公式：chunk' = (colByte>>4) XOR (row&7)，offset=row*128+chunk'*16+(colByte&15)
 ```
 
-# M0 环境与峰值（A）
+# M0 环境与峰值
 
 ## Prob 0.1 最小 Tensor Core 程序
 
@@ -156,7 +156,7 @@ pipeline 降低冲突、减少搬运开销、重叠访存和计算。这里比�
 | (c) | 错 | 大 shape 可能提高局部计算强度，但会增加寄存器、供数和调度压力，并受 ISA 支持形状限制。 |
 | (d) | 错 | 单条 MMA 的局部强度不等于 kernel 强度；完整 GEMM 可跨多条 MMA 复用 tile。 |
 
-# M1 fragment 与 mma.sync（A）
+# M1 fragment 与 mma.sync
 
 ## Prob 1.1 FP8 fragment 映射
 
@@ -267,7 +267,7 @@ warp 因 bank conflict 被拆成多个 wavefront 时，LSU 可以交错服务其
 同时循环还包含发射、依赖与指令流水开销，所以总耗时不会按单个访问的
 wavefront 数线性放大。144 B padding 打散了 bank 映射，实测 conflict 为 0。
 
-# M2 descriptor 与 swizzle（A）
+# M2 descriptor 与 swizzle
 
 ## Prob 2.1 异步排序
 
@@ -349,7 +349,7 @@ layout_type：`(layout & 7ull) << 61`
 整个映射保持双射。row 的低 3/2/1 bit 分别参与 128/64/32B 模式的 XOR，
 让相邻行原本落到同一 chunk/bank 的列访问分散到不同物理 chunk。
 
-# M3 SM100 tcgen05（B）
+# M3 SM100 tcgen05
 
 ## Prob 3.1 概念判断
 
@@ -437,7 +437,7 @@ barrier，固定 phase 0 恰好与正确等待相同。2 轮是能区分两个�
 3. 数据中心 GPU 更强调大矩阵吞吐、cluster 协作与片上数据复用，也更能以
    足够多的并行工作摊薄 cluster 同步开销。
 
-# M4 完整 GEMM（B/C）
+# M4 完整 GEMM
 
 ## GEMM 性能阶梯表
 
@@ -449,7 +449,7 @@ barrier，固定 phase 0 恰好与正确等待相同。2 轮是能区分两个�
 | 4.3 pipeline（S=3） | 287.8 | 29.6% | shared-memory 容量、occupancy 与等待 |
 | cuBLAS | 约 972–979 | 100% | 高度优化的生产级实现 |
 
-## Prob 4.1 tiled GEMM（B）
+## Prob 4.1 tiled GEMM
 
 ### 实现说明
 
@@ -474,7 +474,7 @@ Nsight Compute 2025.3.1 `detailed` profile（Job 14904）显示：Compute/SM
 88.47%，并有约 13% excessive global sectors。DRAM 远未饱和，说明瓶颈是
 普通 staging 的指令/地址开销、访问合并和延迟，而非 HBM 或 Tensor Core 屋顶。
 
-## Prob 4.2 TMA（B）
+## Prob 4.2 TMA
 
 ### 修改内容
 
@@ -495,7 +495,7 @@ barrier 同时承担两种 completion generation。
 TMA 与 MMA 之间的串行等待。上述 4.1 NCU 数据进一步排除了 HBM 带宽饱和，
 验证了 TMA 所替代的普通地址/load/store 供数路径是主要开销。
 
-## Prob 4.3 多级 pipeline（B）
+## Prob 4.3 多级 pipeline
 
 ### Stage sweep
 
@@ -537,7 +537,7 @@ block 间调度隐藏延迟”。4096³ 的 2048 CTA 支持这一判断，S=2 �
    配置/硬件分配约束。继续增加 stage 时 shared memory 仍会先于当前
    64-column TMEM accumulator 成为硬容量限制。
 
-## Prob 4.5 thin GEMM（C）
+## Prob 4.5 thin GEMM
 
 ### 理论 Roof
 
@@ -582,7 +582,7 @@ TFLOPS：
 6. vLLM 在 M≤16 使用 skinny CUDA Core FMA，是用较低峰值换取更低 setup：
    直接流过权重，绕开通用 Tensor Core/TMA tile、padding 和 dispatch 开销。
 
-# M5 低精度与 block scaling（C）
+# M5 低精度与 block scaling
 
 ## Prob 5.1 FP8 outlier
 
@@ -747,7 +747,7 @@ launch，而非计算峰值，因此 W4A16 的权重压缩收益更直接。NVFP
 要在 M、并行度和复用提高后才容易兑现，小 M 还可能被 activation quant 和
 启动成本抵消；这与 4.5 的 thin-GEMM 曲线一致。
 
-# M6 TileLang 对照（A）
+# M6 TileLang 对照
 
 ## Prob 6.1 lowering 对照
 
@@ -804,5 +804,5 @@ tcgen05 支持能力误写成本次实际选择结果。
 - [x] 3.3 barrier 代际图与 4.3 流水时空图同时提供 SVG/PNG，图文可直接渲染
 - [x] 命令和关键输出已保留
 - [x] 引用的峰值、带宽注明口径和来源
-- [x] 三部分报告格式一致
+- [x] 各模块报告格式一致
 - [x] 已完成最终通读和交叉检查

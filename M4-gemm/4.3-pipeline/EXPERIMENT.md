@@ -3,7 +3,7 @@
 | 字段 | 记录 |
 |---|---|
 | 环境 | NVIDIA B300 SXM6 AC；CUDA/NVCC 13.0.88；Nsight Compute 2025.3.1；`compute_100f/sm_100f`；benchmark Job 14793/14931，occupancy Job 14903，NCU Job 14933 |
-| Commit | 本次 B 部分提交（父提交 `6574c37afe144e99d50418dd38c83a8cdef8d2a7`；最终 hash 见仓库历史） |
+| Commit | 归档提交（父提交 `6574c37afe144e99d50418dd38c83a8cdef8d2a7`；最终 hash 见仓库历史） |
 | 运行命令 | [README 中的 stage sweep/Slurm 命令](README.md)；[occupancy_stages.sh](occupancy_stages.sh) |
 | 正确性 | S=2/3/4/6 在 4096³ 与 256×4096×16384 两种形状全部 `exact PASS` |
 | 性能数据 | 4096³：301.8/288.5/253.3/183.3 TFLOPS；thin-M：168.5/207.4/189.4/210.5 TFLOPS |

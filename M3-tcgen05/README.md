@@ -1,6 +1,6 @@
 # M3 · SM100 `tcgen05`
 
-负责人：B。3.1–3.4 已完成；CUDA 实现已在 NVIDIA B300 / CUDA 13.0 上验证。
+状态：3.1–3.4 已完成；CUDA 实现已在 NVIDIA B300 / CUDA 13.0 上验证。
 
 | 小题 | 内容 | 状态与材料 |
 |---|---|---|
@@ -11,4 +11,3 @@
 
 B300 汇总数据与完整复现输出见
 [`docs/evidence/b300-results.md`](../docs/evidence/b300-results.md)。
-

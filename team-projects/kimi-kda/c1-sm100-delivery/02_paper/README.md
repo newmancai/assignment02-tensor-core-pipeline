@@ -4,6 +4,9 @@
 [`main.tex`](main.tex)、参考文献 [`references.bib`](references.bib) 和模板来源说明
 [`TEMPLATE_PROVENANCE.md`](TEMPLATE_PROVENANCE.md)。
 
+署名：Yuyang Cai（蔡雨洋）、Ao Li（李奥）、Cheng Zhao（赵骋）；团队
+“奶龙必胜”。
+
 论文采用单栏 Letter 版式，叙述 FlashKDA SM80-HMMA→SM100 主线、
 H0/H1/T0/T1/T2 挑战、开放 proposal、Program IR、带作用域的 Experience IR、
 执行身份，以及 B300 上八轮双分支闭环。结果明确区分 qualified result、scoped

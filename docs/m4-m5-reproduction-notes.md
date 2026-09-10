@@ -1,4 +1,4 @@
-# C 负责人交接：4.5 与 M5
+# Assignment 02 · 4.5 与 M5 复现记录
 
 ## 范围
 
@@ -25,7 +25,7 @@ C1/C2。后两类团队材料与本次非团队必做交付保持分离。
 | 5.4 | [`04_fused_rms_nvfp4.cu`](../M5-low-precision/5.4-fused-rmsnorm-nvfp4/04_fused_rms_nvfp4.cu) | 十形状 × 3 次、NCU |
 | 5.5 | [`5.5-concepts/README.md`](../M5-low-precision/5.5-concepts/README.md) | 概念互审 |
 
-总报告的 C 部分已写入 [`full-report.md`](full-report.md)，集中证据见
+总报告的相关章节已写入 [`full-report.md`](full-report.md)，集中证据见
 [`M5-low-precision/evidence/b300-final-regression.md`](../M5-low-precision/evidence/b300-final-regression.md)。
 
 ## 最终结果摘要

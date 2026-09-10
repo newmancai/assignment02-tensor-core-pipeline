@@ -3,7 +3,7 @@
 | 字段 | 记录 |
 |---|---|
 | 环境 | NVIDIA B300 SXM6 AC；CUDA/NVCC 13.0.88；Nsight Compute 2025.3.1；`compute_100f/sm_100f`；4096³；benchmark Job 14793，NCU Job 14904 |
-| Commit | 本次 B 部分提交（父提交 `6574c37afe144e99d50418dd38c83a8cdef8d2a7`；最终 hash 见仓库历史） |
+| Commit | 归档提交（父提交 `6574c37afe144e99d50418dd38c83a8cdef8d2a7`；最终 hash 见仓库历史） |
 | 运行命令 | [README 中的 Slurm/NCU 命令](README.md)；[profile_ncu.sh](profile_ncu.sh) |
 | 正确性 | 与 cuBLAS BF16 输出逐元素位模式比较，`exact PASS` |
 | 性能数据 | 2.753 ms，49.9 TFLOPS；cuBLAS 976.2 TFLOPS；达成率 5.1% |

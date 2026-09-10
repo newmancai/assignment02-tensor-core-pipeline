@@ -1,6 +1,6 @@
-# Assignment 02 handoff
+# Assignment 02 · M0–M2 与 M6 复现记录
 
-## A status
+## 模块状态
 
 - M0: complete (0.1 correct/mismatched ARCH experiment, 0.2 roofline, 0.3)
 - M1: complete
@@ -13,10 +13,11 @@
 - M6: complete; sm_90a selects WGMMA, while fixed TileLang 0.1.13
   falls back to mma.sync + ldmatrix for the tested sm_100a FP16 T.gemm.
 
-Detailed A report: `作业二报告模板.md`; standalone derivations:
-`M0_0.2_峰值与机器平衡点.md` and `M6_TileLang_lowering_对照.md`.
+Detailed report: [`full-report.md`](full-report.md); standalone derivations:
+[`0.2-roofline/derivation.md`](../M0-environment-and-roofline/0.2-roofline/derivation.md)
+and [`6.1-lowering/analysis.md`](../M6-tilelang/6.1-lowering/analysis.md).
 
-## A -> B: M2 shared-memory layout
+## M2 shared-memory layout
 
 - `m2_smem/02_descriptor`: PASS (3/3 scenarios)
 - `m2_smem/03_swizzle`: PASS (128B / 64B / 32B)
@@ -53,7 +54,7 @@ offset        = row * 128 + physicalChunk * 16 + byteInChunk
 For rows outside the first atom, add `(row >> 3) * 1024` and use
 `row & 7` as the row inside the atom.
 
-## A -> C: roofline inputs
+## Roofline inputs
 
 - Recommended report/roofline inputs (official dense figures):
   - B300 BF16 peak: `2250 TFLOPS`
