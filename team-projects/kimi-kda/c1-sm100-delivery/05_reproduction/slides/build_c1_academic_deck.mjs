@@ -26,6 +26,7 @@ const closureFigure = path.join(stage12FigureDir, "fig_stage12_knowledge_closure
 const seuLogoPath = path.join(brandAssetDir, "seu-official.png");
 const githubLockupBlackPath = path.join(brandAssetDir, "GitHub_Lockup_Black.svg");
 const githubLockupWhitePath = path.join(brandAssetDir, "GitHub_Lockup_White.svg");
+const deliveryUrl = "https://github.com/newmancai/assignment02-tensor-core-pipeline/tree/main/team-projects/kimi-kda/c1-sm100-delivery";
 
 const { finalizePresentation } = await import(
   pathToFileURL(path.join(SKILL_DIR, "container_tools/artifact_tool_utils.mjs")).href,
@@ -814,10 +815,16 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     { run: "最终回答  ", textStyle: { bold: true, color: C.orange } },
     { run: "SM100 值得以受条件保护的后端方式加入 FlashKDA。", textStyle: { bold: true, color: C.ink } },
   ]], 74, 614, 930, 44, { size: 24, valign: "middle" });
+  rich(s, [[{
+    run: "GitHub · 代码与完整证据归档",
+    textStyle: { bold: true, color: C.teal, underline: "sng" },
+    link: { uri: deliveryUrl, isExternal: true },
+  }]], 74, 668, 620, 22, { size: 15, color: C.teal });
   txt(s, "提问　奶龙必胜", 1010, 668, 195, 22, { size: 16, color: C.muted, align: "right" });
   notes(s, [
     "收尾回到论文方法图。双分支搜索、证据晋级和双层 IR 把迁移问题从一次性 benchmark 变成可积累的探索闭环。",
     "最终回答：SM100 值得以 guarded backend 的方式加入 FlashKDA。",
+    `代码与完整证据归档：${deliveryUrl}`,
     "图片来源：output/pdf/runtime-profile-evolution-mainline-20260910.pdf，第 2 页 Figure 1 核心片段。",
   ]);
 }
