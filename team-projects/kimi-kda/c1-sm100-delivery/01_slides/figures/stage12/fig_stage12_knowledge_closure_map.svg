@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">有限 Typed Grammar 的局部知识闭包</title>
+  <desc id="desc">声明域内的 HMMA warp 密度、TCGEN B 布局、P3/P4 生命周期、D 到 A 映射和数据流规范化均形成终态证据并由闭包证书记录。完整 public-call、新布局映射和新算法族位于开放边界外。</desc>
+  <defs>
+    <style>
+      .title{font:600 40px "Noto Sans CJK SC",sans-serif;fill:#151a21}.sub{font:400 22px "Noto Sans CJK SC",sans-serif;fill:#66707a}
+      .kicker{font:600 17px "Noto Sans CJK SC",sans-serif;letter-spacing:1px;fill:#66707a}.head{font:600 25px "Noto Sans CJK SC",sans-serif;fill:#151a21}
+      .label{font:500 19px "Noto Sans CJK SC",sans-serif;fill:#2c333b}.small{font:400 16px "Noto Sans CJK SC",sans-serif;fill:#66707a}
+      .tiny{font:400 14px "Noto Sans CJK SC",sans-serif;fill:#66707a}.metric{font:600 21px "Noto Sans CJK SC",sans-serif;fill:#151a21}.white{fill:#fff}.head.white,.label.white,.small.white,.tiny.white,.kicker.white,.metric.white{fill:#fff!important}
+      .rule{stroke:#d9d6cf;stroke-width:1.4}.domain{stroke:#7b8793;stroke-width:2;stroke-dasharray:9 8;fill:none}.link{stroke:#aab1b8;stroke-width:2;fill:none}
+    </style>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="#a84d47" stroke-width="3" opacity=".22"/></pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="#faf9f6"/>
+  <text x="74" y="72" class="kicker" fill="#2c5f91">13  挑战结果</text>
+  <text x="74" y="126" class="title">有限 Typed Grammar 的局部知识闭包</text>
+  <text x="74" y="165" class="sub">闭包要求每个声明候选都有终态证据；扩大 grammar、profile 或 public-call 后必须重新开域</text>
+  <line x1="74" y1="194" x2="1846" y2="194" class="rule"/>
+
+  <rect x="70" y="230" width="1388" height="770" rx="18" class="domain"/>
+  <rect x="92" y="216" width="282" height="32" fill="#faf9f6"/>
+  <text x="104" y="240" class="kicker">DECLARED FINITE DOMAIN</text>
+
+  <g>
+    <text x="116" y="292" class="head">HMMA warp density</text><text x="116" y="321" class="small">V32 / V64，每 warp 处理 1 或 2 个列块</text>
+    <g transform="translate(116 346)">
+      <rect x="0" y="0" width="184" height="74" rx="5" fill="#e9eff6" stroke="#2c5f91" stroke-width="1.8"/>
+      <text x="92" y="29" text-anchor="middle" class="label">V32 · 2 warps</text><text x="92" y="56" text-anchor="middle" class="metric" fill="#2c5f91">1.307×</text>
+      <rect x="194" y="0" width="184" height="74" rx="5" fill="#f4e8e6" stroke="#a84d47" stroke-width="1.8"/>
+      <text x="286" y="29" text-anchor="middle" class="label">V32 · 1 warp</text><text x="286" y="56" text-anchor="middle" class="metric" fill="#a84d47">0.846×</text>
+      <rect x="0" y="86" width="184" height="74" rx="5" fill="#e9eff6" stroke="#2c5f91" stroke-width="1.8"/>
+      <text x="92" y="115" text-anchor="middle" class="label">V64 · 4 warps</text><text x="92" y="142" text-anchor="middle" class="metric" fill="#2c5f91">1.184×</text>
+      <rect x="194" y="86" width="184" height="74" rx="5" fill="#f4e8e6" stroke="#a84d47" stroke-width="1.8"/>
+      <text x="286" y="115" text-anchor="middle" class="label">V64 · 2 warps</text><text x="286" y="142" text-anchor="middle" class="metric" fill="#a84d47">0.891×</text>
+    </g>
+    <rect x="514" y="410" width="86" height="48" rx="24" fill="#2f7a68"/><text x="557" y="440" text-anchor="middle" class="label" style="fill:#fff">4 / 4</text>
+  </g>
+
+  <g>
+    <text x="1006" y="292" class="head">TCGEN B layout</text><text x="1006" y="321" class="small">Phase-6 V16，logical 与 producer-ready</text>
+    <rect x="1006" y="346" width="344" height="76" rx="5" fill="#f5eae3" stroke="#c66a3d" stroke-width="1.8"/>
+    <text x="1178" y="376" text-anchor="middle" class="label">logical preferred bridge</text><text x="1178" y="404" text-anchor="middle" class="metric" fill="#c66a3d">incumbent</text>
+    <rect x="1006" y="434" width="344" height="76" rx="5" fill="#f4e8e6" stroke="#a84d47" stroke-width="1.8"/>
+    <text x="1178" y="464" text-anchor="middle" class="label">producer-ready physical B</text><text x="1178" y="492" text-anchor="middle" class="metric" fill="#a84d47">0.993×</text>
+    <rect x="1364" y="404" width="72" height="48" rx="24" fill="#2f7a68"/><text x="1400" y="434" text-anchor="middle" class="label" style="fill:#fff">2 / 2</text>
+  </g>
+
+  <g>
+    <rect x="654" y="326" width="292" height="236" rx="12" fill="#101d2e"/>
+    <text x="800" y="370" text-anchor="middle" class="kicker" style="fill:#fff">CLOSURE CERTIFICATE</text>
+    <text x="800" y="422" text-anchor="middle" class="head" style="fill:#fff">missing_design_ids</text>
+    <text x="800" y="466" text-anchor="middle" style="font:600 34px 'PingFang SC','Hiragino Sans GB',sans-serif;fill:#d2aa52">[ ]</text>
+    <line x1="686" y1="486" x2="914" y2="486" stroke="#39485a" stroke-width="1.5"/>
+    <text x="800" y="519" text-anchor="middle" class="tiny" style="fill:#fff">semantic hash · scope · terminal state</text>
+    <text x="800" y="544" text-anchor="middle" class="tiny" style="fill:#fff">evidence refs · invalidation condition</text>
+    <path d="M654 420H600M946 420H1006M800 562V604" class="link"/>
+  </g>
+
+  <g>
+    <text x="116" y="626" class="head">P3 / ROUND / P4 lifecycle</text><text x="116" y="655" class="small">grid 12 / 96，inner 1 / 64；一次 TMEM allocation</text>
+    <g transform="translate(116 682)">
+      <rect x="0" y="0" width="204" height="74" rx="5" fill="#f4e8e6" stroke="#a84d47" stroke-width="1.8"/>
+      <text x="102" y="29" text-anchor="middle" class="label">grid12 · inner1</text><text x="102" y="56" text-anchor="middle" class="metric" fill="#a84d47">0.765×</text>
+      <rect x="214" y="0" width="204" height="74" rx="5" fill="#e7f1ed" stroke="#2f7a68" stroke-width="2"/>
+      <text x="316" y="29" text-anchor="middle" class="label">grid12 · inner64</text><text x="316" y="56" text-anchor="middle" class="metric" fill="#2f7a68">1.446×</text>
+      <rect x="0" y="86" width="204" height="74" rx="5" fill="#f4e8e6" stroke="#a84d47" stroke-width="1.8"/>
+      <text x="102" y="115" text-anchor="middle" class="label">grid96 · inner1</text><text x="102" y="142" text-anchor="middle" class="metric" fill="#a84d47">0.709×</text>
+      <rect x="214" y="86" width="204" height="74" rx="5" fill="#e7f1ed" stroke="#2f7a68" stroke-width="2"/>
+      <text x="316" y="115" text-anchor="middle" class="label">grid96 · inner64</text><text x="316" y="142" text-anchor="middle" class="metric" fill="#2f7a68">1.430×</text>
+    </g>
+    <rect x="550" y="740" width="92" height="50" rx="25" fill="#2f7a68"/><text x="596" y="771" text-anchor="middle" class="label" style="fill:#fff">8 / 8</text>
+  </g>
+
+  <g>
+    <text x="1006" y="626" class="head">D fragment 到 A TMEM</text><text x="1006" y="655" class="small">正确性在计时前决定候选是否存在</text>
+    <rect x="1006" y="682" width="344" height="70" rx="5" fill="#e7f1ed" stroke="#2f7a68" stroke-width="2"/>
+    <text x="1178" y="710" text-anchor="middle" class="label">shared carrier</text><text x="1178" y="737" text-anchor="middle" class="metric" fill="#2f7a68">exact pass</text>
+    <rect x="1006" y="764" width="164" height="78" rx="5" fill="#f4e8e6" stroke="#a84d47" stroke-width="1.8"/><rect x="1006" y="764" width="164" height="78" rx="5" fill="url(#hatch)"/>
+    <text x="1088" y="794" text-anchor="middle" class="label">unpack16</text><text x="1088" y="824" text-anchor="middle" class="metric" fill="#a84d47">24,576 fail</text>
+    <rect x="1186" y="764" width="164" height="78" rx="5" fill="#f4e8e6" stroke="#a84d47" stroke-width="1.8"/><rect x="1186" y="764" width="164" height="78" rx="5" fill="url(#hatch)"/>
+    <text x="1268" y="794" text-anchor="middle" class="label">lowword</text><text x="1268" y="824" text-anchor="middle" class="metric" fill="#a84d47">24,576 fail</text>
+    <rect x="1364" y="740" width="72" height="50" rx="25" fill="#2f7a68"/><text x="1400" y="771" text-anchor="middle" class="label" style="fill:#fff">3 / 3</text>
+  </g>
+
+  <g>
+    <rect x="432" y="882" width="720" height="82" rx="6" fill="#fff5df" stroke="#d2aa52" stroke-width="1.7"/>
+    <text x="462" y="914" class="label">Dataflow canonicalization</text>
+    <text x="462" y="945" class="small">2 materializations · 65,536 B/CTA</text>
+    <path d="M760 922H832" stroke="#7b8793" stroke-width="2"/><polygon points="832,922 816,914 816,930" fill="#7b8793"/>
+    <text x="858" y="914" class="label" fill="#2f7a68">1 materialization</text><text x="858" y="945" class="small">32,768 B/CTA · 不跨越 BF16 ROUND</text>
+  </g>
+
+  <g>
+    <text x="1512" y="254" class="kicker" fill="#c66a3d">OPEN FRONTIER</text><text x="1512" y="290" class="small">边界外的问题不计入本次闭包</text>
+    <line x1="1530" y1="340" x2="1530" y2="738" stroke="#c66a3d" stroke-width="2" stroke-dasharray="8 8"/>
+    <circle cx="1530" cy="358" r="10" fill="#c66a3d"/><text x="1562" y="352" class="label">完整 P1–P6 public-call</text><text x="1562" y="380" class="small">beta、TMA、final state</text>
+    <circle cx="1530" cy="466" r="10" fill="#c66a3d"/><text x="1562" y="460" class="label">可验证 D 到 A 映射</text><text x="1562" y="488" class="small">CUTLASS / CuTe layout proof</text>
+    <circle cx="1530" cy="574" r="10" fill="#c66a3d"/><text x="1562" y="568" class="label">shape gated portfolio</text><text x="1562" y="596" class="small">M64 / M128 / split / slab</text>
+    <circle cx="1530" cy="682" r="10" fill="#c66a3d"/><text x="1562" y="676" class="label">新算法与新 grammar</text><text x="1562" y="704" class="small">重新声明有限域并取证</text>
+    <rect x="1512" y="786" width="330" height="178" rx="6" fill="#fff" stroke="#d2aa52" stroke-width="1.8"/>
+    <text x="1677" y="828" text-anchor="middle" class="head">答辩中的准确表述</text>
+    <text x="1677" y="871" text-anchor="middle" class="label">当前局部语法与已测 profile 已闭包</text>
+    <text x="1677" y="906" text-anchor="middle" class="small">完整 SM100 KDA 仍依赖 full-call 移植</text>
+    <text x="1677" y="937" text-anchor="middle" class="small">新增搜索轴会使闭包证书失效</text>
+  </g>
+
+  <g transform="translate(82 1030)">
+    <rect x="0" y="-13" width="22" height="13" fill="#e9eff6" stroke="#2c5f91"/><text x="34" y="0" class="small">incumbent</text>
+    <rect x="168" y="-13" width="22" height="13" fill="#e7f1ed" stroke="#2f7a68"/><text x="202" y="0" class="small">qualified</text>
+    <rect x="340" y="-13" width="22" height="13" fill="#f4e8e6" stroke="#a84d47"/><text x="374" y="0" class="small">below gate / rejected</text>
+    <text x="1764" y="0" text-anchor="end" class="tiny">ClosureCertificate · Stage 12 · B300 SM103a</text>
+  </g>
+</svg>

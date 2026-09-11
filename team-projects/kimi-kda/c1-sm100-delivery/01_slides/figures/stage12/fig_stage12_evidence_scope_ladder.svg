@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+  <title id="title">从局部机制到条件分发的证据阶梯</title>
+  <desc id="desc">按集成深度组织 HMMA 与 TCGEN05 的不同作用域证据，强调各数字使用自己的比较基线，最终得到短驻留回退 HMMA、长驻留继续 TCGEN full-call lowering、已认证完整 profile 采用 CAKE 或演化路线的决策。</desc>
+  <defs>
+    <style>
+      .title { font: 600 32px "Noto Sans CJK SC", sans-serif; fill: #17212b; }
+      .subtitle { font: 400 17px "Noto Sans CJK SC", sans-serif; fill: #52606d; }
+      .head { font: 600 21px "Noto Sans CJK SC", sans-serif; fill: #17212b; }
+      .label { font: 500 17px "Noto Sans CJK SC", sans-serif; fill: #24323f; }
+      .small { font: 400 14px "Noto Sans CJK SC", sans-serif; fill: #52606d; }
+      .tiny { font: 400 12px "Noto Sans CJK SC", sans-serif; fill: #52606d; }
+      .metric { font: 600 24px "Noto Sans CJK SC", sans-serif; fill: #17212b; }
+      .white { fill: #ffffff; }
+      .rule { stroke: #d8dee4; stroke-width: 1.2; }
+      .arrow { stroke: #8b98a5; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,3 L0,6 Z" fill="#8b98a5"/></marker>
+  </defs>
+
+  <rect width="1800" height="1100" fill="#ffffff"/>
+  <text x="48" y="56" class="title">成果不在一条曲线里，而在证据作用域逐层变强</text>
+  <text x="48" y="90" class="subtitle">从 opcode、layout、cross-phase lifecycle 到 public-full co-design；每一级只回答自己的问题，数字不跨 scope 连乘</text>
+  <line x1="48" y1="122" x2="1752" y2="122" class="rule"/>
+
+  <text x="66" y="174" class="small">INTEGRATION DEPTH</text>
+  <text x="338" y="174" class="small">EVIDENCE</text>
+  <text x="1436" y="174" class="small">DECISION</text>
+
+  <line x1="222" y1="216" x2="222" y2="914" stroke="#d8dee4" stroke-width="6"/>
+  <circle cx="222" cy="268" r="17" fill="#d1495b"/>
+  <circle cx="222" cy="438" r="17" fill="#e9c46a"/>
+  <circle cx="222" cy="628" r="17" fill="#2a9d8f"/>
+  <circle cx="222" cy="838" r="17" fill="#457b9d"/>
+
+  <g>
+    <text x="64" y="253" class="head">01 · Opcode</text>
+    <text x="64" y="282" class="small">instruction-only</text>
+    <rect x="320" y="212" width="1010" height="112" fill="#fff7f5"/>
+    <rect x="320" y="212" width="10" height="112" fill="#d1495b"/>
+    <text x="362" y="248" class="label">Direct V128：仅把 Phase-6 HMMA 换成 tcgen05</text>
+    <text x="362" y="286" class="small">相同 grid12 / inner64 / preferred layout</text>
+    <text x="1120" y="271" text-anchor="end" class="metric" fill="#d1495b">0.9197× vs HMMA</text>
+    <text x="1285" y="271" text-anchor="end" class="label" fill="#d1495b">关闭裸替换</text>
+    <path d="M1330 268 L1412 268" class="arrow"/>
+    <rect x="1432" y="226" width="286" height="84" rx="4" fill="#fff7f5" stroke="#d1495b" stroke-width="2"/>
+    <text x="1575" y="258" text-anchor="middle" class="label">ISA 更新不自动获益</text>
+    <text x="1575" y="285" text-anchor="middle" class="small">保留为 scoped failure card</text>
+  </g>
+
+  <g>
+    <text x="64" y="423" class="head">02 · Layout</text>
+    <text x="64" y="452" class="small">carrier / materialization</text>
+    <rect x="320" y="354" width="1010" height="168" fill="#fffaf2"/>
+    <rect x="320" y="354" width="10" height="168" fill="#e9c46a"/>
+    <text x="362" y="391" class="label">V16 preferred staging</text>
+    <text x="700" y="391" class="metric" fill="#b96524">1.2107× vs scalar</text>
+    <text x="1054" y="391" class="metric" fill="#d1495b">0.9564× vs HMMA</text>
+    <line x1="362" y1="414" x2="1285" y2="414" class="rule"/>
+    <text x="362" y="451" class="label">Producer-ready physical B</text>
+    <text x="700" y="451" class="metric" fill="#d1495b">0.9926× vs logical</text>
+    <text x="1054" y="451" class="metric" fill="#d1495b">0.9461× vs HMMA</text>
+    <text x="362" y="489" class="small">结论：rematerialization 是实成本，但单独改变全局 B 布局没有追回差距</text>
+    <path d="M1330 438 L1412 438" class="arrow"/>
+    <rect x="1432" y="396" width="286" height="84" rx="4" fill="#fffaf2" stroke="#e9c46a" stroke-width="2"/>
+    <text x="1575" y="428" text-anchor="middle" class="label">关闭单独布局轴</text>
+    <text x="1575" y="455" text-anchor="middle" class="small">转向跨阶段驻留</text>
+  </g>
+
+  <g>
+    <text x="64" y="613" class="head">03 · Lifecycle</text>
+    <text x="64" y="642" class="small">P3 · ROUND · P4</text>
+    <rect x="320" y="552" width="1010" height="152" fill="#eaf6f2"/>
+    <rect x="320" y="552" width="10" height="152" fill="#2a9d8f"/>
+    <text x="362" y="590" class="label">同一 TMEM allocation、同一累加列、一次安全 shared carrier</text>
+    <rect x="362" y="614" width="390" height="62" rx="4" fill="#fff7f5" stroke="#d1495b" stroke-width="1.7"/>
+    <text x="390" y="641" class="label">短驻留 · inner1</text>
+    <text x="724" y="650" text-anchor="end" class="metric" fill="#d1495b">0.709–0.765×</text>
+    <rect x="776" y="614" width="510" height="62" rx="4" fill="#ffffff" stroke="#2a9d8f" stroke-width="2.2"/>
+    <text x="804" y="641" class="label">长驻留 · inner64</text>
+    <text x="1258" y="650" text-anchor="end" class="metric" fill="#2a9d8f">1.430–1.446× vs HMMA</text>
+    <path d="M1330 628 L1412 628" class="arrow"/>
+    <rect x="1432" y="566" width="286" height="124" rx="4" fill="#eaf6f2" stroke="#2a9d8f" stroke-width="2"/>
+    <text x="1575" y="603" text-anchor="middle" class="label">性能交叉点成立</text>
+    <text x="1575" y="634" text-anchor="middle" class="small">短任务回退 HMMA</text>
+    <text x="1575" y="662" text-anchor="middle" class="small">长驻留进入 full-call lowering</text>
+  </g>
+
+  <g>
+    <text x="64" y="823" class="head">04 · Public call</text>
+    <text x="64" y="852" class="small">complete route</text>
+    <rect x="320" y="742" width="1010" height="192" fill="#f7fafc"/>
+    <rect x="320" y="742" width="10" height="192" fill="#457b9d"/>
+    <text x="362" y="782" class="label">优化 HMMA ValueSlice · public-full</text>
+    <text x="850" y="782" class="metric" fill="#457b9d">V32 1.307×</text>
+    <text x="1088" y="782" class="metric" fill="#457b9d">V64 1.184×</text>
+    <text x="1268" y="782" text-anchor="end" class="small">各自 vs official</text>
+    <line x1="362" y1="810" x2="1285" y2="810" class="rule"/>
+    <text x="362" y="850" class="label">CAKE SM100 full-stack · public-full</text>
+    <text x="850" y="850" class="metric" fill="#2a9d8f">H12 2.482×</text>
+    <text x="1088" y="850" class="metric" fill="#2a9d8f">H96 2.253×</text>
+    <text x="1268" y="850" text-anchor="end" class="small">各自 vs official</text>
+    <text x="362" y="895" class="small">CAKE 同时改变 fusion、roles、layout、pipeline 与 dispatch，属于 full-stack treatment effect</text>
+    <path d="M1330 838 L1412 838" class="arrow"/>
+    <rect x="1432" y="772" width="286" height="132" rx="4" fill="#eef2f6" stroke="#457b9d" stroke-width="2"/>
+    <text x="1575" y="808" text-anchor="middle" class="label">已认证 profile</text>
+    <text x="1575" y="840" text-anchor="middle" class="metric" fill="#457b9d">CAKE / evolution</text>
+    <text x="1575" y="873" text-anchor="middle" class="small">未覆盖条件保留 fallback</text>
+  </g>
+
+  <rect x="48" y="974" width="1704" height="82" fill="#17212b"/>
+  <text x="82" y="1007" class="head white">最终工程决策</text>
+  <text x="358" y="1007" class="label white">短驻留或未认证形状：HMMA</text>
+  <text x="814" y="1007" class="label white">长驻留且形状合法：继续 TCGEN full-call 候选</text>
+  <text x="1390" y="1007" class="label white">已认证完整 profile：guarded SM100 route</text>
+  <text x="48" y="1082" class="tiny">数值均来自 Stage 12 closure report；不同层级的 speedup 分母和计时 scope 已在图内单独标注</text>
+</svg>

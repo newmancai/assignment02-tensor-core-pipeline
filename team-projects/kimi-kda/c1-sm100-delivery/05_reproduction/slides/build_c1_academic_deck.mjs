@@ -1,15 +1,26 @@
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { Presentation, PresentationFile } from "@oai/artifact-tool";
 import JSZip from "jszip";
 
-const workspaceDir = "<PROJECT_ROOT>";
-const SKILL_DIR = "<LOCAL_HOME>/.codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations";
-const RUNTIME_PYTHON = "<LOCAL_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3";
-const TMP_DIR = path.join(workspaceDir, ".codex-ppt-build");
-const FINAL_PPTX = path.join(workspaceDir, "output/slides/C1_FlashKDA_SM100_奶龙必胜_学术答辩版_20260910_v9.pptx");
-const paperExcerptPath = path.join(TMP_DIR, "paper-2-framework-core.png");
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const workspaceDir = process.env.C1_DELIVERY_DIR
+  ? path.resolve(process.env.C1_DELIVERY_DIR)
+  : path.resolve(scriptDir, "../..");
+const userHomeDir = os.homedir();
+const SKILL_DIR = process.env.C1_PRESENTATIONS_SKILL_DIR
+  ?? path.join(userHomeDir, ".codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations");
+const RUNTIME_PYTHON = process.env.C1_RUNTIME_PYTHON
+  ?? path.join(userHomeDir, ".cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3");
+const TMP_DIR = path.join(workspaceDir, ".codex-ppt-build-stage12");
+const FINAL_PPTX = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911.pptx");
+const paperExcerptPath = path.join(workspaceDir, "05_reproduction/slides/paper-2-framework-core.png");
+const stage12FigureDir = path.join(workspaceDir, "01_slides/figures/stage12");
+const agentLoopFigure = path.join(stage12FigureDir, "fig_stage12_dual_branch_exploration.svg");
+const typedIrFigure = path.join(stage12FigureDir, "fig_stage12_typed_ir_pipeline.svg");
+const closureFigure = path.join(stage12FigureDir, "fig_stage12_knowledge_closure_map.svg");
 
 const { finalizePresentation } = await import(
   pathToFileURL(path.join(SKILL_DIR, "container_tools/artifact_tool_utils.mjs")).href,
@@ -20,9 +31,9 @@ await fs.mkdir(path.dirname(FINAL_PPTX), { recursive: true });
 
 const W = 1280;
 const H = 720;
-const FONT_LATIN = "Arial";
-const FONT_ZH = "Microsoft YaHei";
-const FONT = FONT_LATIN;
+const FONT_LATIN = "Noto Sans CJK SC";
+const FONT_ZH = "Noto Sans CJK SC";
+const FONT = FONT_ZH;
 const C = {
   bg: "#FAF9F6",
   white: "#FFFFFF",
@@ -176,7 +187,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     txt(s, steps[i][0], x, 470, 42, 24, { size: 14, color: steps[i][2], bold: true });
     txt(s, steps[i][1], x, 502, 200, 34, { size: 23, color: C.white, bold: true });
   }
-  txt(s, "奶龙必胜", 76, 640, 220, 36, { size: 27, color: C.white, bold: true });
+  txt(s, "奶龙必胜｜蔡雨洋 · 李奥 · 赵骋", 76, 640, 560, 36, { size: 24, color: C.white, bold: true });
   txt(s, "HMMA 兼容路径与 tcgen05 原生路径", 800, 644, 395, 26, { size: 16, color: "#8FA0B2", align: "right" });
   notes(s, [
     "开场直接给出 C1：FlashKDA 官方 recurrence 使用 HMMA，我们研究迁移到 SM100 是否值得。",
@@ -397,41 +408,19 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
 {
   const s = deck.slides.add();
   s.background.fill = C.bg;
-  header(s, 7, "分析方法", "MARPE 探索闭环", C.gold);
-  txt(s, "MARPE：多智能体运行时画像演化（Multi-Agent Runtime Profile Evolution）", 72, 146, 1120, 28, {
-    size: 17, color: C.muted,
-  });
-
-  const steps = [
-    ["开放提案", "代码补丁、结构扩展\n与机制探针"],
-    ["候选分配", "HMMA 兼容分支与 tcgen05 原生分支"],
-    ["隔离执行", "独立 GPU、性能分析\n与实验快照"],
-    ["证据晋级", "实际路径、正确性\n与 ABBA 复测"],
-    ["双层写回", "程序 IR 与经验 IR"],
-  ];
-  for (let i = 0; i < steps.length; i++) {
-    const x = 70 + i * 238;
-    txt(s, String(i + 1).padStart(2, "0"), x, 178, 34, 24, { size: 14, color: i < 2 ? C.blue : C.orange, bold: true });
-    txt(s, steps[i][0], x, 218, 188, 34, { size: 22, color: C.ink, bold: true });
-    txt(s, steps[i][1], x, 264, 185, 72, { size: 17, color: C.muted, lineSpacing: 1.1 });
-    if (i < steps.length - 1) arrowSegment(s, x + 188, 235, x + 220, 235, C.rule, 1.6);
-  }
-
-  line(s, 70, 378, 1135, 0, C.rule, 1);
-  txt(s, "写回的两类产物", 74, 414, 250, 34, { size: 22, color: C.ink, bold: true });
-  txt(s, "数据", 80, 478, 90, 32, { size: 20, color: C.blue, bold: true });
-  txt(s, "时延样本、正确性、二进制指令、路径凭据与硬件计数器", 180, 476, 910, 34, { size: 19, color: C.text });
-  txt(s, "知识", 80, 536, 90, 32, { size: 20, color: C.orange, bold: true });
-  txt(s, "机制解释 · 失败边界 · 适用范围 · 允许复用方式 · 下一轮高价值提案", 180, 534, 910, 34, { size: 19, color: C.text });
-
-  line(s, 70, 610, 1135, 0, C.rule, 1);
-  txt(s, "PIKE  分支搜索与候选分配     Atrex  隔离执行、性能分析与 ABBA     本文  双分支 IR、公平预算与证据晋级", 74, 630, 1120, 28, {
-    size: 15, color: C.muted, align: "center",
+  const svg = await fs.readFile(agentLoopFigure);
+  s.images.add({
+    blob: svg,
+    contentType: "image/svg+xml",
+    alt: "双分支 Agent 的知识驱动探索闭环。互补角色生成 typed patch，HMMA 与 TCGEN05 分支在共同证据合同下实验，判断写回 scoped Experience IR，并改变下一轮搜索空间。",
+    fit: "contain",
+    position: { left: 0, top: 0, width: W, height: H },
   });
   notes(s, [
-    "这一页解释 Agent 怎样工作。每轮先生成开放提案，再分配到两条 lane，隔离执行，通过证据 gate 后写回数据与知识。",
-    "MARPE 复用 PIKE 的分支搜索与候选分配，复用 Atrex 的执行与验证能力。原创部分是双分支 Program IR、Scoped Experience IR、公平预算和证明式晋级。",
-    "来源：https://github.com/pike-project/pike；https://github.com/alibaba/atrex-kernel-agent。",
+    "这一页强调 Agent 的核心产物是判断和可复用知识，不是一串 benchmark 数字。",
+    "五类角色只提交 typed patch；协调器先做冲突、物理协议和语义去重检查，再把合法候选分配到 HMMA 与 TCGEN05 两条支路。",
+    "证据合同检查实际路径、output 与 final state，以及同 workload 和同计时范围。判断写回 scoped Experience IR，已关闭旋钮不再重复采样。",
+    "来源：STAGE12_TYPED_IR_SEARCH_CLOSURE_20260911.md §2.3、§3.3。",
   ]);
 }
 
@@ -439,34 +428,19 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
 {
   const s = deck.slides.add();
   s.background.fill = C.bg;
-  header(s, 8, "分析方法", "双层 IR", C.gold);
-
-  label(s, "程序中间表示（Program IR）", 78, 160, C.blue, 220);
-  txt(s, "回答：实际执行了什么", 78, 205, 360, 34, { size: 22, color: C.ink, bold: true });
-  const program = ["算子约束与实际路径", "源码、头文件、动态库与哈希", "硬件架构、编译器与路由条件", "调度、布局与同步", "Python 解释器、导入来源与搜索路径"];
-  for (let i = 0; i < program.length; i++) {
-    txt(s, String(i + 1).padStart(2, "0"), 80, 264 + i * 48, 30, 24, { size: 14, color: C.blue, bold: true });
-    txt(s, program[i], 125, 260 + i * 48, 390, 30, { size: 18, color: C.text });
-  }
-
-  line(s, 620, 160, 0, 386, C.rule, 1);
-  label(s, "经验中间表示（Experience IR）", 690, 160, C.orange, 240);
-  txt(s, "回答：这条证据能在哪里复用", 690, 205, 430, 34, { size: 22, color: C.ink, bold: true });
-  const exp = ["候选提案、结果与不确定性", "机制状态与失败原因", "执行路径、架构与注意力头数", "工作负载、阶段与计时范围", "允许复用范围与必须重测条件"];
-  for (let i = 0; i < exp.length; i++) {
-    txt(s, String(i + 1).padStart(2, "0"), 692, 264 + i * 48, 30, 24, { size: 14, color: C.orange, bold: true });
-    txt(s, exp[i], 737, 260 + i * 48, 410, 30, { size: 18, color: C.text });
-  }
-
-  line(s, 76, 566, 1125, 0, C.rule, 1);
-  rich(s, [
-    [{ run: "例 1  ", textStyle: { bold: true, color: C.green } }, "V16 核心探针 1.615× 只说明首选布局有潜力，不能直接写成公开路径赢家。"],
-    [{ run: "例 2  ", textStyle: { bold: true, color: C.red } }, "HMMA nseq3 的 1.076× 不外推到 nseq4；后者实测为 0.962×。"],
-  ], 80, 592, 1080, 62, { size: 18, color: C.text, lineSpacing: 1.12 });
+  const svg = await fs.readFile(typedIrFigure);
+  s.images.add({
+    blob: svg,
+    contentType: "image/svg+xml",
+    alt: "P3、BF16 ROUND 与 P4 的 Typed IR 流水。P3 和 P4 共用一次 TMEM 分配，在 ROUND 语义边界通过 32 字节 swizzled shared carrier 传递 BF16 值。",
+    fit: "contain",
+    position: { left: 0, top: 0, width: W, height: H },
+  });
   notes(s, [
-    "Program IR 负责复现实验，Experience IR 负责限定经验。它们共同防止把局部 probe 当作全局结论。",
-    "Python 路径、头文件和实际加载 .so 都是执行身份的一部分，不是附属日志。",
-    "来源：FRAMEWORK_SCOPE_CORRECTION_20260910.md；DEFAULT_KNOWLEDGE_SATURATION_REVIEW_20260910.md。",
+    "Typed IR 把 shape、dtype、layout、carrier、pipeline 和 lifetime 变成可检查字段。",
+    "P3 与 P4 只分配一次 TMEM，并复用同一累加列。P3 的 FP32 D fragment 在明确 BF16 ROUND 后，通过 32B swizzled shared carrier 形成 P4 的输入。",
+    "ROUND 是语义边界，规范化器不得跨过；D fragment 到 A TMEM 也必须有显式 layout proof。",
+    "来源：STAGE12_TYPED_IR_SEARCH_CLOSURE_20260911.md §3.1–3.2、§4.3。",
   ]);
 }
 
@@ -626,51 +600,19 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
 {
   const s = deck.slides.add();
   s.background.fill = C.bg;
-  header(s, 13, "挑战结果", "八轮探索结果", C.blue);
-
-  label(s, "HMMA 兼容分支", 78, 156, C.blue, 145);
-  label(s, "tcgen05 原生分支", 688, 156, C.orange, 155);
-  const left = [
-    ["nseq3  V32/V64", "1.076×", C.green],
-    ["skew3  V32/V64", "1.077×", C.green],
-    ["nseq4  V32/V64", "0.962×", C.red],
-  ];
-  const right = [
-    ["H96  s173 相对 CAKE", "1.033×", C.green],
-    ["负载极小化调度", "0.938×", C.red],
-    ["首选布局 / 标量重构", "1.227×", C.green],
-    ["首选布局 / HMMA", "0.955×", C.red],
-  ];
-  for (let i = 0; i < left.length; i++) {
-    const y = 220 + i * 62;
-    txt(s, left[i][0], 78, y, 330, 28, { size: 19, color: C.ink, bold: true });
-    txt(s, left[i][1], 455, y, 112, 28, { size: 21, color: left[i][2], bold: true, align: "right" });
-    line(s, 78, y + 40, 490, 0, C.rule2, 1);
-  }
-  for (let i = 0; i < right.length; i++) {
-    const y = 220 + i * 52;
-    txt(s, right[i][0], 688, y, 340, 28, { size: 18, color: C.ink, bold: true });
-    txt(s, right[i][1], 1075, y, 110, 28, { size: 20, color: right[i][2], bold: true, align: "right" });
-    line(s, 688, y + 36, 497, 0, C.rule2, 1);
-  }
-
-  line(s, 76, 462, 1120, 0, C.rule, 1);
-  txt(s, "写入经验 IR 的三条知识", 78, 494, 460, 34, { size: 23, color: C.ink, bold: true });
-  const learned = [
-    ["HMMA 仍可优化", "nseq3 仍有 7.6% 的可资格收益。", C.blue],
-    ["工作负载决定胜负", "同一 V32/V64 在 nseq3 和 nseq4 方向相反。", C.orange],
-    ["局部收益须过门槛", "首选布局优于标量重构，但相对匹配 HMMA 仍为 0.955×。", C.green],
-  ];
-  for (let i = 0; i < learned.length; i++) {
-    const y = 546 + i * 40;
-    txt(s, String(i + 1).padStart(2, "0"), 80, y, 32, 24, { size: 14, color: learned[i][2], bold: true });
-    txt(s, learned[i][0], 124, y - 2, 205, 28, { size: 18, color: C.ink, bold: true });
-    txt(s, learned[i][1], 345, y - 2, 805, 28, { size: 18, color: C.text });
-  }
+  const svg = await fs.readFile(closureFigure);
+  s.images.add({
+    blob: svg,
+    contentType: "image/svg+xml",
+    alt: "有限 Typed Grammar 的局部知识闭包。声明域内的候选均有终态证据，missing_design_ids 为空；完整 P1 到 P6 public-call、可验证 D 到 A 映射和新算法族仍在开放边界外。",
+    fit: "contain",
+    position: { left: 0, top: 0, width: W, height: H },
+  });
   notes(s, [
-    "这一页同时讲数据和知识。HMMA 的 1.076× 说明官方 H0 不是公平终点；nseq3/nseq4 方向相反说明经验必须绑定 profile。",
-    "tcgen05 的 preferred-layout 相对 scalar 提升 1.227×，但相对匹配 HMMA 仍为 0.955×，说明 carrier gate 决定最终晋级。",
-    "来源：DEFAULT_KNOWLEDGE_SATURATION_REVIEW_20260910.md。",
+    "闭包只覆盖图中的有限 typed grammar 与已测 profile。每个候选都以 qualified、below gate 或 correctness rejected 结束，证书中的 missing_design_ids 为空。",
+    "这不是全局 GPU 最优性证明。完整 P1 到 P6 public-call、可验证 D 到 A TMEM 映射，以及新的 M64、M128、split、slab 算法族仍在开放边界外。",
+    "长驻留 P3/P4 探针给出 1.43 到 1.45 倍的机制上界；是否成为完整 SM100 后端仍由 public-full 正确性和同口径计时决定。",
+    "来源：STAGE12_TYPED_IR_SEARCH_CLOSURE_20260911.md §1、§4–6；04_evidence/agent_rounds/round9_closure_certificate.json。",
   ]);
 }
 
@@ -765,7 +707,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   ]);
 }
 
-const previewDir = path.join(TMP_DIR, "academic-preview-v9");
+const previewDir = path.join(TMP_DIR, "academic-preview-stage12");
 await fs.mkdir(previewDir, { recursive: true });
 for (let i = 0; i < deck.slides.length; i++) {
   const slide = deck.slides.getItemAt(i);
@@ -784,10 +726,10 @@ const requirements = {
   requiredEmbeddedWorkbookChartOwnerSlides: [],
   materializeLiteralChartWorkbooks: false,
 };
-const fontPolicy = { basis: "design", families: [FONT_LATIN], scriptFonts: { ea: FONT_ZH } };
+const fontPolicy = { basis: "design", families: [FONT_ZH], scriptFonts: { ea: FONT_ZH } };
 const stagingDir = path.join(workspaceDir, ".codex-finalizer");
 await fs.mkdir(stagingDir, { recursive: true });
-const candidatePath = path.join(stagingDir, "C1_FlashKDA_SM100_奶龙必胜_学术答辩版_candidate_v9.pptx");
+const candidatePath = path.join(stagingDir, "C1_FlashKDA_SM100_奶龙必胜_署名版_candidate_20260911.pptx");
 await (await PresentationFile.exportPptx(deck)).save(candidatePath);
 await applyPlatformFonts(candidatePath);
 

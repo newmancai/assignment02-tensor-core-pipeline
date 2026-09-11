@@ -1,9 +1,14 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import JSZip from "jszip";
 
-const input = path.resolve("output/slides/C1_FlashKDA_SM100_奶龙必胜_学术答辩版_20260910_v9.pptx");
-const output = path.resolve("output/public/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260910.pptx");
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const workspaceDir = process.env.C1_DELIVERY_DIR
+  ? path.resolve(process.env.C1_DELIVERY_DIR)
+  : path.resolve(scriptDir, "../..");
+const input = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911.pptx");
+const output = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260911.pptx");
 
 const zip = await JSZip.loadAsync(await fs.readFile(input));
 
@@ -15,6 +20,7 @@ for (const [name, file] of Object.entries(zip.files)) {
   xml = xml.replaceAll("1ce47ea", "版本已固定");
   xml = xml.replaceAll("5c149f5", "版本已固定");
   xml = xml.replaceAll("ChatGPT", "答辩公开版");
+  xml = xml.replaceAll("奶龙必胜｜蔡雨洋 · 李奥 · 赵骋", "奶龙必胜");
 
   // Remove speaker notes, which contain internal evidence-file names and source navigation hints.
   if (name.startsWith("ppt/notesSlides/notesSlide") && name.endsWith(".xml")) {
