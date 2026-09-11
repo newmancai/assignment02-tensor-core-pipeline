@@ -12,7 +12,7 @@
       .blue{fill:#2f6f9c}.orange{fill:#c76740}.green{fill:#2f7a68}.red{fill:#aa514b}.gold{fill:#9a742e}.hair{stroke:#d9d6cf;stroke-width:1.4;fill:none}
     </style>
   </defs>
-  <rect width="1920" height="1080" fill="#faf8f3"/>
+  <rect width="1920" height="1080" fill="#ffffff"/>
   <text x="76" y="70" class="kicker">08  分析方法</text>
   <text x="76" y="132" class="title">Typed IR 把语义与物理协议摆在同一条流上</text>
   <text x="76" y="176" class="sub">每个节点都携带 shape、dtype、layout、carrier 与 lifetime，不合法的组合不会进入 CUDA</text>
@@ -21,7 +21,7 @@
   <!-- 主价值流：一条有拐点的带，不用等宽流程框 -->
   <path d="M150 390 C310 312, 420 324, 560 384 C720 454, 826 430, 944 358 C1050 292, 1178 348, 1288 426 C1428 524, 1570 466, 1776 372" stroke="url(#valueRibbon)" stroke-width="24" stroke-linecap="round" fill="none"/>
   <path d="M150 390 C310 312, 420 324, 560 384 C720 454, 826 430, 944 358 C1050 292, 1178 348, 1288 426 C1428 524, 1570 466, 1776 372" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".8"/>
-  <circle cx="150" cy="390" r="15" fill="#2f6f9c"/><circle cx="560" cy="384" r="26" fill="#c76740" stroke="#faf8f3" stroke-width="5"/><circle cx="820" cy="420" r="20" fill="#2f7a68" stroke="#faf8f3" stroke-width="4"/><circle cx="1050" cy="322" r="25" fill="#111b25" stroke="#d2aa52" stroke-width="5"/><circle cx="1288" cy="426" r="20" fill="#d2aa52" stroke="#faf8f3" stroke-width="4"/><circle cx="1516" cy="486" r="26" fill="#c76740" stroke="#faf8f3" stroke-width="5"/><circle cx="1776" cy="372" r="16" fill="#2f7a68"/>
+  <circle cx="150" cy="390" r="15" fill="#2f6f9c"/><circle cx="560" cy="384" r="26" fill="#c76740" stroke="#ffffff" stroke-width="5"/><circle cx="820" cy="420" r="20" fill="#2f7a68" stroke="#ffffff" stroke-width="4"/><circle cx="1050" cy="322" r="25" fill="#111b25" stroke="#d2aa52" stroke-width="5"/><circle cx="1288" cy="426" r="20" fill="#d2aa52" stroke="#ffffff" stroke-width="4"/><circle cx="1516" cy="486" r="26" fill="#c76740" stroke="#ffffff" stroke-width="5"/><circle cx="1776" cy="372" r="16" fill="#2f7a68"/>
   <ellipse cx="1050" cy="322" rx="150" ry="130" fill="url(#roundHalo)"/>
 
   <text x="118" y="316" class="head blue">A0 × INV</text><text x="118" y="344" class="mono">bf16 · shared_MK</text>
@@ -32,21 +32,14 @@
   <text x="1438" y="390" class="head orange">P4 tcgen05</text><text x="1438" y="420" class="mono">U × MQK</text>
   <text x="1660" y="310" class="head green">D4 / output</text><text x="1660" y="339" class="mono">fp32 · verified</text>
 
-  <!-- 字段线索 -->
-  <g class="tiny">
-    <path d="M244 358 C296 254, 350 244, 426 258" stroke="#2f6f9c" stroke-width="1.5" fill="none"/><text x="308" y="238">shape  m16n64k16</text><text x="308" y="262">layout  shared_MK</text>
-    <path d="M632 414 C674 538, 662 574, 630 610" stroke="#c76740" stroke-width="1.5" fill="none"/><text x="494" y="639">carrier  TCGEN A/B descriptors</text><text x="494" y="665">lifetime  commit → wait</text>
-    <path d="M1360 454 C1384 602, 1438 640, 1510 652" stroke="#d2aa52" stroke-width="1.5" fill="none"/><text x="1380" y="683">layout  swizzled NK</text><text x="1380" y="709">proof  bit exact before timing</text>
-  </g>
-
   <!-- 物理生命线：一次分配跨两次 MMA -->
-  <text x="78" y="646" class="kicker green">RESOURCE LIFETIME</text>
+  <text x="78" y="672" class="kicker green">RESOURCE LIFETIME</text>
   <path d="M282 764 C480 712, 646 738, 812 774 C986 811, 1182 752, 1390 770 C1520 782, 1640 770, 1772 724 L1772 824 C1580 860, 1440 844, 1270 838 C1030 830, 842 886, 632 836 C490 802, 378 802, 282 836Z" fill="url(#tmemLife)" stroke="#2f7a68" stroke-width="2"/>
   <path d="M312 798 C566 750, 744 834, 980 814 C1210 794, 1448 846, 1738 770" stroke="#2f7a68" stroke-width="4" stroke-linecap="round" fill="none"/>
   <text x="120" y="794" class="head green">TMEM</text><text x="120" y="824" class="small">一次分配</text>
-  <text x="350" y="742" class="label">alloc once</text><text x="730" y="858" class="small">P3 accumulation</text><text x="1110" y="858" class="small">same columns stay live</text><text x="1518" y="738" class="label">P4 accumulation · read · free</text>
-  <path d="M560 718 C604 694, 646 692, 690 704" stroke="#c76740" stroke-width="12" stroke-linecap="round" fill="none"/><text x="540" y="690" class="small orange">P3 issue</text>
-  <path d="M1408 736 C1450 716, 1502 716, 1544 730" stroke="#c76740" stroke-width="12" stroke-linecap="round" fill="none"/><text x="1400" y="703" class="small orange">P4 issue</text>
+  <text x="350" y="748" class="label">alloc once</text><text x="730" y="868" class="small">P3 accumulation</text><text x="1110" y="868" class="small">same columns stay live</text><text x="1600" y="868" class="small">read + free</text>
+  <path d="M560 740 C604 716, 646 714, 690 726" stroke="#c76740" stroke-width="12" stroke-linecap="round" fill="none"/><text x="540" y="710" class="small orange">P3 issue</text>
+  <path d="M1408 742 C1450 722, 1502 722, 1544 736" stroke="#c76740" stroke-width="12" stroke-linecap="round" fill="none"/><text x="1400" y="710" class="small orange">P4 issue</text>
 
   <!-- 被 verifier 拒绝的捷径 -->
   <path d="M812 438 C898 540, 1110 608, 1398 560" stroke="#aa514b" stroke-width="3" stroke-dasharray="10 12" fill="none" marker-end="url(#arrow)" opacity=".68"/>

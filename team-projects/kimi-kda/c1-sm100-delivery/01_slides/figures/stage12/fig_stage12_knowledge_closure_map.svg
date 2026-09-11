@@ -7,23 +7,23 @@
     <radialGradient id="greenBasin"><stop offset="0" stop-color="#3f9178" stop-opacity=".34"/><stop offset="1" stop-color="#3f9178" stop-opacity="0"/></radialGradient>
     <marker id="frontierArrow" markerWidth="14" markerHeight="14" refX="11" refY="5" orient="auto"><path d="M0,0 L12,5 L0,10 Z" fill="#e58a61"/></marker>
     <style>
-      .kicker{font-size:21px;font-weight:600;letter-spacing:2px;fill:#7db9df}.title{font-size:48px;font-weight:650;fill:#f7f4ee}.sub{font-size:22px;font-weight:400;fill:#aeb7c1}
-      .head{font-size:27px;font-weight:600;fill:#f3efe8}.label{font-size:21px;font-weight:500;fill:#e8e4dc}.small{font-size:18px;font-weight:400;fill:#a0aab4}.tiny{font-size:16px;font-weight:400;fill:#7f8994}.metric{font-size:24px;font-weight:650;fill:#f7f4ee}
-      .blue{fill:#7db9df}.orange{fill:#f0a078}.green{fill:#80c9ae}.red{fill:#d9746d}.gold{fill:#e2bd6f}.contour{fill:none;stroke:#66717d;stroke-width:1.8;opacity:.55}.inner{fill:none;stroke:#8e99a5;stroke-width:1.4;opacity:.38}
+      .kicker{font-size:21px;font-weight:600;letter-spacing:2px;fill:#2c6f9c}.title{font-size:48px;font-weight:650;fill:#151a21}.sub{font-size:22px;font-weight:400;fill:#66707a}
+      .head{font-size:27px;font-weight:600;fill:#151a21}.label{font-size:21px;font-weight:500;fill:#2c333b}.small{font-size:18px;font-weight:400;fill:#66707a}.tiny{font-size:16px;font-weight:400;fill:#7f8994}.metric{font-size:24px;font-weight:650;fill:#151a21}
+      .blue{fill:#2c6f9c}.orange{fill:#c76740}.green{fill:#2f7a68}.red{fill:#aa514b}.gold{fill:#9a742e}.contour{fill:none;stroke:#91a0aa;stroke-width:1.8;opacity:.65}.inner{fill:none;stroke:#aab6bd;stroke-width:1.4;opacity:.54}
     </style>
   </defs>
-  <rect width="1920" height="1080" fill="#090b0e"/>
+  <rect width="1920" height="1080" fill="#ffffff"/>
   <text x="76" y="70" class="kicker">13  挑战结果</text>
   <text x="76" y="132" class="title">知识闭包是一块已探明的地形</text>
   <text x="76" y="176" class="sub">我们关闭的是已声明 finite grammar 与已测 profile，新算法、新映射或完整 public-call 会重新打开边界</text>
-  <path d="M76 207 C520 198, 1048 220, 1844 202" stroke="#3a424b" stroke-width="1.3" fill="none"/>
+  <path d="M76 207 C520 198, 1048 220, 1844 202" stroke="#d9e3e8" stroke-width="1.3" fill="none"/>
 
   <!-- 不规则闭包域和地形线 -->
   <path d="M118 318 C210 228 382 236 498 292 C610 212 810 226 908 304 C1034 244 1226 280 1308 392 C1394 510 1330 676 1228 738 C1138 842 932 850 816 796 C690 874 496 840 410 764 C260 798 132 710 116 590 C82 486 66 392 118 318Z" class="contour" stroke-dasharray="8 10"/>
   <path d="M174 350 C254 280 382 292 472 334 C574 266 720 276 806 344 C934 300 1102 326 1188 418 C1264 500 1224 624 1134 682 C1032 760 886 750 794 706 C692 780 540 754 468 686 C330 724 218 660 194 568 C158 486 132 410 174 350Z" class="contour"/>
   <path d="M238 392 C330 330 428 352 502 390 C600 324 716 342 772 412 C884 366 1014 390 1084 466 C1142 534 1104 612 1032 650 C928 706 842 672 770 638 C680 710 566 672 512 616 C402 666 298 610 270 540 C238 478 210 430 238 392Z" class="inner"/>
   <text x="126" y="278" class="kicker">DECLARED FINITE DOMAIN</text>
-  <text x="1110" y="784" class="tiny">等高线 = 已取证搜索强度</text>
+  <text x="1110" y="862" class="tiny">等高线 = 已取证搜索强度</text>
 
   <ellipse cx="384" cy="450" rx="250" ry="200" fill="url(#blueBasin)"/>
   <ellipse cx="954" cy="440" rx="270" ry="205" fill="url(#orangeBasin)"/>
@@ -31,7 +31,7 @@
 
   <!-- HMMA basin -->
   <g>
-    <path d="M236 426 C288 350 418 326 492 382 C554 428 520 522 450 552 C364 594 248 536 236 426Z" fill="#142a3b" stroke="#4f91be" stroke-width="2"/>
+    <path d="M236 426 C288 350 418 326 492 382 C554 428 520 522 450 552 C364 594 248 536 236 426Z" fill="#e9f1f7" stroke="#4f91be" stroke-width="2"/>
     <text x="274" y="406" class="head blue">HMMA warp 密度</text><text x="274" y="438" class="small">V32 / V64 · 列块密度</text>
     <circle cx="302" cy="486" r="17" fill="#80c9ae"/><text x="332" y="494" class="label">V32 2 warps  1.307×</text>
     <circle cx="302" cy="530" r="12" fill="#d9746d"/><text x="332" y="537" class="small">V32 1 warp  0.846×</text>
@@ -40,7 +40,7 @@
 
   <!-- TCGEN layout basin -->
   <g>
-    <path d="M824 368 C890 310 1032 320 1096 386 C1164 454 1100 548 1016 570 C914 598 810 518 824 368Z" fill="#321f18" stroke="#d9825b" stroke-width="2"/>
+    <path d="M824 368 C890 310 1032 320 1096 386 C1164 454 1100 548 1016 570 C914 598 810 518 824 368Z" fill="#f8ede7" stroke="#d9825b" stroke-width="2"/>
     <text x="858" y="400" class="head orange">TCGEN B layout</text><text x="858" y="432" class="small">logical · producer-ready</text>
     <circle cx="876" cy="482" r="17" fill="#80c9ae"/><text x="908" y="489" class="label">preferred bridge  incumbent</text>
     <circle cx="876" cy="528" r="12" fill="#d9746d"/><text x="908" y="535" class="small">physical B  0.993×</text>
@@ -49,7 +49,7 @@
 
   <!-- lifetime basin -->
   <g>
-    <path d="M432 630 C474 554 610 542 714 570 C820 596 860 704 790 766 C716 834 550 818 462 756 C408 718 400 674 432 630Z" fill="#152a24" stroke="#4a9d84" stroke-width="2"/>
+    <path d="M432 630 C474 554 610 542 714 570 C820 596 860 704 790 766 C716 834 550 818 462 756 C408 718 400 674 432 630Z" fill="#e8f2ee" stroke="#4a9d84" stroke-width="2"/>
     <text x="470" y="626" class="head green">P3 / ROUND / P4 生命周期</text><text x="470" y="658" class="small">一次 TMEM allocation · grid12 / 96</text>
     <circle cx="486" cy="706" r="13" fill="#d9746d"/><text x="516" y="713" class="small">inner1  0.709–0.765×</text>
     <circle cx="486" cy="752" r="18" fill="#80c9ae"/><text x="516" y="760" class="label">inner64  1.430–1.446×</text>
@@ -58,18 +58,18 @@
 
   <!-- D to A proof: 小山脊 -->
   <g>
-    <path d="M916 656 C964 612 1044 610 1100 652 C1158 696 1136 766 1082 794 C1018 826 930 790 910 726 C902 700 904 674 916 656Z" fill="#19231f" stroke="#62b298" stroke-width="2"/>
+    <path d="M916 656 C964 612 1044 610 1100 652 C1158 696 1136 766 1082 794 C1018 826 930 790 910 726 C902 700 904 674 916 656Z" fill="#eef5f2" stroke="#62b298" stroke-width="2"/>
     <text x="950" y="684" class="head">D fragment → A TMEM</text><text x="950" y="718" class="small green">shared carrier  exact pass</text>
     <text x="950" y="754" class="small red">unpack16 / lowword  24,576 fail</text><text x="1068" y="812" class="metric green">3 / 3</text>
   </g>
 
   <!-- central closure certificate -->
-  <g transform="translate(694 456)">
-    <path d="M0 -88 C82 -110 164 -62 170 18 C176 96 102 140 28 118 C-52 96 -88 12 -52 -50 C-38 -72 -20 -82 0 -88Z" fill="#101822" stroke="#e2bd6f" stroke-width="2.2"/>
-    <text x="48" y="-28" text-anchor="middle" class="tiny gold">CLOSURE CERTIFICATE</text>
-    <text x="48" y="18" text-anchor="middle" class="head">missing_design_ids</text>
-    <text x="48" y="70" text-anchor="middle" font-size="42" font-weight="650" fill="#e2bd6f">[ ]</text>
-    <text x="48" y="108" text-anchor="middle" class="tiny">scope · hash · terminal state</text>
+  <g transform="translate(700 402)">
+    <circle cx="0" cy="0" r="82" fill="#fffaf0" stroke="#d2aa52" stroke-width="2.2"/>
+    <text x="0" y="-34" text-anchor="middle" class="tiny gold">CLOSURE CERTIFICATE</text>
+    <text x="0" y="0" text-anchor="middle" font-size="20" font-weight="600" fill="#151a21">missing_design_ids</text>
+    <text x="0" y="48" text-anchor="middle" font-size="38" font-weight="650" fill="#9a742e">[ ]</text>
+    <text x="0" y="72" text-anchor="middle" font-size="13" fill="#7f8994">scope · hash · terminal</text>
   </g>
 
   <!-- 状态粒子：不同路径终态不同 -->
@@ -81,7 +81,7 @@
 
   <!-- open frontier: 从闭包边缘长出的未知分支 -->
   <text x="1452" y="286" class="kicker orange">OPEN FRONTIER</text><text x="1452" y="320" class="small">边界外问题不计入本次闭包</text>
-  <path d="M1290 412 C1410 378 1440 330 1512 320" stroke="#e58a61" stroke-width="5" fill="none" marker-end="url(#frontierArrow)"/>
+  <path d="M1290 412 C1406 390 1440 354 1512 348" stroke="#e58a61" stroke-width="5" fill="none" marker-end="url(#frontierArrow)"/>
   <path d="M1302 520 C1450 506 1482 492 1570 452" stroke="#e58a61" stroke-width="9" fill="none" marker-end="url(#frontierArrow)"/>
   <path d="M1260 646 C1410 680 1460 738 1548 770" stroke="#e58a61" stroke-width="6" fill="none" marker-end="url(#frontierArrow)"/>
   <path d="M1198 742 C1318 838 1460 874 1660 844" stroke="#e58a61" stroke-width="3" stroke-dasharray="7 10" fill="none" marker-end="url(#frontierArrow)" opacity=".74"/>
@@ -90,7 +90,7 @@
   <text x="1556" y="720" class="head orange">shape-gated portfolio</text><text x="1556" y="750" class="small">M64 / M128 / split / slab</text>
   <text x="1668" y="822" class="head orange">新算法与新 grammar</text><text x="1668" y="852" class="small">重新声明有限域并取证</text>
 
-  <path d="M76 916 C420 886, 768 940, 1102 910 C1380 884, 1620 930, 1844 900" stroke="#3a424b" stroke-width="1.4" fill="none"/>
+  <path d="M76 916 C420 886, 768 940, 1102 910 C1380 884, 1620 930, 1844 900" stroke="#d9e3e8" stroke-width="1.4" fill="none"/>
   <text x="78" y="956" class="kicker gold">准确表述</text>
   <text x="78" y="1002" class="head">当前局部语法与已测 profile 已闭包</text>
   <text x="724" y="1002" class="label">完整 SM100 KDA 仍依赖 full-call 移植</text>

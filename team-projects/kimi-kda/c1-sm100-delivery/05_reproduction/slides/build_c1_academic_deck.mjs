@@ -15,8 +15,8 @@ const SKILL_DIR = process.env.C1_PRESENTATIONS_SKILL_DIR
   ?? path.join(userHomeDir, ".codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations");
 const RUNTIME_PYTHON = process.env.C1_RUNTIME_PYTHON
   ?? path.join(userHomeDir, ".cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3");
-const TMP_DIR = path.join(workspaceDir, ".codex-ppt-build-workshop-fusion");
-const FINAL_PPTX = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v3.pptx");
+const TMP_DIR = path.join(workspaceDir, ".codex-ppt-build-refined");
+const FINAL_PPTX = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v5.pptx");
 const paperExcerptPath = path.join(workspaceDir, "05_reproduction/slides/paper-2-framework-core.png");
 const stage12FigureDir = path.join(workspaceDir, "01_slides/figures/stage12");
 const brandAssetDir = path.join(workspaceDir, "01_slides/assets/branding");
@@ -237,33 +237,17 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   brandLockup(s, { dark: false, y: 38 });
   line(s, 74, 88, 1132, 0, C.teal, 1.4);
 
-  txt(s, "FlashKDA 迁移到 SM100\n是否值得？", 110, 152, 1060, 150, {
+  txt(s, "FlashKDA 迁移到 SM100\n是否值得？", 110, 202, 1060, 150, {
     size: 58, color: C.ink, bold: true, align: "center", lineSpacing: 0.98, name: "cover-title",
   });
-  txt(s, "B300 上的复现、因果分析与双分支探索", 210, 318, 860, 38, {
+  txt(s, "B300 上的复现、因果分析与双分支探索", 210, 382, 860, 38, {
     size: 24, color: C.muted, align: "center",
   });
 
-  // 白底上只保留一条克制的探索轨迹：路径粗细仍表示两条路线的投入差异。
-  line(s, 270, 438, 126, 30, "#78A8C7", 3.5);
-  line(s, 396, 468, 150, 0, "#4F8DB5", 8.5);
-  line(s, 546, 468, 140, 26, "#78A8C7", 5);
-  line(s, 270, 500, 124, 58, "#D89472", 3.5);
-  line(s, 394, 558, 160, 16, "#C66A3D", 10.5);
-  line(s, 554, 574, 132, 0, "#D89472", 6.5);
-  ellipse(s, 252, 462, 16, 16, C.gold);
-  ellipse(s, 386, 456, 24, 24, "#75B5DC");
-  ellipse(s, 676, 482, 24, 24, C.green);
-  ellipse(s, 384, 546, 24, 24, "#F0A078");
-  ellipse(s, 676, 562, 24, 24, C.green);
-  txt(s, "HMMA", 720, 446, 150, 30, { size: 19, color: C.blue, bold: true });
-  txt(s, "tcgen05", 720, 548, 170, 30, { size: 19, color: C.orange, bold: true });
-  txt(s, "共同证据门", 916, 496, 180, 28, { size: 17, color: C.green, bold: true });
-
-  txt(s, "奶龙必胜｜蔡雨洋 · 李奥 · 赵骋", 110, 624, 1060, 30, {
+  txt(s, "奶龙必胜｜蔡雨洋 · 李奥 · 赵骋", 110, 560, 1060, 30, {
     size: 22, color: C.ink, bold: true, align: "center",
   });
-  txt(s, "复现与测量  ·  分析与知识写回  ·  挑战与条件部署", 110, 663, 1060, 24, {
+  txt(s, "复现与测量  ·  分析与知识写回  ·  挑战与条件部署", 110, 608, 1060, 24, {
     size: 15, color: C.muted, align: "center",
   });
   notes(s, [
@@ -448,50 +432,46 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   });
   txt(s, "两条支路的搜索能量可以不同，但机会预算与证据门槛必须一致。", 76, 198, 900, 32, { size: 18, color: C.muted });
 
-  ellipse(s, 76, 330, 82, 82, C.navy, C.gold, 1.5);
-  txt(s, "共同\n问题", 86, 340, 62, 62, { size: 18, color: C.white, bold: true, align: "center", valign: "middle", lineSpacing: 0.95 });
+  rect(s, 76, 286, 116, 276, C.navy, C.gold, 1.5, 12);
+  txt(s, "共同\n问题", 92, 322, 84, 78, { size: 21, color: C.white, bold: true, align: "center", valign: "middle", lineSpacing: 0.95 });
+  txt(s, "同一\nworkload", 92, 438, 84, 60, { size: 15, color: "#C9D3DC", align: "center", valign: "middle", lineSpacing: 0.95 });
 
-  // HMMA 线宽收敛较快：兼容路径的局部调参空间更窄。
-  line(s, 158, 350, 128, 22, "#6E9FC4", 4);
-  line(s, 286, 372, 148, 0, "#4C86B1", 9);
-  line(s, 434, 372, 145, 35, "#6E9FC4", 5);
-  ellipse(s, 272, 358, 28, 28, "#7DB9DF");
-  ellipse(s, 420, 358, 30, 30, "#7DB9DF");
-  ellipse(s, 566, 394, 28, 28, C.green);
-  txt(s, "HMMA", 188, 270, 150, 36, { size: 27, color: C.blue, bold: true });
-  txt(s, "H0  官方路径", 250, 314, 170, 26, { size: 18, color: C.muted });
-  txt(s, "H1  同预算最优", 404, 314, 190, 26, { size: 18, color: C.blue, bold: true });
-  txt(s, "局部闭包", 520, 438, 100, 24, { size: 16, color: C.green, bold: true, align: "right" });
+  // 两条连续水平支路使用不同线宽表达搜索投入，避免视觉上出现断裂。
+  line(s, 192, 338, 530, 0, C.blue, 8);
+  ellipse(s, 330, 326, 24, 24, "#7DB9DF");
+  ellipse(s, 548, 323, 30, 30, "#7DB9DF");
+  ellipse(s, 704, 326, 24, 24, C.green);
+  txt(s, "HMMA", 222, 276, 150, 32, { size: 25, color: C.blue, bold: true });
+  txt(s, "H0  官方路径", 294, 365, 160, 26, { size: 17, color: C.muted });
+  txt(s, "H1  同预算最优", 500, 365, 190, 26, { size: 18, color: C.blue, bold: true });
+  txt(s, "局部闭包", 650, 298, 100, 24, { size: 16, color: C.green, bold: true, align: "right" });
 
-  // tcgen05 在中段需要更高投入，因为 layout、carrier 和 lifetime 的物理协议更多。
-  line(s, 158, 392, 126, 96, "#9A5037", 4);
-  line(s, 284, 488, 152, 20, "#C76740", 12);
-  line(s, 436, 488, 146, 20, "#E08A62", 7);
-  ellipse(s, 270, 474, 30, 30, "#F0A078");
-  ellipse(s, 420, 494, 32, 32, "#F0A078");
-  ellipse(s, 568, 494, 30, 30, C.green);
-  txt(s, "tcgen05", 188, 560, 180, 36, { size: 27, color: C.orange, bold: true });
-  txt(s, "T0  同预算接入", 250, 524, 190, 26, { size: 18, color: C.muted });
-  txt(s, "T1 / T2  布局与全栈", 420, 550, 220, 26, { size: 18, color: C.orange, bold: true });
+  line(s, 192, 482, 530, 0, C.orange, 12);
+  ellipse(s, 330, 468, 28, 28, "#F0A078");
+  ellipse(s, 548, 464, 36, 36, "#F0A078");
+  ellipse(s, 704, 470, 24, 24, C.green);
+  txt(s, "tcgen05", 222, 526, 180, 32, { size: 25, color: C.orange, bold: true });
+  txt(s, "T0  同预算接入", 286, 430, 190, 26, { size: 17, color: C.muted });
+  txt(s, "T1 / T2  布局与全栈", 492, 520, 230, 26, { size: 18, color: C.orange, bold: true });
 
-  line(s, 662, 228, 0, 392, C.rule, 1);
-  txt(s, "共享证据合同", 720, 252, 420, 40, { size: 28, color: C.ink, bold: true });
+  line(s, 816, 250, 0, 372, C.rule, 1);
+  txt(s, "共享证据合同", 866, 262, 350, 40, { size: 27, color: C.ink, bold: true });
   const shared = [
-    ["工作负载", "q / k / v、状态和打包边界一致", C.blue],
-    ["机会预算", "每轮候选数和搜索机会匹配", C.gold],
-    ["证据门槛", "身份、output + final state、public-full", C.orange],
+    ["工作负载", "q / k / v、状态与打包边界一致", C.blue],
+    ["机会预算", "候选数与搜索机会按轮匹配", C.gold],
+    ["证据门槛", "身份、双重正确性与 public-full", C.orange],
   ];
   for (let i = 0; i < shared.length; i++) {
-    const y = 330 + i * 82;
-    ellipse(s, 722, y + 2, 14 + i * 4, 14 + i * 4, shared[i][2]);
-    txt(s, shared[i][0], 756, y - 2, 150, 30, { size: 21, color: shared[i][2], bold: true });
-    txt(s, shared[i][1], 902, y - 2, 300, 54, { size: 18, color: C.text, lineSpacing: 1.08 });
+    const y = 326 + i * 78;
+    txt(s, String(i + 1).padStart(2, "0"), 866, y, 34, 24, { size: 14, color: shared[i][2], bold: true });
+    txt(s, shared[i][0], 914, y - 4, 210, 30, { size: 20, color: shared[i][2], bold: true });
+    txt(s, shared[i][1], 914, y + 27, 286, 30, { size: 15, color: C.text });
   }
-  line(s, 720, 574, 460, 0, C.rule, 1);
+  line(s, 866, 568, 354, 0, C.rule, 1);
   rich(s, [[
     { run: "比较对象  ", textStyle: { bold: true, color: C.green } },
-    { run: "同预算的最优边界，不是新旧指令的标签。", textStyle: { color: C.ink } },
-  ]], 720, 596, 470, 50, { size: 20, lineSpacing: 1.08 });
+    { run: "两条支路在同一合同下得到的最优边界。", textStyle: { color: C.ink } },
+  ]], 866, 590, 354, 50, { size: 18, lineSpacing: 1.08 });
   notes(s, [
     "双分支 Agent 的动机是公平性。HMMA 和 tcgen05 各自独立优化，再用同一 workload 和同一 gate 比较。",
     "H0/H1 分离旧路径的优化空间，T0/T1/T2 分离 tcgen05 接入与全栈路径。",
@@ -511,7 +491,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     fit: "contain",
     position: { left: 0, top: 0, width: W, height: H },
   });
-  brandLockup(s, { dark: true, y: 25, compact: true });
+  brandLockup(s, { dark: false, y: 25, compact: true });
   notes(s, [
     "这一页强调 Agent 的核心产物是判断和可复用知识，不是一串 benchmark 数字。",
     "五类角色只提交 typed patch；协调器先做冲突、物理协议和语义去重检查，再把合法候选分配到 HMMA 与 TCGEN05 两条支路。",
@@ -584,47 +564,61 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   s.background.fill = C.bg;
   header(s, 10, "挑战", "四条挑战路径的投入与回报", C.orange);
 
-  txt(s, "气泡大小表示改造能量，位置表示完整路径的实测回报。", 76, 154, 780, 32, { size: 19, color: C.muted });
-  txt(s, "快速试探", 86, 610, 130, 26, { size: 16, color: C.muted });
-  txt(s, "全栈改造", 1060, 610, 130, 26, { size: 16, color: C.muted, align: "right" });
-  line(s, 140, 590, 980, 0, C.rule, 1.5);
-  txt(s, "改造范围", 550, 624, 160, 26, { size: 17, color: C.muted, align: "center" });
-  line(s, 212, 238, 0, 352, C.rule, 1.2);
-  txt(s, "回报", 92, 224, 100, 24, { size: 16, color: C.muted, align: "right" });
+  txt(s, "核心探针与 public-full 分开标注，1.0× 表示各自基线。", 76, 154, 780, 32, { size: 18, color: C.muted });
 
-  // 四条路径不是并列卡片，而是一组投入不均的试探轨迹。
-  line(s, 230, 454, 222, 4, "#B96554", 2.5);
-  line(s, 452, 390, 236, 68, "#D18B63", 2.5);
-  line(s, 688, 390, 220, 72, "#9B6D63", 2.5);
-  line(s, 908, 264, 216, 198, "#5E927E", 3.5);
+  const plotLeft = 240;
+  const plotRight = 1138;
+  const baselineY = 474;
+  line(s, plotLeft, 224, 0, 344, C.rule, 1.2);
+  line(s, plotLeft, 568, plotRight - plotLeft, 0, C.rule, 1.2);
+  line(s, plotLeft, baselineY, plotRight - plotLeft, 0, C.ink, 1.2);
+  txt(s, "1.0×", 176, baselineY - 12, 52, 24, { size: 14, color: C.ink, bold: true, align: "right" });
+  txt(s, "实测加速比", 78, 224, 130, 28, { size: 17, color: C.muted });
 
-  ellipse(s, 238, 414, 84, 84, C.redSoft, C.red, 2);
-  txt(s, "0.920×", 238, 437, 84, 38, { size: 18, color: C.red, bold: true, align: "center", valign: "middle" });
-  txt(s, "01  Direct", 230, 350, 150, 30, { size: 22, color: C.ink, bold: true });
-  txt(s, "只替换矩阵乘加", 230, 384, 180, 24, { size: 16, color: C.muted });
+  const xDirect = 330;
+  const xV16 = 555;
+  const xH3 = 790;
+  const xCake = 1040;
+  const yDirect = 490;
+  const yV16Core = 330;
+  const yV16Full = 520;
+  const yH3 = 496;
+  const yCake = 250;
 
-  ellipse(s, 420, 358, 132, 132, C.orangeSoft, C.orange, 2);
-  txt(s, "1.615×", 420, 384, 132, 34, { size: 23, color: C.orange, bold: true, align: "center", valign: "middle" });
-  txt(s, "0.779×", 420, 425, 132, 26, { size: 17, color: C.red, bold: true, align: "center" });
-  txt(s, "02  V16 布局探针", 386, 286, 230, 32, { size: 22, color: C.ink, bold: true });
-  txt(s, "核心计算有潜力，承载层会吞掉收益", 386, 320, 305, 30, { size: 16, color: C.muted });
+  ellipse(s, xDirect - 12, yDirect - 12, 24, 24, C.red, C.white, 2);
+  txt(s, "0.920×", xDirect - 54, yDirect - 48, 108, 28, { size: 18, color: C.red, bold: true, align: "center" });
 
-  ellipse(s, 650, 416, 108, 108, C.redSoft, C.red, 2);
-  txt(s, "0.906×", 650, 450, 108, 36, { size: 21, color: C.red, bold: true, align: "center", valign: "middle" });
-  txt(s, "03  H3 数据流重排", 630, 340, 250, 32, { size: 22, color: C.ink, bold: true });
-  txt(s, "正确，但串行路径未缩短", 630, 376, 250, 26, { size: 16, color: C.muted });
+  line(s, xV16, yV16Core, 0, yV16Full - yV16Core, C.orange, 3);
+  ellipse(s, xV16 - 14, yV16Core - 14, 28, 28, C.green, C.white, 2);
+  ellipse(s, xV16 - 12, yV16Full - 12, 24, 24, C.red, C.white, 2);
+  txt(s, "core  1.615×", xV16 - 124, yV16Core - 42, 118, 28, { size: 17, color: C.green, bold: true, align: "right" });
+  txt(s, "public  0.779×", xV16 + 18, yV16Full - 12, 150, 28, { size: 17, color: C.red, bold: true });
+  txt(s, "承载成本", xV16 + 20, 402, 104, 26, { size: 15, color: C.orange, bold: true });
 
-  ellipse(s, 860, 246, 238, 238, C.greenSoft, C.green, 2.5);
-  ellipse(s, 889, 275, 180, 180, "#DDECE6");
-  txt(s, "2.482×", 890, 315, 178, 48, { size: 34, color: C.green, bold: true, align: "center", valign: "middle" });
-  txt(s, "9 / 9 获益", 890, 370, 178, 30, { size: 19, color: C.green, bold: true, align: "center" });
-  txt(s, "04  CAKE 全栈协同", 850, 198, 260, 34, { size: 25, color: C.ink, bold: true });
-  txt(s, "驻留、角色、流水、布局与分发", 860, 502, 300, 28, { size: 17, color: C.text, align: "center" });
+  ellipse(s, xH3 - 12, yH3 - 12, 24, 24, C.red, C.white, 2);
+  txt(s, "0.906×", xH3 - 54, yH3 - 48, 108, 28, { size: 18, color: C.red, bold: true, align: "center" });
+
+  ellipse(s, xCake - 38, yCake - 38, 76, 76, C.greenSoft, C.green, 1.2);
+  ellipse(s, xCake - 18, yCake - 18, 36, 36, C.green, C.white, 3);
+  txt(s, "2.482×", xCake - 62, yCake - 72, 124, 30, { size: 23, color: C.green, bold: true, align: "center" });
+  txt(s, "9 / 9 获益", xCake - 64, yCake + 46, 128, 26, { size: 17, color: C.green, bold: true, align: "center" });
+
+  const paths = [
+    [xDirect, "01  Direct", "矩阵乘加替换"],
+    [xV16, "02  V16", "布局与 carrier"],
+    [xH3, "03  H3", "数据流重排"],
+    [xCake, "04  CAKE", "全栈协同"],
+  ];
+  for (const [x, title, subtitle] of paths) {
+    line(s, x, 560, 0, 16, C.rule, 1.2);
+    txt(s, title, x - 92, 586, 184, 28, { size: 18, color: C.ink, bold: true, align: "center" });
+    txt(s, subtitle, x - 100, 616, 200, 24, { size: 14, color: C.muted, align: "center" });
+  }
 
   rich(s, [[
     { run: "轨迹展示的不是线性进步。 ", textStyle: { bold: true, color: C.orange } },
     { run: "Direct 和 H3 留下负边界，V16 揭示 carrier 问题，CAKE 才将这些知识组成完整收益。", textStyle: { color: C.ink } },
-  ]], 80, 654, 1090, 36, { size: 18, valign: "middle" });
+  ]], 80, 662, 1090, 32, { size: 17, valign: "middle" });
   notes(s, [
     "挑战不是只写一个 tcgen kernel，而是用四条互相证伪的路径逐步扩大改造范围。",
     "Direct 和 H3 失败，V16 揭示 core/carrier 差异，CAKE 证明全栈协同存在显著工程收益。",
@@ -725,7 +719,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     fit: "contain",
     position: { left: 0, top: 0, width: W, height: H },
   });
-  brandLockup(s, { dark: true, y: 25, compact: true });
+  brandLockup(s, { dark: false, y: 25, compact: true });
   notes(s, [
     "闭包只覆盖图中的有限 typed grammar 与已测 profile。每个候选都以 qualified、below gate 或 correctness rejected 结束，证书中的 missing_design_ids 为空。",
     "这不是全局 GPU 最优性证明。完整 P1 到 P6 public-call、可验证 D 到 A TMEM 映射，以及新的 M64、M128、split、slab 算法族仍在开放边界外。",
@@ -740,43 +734,43 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   s.background.fill = C.bg;
   header(s, 14, "结论", "证据驱动的条件部署", C.green);
 
-  txt(s, "线上路由不应求一刀切。证据足够的 profile 走 SM100，其余保留 HMMA 回退。", 76, 154, 1080, 40, { size: 23, color: C.ink, bold: true });
+  txt(s, "每个请求依次通过执行身份、递推正确性和 public-full 证据，再决定后端。", 76, 154, 1080, 40, { size: 22, color: C.ink, bold: true });
 
-  ellipse(s, 84, 300, 122, 122, C.navy, C.gold, 1.8);
-  txt(s, "设备\n负载", 100, 324, 90, 74, { size: 23, color: C.white, bold: true, align: "center", valign: "middle", lineSpacing: 0.95 });
-  txt(s, "型号 · head 数 · 序列形态", 68, 444, 255, 28, { size: 16, color: C.muted, align: "center" });
+  ellipse(s, 82, 388, 84, 84, C.navy, C.gold, 1.8);
+  txt(s, "运行\n请求", 96, 398, 56, 64, { size: 20, color: C.white, bold: true, align: "center", valign: "middle", lineSpacing: 0.95 });
+  txt(s, "device · profile", 62, 484, 126, 24, { size: 14, color: C.muted, align: "center" });
 
-  line(s, 206, 342, 154, 42, C.muted, 3);
-  ellipse(s, 352, 278, 232, 232, C.navy, C.green, 2);
-  txt(s, "资格检查", 384, 314, 168, 38, { size: 28, color: C.white, bold: true, align: "center" });
-  txt(s, "B300 且 profile 已认证", 376, 374, 184, 28, { size: 17, color: "#D6E0E8", align: "center" });
-  txt(s, "output + final state", 376, 411, 184, 26, { size: 16, color: "#D6E0E8", align: "center" });
-  txt(s, "public-full 通过", 376, 446, 184, 26, { size: 16, color: "#D6E0E8", align: "center" });
+  // 学术化的路由图：一条连续证据主线，末端分成认证路径和兼容回退。
+  line(s, 166, 430, 574, 0, C.muted, 4);
+  const checks = [
+    [320, "执行身份", "实际 module", C.blue, 330],
+    [510, "递推正确性", "output + final state", C.orange, 468],
+    [700, "公开完整计时", "public-full", C.green, 330],
+  ];
+  for (const [x, title, subtitle, color, labelY] of checks) {
+    ellipse(s, x - 13, 417, 26, 26, color, C.white, 2);
+    txt(s, title, x - 90, labelY, 180, 28, { size: 19, color, bold: true, align: "center" });
+    txt(s, subtitle, x - 110, labelY + 31, 220, 24, { size: 14, color: C.muted, align: "center" });
+  }
 
-  // 分叉的线宽表示默认流量与已认证 niche：回退路径常在，专用路径按证据开启。
-  line(s, 584, 342, 160, 20, C.green, 7);
-  line(s, 744, 362, 170, 0, C.green, 11);
-  line(s, 584, 430, 154, 64, C.blue, 4);
-  line(s, 738, 494, 176, 0, C.blue, 7);
-  ellipse(s, 724, 348, 24, 24, "#80C9AE");
-  ellipse(s, 724, 480, 24, 24, "#7DB9DF");
+  line(s, 740, 350, 0, 170, C.muted, 2.5);
+  line(s, 740, 350, 410, 0, C.green, 10);
+  line(s, 740, 520, 410, 0, C.blue, 7);
+  ellipse(s, 1129, 338, 24, 24, C.green);
+  ellipse(s, 1132, 510, 20, 20, C.blue);
+  txt(s, "全部通过", 760, 310, 110, 24, { size: 15, color: C.green, bold: true });
+  txt(s, "否则", 760, 534, 70, 24, { size: 15, color: C.blue, bold: true });
 
-  ellipse(s, 900, 270, 250, 184, C.greenSoft, C.green, 2);
-  txt(s, "SM100 专用后端", 926, 314, 198, 34, { size: 25, color: C.green, bold: true, align: "center" });
-  txt(s, "认证路径 T2", 926, 360, 198, 30, { size: 20, color: C.green, bold: true, align: "center" });
-  txt(s, "条件成立时启用", 926, 398, 198, 26, { size: 17, color: C.muted, align: "center" });
+  txt(s, "SM100 专用后端", 872, 254, 278, 38, { size: 27, color: C.green, bold: true, align: "right" });
+  txt(s, "T2 · 仅认证 profile", 872, 298, 278, 28, { size: 18, color: C.green, align: "right" });
+  txt(s, "HMMA 兼容后端", 872, 552, 278, 38, { size: 27, color: C.blue, bold: true, align: "right" });
+  txt(s, "默认回退 · 保持跨代可用", 842, 594, 308, 28, { size: 17, color: C.muted, align: "right" });
 
-  ellipse(s, 900, 454, 250, 184, C.blueSoft, C.blue, 2);
-  txt(s, "HMMA 兼容后端", 926, 498, 198, 34, { size: 25, color: C.blue, bold: true, align: "center" });
-  txt(s, "默认回退", 926, 544, 198, 30, { size: 20, color: C.blue, bold: true, align: "center" });
-  txt(s, "保持跨代可用", 926, 582, 198, 26, { size: 17, color: C.muted, align: "center" });
-
-  line(s, 76, 650, 1110, 0, C.rule, 1);
-  txt(s, "晋级证据", 80, 672, 120, 26, { size: 17, color: C.orange, bold: true });
-  txt(s, "实际执行路径", 230, 670, 170, 28, { size: 18, color: C.text });
-  txt(s, "output + final state", 480, 670, 190, 28, { size: 18, color: C.text });
-  txt(s, "公开接口完整计时", 760, 670, 220, 28, { size: 18, color: C.text });
-  txt(s, "工作负载认证", 1030, 670, 160, 28, { size: 18, color: C.text, align: "right" });
+  line(s, 76, 646, 1110, 0, C.rule, 1);
+  rich(s, [[
+    { run: "路由原则  ", textStyle: { bold: true, color: C.orange } },
+    { run: "已认证 profile 才进入 SM100，未覆盖或证据不足时保留 HMMA。", textStyle: { color: C.ink } },
+  ]], 80, 666, 1080, 30, { size: 18, valign: "middle" });
   notes(s, [
     "最终交付不是一个孤立 benchmark，而是一个可以实现的 dispatcher。",
     "资格 profile 进入 SM100 T2，其余条件走 HMMA 兼容路径。每个 route 都由执行身份、递推 correctness 和 public-full 证据晋级。",
@@ -787,13 +781,13 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
 // 15. Paper excerpt and final answer
 {
   const s = deck.slides.add();
-  s.background.fill = C.navy;
-  txt(s, "论文方法图", 72, 48, 650, 50, { size: 40, color: C.white, bold: true });
-  txt(s, "论文图 1  方法框架摘录", 900, 60, 306, 24, { size: 15, color: "#9AA8B8", align: "right" });
-  brandLockup(s, { dark: true, y: 24, compact: true });
+  s.background.fill = C.white;
+  txt(s, "论文方法图", 72, 48, 650, 50, { size: 40, color: C.ink, bold: true });
+  txt(s, "论文图 1  方法框架摘录", 900, 60, 306, 24, { size: 15, color: C.muted, align: "right" });
+  brandLockup(s, { dark: false, y: 24, compact: true });
 
   const bytes = await fs.readFile(paperExcerptPath);
-  rect(s, 72, 138, 720, 400, C.white, "#344357", 1, 3).shadow = "shadow-lg";
+  rect(s, 72, 138, 720, 400, C.white, C.rule, 1, 3).shadow = "shadow-lg";
   s.images.add({
     blob: bytes,
     contentType: "image/png",
@@ -802,7 +796,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     position: { left: 88, top: 152, width: 690, height: 370 },
   });
 
-  label(s, "图中方法的中文释义", 842, 148, C.gold, 190);
+  label(s, "图中方法的中文释义", 842, 148, C.orange, 190);
   const points = [
     ["双分支搜索", "HMMA 与 tcgen05 独立优化"],
     ["证据式晋级", "实际路径、正确性、成本同时携带"],
@@ -811,16 +805,16 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   ];
   for (let i = 0; i < points.length; i++) {
     const y = 208 + i * 82;
-    txt(s, points[i][0], 842, y, 190, 28, { size: 20, color: i % 2 === 0 ? "#91B7E5" : "#F0A07A", bold: true });
-    txt(s, points[i][1], 842, y + 34, 340, 36, { size: 17, color: "#C6CFD9" });
+    txt(s, points[i][0], 842, y, 190, 28, { size: 20, color: i % 2 === 0 ? C.blue : C.orange, bold: true });
+    txt(s, points[i][1], 842, y + 34, 340, 36, { size: 17, color: C.text });
   }
 
-  line(s, 72, 590, 1135, 0, "#39485A", 1);
+  line(s, 72, 590, 1135, 0, C.rule, 1);
   rich(s, [[
-    { run: "最终回答  ", textStyle: { bold: true, color: C.gold } },
-    { run: "SM100 值得以受条件保护的后端方式加入 FlashKDA。", textStyle: { bold: true, color: C.white } },
+    { run: "最终回答  ", textStyle: { bold: true, color: C.orange } },
+    { run: "SM100 值得以受条件保护的后端方式加入 FlashKDA。", textStyle: { bold: true, color: C.ink } },
   ]], 74, 614, 930, 44, { size: 24, valign: "middle" });
-  txt(s, "提问　奶龙必胜", 1010, 668, 195, 22, { size: 16, color: "#AAB6C6", align: "right" });
+  txt(s, "提问　奶龙必胜", 1010, 668, 195, 22, { size: 16, color: C.muted, align: "right" });
   notes(s, [
     "收尾回到论文方法图。双分支搜索、证据晋级和双层 IR 把迁移问题从一次性 benchmark 变成可积累的探索闭环。",
     "最终回答：SM100 值得以 guarded backend 的方式加入 FlashKDA。",
@@ -828,7 +822,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   ]);
 }
 
-const previewDir = path.join(TMP_DIR, "academic-preview-workshop-fusion");
+const previewDir = path.join(TMP_DIR, "academic-preview-refined-v5");
 await fs.mkdir(previewDir, { recursive: true });
 for (let i = 0; i < deck.slides.length; i++) {
   const slide = deck.slides.getItemAt(i);
@@ -850,7 +844,7 @@ const requirements = {
 const fontPolicy = { basis: "design", families: [FONT_ZH], scriptFonts: { ea: FONT_ZH } };
 const stagingDir = path.join(workspaceDir, ".codex-finalizer");
 await fs.mkdir(stagingDir, { recursive: true });
-const candidatePath = path.join(stagingDir, "C1_FlashKDA_SM100_奶龙必胜_署名版_candidate_20260911_v3.pptx");
+const candidatePath = path.join(stagingDir, "C1_FlashKDA_SM100_奶龙必胜_署名版_candidate_20260911_v5.pptx");
 await (await PresentationFile.exportPptx(deck)).save(candidatePath);
 await applyPlatformFonts(candidatePath);
 
