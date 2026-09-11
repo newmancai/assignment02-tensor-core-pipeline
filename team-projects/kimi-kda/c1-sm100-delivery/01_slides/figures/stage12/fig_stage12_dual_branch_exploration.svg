@@ -1,92 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
-  <title id="title">双分支 Agent 的知识驱动探索闭环</title>
-  <desc id="desc">布局、驻留、调度、并行和数值角色提出 typed patch，协调器组合合法候选并分配到 HMMA 与 TCGEN05 两条支路。实验经过身份、正确性和测量作用域门槛后形成判断，写回带适用范围的经验 IR，并据此关闭重复方向或开启新轴。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc" font-family="Noto Sans CJK SC, sans-serif">
+  <title id="title">双分支 Agent 的知识驱动探索地形</title>
+  <desc id="desc">两条弯曲且粗细不同的路径表示 HMMA 与 TCGEN05 分支。线宽表示搜索投入，透明度表示当前确信，短支流记录被否定的方向，底部的沉积层记录写回 Experience IR 的知识。</desc>
   <defs>
+    <radialGradient id="hmmaFog" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#357fb5" stop-opacity=".30"/><stop offset="1" stop-color="#357fb5" stop-opacity="0"/></radialGradient>
+    <radialGradient id="tcgenFog" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#df7448" stop-opacity=".30"/><stop offset="1" stop-color="#df7448" stop-opacity="0"/></radialGradient>
+    <linearGradient id="sediment" x1="0" x2="1"><stop offset="0" stop-color="#0d1a25"/><stop offset=".46" stop-color="#151a22"/><stop offset="1" stop-color="#231713"/></linearGradient>
+    <marker id="arrowBlue" markerWidth="14" markerHeight="14" refX="11" refY="5" orient="auto"><path d="M0,0 L12,5 L0,10 Z" fill="#64a7d5"/></marker>
+    <marker id="arrowOrange" markerWidth="14" markerHeight="14" refX="11" refY="5" orient="auto"><path d="M0,0 L12,5 L0,10 Z" fill="#e58a61"/></marker>
     <style>
-      .title{font:600 40px "Noto Sans CJK SC",sans-serif;fill:#151a21}.sub{font:400 22px "Noto Sans CJK SC",sans-serif;fill:#66707a}
-      .kicker{font:600 17px "Noto Sans CJK SC",sans-serif;letter-spacing:1px;fill:#66707a}.head{font:600 25px "Noto Sans CJK SC",sans-serif;fill:#151a21}
-      .label{font:500 20px "Noto Sans CJK SC",sans-serif;fill:#2c333b}.small{font:400 17px "Noto Sans CJK SC",sans-serif;fill:#66707a}
-      .tiny{font:400 15px "Noto Sans CJK SC",sans-serif;fill:#66707a}.white{fill:#fff}.head.white,.label.white,.small.white,.tiny.white,.kicker.white{fill:#fff!important}.blue{fill:#2c5f91}.orange{fill:#c66a3d}.green{fill:#2f7a68}.red{fill:#a84d47}
-      .rule{stroke:#d9d6cf;stroke-width:1.5}.flow{stroke:#7b8793;stroke-width:2.5;fill:none;marker-end:url(#arrow)}.feedback{stroke:#2f7a68;stroke-width:2.5;stroke-dasharray:8 7;fill:none;marker-end:url(#arrow-green)}
+      .kicker{font-size:22px;font-weight:600;letter-spacing:2px;fill:#d3aa52}.title{font-size:48px;font-weight:650;fill:#f7f4ee}.sub{font-size:23px;font-weight:400;fill:#aeb7c1}
+      .head{font-size:27px;font-weight:600;fill:#f7f4ee}.label{font-size:22px;font-weight:500;fill:#e8e4dc}.small{font-size:18px;font-weight:400;fill:#9da7b1}.tiny{font-size:16px;font-weight:400;fill:#7e8994}
+      .blue{fill:#7db9df}.orange{fill:#f0a078}.green{fill:#80c9ae}.red{fill:#d9746d}.gold{fill:#e2bd6f}.ghost{stroke:#7d8790;stroke-width:2;stroke-dasharray:4 12;stroke-linecap:round;fill:none;opacity:.42}
     </style>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#7b8793"/></marker>
-    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#2f7a68"/></marker>
   </defs>
-  <rect width="1920" height="1080" fill="#faf9f6"/>
-  <text x="74" y="72" class="kicker" fill="#d2aa52">07  分析方法</text>
-  <text x="74" y="126" class="title">双分支 Agent 的知识驱动探索闭环</text>
-  <text x="74" y="165" class="sub">每轮的产物不只是更快候选，还包括失败边界、适用条件和下一项值得验证的假设</text>
-  <line x1="74" y1="194" x2="1846" y2="194" class="rule"/>
-  <text x="78" y="234" class="kicker">互补角色只提交 TYPED PATCH</text>
-  <g transform="translate(78 250)">
-    <rect x="0" y="0" width="214" height="48" rx="4" fill="#e9eff6"/><text x="107" y="31" text-anchor="middle" class="label blue">layout 布局</text>
-    <rect x="226" y="0" width="214" height="48" rx="4" fill="#e7f1ed"/><text x="333" y="31" text-anchor="middle" class="label green">residency 驻留</text>
-    <rect x="452" y="0" width="214" height="48" rx="4" fill="#ece9e2"/><text x="559" y="31" text-anchor="middle" class="label">scheduler 调度</text>
-    <rect x="678" y="0" width="214" height="48" rx="4" fill="#f5eae3"/><text x="785" y="31" text-anchor="middle" class="label orange">parallelism 并行</text>
-    <rect x="904" y="0" width="214" height="48" rx="4" fill="#fff5df"/><text x="1011" y="31" text-anchor="middle" class="label">numerics 数值</text>
-  </g>
-  <g>
-    <rect x="78" y="348" width="254" height="248" rx="6" fill="#fff" stroke="#d9d6cf" stroke-width="1.5"/>
-    <text x="102" y="385" class="kicker">01 机会模型</text><text x="102" y="426" class="head">从缺口提出假设</text>
-    <line x1="102" y1="446" x2="305" y2="446" class="rule"/>
-    <text x="102" y="480" class="small">性能差距落在哪个机制</text><text x="102" y="513" class="small">现有证据遗漏了哪个轴</text>
-    <text x="102" y="546" class="small">什么结果会推翻假设</text><text x="102" y="579" class="tiny">输入：profile、瓶颈、开放边界</text>
-    <rect x="378" y="348" width="284" height="248" rx="6" fill="#101d2e"/>
-    <text x="404" y="385" class="kicker" style="fill:#fff">02 协调器</text><text x="404" y="426" class="head" style="fill:#fff">组合与静态判断</text>
-    <line x1="404" y1="447" x2="636" y2="447" stroke="#39485a" stroke-width="1.5"/>
-    <text x="404" y="482" class="small" style="fill:#fff">同轴冲突拒绝</text><text x="404" y="515" class="small" style="fill:#fff">物理协议 verifier</text>
-    <text x="404" y="548" class="small" style="fill:#fff">canonical ID 去重</text><text x="404" y="579" class="tiny" style="fill:#fff">输出：可执行 KernelDesign</text>
-  </g>
-  <path d="M332 472H378" class="flow"/>
-  <g>
-    <text x="724" y="337" class="kicker">03 同预算双分支</text>
-    <rect x="712" y="356" width="566" height="112" rx="6" fill="#e9eff6" stroke="#2c5f91" stroke-width="2"/>
-    <rect x="712" y="356" width="12" height="112" fill="#2c5f91"/>
-    <text x="750" y="391" class="head blue">HMMA 兼容支路</text><text x="750" y="426" class="label">映射与 warp 密度 patch</text>
-    <text x="1040" y="393" class="small">隔离构建</text><text x="1040" y="426" class="small">公开接口复测</text><line x1="1008" y1="382" x2="1008" y2="442" stroke="#b7c8da" stroke-width="1.5"/>
-    <rect x="712" y="484" width="566" height="112" rx="6" fill="#f5eae3" stroke="#c66a3d" stroke-width="2"/>
-    <rect x="712" y="484" width="12" height="112" fill="#c66a3d"/>
-    <text x="750" y="519" class="head orange">TCGEN05 原生支路</text><text x="750" y="554" class="label">layout · carrier · lifetime</text>
-    <text x="1040" y="521" class="small">物理约束</text><text x="1040" y="554" class="small">机制探针</text><line x1="1008" y1="510" x2="1008" y2="570" stroke="#e7c8b8" stroke-width="1.5"/>
-  </g>
-  <path d="M662 472H712" class="flow"/>
-  <g>
-    <rect x="1334" y="348" width="260" height="248" rx="6" fill="#fff" stroke="#d9d6cf" stroke-width="1.5"/>
-    <text x="1360" y="385" class="kicker">04 证据合同</text><text x="1360" y="426" class="head">先决定能否比较</text>
-    <line x1="1360" y1="447" x2="1568" y2="447" class="rule"/>
-    <text x="1360" y="482" class="small">实际加载路径与指令身份</text><text x="1360" y="515" class="small">output 与 final state</text>
-    <text x="1360" y="548" class="small">同 workload 与计时范围</text><text x="1360" y="579" class="tiny">失败时不进入性能排序</text>
-  </g>
-  <path d="M1278 472H1334" class="flow"/>
-  <g>
-    <rect x="1642" y="348" width="204" height="248" rx="6" fill="#fff" stroke="#d9d6cf" stroke-width="1.5"/>
-    <text x="1668" y="385" class="kicker">05 判断</text>
-    <circle cx="1678" cy="438" r="8" fill="#2f7a68"/><text x="1700" y="445" class="label">qualified</text>
-    <circle cx="1678" cy="492" r="8" fill="#a84d47"/><text x="1700" y="499" class="label">below gate</text>
-    <path d="M1670 541l16 16m0-16l-16 16" stroke="#a84d47" stroke-width="3"/><text x="1700" y="557" class="label">rejected</text>
-    <text x="1668" y="582" class="tiny">判断必须带理由</text>
-  </g>
-  <path d="M1594 472H1642" class="flow"/>
-  <g>
-    <rect x="930" y="688" width="664" height="230" rx="7" fill="#e7f1ed" stroke="#2f7a68" stroke-width="2"/>
-    <text x="962" y="730" class="kicker green">06 SCOPED EXPERIENCE IR</text><text x="962" y="774" class="head">知识写回以后，下一轮不会从零开始</text>
-    <line x1="962" y1="795" x2="1562" y2="795" stroke="#bad6cc" stroke-width="1.5"/>
-    <text x="962" y="831" class="label">结论</text><text x="1052" y="831" class="small">晋级、关闭局部轴，或保留证伪卡</text>
-    <text x="962" y="864" class="label">作用域</text><text x="1052" y="864" class="small">route、profile、驻留长度、计时范围</text>
-    <text x="962" y="897" class="label">重开条件</text><text x="1052" y="897" class="small">新算法、新布局证明、完整 public-call 或新 workload</text>
-  </g>
-  <path d="M1744 596V640H1538V688" class="flow"/>
-  <g>
-    <rect x="378" y="688" width="472" height="230" rx="7" fill="#fff" stroke="#d2aa52" stroke-width="2"/>
-    <text x="410" y="730" class="kicker" fill="#9b762b">07 下一轮机会模型</text><text x="410" y="774" class="head">知识改变搜索空间</text>
-    <line x1="410" y1="795" x2="818" y2="795" class="rule"/>
-    <text x="410" y="833" class="small">已关闭旋钮不重复采样</text><text x="410" y="866" class="small">保留不同 niche 的有效机制</text>
-    <text x="410" y="899" class="small">只有新增机会才重新开域</text>
-  </g>
-  <path d="M930 803H850" class="feedback"/><path d="M378 803H228V596" class="feedback"/>
-  <g transform="translate(78 968)">
-    <line x1="0" y1="0" x2="1768" y2="0" class="rule"/>
-    <text x="0" y="42" class="label">闭环价值</text><text x="128" y="42" class="small">更快候选进入 niche elite；失败候选留下可复用边界；证据不足的方向保留为开放问题</text>
-    <text x="1768" y="42" text-anchor="end" class="tiny">Stage 12 · B300 SM103a</text>
-  </g>
+  <rect width="1920" height="1080" fill="#090b0e"/>
+  <ellipse cx="760" cy="414" rx="560" ry="260" fill="url(#hmmaFog)"/>
+  <ellipse cx="1140" cy="670" rx="610" ry="290" fill="url(#tcgenFog)"/>
+  <ellipse cx="1670" cy="494" rx="290" ry="360" fill="#2f7a68" opacity=".055"/>
+  <text x="76" y="70" class="kicker">07  分析方法</text>
+  <text x="76" y="132" class="title">双分支 Agent 的探索地形</text>
+  <text x="76" y="176" class="sub">快不是唯一产物：试探、证伪与适用边界一起改变下一轮搜索空间</text>
+  <path d="M76 207 C510 198, 982 222, 1844 202" stroke="#3a424b" stroke-width="1.3" fill="none"/>
+  <g id="origin"><circle cx="132" cy="518" r="58" fill="#111820" stroke="#d3aa52" stroke-width="2"/><circle cx="132" cy="518" r="8" fill="#d3aa52"/><text x="132" y="608" text-anchor="middle" class="head">机会模型</text><text x="132" y="638" text-anchor="middle" class="small">profile · 瓶颈 · 开放边界</text></g>
+  <path d="M188 496 C315 390, 414 362, 548 386" stroke="#3979a7" stroke-width="6" stroke-linecap="round" fill="none" opacity=".72"/>
+  <path d="M548 386 C700 410, 752 304, 918 332" stroke="#4d93c2" stroke-width="16" stroke-linecap="round" fill="none" opacity=".86"/>
+  <path d="M918 332 C1078 360, 1138 286, 1280 322" stroke="#64a7d5" stroke-width="11" stroke-linecap="round" fill="none" opacity=".92"/>
+  <path d="M1280 322 C1436 362, 1500 302, 1660 354" stroke="#64a7d5" stroke-width="7" stroke-linecap="round" fill="none" marker-end="url(#arrowBlue)"/>
+  <path d="M422 397 C416 308, 366 282, 314 267" class="ghost"/><path d="M724 366 C686 279, 706 244, 770 229" class="ghost"/><path d="M1100 337 C1130 246, 1200 242, 1264 260" class="ghost"/><path d="M1450 336 C1490 256, 1545 263, 1594 290" class="ghost"/>
+  <circle cx="548" cy="386" r="13" fill="#7db9df"/><circle cx="918" cy="332" r="15" fill="#7db9df"/><circle cx="1280" cy="322" r="12" fill="#7db9df"/><circle cx="1660" cy="354" r="16" fill="#80c9ae"/>
+  <text x="282" y="354" class="head blue">HMMA 兼容支路</text>
+  <text x="516" y="438" class="label">布局重排</text><text x="516" y="467" class="small">有效，但非主要增益</text>
+  <text x="872" y="278" class="label">warp 密度</text><text x="872" y="305" class="small">V32 2 warps  1.307×</text>
+  <text x="1218" y="383" class="label">低并行度边界</text><text x="1218" y="410" class="small">H12 价值切片受关键路径限制</text>
+  <text x="1610" y="316" class="small green">可复用基线</text>
+  <g stroke="#d9746d" stroke-width="3" opacity=".76"><path d="M302 256l20 20m0-20l-20 20"/><path d="M760 220l20 20m0-20l-20 20"/><path d="M1585 280l18 18m0-18l-18 18"/></g>
+  <path d="M188 540 C328 624, 434 642, 554 611" stroke="#a34e35" stroke-width="7" stroke-linecap="round" fill="none" opacity=".70"/>
+  <path d="M554 611 C708 570, 778 718, 944 660" stroke="#d76b45" stroke-width="19" stroke-linecap="round" fill="none" opacity=".90"/>
+  <path d="M944 660 C1086 610, 1168 774, 1314 704" stroke="#e58a61" stroke-width="15" stroke-linecap="round" fill="none" opacity=".95"/>
+  <path d="M1314 704 C1458 636, 1516 696, 1660 630" stroke="#e58a61" stroke-width="10" stroke-linecap="round" fill="none" marker-end="url(#arrowOrange)"/>
+  <path d="M422 636 C398 724, 342 747, 286 760" class="ghost"/><path d="M760 631 C716 770, 770 820, 858 833" class="ghost"/><path d="M1038 656 C1100 536, 1160 524, 1236 548" class="ghost"/><path d="M1428 670 C1432 787, 1500 820, 1582 820" class="ghost"/>
+  <circle cx="554" cy="611" r="13" fill="#f0a078"/><circle cx="944" cy="660" r="16" fill="#f0a078"/><circle cx="1314" cy="704" r="14" fill="#f0a078"/><circle cx="1660" cy="630" r="17" fill="#80c9ae"/>
+  <text x="286" y="694" class="head orange">TCGEN05 原生支路</text>
+  <text x="510" y="566" class="label">preferred layout</text><text x="510" y="592" class="small">核心探针  1.615×</text>
+  <text x="872" y="722" class="label">carrier 成本</text><text x="872" y="750" class="small">完整承载回落到 0.779×</text>
+  <text x="1218" y="655" class="label">P3 / P4 长驻留</text><text x="1218" y="682" class="small">inner64 机制上界  1.430–1.446×</text>
+  <text x="1604" y="687" class="small green">条件候选</text>
+  <g stroke="#d9746d" stroke-width="3" opacity=".78"><path d="M278 750l20 20m0-20l-20 20"/><path d="M850 824l20 20m0-20l-20 20"/><path d="M1574 812l20 20m0-20l-18 18"/></g>
+  <path d="M1180 246 C1218 430, 1150 621, 1226 814" stroke="#d3aa52" stroke-width="2" stroke-dasharray="3 11" fill="none" opacity=".75"/>
+  <text x="1090" y="238" text-anchor="middle" class="tiny gold">gate 01 · 身份 + correctness</text>
+  <path d="M1516 262 C1560 428, 1490 602, 1546 780" stroke="#63b49b" stroke-width="2" stroke-dasharray="3 11" fill="none" opacity=".7"/>
+  <text x="1536" y="238" text-anchor="middle" class="tiny green">gate 02 · public-full</text>
+  <g transform="translate(1732 494)"><path d="M0 -118 C84 -100 116 -38 100 24 C84 88 18 126 -52 98 C-118 72 -140 -8 -98 -72 C-74 -108 -38 -124 0 -118Z" fill="#11181c" stroke="#63b49b" stroke-width="2.2" stroke-dasharray="8 10"/><circle cx="0" cy="-8" r="44" fill="#183229" stroke="#80c9ae" stroke-width="2"/><text x="0" y="-17" text-anchor="middle" class="head green">局部闭包</text><text x="0" y="18" text-anchor="middle" class="small">finite grammar</text><text x="0" y="160" text-anchor="middle" class="tiny">missing_design_ids = [ ]</text></g>
+  <path d="M72 900 C320 858 512 935 746 896 C982 858 1178 928 1410 888 C1580 860 1704 890 1848 868 L1848 1028 L72 1028Z" fill="url(#sediment)" stroke="#303943" stroke-width="1.4"/>
+  <path d="M72 938 C332 904 520 972 762 934 C1030 892 1208 969 1470 922 C1600 900 1746 914 1848 900" stroke="#35424d" stroke-width="2" fill="none"/><path d="M72 976 C302 944 546 1010 812 965 C1070 922 1260 1002 1510 952 C1640 928 1764 944 1848 930" stroke="#27333c" stroke-width="2" fill="none"/>
+  <text x="92" y="932" class="kicker green">KNOWLEDGE SEDIMENT  知识沉积</text><text x="92" y="975" class="label">保留：负边界、适用 profile、作用域、重开条件</text><text x="842" y="976" class="label">改变下一轮：关闭重复方向，把能量转移到未证伪边界</text><text x="1840" y="1048" text-anchor="end" class="tiny">Stage 12 · B300 SM103a</text>
+  <g transform="translate(98 832)"><path d="M0 0H86" stroke="#f7f4ee" stroke-width="5" stroke-linecap="round"/><text x="104" y="7" class="tiny">线宽 = 搜索投入</text><path d="M294 0H380" stroke="#f7f4ee" stroke-width="3" stroke-linecap="round" opacity=".32"/><text x="398" y="7" class="tiny">透明度 = 当前确信</text><circle cx="680" cy="0" r="7" fill="#80c9ae"/><text x="700" y="7" class="tiny">终态证据</text><path d="M884 -7l14 14m0-14l-14 14" stroke="#d9746d" stroke-width="2.5"/><text x="914" y="7" class="tiny">已证伪支流</text></g>
 </svg>

@@ -7,8 +7,8 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const workspaceDir = process.env.C1_DELIVERY_DIR
   ? path.resolve(process.env.C1_DELIVERY_DIR)
   : path.resolve(scriptDir, "../..");
-const input = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911.pptx");
-const output = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260911.pptx");
+const input = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v2.pptx");
+const output = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_公开脱敏版_20260911_v2.pptx");
 
 const zip = await JSZip.loadAsync(await fs.readFile(input));
 

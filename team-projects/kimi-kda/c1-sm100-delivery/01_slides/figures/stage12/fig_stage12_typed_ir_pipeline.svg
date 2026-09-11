@@ -1,83 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
-  <title id="title">P3、BF16 ROUND 与 P4 的 Typed IR 流水及 TMEM 生命周期</title>
-  <desc id="desc">P3 与 P4 两次 TCGEN05 MMA 共用一次 TMEM 分配和同一累加列。P3 的 FP32 D fragment 在 ROUND 语义边界后通过 32 字节 swizzled shared carrier 形成 P4 的 BF16 A 操作数。直接 D fragment 到 A TMEM 的未证明转换被类型检查拒绝。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc" font-family="Noto Sans CJK SC, sans-serif">
+  <title id="title">P3、BF16 ROUND 与 P4 的 Typed IR 价值流</title>
+  <desc id="desc">价值流经过 P3 tcgen05、FP32 累加、BF16 舍入语义边界、32 字节 swizzled shared carrier 和 P4 tcgen05。P3 与 P4 复用一次 TMEM 分配与同一累加列，未经 layout proof 的 D fragment 到 A TMEM 捷径被拒绝。</desc>
   <defs>
+    <linearGradient id="valueRibbon" x1="0" x2="1"><stop offset="0" stop-color="#2f6f9c"/><stop offset=".42" stop-color="#d56e46"/><stop offset=".56" stop-color="#d4a64f"/><stop offset="1" stop-color="#2f7a68"/></linearGradient>
+    <linearGradient id="tmemLife" x1="0" x2="1"><stop offset="0" stop-color="#2f7a68" stop-opacity=".18"/><stop offset=".45" stop-color="#2f7a68" stop-opacity=".65"/><stop offset="1" stop-color="#2f7a68" stop-opacity=".22"/></linearGradient>
+    <radialGradient id="roundHalo"><stop offset="0" stop-color="#d2aa52" stop-opacity=".34"/><stop offset="1" stop-color="#d2aa52" stop-opacity="0"/></radialGradient>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="11" refY="5" orient="auto"><path d="M0,0 L12,5 L0,10 Z" fill="#39434d"/></marker>
     <style>
-      .title{font:600 40px "Noto Sans CJK SC",sans-serif;fill:#151a21}.sub{font:400 22px "Noto Sans CJK SC",sans-serif;fill:#66707a}
-      .kicker{font:600 17px "Noto Sans CJK SC",sans-serif;letter-spacing:1px;fill:#66707a}.head{font:600 24px "Noto Sans CJK SC",sans-serif;fill:#151a21}
-      .label{font:500 19px "Noto Sans CJK SC",sans-serif;fill:#2c333b}.small{font:400 16px "Noto Sans CJK SC",sans-serif;fill:#66707a}
-      .tiny{font:400 14px "Noto Sans CJK SC",sans-serif;fill:#66707a}.mono{font:500 16px "SFMono-Regular",Menlo,monospace;fill:#2c333b}.white{fill:#fff}.head.white,.label.white,.small.white,.tiny.white,.kicker.white,.mono.white{fill:#fff!important}
-      .rule{stroke:#d9d6cf;stroke-width:1.4}.grid{stroke:#e4e1da;stroke-width:1}.flow{stroke:#7b8793;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .kicker{font-size:21px;font-weight:600;letter-spacing:2px;fill:#b07f2c}.title{font-size:47px;font-weight:650;fill:#12171d}.sub{font-size:22px;font-weight:400;fill:#65707a}
+      .head{font-size:27px;font-weight:600;fill:#151a21}.label{font-size:21px;font-weight:500;fill:#25303a}.small{font-size:18px;font-weight:400;fill:#66717b}.tiny{font-size:16px;font-weight:400;fill:#7b858e}.mono{font-family:SFMono-Regular, Menlo, monospace;font-size:18px;font-weight:500;fill:#2f3942}
+      .blue{fill:#2f6f9c}.orange{fill:#c76740}.green{fill:#2f7a68}.red{fill:#aa514b}.gold{fill:#9a742e}.hair{stroke:#d9d6cf;stroke-width:1.4;fill:none}
     </style>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#7b8793"/></marker>
   </defs>
-  <rect width="1920" height="1080" fill="#faf9f6"/>
-  <text x="74" y="72" class="kicker" fill="#d2aa52">08  分析方法</text>
-  <text x="74" y="126" class="title">P3、BF16 ROUND 与 P4 的 Typed IR 流水</text>
-  <text x="74" y="165" class="sub">类型同时约束 shape、dtype、layout、carrier 和 lifetime，非法组合在生成 CUDA 之前终止</text>
-  <line x1="74" y1="194" x2="1846" y2="194" class="rule"/>
+  <rect width="1920" height="1080" fill="#faf8f3"/>
+  <text x="76" y="70" class="kicker">08  分析方法</text>
+  <text x="76" y="132" class="title">Typed IR 把语义与物理协议摆在同一条流上</text>
+  <text x="76" y="176" class="sub">每个节点都携带 shape、dtype、layout、carrier 与 lifetime，不合法的组合不会进入 CUDA</text>
+  <path d="M76 207 C520 198, 1060 220, 1844 202" class="hair"/>
 
-  <text x="78" y="236" class="kicker">VALUE FLOW</text>
-  <g transform="translate(78 258)">
-    <rect x="0" y="0" width="226" height="82" rx="5" fill="#e9eff6" stroke="#2c5f91" stroke-width="1.6"/>
-    <text x="113" y="31" text-anchor="middle" class="label">A0 × INV</text><text x="113" y="59" text-anchor="middle" class="mono">bf16 · shared_MK</text>
-    <path d="M226 41H286" class="flow"/>
-    <rect x="286" y="0" width="168" height="82" rx="5" fill="#f5eae3" stroke="#c66a3d" stroke-width="2"/>
-    <text x="370" y="31" text-anchor="middle" class="head" fill="#c66a3d">P3 tcgen05</text><text x="370" y="59" text-anchor="middle" class="mono">mma.async</text>
-    <path d="M454 41H514" class="flow"/>
-    <rect x="514" y="0" width="226" height="82" rx="5" fill="#fff" stroke="#2f7a68" stroke-width="1.8"/>
-    <text x="627" y="31" text-anchor="middle" class="label">D3 accumulator</text><text x="627" y="59" text-anchor="middle" class="mono">fp32 · tmem[col]</text>
-    <path d="M740 41H802" class="flow"/>
-    <rect x="802" y="-10" width="194" height="102" rx="5" fill="#101d2e"/>
-    <text x="899" y="30" text-anchor="middle" class="head" style="fill:#fff">BF16 ROUND</text><text x="899" y="60" text-anchor="middle" class="tiny" style="fill:#fff">semantic boundary</text>
-    <path d="M996 41H1058" class="flow"/>
-    <rect x="1058" y="0" width="260" height="82" rx="5" fill="#fff5df" stroke="#d2aa52" stroke-width="1.8"/>
-    <text x="1188" y="31" text-anchor="middle" class="label">U shared carrier</text><text x="1188" y="59" text-anchor="middle" class="mono">bf16 · 32B-swizzled NK</text>
-    <path d="M1318 41H1378" class="flow"/>
-    <rect x="1378" y="0" width="168" height="82" rx="5" fill="#f5eae3" stroke="#c66a3d" stroke-width="2"/>
-    <text x="1462" y="31" text-anchor="middle" class="head" fill="#c66a3d">P4 tcgen05</text><text x="1462" y="59" text-anchor="middle" class="mono">U × MQK</text>
-    <path d="M1546 41H1606" class="flow"/>
-    <rect x="1606" y="0" width="222" height="82" rx="5" fill="#e7f1ed" stroke="#2f7a68" stroke-width="1.8"/>
-    <text x="1717" y="31" text-anchor="middle" class="label">D4 / final output</text><text x="1717" y="59" text-anchor="middle" class="mono">fp32 · verified</text>
+  <!-- 主价值流：一条有拐点的带，不用等宽流程框 -->
+  <path d="M150 390 C310 312, 420 324, 560 384 C720 454, 826 430, 944 358 C1050 292, 1178 348, 1288 426 C1428 524, 1570 466, 1776 372" stroke="url(#valueRibbon)" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <path d="M150 390 C310 312, 420 324, 560 384 C720 454, 826 430, 944 358 C1050 292, 1178 348, 1288 426 C1428 524, 1570 466, 1776 372" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".8"/>
+  <circle cx="150" cy="390" r="15" fill="#2f6f9c"/><circle cx="560" cy="384" r="26" fill="#c76740" stroke="#faf8f3" stroke-width="5"/><circle cx="820" cy="420" r="20" fill="#2f7a68" stroke="#faf8f3" stroke-width="4"/><circle cx="1050" cy="322" r="25" fill="#111b25" stroke="#d2aa52" stroke-width="5"/><circle cx="1288" cy="426" r="20" fill="#d2aa52" stroke="#faf8f3" stroke-width="4"/><circle cx="1516" cy="486" r="26" fill="#c76740" stroke="#faf8f3" stroke-width="5"/><circle cx="1776" cy="372" r="16" fill="#2f7a68"/>
+  <ellipse cx="1050" cy="322" rx="150" ry="130" fill="url(#roundHalo)"/>
+
+  <text x="118" y="316" class="head blue">A0 × INV</text><text x="118" y="344" class="mono">bf16 · shared_MK</text>
+  <text x="500" y="302" class="head orange">P3 tcgen05</text><text x="500" y="331" class="mono">mma.async</text>
+  <text x="708" y="500" class="head green">D3 accumulator</text><text x="708" y="529" class="mono">fp32 · tmem[col]</text>
+  <text x="954" y="252" class="head">BF16 ROUND</text><text x="954" y="282" class="small gold">不可跨越的语义缩颈</text>
+  <text x="1164" y="514" class="head gold">U shared carrier</text><text x="1164" y="544" class="mono">bf16 · 32B-swizzled NK</text>
+  <text x="1438" y="390" class="head orange">P4 tcgen05</text><text x="1438" y="420" class="mono">U × MQK</text>
+  <text x="1660" y="310" class="head green">D4 / output</text><text x="1660" y="339" class="mono">fp32 · verified</text>
+
+  <!-- 字段线索 -->
+  <g class="tiny">
+    <path d="M244 358 C296 254, 350 244, 426 258" stroke="#2f6f9c" stroke-width="1.5" fill="none"/><text x="308" y="238">shape  m16n64k16</text><text x="308" y="262">layout  shared_MK</text>
+    <path d="M632 414 C674 538, 662 574, 630 610" stroke="#c76740" stroke-width="1.5" fill="none"/><text x="494" y="639">carrier  TCGEN A/B descriptors</text><text x="494" y="665">lifetime  commit → wait</text>
+    <path d="M1360 454 C1384 602, 1438 640, 1510 652" stroke="#d2aa52" stroke-width="1.5" fill="none"/><text x="1380" y="683">layout  swizzled NK</text><text x="1380" y="709">proof  bit exact before timing</text>
   </g>
 
-  <text x="78" y="394" class="kicker">PIPELINE AND RESOURCE LIFETIME</text>
-  <g>
-    <text x="248" y="424" class="tiny">t0</text><text x="438" y="424" class="tiny">t1</text><text x="628" y="424" class="tiny">t2</text><text x="818" y="424" class="tiny">t3</text>
-    <text x="1008" y="424" class="tiny">t4</text><text x="1198" y="424" class="tiny">t5</text><text x="1388" y="424" class="tiny">t6</text><text x="1578" y="424" class="tiny">t7</text><text x="1768" y="424" class="tiny">t8</text>
-    <line x1="264" y1="438" x2="1784" y2="438" class="rule"/>
-    <g class="grid"><line x1="264" y1="438" x2="264" y2="824"/><line x1="454" y1="438" x2="454" y2="824"/><line x1="644" y1="438" x2="644" y2="824"/><line x1="834" y1="438" x2="834" y2="824"/><line x1="1024" y1="438" x2="1024" y2="824"/><line x1="1214" y1="438" x2="1214" y2="824"/><line x1="1404" y1="438" x2="1404" y2="824"/><line x1="1594" y1="438" x2="1594" y2="824"/><line x1="1784" y1="438" x2="1784" y2="824"/></g>
-    <text x="78" y="490" class="label">control</text><text x="78" y="581" class="label">TCGEN issue</text><text x="78" y="672" class="label">TMEM columns</text><text x="78" y="763" class="label">shared carrier</text>
-    <line x1="78" y1="518" x2="1784" y2="518" class="rule"/><line x1="78" y1="609" x2="1784" y2="609" class="rule"/><line x1="78" y1="700" x2="1784" y2="700" class="rule"/><line x1="78" y1="791" x2="1784" y2="791" class="rule"/>
+  <!-- 物理生命线：一次分配跨两次 MMA -->
+  <text x="78" y="646" class="kicker green">RESOURCE LIFETIME</text>
+  <path d="M282 764 C480 712, 646 738, 812 774 C986 811, 1182 752, 1390 770 C1520 782, 1640 770, 1772 724 L1772 824 C1580 860, 1440 844, 1270 838 C1030 830, 842 886, 632 836 C490 802, 378 802, 282 836Z" fill="url(#tmemLife)" stroke="#2f7a68" stroke-width="2"/>
+  <path d="M312 798 C566 750, 744 834, 980 814 C1210 794, 1448 846, 1738 770" stroke="#2f7a68" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <text x="120" y="794" class="head green">TMEM</text><text x="120" y="824" class="small">一次分配</text>
+  <text x="350" y="742" class="label">alloc once</text><text x="730" y="858" class="small">P3 accumulation</text><text x="1110" y="858" class="small">same columns stay live</text><text x="1518" y="738" class="label">P4 accumulation · read · free</text>
+  <path d="M560 718 C604 694, 646 692, 690 704" stroke="#c76740" stroke-width="12" stroke-linecap="round" fill="none"/><text x="540" y="690" class="small orange">P3 issue</text>
+  <path d="M1408 736 C1450 716, 1502 716, 1544 730" stroke="#c76740" stroke-width="12" stroke-linecap="round" fill="none"/><text x="1400" y="703" class="small orange">P4 issue</text>
 
-    <rect x="274" y="462" width="152" height="42" rx="4" fill="#101d2e"/><text x="350" y="489" text-anchor="middle" class="small" style="fill:#fff">alloc once</text>
-    <rect x="654" y="462" width="152" height="42" rx="4" fill="#fff5df" stroke="#d2aa52"/><text x="730" y="489" text-anchor="middle" class="small">commit / wait</text>
-    <rect x="844" y="458" width="350" height="50" rx="4" fill="#101d2e"/><text x="1019" y="489" text-anchor="middle" class="small" style="fill:#fff">read D3 · ROUND · materialize U</text>
-    <rect x="1414" y="462" width="152" height="42" rx="4" fill="#fff5df" stroke="#d2aa52"/><text x="1490" y="489" text-anchor="middle" class="small">commit / wait</text>
-    <rect x="1604" y="462" width="152" height="42" rx="4" fill="#101d2e"/><text x="1680" y="489" text-anchor="middle" class="small" style="fill:#fff">read · free</text>
+  <!-- 被 verifier 拒绝的捷径 -->
+  <path d="M812 438 C898 540, 1110 608, 1398 560" stroke="#aa514b" stroke-width="3" stroke-dasharray="10 12" fill="none" marker-end="url(#arrow)" opacity=".68"/>
+  <path d="M1086 553l24 24m0-24l-24 24" stroke="#aa514b" stroke-width="4"/>
+  <text x="870" y="590" class="label red">D fragment → A TMEM 捷径</text><text x="870" y="619" class="small red">缺少 layout proof，Typed Verifier 在生成 CUDA 前拒绝</text>
 
-    <rect x="464" y="551" width="170" height="42" rx="4" fill="#c66a3d"/><text x="549" y="578" text-anchor="middle" class="small" style="fill:#fff">P3 issue</text>
-    <rect x="1224" y="551" width="170" height="42" rx="4" fill="#c66a3d"/><text x="1309" y="578" text-anchor="middle" class="small" style="fill:#fff">P4 issue</text>
-
-    <rect x="274" y="642" width="1482" height="42" rx="4" fill="#e7f1ed"/>
-    <rect x="464" y="642" width="330" height="42" fill="#2f7a68"/><text x="629" y="669" text-anchor="middle" class="small" style="fill:#fff">P3 accumulation · same columns</text>
-    <rect x="1224" y="642" width="342" height="42" fill="#2f7a68"/><text x="1395" y="669" text-anchor="middle" class="small" style="fill:#fff">P4 accumulation · same columns</text>
-    <text x="1015" y="670" text-anchor="middle" class="tiny">one allocation spans both MMAs</text>
-
-    <rect x="844" y="733" width="350" height="42" rx="4" fill="#d2aa52"/><text x="1019" y="760" text-anchor="middle" class="small">one safe 32B-swizzled shared carrier</text>
-    <line x1="1024" y1="438" x2="1024" y2="824" stroke="#a84d47" stroke-width="2.5" stroke-dasharray="8 7"/>
-    <text x="1024" y="816" text-anchor="middle" class="tiny" fill="#a84d47">BF16 ROUND blocks algebraic rewrite</text>
-  </g>
-
-  <g>
-    <rect x="78" y="862" width="1118" height="126" rx="6" fill="#fff" stroke="#d9d6cf" stroke-width="1.5"/>
-    <text x="106" y="898" class="kicker">TYPED VERIFIER</text>
-    <text x="106" y="934" class="small">HMMA D fragment、TCGEN A TMEM operand 与 TCGEN accumulator 是不同物理类型</text>
-    <text x="106" y="968" class="small">未经 layout proof 的 D3 直通 A TMEM 候选直接拒绝；shared carrier 逐 bit 正确后才进入计时</text>
-    <rect x="1220" y="862" width="626" height="126" rx="6" fill="#e7f1ed" stroke="#2f7a68" stroke-width="1.8"/>
-    <text x="1250" y="898" class="kicker" fill="#2f7a68">MECHANISM DECISION</text>
-    <text x="1250" y="934" class="label">inner64 长驻留：1.430–1.446× vs HMMA</text>
-    <text x="1250" y="968" class="small">inner1 固定成本占主导，回退 HMMA；完整 public-call 仍需重新取证</text>
-  </g>
-  <text x="1846" y="1044" text-anchor="end" class="tiny">P3/P4 mechanism probe · Stage 12 · B300 SM103a</text>
+  <path d="M74 916 C394 894, 714 936, 1020 910 C1322 884, 1580 930, 1844 900" class="hair"/>
+  <text x="78" y="958" class="kicker">MECHANISM DECISION</text>
+  <text x="78" y="1001" class="head">inner64 长驻留：1.430–1.446× vs HMMA</text>
+  <text x="710" y="1001" class="label">inner1 固定成本占主导，回退 HMMA</text>
+  <text x="1310" y="1001" class="label green">完整 public-call 仍需重新取证</text>
+  <text x="1840" y="1048" text-anchor="end" class="tiny">P3/P4 mechanism probe · Stage 12 · B300 SM103a</text>
 </svg>
