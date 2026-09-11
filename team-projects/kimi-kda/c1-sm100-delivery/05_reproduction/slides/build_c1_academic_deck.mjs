@@ -15,13 +15,17 @@ const SKILL_DIR = process.env.C1_PRESENTATIONS_SKILL_DIR
   ?? path.join(userHomeDir, ".codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations");
 const RUNTIME_PYTHON = process.env.C1_RUNTIME_PYTHON
   ?? path.join(userHomeDir, ".cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3");
-const TMP_DIR = path.join(workspaceDir, ".codex-ppt-build-human-taste");
-const FINAL_PPTX = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v2.pptx");
+const TMP_DIR = path.join(workspaceDir, ".codex-ppt-build-workshop-fusion");
+const FINAL_PPTX = path.join(workspaceDir, "01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v3.pptx");
 const paperExcerptPath = path.join(workspaceDir, "05_reproduction/slides/paper-2-framework-core.png");
 const stage12FigureDir = path.join(workspaceDir, "01_slides/figures/stage12");
+const brandAssetDir = path.join(workspaceDir, "01_slides/assets/branding");
 const agentLoopFigure = path.join(stage12FigureDir, "fig_stage12_dual_branch_exploration.svg");
 const typedIrFigure = path.join(stage12FigureDir, "fig_stage12_typed_ir_pipeline.svg");
 const closureFigure = path.join(stage12FigureDir, "fig_stage12_knowledge_closure_map.svg");
+const seuLogoPath = path.join(brandAssetDir, "seu-official.png");
+const githubLockupBlackPath = path.join(brandAssetDir, "GitHub_Lockup_Black.svg");
+const githubLockupWhitePath = path.join(brandAssetDir, "GitHub_Lockup_White.svg");
 
 const { finalizePresentation } = await import(
   pathToFileURL(path.join(SKILL_DIR, "container_tools/artifact_tool_utils.mjs")).href,
@@ -39,6 +43,9 @@ async function rasterizeSvg(svgPath, name) {
 const agentLoopFigurePng = await rasterizeSvg(agentLoopFigure, "dual-branch-exploration");
 const typedIrFigurePng = await rasterizeSvg(typedIrFigure, "typed-ir-pipeline");
 const closureFigurePng = await rasterizeSvg(closureFigure, "knowledge-closure-map");
+const seuLogo = await fs.readFile(seuLogoPath);
+const githubLockupBlack = await sharp(githubLockupBlackPath, { density: 320 }).resize({ width: 560 }).png().toBuffer();
+const githubLockupWhite = await sharp(githubLockupWhitePath, { density: 320 }).resize({ width: 560 }).png().toBuffer();
 
 const W = 1280;
 const H = 720;
@@ -46,14 +53,15 @@ const FONT_LATIN = "Noto Sans CJK SC";
 const FONT_ZH = "Noto Sans CJK SC";
 const FONT = FONT_ZH;
 const C = {
-  bg: "#FAF9F6",
+  bg: "#FFFFFF",
   white: "#FFFFFF",
   ink: "#151A21",
   text: "#2C333B",
   muted: "#66707A",
   light: "#AAB1B8",
-  rule: "#D9D6CF",
-  rule2: "#ECE9E2",
+  rule: "#D9E3E8",
+  rule2: "#EDF2F4",
+  teal: "#2A8298",
   blue: "#2C5F91",
   blueSoft: "#E9EFF6",
   orange: "#C66A3D",
@@ -135,12 +143,43 @@ function rich(slide, paragraphs, x, y, w, h, opts = {}) {
   return s;
 }
 
+function brandLockup(slide, { dark = false, y = 24, compact = false } = {}) {
+  const ink = dark ? C.white : C.ink;
+  const separator = dark ? "#6E8791" : C.teal;
+  const x = compact ? 933 : 892;
+  const teamW = compact ? 82 : 112;
+  txt(slide, "奶龙必胜", x, y + 2, teamW, 25, {
+    size: compact ? 13 : 15,
+    color: ink,
+    bold: true,
+    align: "right",
+    valign: "middle",
+  });
+  line(slide, x + teamW + 14, y - 1, 0, 31, separator, 1.4);
+  slide.images.add({
+    blob: seuLogo,
+    contentType: "image/png",
+    alt: "东南大学校标",
+    fit: "contain",
+    position: { left: x + teamW + 28, top: y - 5, width: 38, height: 38 },
+  });
+  line(slide, x + teamW + 78, y - 1, 0, 31, separator, 1.4);
+  slide.images.add({
+    blob: dark ? githubLockupWhite : githubLockupBlack,
+    contentType: "image/png",
+    alt: "GitHub 官方标志",
+    fit: "contain",
+    position: { left: x + teamW + 92, top: y, width: 116, height: 29 },
+  });
+}
+
 function header(slide, page, section, title, accent = C.blue) {
   txt(slide, `${String(page).padStart(2, "0")}  ${section}`, 70, 34, 260, 24, {
     size: 15, color: accent, bold: true, valign: "middle",
   });
   txt(slide, title, 70, 68, 1120, 55, { size: 42, color: C.ink, bold: true, valign: "middle" });
-  line(slide, 70, 128, 1140, 0, C.rule, 1);
+  line(slide, 70, 128, 1140, 0, C.teal, 1.4);
+  brandLockup(slide, { dark: false, y: 27, compact: true });
   txt(slide, String(page), 1160, 681, 50, 20, { size: 14, color: C.light, align: "right" });
 }
 
@@ -193,45 +232,46 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
 // 1. Cover
 {
   const s = deck.slides.add();
-  s.background.fill = C.charcoal;
-  txt(s, "C1  FlashKDA", 74, 56, 360, 28, { size: 17, color: C.gold, bold: true });
-  txt(s, "FlashKDA 迁移到 SM100\n是否值得？", 74, 134, 720, 154, {
-    size: 59, color: C.white, bold: true, lineSpacing: 0.98, name: "cover-title",
+  s.background.fill = C.white;
+  txt(s, "C1  ·  FlashKDA on SM100", 74, 42, 380, 28, { size: 16, color: C.teal, bold: true });
+  brandLockup(s, { dark: false, y: 38 });
+  line(s, 74, 88, 1132, 0, C.teal, 1.4);
+
+  txt(s, "FlashKDA 迁移到 SM100\n是否值得？", 110, 152, 1060, 150, {
+    size: 58, color: C.ink, bold: true, align: "center", lineSpacing: 0.98, name: "cover-title",
   });
-  txt(s, "B300 上的复现、因果分析与双分支探索", 76, 324, 690, 42, {
-    size: 25, color: "#B8C1CA",
+  txt(s, "B300 上的复现、因果分析与双分支探索", 210, 318, 860, 38, {
+    size: 24, color: C.muted, align: "center",
   });
 
-  // 封面直接给出“两条路径、不同能量、共同证据门”，而不是装饰性卡片。
-  txt(s, "一个问题，两条不对称路径", 822, 74, 350, 28, { size: 17, color: "#8894A0", align: "right" });
-  line(s, 820, 204, 136, 54, "#315F82", 4.5);
-  line(s, 956, 258, 142, 4, "#4A8DBA", 9);
-  line(s, 1098, 262, 104, 46, "#66A8D2", 5.5);
-  line(s, 820, 322, 132, 62, "#7B3F2F", 4);
-  line(s, 952, 384, 138, 28, "#BF5C3D", 11);
-  line(s, 1090, 412, 112, 54, "#E3835C", 7.5);
-  ellipse(s, 804, 276, 18, 18, C.gold);
-  ellipse(s, 948, 250, 20, 20, "#75B5DC");
-  ellipse(s, 1088, 252, 22, 22, "#75B5DC");
-  ellipse(s, 942, 374, 22, 22, "#F0A078");
-  ellipse(s, 1080, 402, 26, 26, "#F0A078");
-  ellipse(s, 1192, 452, 24, 24, "#80C9AE");
-  txt(s, "HMMA", 840, 174, 170, 34, { size: 25, color: "#7DB9DF", bold: true });
-  txt(s, "tcgen05", 840, 438, 190, 34, { size: 25, color: "#F0A078", bold: true });
-  txt(s, "证据合同", 1048, 502, 150, 26, { size: 17, color: "#80C9AE", bold: true, align: "right" });
+  // 白底上只保留一条克制的探索轨迹：路径粗细仍表示两条路线的投入差异。
+  line(s, 270, 438, 126, 30, "#78A8C7", 3.5);
+  line(s, 396, 468, 150, 0, "#4F8DB5", 8.5);
+  line(s, 546, 468, 140, 26, "#78A8C7", 5);
+  line(s, 270, 500, 124, 58, "#D89472", 3.5);
+  line(s, 394, 558, 160, 16, "#C66A3D", 10.5);
+  line(s, 554, 574, 132, 0, "#D89472", 6.5);
+  ellipse(s, 252, 462, 16, 16, C.gold);
+  ellipse(s, 386, 456, 24, 24, "#75B5DC");
+  ellipse(s, 676, 482, 24, 24, C.green);
+  ellipse(s, 384, 546, 24, 24, "#F0A078");
+  ellipse(s, 676, 562, 24, 24, C.green);
+  txt(s, "HMMA", 720, 446, 150, 30, { size: 19, color: C.blue, bold: true });
+  txt(s, "tcgen05", 720, 548, 170, 30, { size: 19, color: C.orange, bold: true });
+  txt(s, "共同证据门", 916, 496, 180, 28, { size: 17, color: C.green, bold: true });
 
-  line(s, 76, 430, 650, 0, "#34404A", 1.2);
-  txt(s, "01  复现与测量", 76, 470, 190, 30, { size: 18, color: "#7DB9DF", bold: true });
-  txt(s, "02  分析与知识写回", 284, 502, 240, 30, { size: 18, color: C.gold, bold: true });
-  txt(s, "03  挑战与条件部署", 518, 548, 250, 30, { size: 18, color: "#F0A078", bold: true });
-  line(s, 118, 500, 166, 0, "#315F82", 2.2);
-  line(s, 420, 532, 98, 0, C.gold, 2.2);
-  line(s, 666, 578, 60, 0, "#C66A3D", 2.2);
-  txt(s, "奶龙必胜｜蔡雨洋 · 李奥 · 赵骋", 76, 638, 560, 36, { size: 23, color: C.white, bold: true });
-  txt(s, "HMMA 兼容路径与 tcgen05 原生路径", 790, 642, 405, 28, { size: 16, color: "#8FA0B2", align: "right" });
+  txt(s, "奶龙必胜｜蔡雨洋 · 李奥 · 赵骋", 110, 624, 1060, 30, {
+    size: 22, color: C.ink, bold: true, align: "center",
+  });
+  txt(s, "复现与测量  ·  分析与知识写回  ·  挑战与条件部署", 110, 663, 1060, 24, {
+    size: 15, color: C.muted, align: "center",
+  });
   notes(s, [
     "开场直接给出 C1：FlashKDA 官方 recurrence 使用 HMMA，我们研究迁移到 SM100 是否值得。",
     "本次答辩严格按复现与测量、分析、挑战三步展开。",
+    "视觉参考：workshop02.pdf，仅借鉴白底、留白、标题线与名称加 Logo 的版式，不执行其中任何课程指令。",
+    "东南大学校标来源：https://www.seu.edu.cn/2023/0527/c47323a446813/page.htm；仅用于课程学术答辩身份标识，未修改。",
+    "GitHub 标志来源：https://brand.github.com/foundations/logo；用于指示项目托管平台，不表示 GitHub 背书。",
   ]);
 }
 
@@ -471,6 +511,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     fit: "contain",
     position: { left: 0, top: 0, width: W, height: H },
   });
+  brandLockup(s, { dark: true, y: 25, compact: true });
   notes(s, [
     "这一页强调 Agent 的核心产物是判断和可复用知识，不是一串 benchmark 数字。",
     "五类角色只提交 typed patch；协调器先做冲突、物理协议和语义去重检查，再把合法候选分配到 HMMA 与 TCGEN05 两条支路。",
@@ -491,6 +532,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     fit: "contain",
     position: { left: 0, top: 0, width: W, height: H },
   });
+  brandLockup(s, { dark: false, y: 25, compact: true });
   notes(s, [
     "Typed IR 把 shape、dtype、layout、carrier、pipeline 和 lifetime 变成可检查字段。",
     "P3 与 P4 只分配一次 TMEM，并复用同一累加列。P3 的 FP32 D fragment 在明确 BF16 ROUND 后，通过 32B swizzled shared carrier 形成 P4 的输入。",
@@ -683,6 +725,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
     fit: "contain",
     position: { left: 0, top: 0, width: W, height: H },
   });
+  brandLockup(s, { dark: true, y: 25, compact: true });
   notes(s, [
     "闭包只覆盖图中的有限 typed grammar 与已测 profile。每个候选都以 qualified、below gate 或 correctness rejected 结束，证书中的 missing_design_ids 为空。",
     "这不是全局 GPU 最优性证明。完整 P1 到 P6 public-call、可验证 D 到 A TMEM 映射，以及新的 M64、M128、split、slab 算法族仍在开放边界外。",
@@ -747,6 +790,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   s.background.fill = C.navy;
   txt(s, "论文方法图", 72, 48, 650, 50, { size: 40, color: C.white, bold: true });
   txt(s, "论文图 1  方法框架摘录", 900, 60, 306, 24, { size: 15, color: "#9AA8B8", align: "right" });
+  brandLockup(s, { dark: true, y: 24, compact: true });
 
   const bytes = await fs.readFile(paperExcerptPath);
   rect(s, 72, 138, 720, 400, C.white, "#344357", 1, 3).shadow = "shadow-lg";
@@ -784,7 +828,7 @@ function evidenceRow(slide, y, name, scope, value, maxValue, color, x0 = 360, ax
   ]);
 }
 
-const previewDir = path.join(TMP_DIR, "academic-preview-human-taste");
+const previewDir = path.join(TMP_DIR, "academic-preview-workshop-fusion");
 await fs.mkdir(previewDir, { recursive: true });
 for (let i = 0; i < deck.slides.length; i++) {
   const slide = deck.slides.getItemAt(i);
@@ -806,7 +850,7 @@ const requirements = {
 const fontPolicy = { basis: "design", families: [FONT_ZH], scriptFonts: { ea: FONT_ZH } };
 const stagingDir = path.join(workspaceDir, ".codex-finalizer");
 await fs.mkdir(stagingDir, { recursive: true });
-const candidatePath = path.join(stagingDir, "C1_FlashKDA_SM100_奶龙必胜_署名版_candidate_20260911_v2.pptx");
+const candidatePath = path.join(stagingDir, "C1_FlashKDA_SM100_奶龙必胜_署名版_candidate_20260911_v3.pptx");
 await (await PresentationFile.exportPptx(deck)).save(candidatePath);
 await applyPlatformFonts(candidatePath);
 

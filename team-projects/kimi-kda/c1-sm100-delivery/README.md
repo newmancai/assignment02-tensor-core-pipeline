@@ -16,8 +16,8 @@
 
 1. [`03_reports/SM100_MAINLINE_DELIVERY.md`](03_reports/SM100_MAINLINE_DELIVERY.md)：C1 正式技术报告，完整回答题目主线与六个讨论点。
 2. [`02_paper/main.pdf`](02_paper/main.pdf)：8 页论文；LaTeX 源码与一键构建入口在同目录。
-3. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911.pdf`](01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911.pdf)：15 页课程提交答辩固定版。
-4. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911.pptx`](01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911.pptx)：可编辑课程提交答辩稿，已嵌入 Agent 探索闭环、Typed IR 流水和局部知识闭包三张方法图。
+3. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v3.pdf`](01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v3.pdf)：15 页课程提交答辩固定版，采用白底课程风格与“名称 + 双 Logo”识别区。
+4. [`01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v3.pptx`](01_slides/C1_FlashKDA_SM100_奶龙必胜_署名版_20260911_v3.pptx)：可编辑课程提交答辩稿，已嵌入 Agent 探索闭环、Typed IR 流水和局部知识闭包三张方法图。
 5. [`DEFENSE_BRIEF.md`](DEFENSE_BRIEF.md)：答辩主线、必记数字和追问边界。
 6. [`RETROSPECTIVE.md`](RETROSPECTIVE.md)：完整研究复盘与后续指导。
 7. [`EVIDENCE_INDEX.md`](EVIDENCE_INDEX.md)：结论到证据的索引。
